@@ -43,6 +43,7 @@ namespace WpfComptabilite.viewModel
         private ICommand archiveCommand;
         private ICommand detailHistoriqueCommand;
         private ICommand addCreditCommand;
+        private ICommand modifyCommandClient;
         private ICommand viderLesChamps;
         private ICommand viderNom;
         private ICommand viderPrenom;
@@ -387,7 +388,6 @@ namespace WpfComptabilite.viewModel
                 return this.detailHistoriqueCommand;
             }
         }
-
         public ICommand AddCreditCommand 
         {
             get
@@ -398,7 +398,16 @@ namespace WpfComptabilite.viewModel
                 return this.addCreditCommand;
             }
         }
+        public ICommand ModifyCommandClient
+        {
+            get
+            {
+                if (this.modifyCommandClient == null)
+                    this.modifyCommandClient = new RelayCommand(() => this.modifyClient(), () => true);
 
+                return this.modifyCommandClient;
+            }
+        }
         public ICommand ViderLesChamps 
         {
             get
@@ -460,8 +469,6 @@ namespace WpfComptabilite.viewModel
                 return this.viderMail;
             }
         }
-
-        
 
         public void ajouterClient()
         {
@@ -545,6 +552,11 @@ namespace WpfComptabilite.viewModel
             
 
         }
+        public void modifyClient() //AJOUTER LES METHODES MODIFIER CHEZ MOI CAR PAR A JOUR AU LYCEE
+        {
+            string nomclient = "";
+            
+        }
         public void viderDesChamps()
         {
             // Vide tous les champs
@@ -568,28 +580,44 @@ namespace WpfComptabilite.viewModel
         public void viderChampsNom()
         {
             IsEnableNom = true;
+            BoutonVisible = true;
+            AutreBoutonVisible = false;
+            IsEnableLesClients = false;
         }
         public void viderChampsPrenom()
         {
             IsEnablePrenom = true;
+            BoutonVisible = true;
+            AutreBoutonVisible = false;
+            IsEnableLesClients = false;
         }
         public void viderChampsVille()
         {
             IsEnableVille = true;
+            BoutonVisible = true;
+            AutreBoutonVisible = false;
+            IsEnableLesClients = false;
         }
         public void viderChampsTel()
         {
             IsEnableTel = true;
+            BoutonVisible = true;
+            AutreBoutonVisible = false;
+            IsEnableLesClients = false;
         }
         public void viderChampsMail()
         {
             IsEnableMail = true;
+            BoutonVisible = true;
+            AutreBoutonVisible = false;
+            IsEnableLesClients = false;
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             if (this.collectionViewClient.CurrentItem != null)
             {
                 ClientActif = this.collectionViewClient.CurrentItem as Client;
+
             }
             if (this.collectionViewHistoriques.CurrentItem != null)
             {

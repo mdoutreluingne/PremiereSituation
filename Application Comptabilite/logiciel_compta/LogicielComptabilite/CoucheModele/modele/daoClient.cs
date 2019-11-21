@@ -28,6 +28,10 @@ namespace CoucheModele.modele
         {
             this.dbal.execRequete("UPDATE client SET archive = 1 WHERE id = " + client.Id + ";");
         }
+        public void selectNom(Client client)
+        {
+            this.dbal.execRequete("SELECT nom FROM client WHERE id = " + client.Id + ";");
+        }
 
         public List<Client> selectAllClient()
         {
