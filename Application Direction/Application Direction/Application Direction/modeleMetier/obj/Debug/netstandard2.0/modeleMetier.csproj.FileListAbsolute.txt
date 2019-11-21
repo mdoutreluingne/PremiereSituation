@@ -6,3 +6,12 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.csprojAssemblyReference.cache
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.deps.json
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.csprojAssemblyReference.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.csproj.CoreCompileInputs.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.AssemblyInfoInputs.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.AssemblyInfo.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.pdb

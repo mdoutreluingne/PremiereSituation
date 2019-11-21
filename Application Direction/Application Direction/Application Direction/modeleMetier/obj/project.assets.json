@@ -4413,23 +4413,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\barra\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Bryan JOACHIM\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
+      "projectUniqueName": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
       "projectName": "modeleMetier",
-      "projectPath": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
-      "packagesPath": "C:\\Users\\barra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\modeleMetier\\obj\\",
+      "projectPath": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
+      "packagesPath": "C:\\Users\\Bryan JOACHIM\\.nuget\\packages\\",
+      "outputPath": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\barra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Bryan JOACHIM\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -4466,16 +4468,10 @@
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }
