@@ -23,8 +23,8 @@ namespace WpfComptabilite
     /// </summary>
     public partial class MainWindow : Window
     {
-        //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
-        static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
+        static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
+        //static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
         static private daoVille theDaoVille = new daoVille(bdd);
         static private daoTheme theDaoTheme = new daoTheme(bdd);
         static private daoSalle theDaoSalle = new daoSalle(bdd, theDaoVille, theDaoTheme);
@@ -40,11 +40,11 @@ namespace WpfComptabilite
             cmb_ville.SelectedIndex = -1;
         }
 
-        //private void cmb_ville_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        //{
-        //    cmb_ville.MaxDropDownHeight = 50;
-        //    cmb_ville.ItemsSource = vc.Lesvilles.Where(p => p.Nom.Contains(e.Text)).ToList();
-        //    cmb_ville.IsDropDownOpen = true;
-        //}
+        private void cmb_ville_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            cmb_ville.MaxDropDownHeight = 50;
+            cmb_ville.ItemsSource = vc.Lesvilles.Where(p => p.Nom.Contains(e.Text)).ToList();
+            cmb_ville.IsDropDownOpen = true;
+        }
     }
 }

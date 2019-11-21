@@ -39,7 +39,7 @@
             <TextBox x:Name="txt_commentaire" Text="{Binding Commentaire}" HorizontalAlignment="Left" Height="27" Margin="77,307,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213"/>
             <TextBlock x:Name="lbl_date" Margin="51,26,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="14" RenderTransformOrigin="0.828,-0.947"/>
             <TextBlock x:Name="lbl_montant" Margin="275,26,0,0" TextWrapping="Wrap" Text="Montant" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="14"/>
-            <ListView x:Name="lst_transactions" HorizontalAlignment="Left" ItemsSource="{Binding LesHistoriques}" SelectedItem="{Binding TransactionActive}" IsSynchronizedWithCurrentItem="True" Height="121" Margin="34,45,0,0" VerticalAlignment="Top" Width="313" Foreground="{Binding CodeCouleurHistorique}">
+            <ListView x:Name="lst_transactions" HorizontalAlignment="Left" ItemsSource="{Binding LesHistoriques}" SelectedItem="{Binding TransactionActive}" Height="121" Margin="34,45,0,0" VerticalAlignment="Top" Width="313" Foreground="{Binding CodeCouleurHistorique}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding DetailHistoriqueCommand}" CommandParameter="ViewImportProgress" />
@@ -49,7 +49,7 @@
         </Grid>
         <TextBox x:Name="txt_nom" IsEnabled="{Binding IsEnableNom}" HorizontalAlignment="Left" Height="26" Margin="24,101,0,0" TextWrapping="Wrap" Text="{Binding Nom}" VerticalAlignment="Top" Width="318" BorderThickness="1"/>
         <TextBox x:Name="txt_prenom" IsEnabled="{Binding IsEnablePrenom}" HorizontalAlignment="Left" Height="25" Margin="24,138,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="318"/>
-        <ComboBox x:Name="cmb_ville" IsEnabled="{Binding IsEnableVille}" ItemsSource="{Binding Lesvilles}" Text="{Binding Ville_id}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Ville_id}" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26" IsEditable="True"/>
+        <ComboBox x:Name="cmb_ville" ItemsSource="{Binding Lesvilles}" Text="{Binding Ville_id}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26" PreviewTextInput="cmb_ville_PreviewTextInput" IsEditable="True"/>
         <TextBox x:Name="txt_tel" IsEnabled="{Binding IsEnableTel}" HorizontalAlignment="Left" Height="25" Margin="24,214,0,0" TextWrapping="Wrap" Text="{Binding Tel}" VerticalAlignment="Top" Width="318"/>
         <TextBox x:Name="txt_mail" IsEnabled="{Binding IsEnableMail}" HorizontalAlignment="Left" Height="27" Margin="24,254,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="318"/>
         <Button x:Name="btn_archive" Content="ARCHIVER" Command="{Binding ArchiveCommand}" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="156" Height="27" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>

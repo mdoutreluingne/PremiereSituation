@@ -18,7 +18,7 @@ namespace CoucheModele.modele
         }
         public void insert(Client client)
         {
-            this.dbal.execRequete("INSERT INTO client (nom, prenom, ville_id, tel, mail, archive) VALUES ('" + client.Nom + "', '" + client.Prenom + "', " + client.Ville_id.Id + ", '" + client.Tel + "', '" + client.Mail + "', " + client.Archive + ");");
+            this.dbal.execRequete("INSERT INTO client (id, nom, prenom, ville_id, tel, mail, archive) VALUES (" + client.Id + ", '" + client.Nom + "', '" + client.Prenom + "', " + client.Ville_id + ", '" + client.Tel + "', '" + client.Mail + "', " + client.Archive + ");");
         }
         public void delete(Client client)
         {

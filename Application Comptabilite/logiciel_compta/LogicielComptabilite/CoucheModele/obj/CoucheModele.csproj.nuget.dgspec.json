@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj": {}
+    "D:\\doutreluingne\\e4\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj": {}
   },
   "projects": {
-    "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj": {
+    "D:\\doutreluingne\\e4\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+        "projectUniqueName": "D:\\doutreluingne\\e4\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
         "projectName": "CoucheModele",
-        "projectPath": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+        "projectPath": "D:\\doutreluingne\\e4\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
         "packagesPath": "C:\\Users\\mdoutreluingne\\.nuget\\packages\\",
-        "outputPath": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\obj\\",
+        "outputPath": "D:\\doutreluingne\\e4\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
