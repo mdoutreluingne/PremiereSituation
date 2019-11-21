@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {}
+    "D:\\EE4\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {
+    "D:\\EE4\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "projectUniqueName": "D:\\EE4\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
         "projectName": "ModeleMetier",
-        "projectPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
-        "packagesPath": "C:\\Users\\SIO2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\obj\\",
+        "projectPath": "D:\\EE4\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "packagesPath": "C:\\Users\\Bryan JOACHIM\\.nuget\\packages\\",
+        "outputPath": "D:\\EE4\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\SIO2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Bryan JOACHIM\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
