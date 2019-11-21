@@ -27,7 +27,6 @@ namespace ApplicationWPF
         private MainWindow _mainWindow;
         private DateTime _date;
         private List<dtoSalle> _salle;
-        private dtoVille _ville;
         private daoReservation _daoReservation;
 
         public viewDate(MainWindow mainWindow, List<dtoSalle> salle, daoReservation daoReservation)
@@ -47,5 +46,10 @@ namespace ApplicationWPF
                 OnPropertyChanged("DateSelect");
             }
         }
+    }
+
+    class viewPlanning
+    {
+
     }
 }

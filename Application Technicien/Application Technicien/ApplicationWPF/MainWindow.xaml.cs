@@ -28,10 +28,10 @@ namespace ApplicationWPF
             "12:30:00","14:00:00", "15:30:00", "17:00:00", "18:30:00", "20:00:00", "21:30:00", "23:00:00"
         };
         private static viewDate _viewDate;
+        
         public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
         {
             InitializeComponent();
-            #region Récupération de l'utilisateur
             //On donne l'utilisateur qui se connecte
             List<dtoUtilisateur> lesUser = (List<dtoUtilisateur>)daoUtilisateur.select("*", "");
             dtoUtilisateur user = lesUser[2];
@@ -40,10 +40,11 @@ namespace ApplicationWPF
             string nomVille = user.Login.Substring(0, user.Login.IndexOf('-'));
             List<dtoVille> lesVille = (List<dtoVille>)daoVille.select("*", "WHERE nom LIKE '" + nomVille + "%'");
             dtoVille ville = lesVille[0];
-            #endregion
+
             //On récupère les salles actives de la ville
             List<dtoSalle> salle = (List<dtoSalle>)daoSalle.select("*", "WHERE ville_id = " + ville.Id + " AND archive = false");
 
+            //MVVM
             _viewDate = new viewDate(this, salle, daoReservation);
             grd_date.DataContext = _viewDate;
 
@@ -141,6 +142,7 @@ namespace ApplicationWPF
                 int fermeture = horaires.IndexOf(salle[i].Heure_fermeture.TimeOfDay.ToString());
                 for (int j = 0; j < 16; j++)
                 {
+                    //Heures où la salle est fermée
                     if (j < ouverture || j > fermeture)
                     {
                         Rectangle rectangle = new Rectangle();
@@ -150,7 +152,8 @@ namespace ApplicationWPF
                         Grid.SetRow(rectangle, i + 1);
                         grd_planning.Children.Add(rectangle);
                     }
-                    else
+                    //Heures sans réservation
+                    else if(_viewDate.DateSelect >= DateTime.Today)
                     {
                         Rectangle rectangle = new Rectangle();
                         rectangle.Fill = new SolidColorBrush(Colors.White);
@@ -170,10 +173,12 @@ namespace ApplicationWPF
                 for (int k = 0; k < reservations.Count; k++)
                 {
                     int heure = horaires.IndexOf(reservations[k].Date.TimeOfDay.ToString());
-                    Rectangle rectangle = new Rectangle();
                     Color c = Color.FromRgb(116, 172, 147);
+                    Rectangle rectangle = new Rectangle();
                     rectangle.Fill = new SolidColorBrush(c);
                     rectangle.Margin = new Thickness(5, 5, 5, 50);
+                    rectangle.DataContext = reservations[k];
+
                     Grid.SetColumn(rectangle, heure + 1);
                     Grid.SetRow(rectangle, i);
                     var rectangle_free = grd_planning.Children

@@ -23,9 +23,10 @@
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="346*"/>
                 </Grid.ColumnDefinitions>
-                <DatePicker HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" />
+                <DatePicker x:Name="dtp_date" HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" />
             </Grid>
-            <Grid x:Name="grd_planning" HorizontalAlignment="Stretch" Margin="20,241,86.4,10">
+            <Grid x:Name="grd_planning" HorizontalAlignment="Stretch" Margin="20,241,10,10">
+                <!-- CHARGEMENT DYNAMIQUE -->
             </Grid>
         </Grid>
         <Grid x:Name="grd_reservation" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
