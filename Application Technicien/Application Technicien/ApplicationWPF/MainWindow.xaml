@@ -23,66 +23,9 @@
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="346*"/>
                 </Grid.ColumnDefinitions>
-                <DatePicker HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1"/>
+                <DatePicker HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" />
             </Grid>
             <Grid x:Name="grd_planning" HorizontalAlignment="Stretch" Margin="20,241,86.4,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"></RowDefinition>
-                </Grid.RowDefinitions>
-                <!--Label des champs-->
-                <Border BorderBrush="Black" BorderThickness="0,0,0,1" Grid.ColumnSpan="17" Grid.Row="0"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="1" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="2" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="3" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="4" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="5" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="6" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="7" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="8" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="9" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="10" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="11" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="12" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="13" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="14" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="15" Grid.RowSpan="10"></Border>
-                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Grid.Column="16" Grid.RowSpan="10"></Border>
-                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Salles" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="00:30" FontSize="14" FontWeight="Bold" Margin="11,12,6,11" Width="48"/>
-                <Label Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="02:00" FontSize="14" FontWeight="Bold" Margin="12,12,8,11" Width="46"/>
-                <Label Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="03:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="05:00" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="06:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="08:00" FontSize="14" FontWeight="Bold" Margin="11,12,6,11" Width="48"/>
-                <Label Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="09:30" FontSize="14" FontWeight="Bold" Margin="12,12,8,11" Width="46"/>
-                <Label Grid.Column="8" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="11:00" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="9" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="12:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="10" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="14:00" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="11" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="15:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="12" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="17:00" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="13" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="18:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="14" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="20:00" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="15" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Content="21:30" FontSize="14" FontWeight="Bold" Margin="11,12,7,11" Width="47"/>
-                <Label Grid.Column="15" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="23:00" FontSize="14" FontWeight="Bold" Margin="0,12,25,11" Width="48" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
         <Grid x:Name="grd_reservation" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">

@@ -38,8 +38,8 @@ namespace ModeleMetier.metier
         public DateTime Heure_ouverture { get => _heure_ouverture; set => _heure_ouverture = value; }
         public DateTime Heure_fermeture { get => _heure_fermeture; set => _heure_fermeture = value; }
         public bool Archive { get => _archive; set => _archive = value; }
-        internal dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; }
-        internal dtoTheme DtoTheme { get => _dtoTheme; set => _dtoTheme = value; } 
+        public dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; }
+        public dtoTheme DtoTheme { get => _dtoTheme; set => _dtoTheme = value; } 
         #endregion
     }
 }

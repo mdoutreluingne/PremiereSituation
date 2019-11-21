@@ -27,6 +27,7 @@ namespace ApplicationWPF
             "00:30:00", "02:00:00", "03:30:00", "05:00:00", "06:30:00", "08:00:00", "09:30:00", "11:00:00",
             "12:30:00","14:00:00", "15:30:00", "17:00:00", "18:30:00", "20:00:00", "21:30:00", "23:00:00"
         };
+        private static viewDate _viewDate;
         public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
         {
             InitializeComponent();
@@ -40,16 +41,83 @@ namespace ApplicationWPF
             List<dtoVille> lesVille = (List<dtoVille>)daoVille.select("*", "WHERE nom LIKE '" + nomVille + "%'");
             dtoVille ville = lesVille[0];
             #endregion
-
-            #region Planning dynamique
             //On récupère les salles actives de la ville
             List<dtoSalle> salle = (List<dtoSalle>)daoSalle.select("*", "WHERE ville_id = " + ville.Id + " AND archive = false");
+
+            _viewDate = new viewDate(this, salle, daoReservation);
+            grd_date.DataContext = _viewDate;
+
+            //On charge le planning
+            loadColumnRow(salle);
+            loadPlanning(salle, daoReservation);
+        }
+
+        public void loadColumnRow(List<dtoSalle> salle)
+        {
+            RowDefinition row = new RowDefinition();
+            row.Height = new GridLength(50);
+            grd_planning.RowDefinitions.Add(row);
+            for (int i = 0; i < 17; i++)
+            {
+                ColumnDefinition column = new ColumnDefinition();
+                grd_planning.ColumnDefinitions.Add(column);
+            }
             for (int i = 0; i < salle.Count; i++)
             {
                 RowDefinition rw = new RowDefinition();
                 rw.Height = new GridLength(75);
                 grd_planning.RowDefinitions.Add(rw);
+            }
+        }
+        public void loadPlanning(List<dtoSalle> salle, daoReservation daoReservation)
+        {
+            #region Horaires
+            Label label = new Label();
+            label.HorizontalAlignment = HorizontalAlignment.Center;
+            label.VerticalAlignment = VerticalAlignment.Center;
+            label.Content = "Salles";
+            label.FontSize = 14;
+            label.FontWeight = FontWeights.Bold;
+            label.Width = 47;
+            Grid.SetColumn(label, 0);
+            Grid.SetRow(label,  0);
+            grd_planning.Children.Add(label);
 
+            for (int i = 0; i < 16; i++)
+            {
+                Label lbl = new Label();
+                lbl.HorizontalAlignment = HorizontalAlignment.Center;
+                lbl.VerticalAlignment = VerticalAlignment.Center;
+                lbl.Content = horaires[i];
+                lbl.FontSize = 14;
+                lbl.FontWeight = FontWeights.Bold;
+                lbl.Width = 47;
+                Grid.SetColumn(lbl, i + 1);
+                Grid.SetRow(lbl, 0);
+                grd_planning.Children.Add(lbl);
+            }
+
+            Border border = new Border();
+            border.BorderBrush = new SolidColorBrush(Colors.Black);
+            border.BorderThickness = new Thickness(0, 0, 0, 1);
+            Grid.SetColumnSpan(border, 17);
+            Grid.SetRow(border, 0);
+            grd_planning.Children.Add(border);
+
+            for (int i = 0; i < 16; i++)
+            {
+                Border brd = new Border();
+                brd.BorderBrush = new SolidColorBrush(Colors.Black);
+                brd.BorderThickness = new Thickness(1, 0, 0, 0);
+                Grid.SetColumn(brd, i + 1);
+                Grid.SetRowSpan(brd, 10);
+                grd_planning.Children.Add(brd);
+            }
+            #endregion
+
+            #region Reservations
+            for (int i = 0; i < salle.Count; i++)
+            {
                 //Ajout du label avec le nom de la salle
                 Label lbl = new Label();
                 lbl.Content = "Salle n° " + salle[i].Numero.ToString();
@@ -69,7 +137,7 @@ namespace ApplicationWPF
                 grd_planning.Children.Add(brd);
 
                 //Ajout des heures où la salle est fermé
-                int ouverture  = horaires.IndexOf(salle[i].Heure_ouverture.TimeOfDay.ToString());
+                int ouverture = horaires.IndexOf(salle[i].Heure_ouverture.TimeOfDay.ToString());
                 int fermeture = horaires.IndexOf(salle[i].Heure_fermeture.TimeOfDay.ToString());
                 for (int j = 0; j < 16; j++)
                 {
@@ -77,7 +145,7 @@ namespace ApplicationWPF
                     {
                         Rectangle rectangle = new Rectangle();
                         rectangle.Fill = new SolidColorBrush(Colors.LightGray);
-                        rectangle.Margin = new Thickness(2, 2, 2, 2) ;
+                        rectangle.Margin = new Thickness(2, 2, 2, 2);
                         Grid.SetColumn(rectangle, j + 1);
                         Grid.SetRow(rectangle, i + 1);
                         grd_planning.Children.Add(rectangle);
@@ -94,7 +162,10 @@ namespace ApplicationWPF
                 }
 
                 //Ajout des réservations
-                string joinWhere = "WHERE reservation.date LIKE '%2019-02-16%' AND salle_id = " + i;
+                string date = _viewDate.DateSelect.ToShortDateString();
+                string[] jourMoisAn = date.Split('/');
+                date = jourMoisAn[2] + "-" + jourMoisAn[1] + "-" + jourMoisAn[0];
+                string joinWhere = "WHERE reservation.date LIKE '%" + date + "%' AND salle_id = " + i;
                 List<dtoReservation> reservations = (List<dtoReservation>)daoReservation.select("*", joinWhere);
                 for (int k = 0; k < reservations.Count; k++)
                 {
@@ -105,13 +176,13 @@ namespace ApplicationWPF
                     rectangle.Margin = new Thickness(5, 5, 5, 50);
                     Grid.SetColumn(rectangle, heure + 1);
                     Grid.SetRow(rectangle, i);
-                    var rectangle_free =  grd_planning.Children
+                    var rectangle_free = grd_planning.Children
                         .Cast<UIElement>()
                         .First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == heure + 1);
                     grd_planning.Children.Remove(rectangle_free);
                     grd_planning.Children.Add(rectangle);
                 }
-            }
+            } 
             #endregion
         }
     }
