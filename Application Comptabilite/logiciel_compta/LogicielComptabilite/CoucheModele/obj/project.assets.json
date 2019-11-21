@@ -4371,28 +4371,33 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Unknown\\.nuget\\packages\\": {},
+    "C:\\Users\\mdoutreluingne\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Unknown\\Source\\Repos\\mdoutreluingne\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+      "projectUniqueName": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
       "projectName": "CoucheModele",
-      "projectPath": "C:\\Users\\Unknown\\Source\\Repos\\mdoutreluingne\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
-      "packagesPath": "C:\\Users\\Unknown\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Unknown\\Source\\Repos\\mdoutreluingne\\PremiereSituation\\LogicielComptabilite\\CoucheModele\\obj\\",
+      "projectPath": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+      "packagesPath": "C:\\Users\\mdoutreluingne\\.nuget\\packages\\",
+      "outputPath": "D:\\doutreluingne\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Unknown\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mdoutreluingne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4421,16 +4426,10 @@
           }
         },
         "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
+          "net461"
         ],
         "assetTargetFallback": true,
-        "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        "warn": true
       }
     }
   }
