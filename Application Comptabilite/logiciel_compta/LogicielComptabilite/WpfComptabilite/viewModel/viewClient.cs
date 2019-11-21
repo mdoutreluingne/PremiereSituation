@@ -29,7 +29,6 @@ namespace WpfComptabilite.viewModel
         private string _numCheque;
         private decimal _montant;
         private string _commentaire;
-        private List<Transaction> _lesHistoriques;
         private bool _isEnableLesClients = true;
         private bool _isEnableNom = false;
         private bool _isEnablePrenom = false;
@@ -59,6 +58,9 @@ namespace WpfComptabilite.viewModel
         private ObservableCollection<Ville> _lesvilles;
         private readonly ICollectionView collectionViewVille;
 
+        private ObservableCollection<Transaction> _lesHistoriques;
+        private readonly ICollectionView collectionViewHistoriques;
+
 
         public viewClient(daoTransaction dt, daoVille dv, daoClient dc, dbal bdd, daoTheme dtheme, daoSalle ds, daoReservation dr)
         {
@@ -71,9 +73,22 @@ namespace WpfComptabilite.viewModel
             unDaoReserv = dr;
             _lesclients = new ObservableCollection<Client>(unDaoClient.selectAllClient());
             _lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
-            
+            _lesHistoriques = new ObservableCollection<Transaction>();
+
+            foreach (Client unclient in _lesclients)
+            {
+                int i = 0;
+                while (unclient.Ville_id.Nom != _lesvilles[i].Nom) i++;
+                unclient.Ville_id = _lesvilles[i];
+            }
+
+
 
             this.collectionViewVille = CollectionViewSource.GetDefaultView(this._lesvilles);
+
+            this.collectionViewHistoriques = CollectionViewSource.GetDefaultView(this._lesHistoriques);
+            if (this.collectionViewHistoriques == null) throw new NullReferenceException("collectionViewHistoriques");
+            this.collectionViewHistoriques.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
 
             this.collectionViewClient = CollectionViewSource.GetDefaultView(this._lesclients);
             if (this.collectionViewClient == null) throw new NullReferenceException("collectionViewClient");
@@ -115,6 +130,7 @@ namespace WpfComptabilite.viewModel
 
 
 
+
             }
         }
         public Transaction TransactionActive //Ce fait par le SelectItem du xaml
@@ -124,8 +140,12 @@ namespace WpfComptabilite.viewModel
         }
         public string ModeAddCreditActif //Ce fait par le SelectItem du xaml
         { 
-            get => _modeAddCreditActif; 
-            set => _modeAddCreditActif = value; 
+            get => _modeAddCreditActif;
+            set 
+            {
+                _modeAddCreditActif = value;
+                OnPropertyChanged("ModeAddCreditActif");
+            } 
         }
 
         public string Nom
@@ -199,18 +219,30 @@ namespace WpfComptabilite.viewModel
         }
         public string NumCheque 
         { 
-            get => _numCheque; 
-            set => _numCheque = value; 
+            get => _numCheque;
+            set
+            {
+                _numCheque = value;
+                OnPropertyChanged("NumCheque");
+            } 
         }
         public decimal Montant 
         { 
-            get => _montant; 
-            set => _montant = value; 
+            get => _montant;
+            set
+            {
+                _montant = value;
+                OnPropertyChanged("Montant");
+            }
         }
         public string Commentaire 
         { 
-            get => _commentaire; 
-            set => _commentaire = value; 
+            get => _commentaire;
+            set
+            {
+                _commentaire = value;
+                OnPropertyChanged("Commentaire");
+            } 
         }
         public bool IsEnableLesClients
         {
@@ -269,12 +301,12 @@ namespace WpfComptabilite.viewModel
         }
 
 
-        public List<Transaction> LesHistoriques 
+        public ObservableCollection<Transaction> LesHistoriques 
         {
             get
             {
-                
-                _lesHistoriques = unDaoTransac.selectAllHistorique(_clientActif.Id);
+
+                _lesHistoriques = new ObservableCollection<Transaction>(unDaoTransac.selectAllHistorique(_clientActif.Id));
                 foreach (Transaction t in _lesHistoriques)
                 {
                     if (t.Montant < 0)
@@ -287,7 +319,12 @@ namespace WpfComptabilite.viewModel
                     }
                 }
 
-                return _lesHistoriques;
+                return this._lesHistoriques;
+            }
+            set
+            {
+                _lesHistoriques = value;
+                OnPropertyChanged("LesHistoriques");
             }
              
         }
@@ -428,15 +465,37 @@ namespace WpfComptabilite.viewModel
 
         public void ajouterClient()
         {
-            if (Nom.Contains(_clientActif.Nom) == true) // A REVOIR !!!!!!!
+            
+            if (Nom.Length == 0 || Prenom.Length == 0 || Ville_id.Nom.Length == 0 || Tel.Length == 0 || Mail.Length == 0) // A REVOIR !!!!!!!
             {
                 MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
+                ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
+                ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
+
+                //foreach (Client c in _lesclients)
+                //{
+                //    if (Mail.Contains(c.Mail))
+                //    {
+                //        MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
+                //    }
+                //}
+
                 Ville_id = this.collectionViewVille.CurrentItem as Ville;
+                _lesclients.Add(ClientActif);
                 unDaoClient.insert(ClientActif);
                 this.collectionViewClient.Refresh();
+                IsEnableNom = false;
+                IsEnablePrenom = false;
+                IsEnableVille = false;
+                IsEnableTel = false;
+                IsEnableMail = false;
+                IsEnableLesClients = true;
+                ClientActif = new Client();
+                TransactionActive = new Transaction();
+                this.collectionViewClient.MoveCurrentTo(null);
             }
             
         }
@@ -449,21 +508,42 @@ namespace WpfComptabilite.viewModel
         {
             if (_transactionActive != null)
             {
-                MessageBox.Show("Type : " + _transactionActive.Type + "\n\nDate : " + _transactionActive.Date.ToString() + "\n\nMontant : " + _transactionActive.Montant + "\n\nCommentaire : " + _transactionActive.Commentaire, "Détail de la transaction", MessageBoxButton.OK);
+                if (_transactionActive.Type == "Chèque") 
+                {   
+                    MessageBox.Show("Type : " + _transactionActive.Type + "\n\nDate : " + _transactionActive.Date.ToString() + "\n\nNuméro de chèque : " + _transactionActive.Numero + "\n\nMontant : " + _transactionActive.Montant + "\n\nCommentaire : " + _transactionActive.Commentaire, "Détail de la transaction", MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show("Type : " + _transactionActive.Type + "\n\nDate : " + _transactionActive.Date.ToString() + "\n\nMontant : " + _transactionActive.Montant + "\n\nCommentaire : " + _transactionActive.Commentaire, "Détail de la transaction", MessageBoxButton.OK);
+                }
+                
             }
             else
             {
                 MessageBox.Show("Sélectionner une transation", "Détail de la transaction", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-        public void addCredit() // A FINIR !
+        public void addCredit()
         {
-            DateTime date = DateTime.Now;
-            Reservation r = unDaoReserv.selectById(_clientActif.Id);
-            Client c = unDaoClient.selectById(_clientActif.Id);
-            Transaction t = new Transaction(null, date, Montant, _modeAddCreditActif, NumCheque, Commentaire, r, c);
-            _lesHistoriques.Add(t);
-            unDaoTransac.insert(t);
+            if (ModeAddCreditActif != null)
+            {
+                DateTime date = DateTime.Now;
+                Client c = unDaoClient.selectById(_clientActif.Id);
+                _transactionActive = new Transaction(null, date, Montant, _modeAddCreditActif, NumCheque, Commentaire, null, c);
+                _lesHistoriques.Add(_transactionActive);
+                unDaoTransac.insert(_transactionActive);
+                this.collectionViewHistoriques.Refresh();
+                NumCheque = string.Empty;
+                ModeAddCreditActif = string.Empty;
+                Montant = 0;
+                Commentaire = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Sélectionner un mode de paiement", "Erreur lors d'ajout de crédit", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
+
         }
         public void viderDesChamps()
         {
@@ -473,6 +553,11 @@ namespace WpfComptabilite.viewModel
             Ville_id.Nom = string.Empty;
             Tel = string.Empty;
             Mail = string.Empty;
+            ClientActif.Nom = string.Empty;
+            ClientActif.Prenom = string.Empty;
+            ClientActif.Ville_id.Nom = string.Empty;
+            ClientActif.Tel = string.Empty;
+            ClientActif.Mail = string.Empty;
             IsEnableNom = true;
             IsEnablePrenom = true;
             IsEnableVille = true;
@@ -505,6 +590,10 @@ namespace WpfComptabilite.viewModel
             if (this.collectionViewClient.CurrentItem != null)
             {
                 ClientActif = this.collectionViewClient.CurrentItem as Client;
+            }
+            if (this.collectionViewHistoriques.CurrentItem != null)
+            {
+                TransactionActive = this.collectionViewHistoriques.CurrentItem as Transaction;
             }
 
         }

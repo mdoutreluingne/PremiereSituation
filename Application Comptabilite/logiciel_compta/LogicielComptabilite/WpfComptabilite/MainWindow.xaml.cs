@@ -40,11 +40,11 @@ namespace WpfComptabilite
             cmb_ville.SelectedIndex = -1;
         }
 
-        private void cmb_ville_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            cmb_ville.MaxDropDownHeight = 50;
-            cmb_ville.ItemsSource = vc.Lesvilles.Where(p => p.Nom.Contains(e.Text)).ToList();
-            cmb_ville.IsDropDownOpen = true;
-        }
+        //private void cmb_ville_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        //{
+        //    cmb_ville.MaxDropDownHeight = 50;
+        //    cmb_ville.ItemsSource = vc.Lesvilles.Where(p => p.Nom.Contains(e.Text)).ToList();
+        //    cmb_ville.IsDropDownOpen = true;
+        //}
     }
 }
