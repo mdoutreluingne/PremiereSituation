@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "projectName": "ModeleMetier",
+        "projectPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "packagesPath": "C:\\Users\\SIO2\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\SIO2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.18, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
