@@ -81,9 +81,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DesarchiveWindow.xaml.cs">
+      <DependentUpon>DesarchiveWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="viewModel\RelayCommand.cs" />
     <Compile Include="viewModel\viewClient.cs" />
     <Compile Include="viewModel\viewModelBase.cs" />
+    <Page Include="DesarchiveWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

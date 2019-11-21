@@ -137,3 +137,5 @@ D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\L
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.csproj.CopyComplete
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.exe
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.pdb
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\WpfComptabilite\obj\Debug\DesarchiveWindow.g.cs
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\WpfComptabilite\obj\Debug\DesarchiveWindow.baml

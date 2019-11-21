@@ -11,11 +11,13 @@ using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfComptabilite.viewModel
 {
     public class viewClient : viewModelBase
     {
+        #region Propriétés
         private dbal bdd;
         private daoClient unDaoClient;
         private daoVille unDaoVille;
@@ -41,6 +43,7 @@ namespace WpfComptabilite.viewModel
         private object _soldes = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
+        private ICommand desarchiveCommand;
         private ICommand detailHistoriqueCommand;
         private ICommand addCreditCommand;
         private ICommand modifyCommandClient;
@@ -61,8 +64,10 @@ namespace WpfComptabilite.viewModel
 
         private ObservableCollection<Transaction> _lesHistoriques;
         private readonly ICollectionView collectionViewHistoriques;
+        #endregion
 
 
+        #region Constructeur
         public viewClient(daoTransaction dt, daoVille dv, daoClient dc, dbal bdd, daoTheme dtheme, daoSalle ds, daoReservation dr)
         {
             unDaoTransac = dt;
@@ -94,9 +99,10 @@ namespace WpfComptabilite.viewModel
             this.collectionViewClient = CollectionViewSource.GetDefaultView(this._lesclients);
             if (this.collectionViewClient == null) throw new NullReferenceException("collectionViewClient");
             this.collectionViewClient.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
-        }
+        } 
+        #endregion
 
-        
+
         public ObservableCollection<Client> Lesclients
         {
             get { return this._lesclients; }
@@ -378,6 +384,16 @@ namespace WpfComptabilite.viewModel
             }
         }
 
+        public ICommand DesarchiveCommand
+        {
+            get
+            {
+                if (this.desarchiveCommand == null)
+                    this.desarchiveCommand = new RelayCommand(() => this.FenetreDesarchiver(), () => true);
+
+                return this.desarchiveCommand;
+            }
+        }
         public ICommand DetailHistoriqueCommand 
         {
             get
@@ -470,6 +486,8 @@ namespace WpfComptabilite.viewModel
             }
         }
 
+        
+
         public void ajouterClient()
         {
             
@@ -508,8 +526,13 @@ namespace WpfComptabilite.viewModel
         }
         public void archiverClient()
         {
-            unDaoClient.archiver(ClientActif);
+            unDaoClient.desarchiver(ClientActif);
             this.collectionViewClient.Refresh();
+        }
+        public void FenetreDesarchiver()
+        {
+            DesarchiveWindow secondwindows = new DesarchiveWindow();
+            secondwindows.Show();            
         }
         public void detailHistorique()
         {
@@ -617,7 +640,6 @@ namespace WpfComptabilite.viewModel
             if (this.collectionViewClient.CurrentItem != null)
             {
                 ClientActif = this.collectionViewClient.CurrentItem as Client;
-
             }
             if (this.collectionViewHistoriques.CurrentItem != null)
             {

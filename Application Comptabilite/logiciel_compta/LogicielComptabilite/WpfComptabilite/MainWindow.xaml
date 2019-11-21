@@ -99,7 +99,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Image>
-        <Button Content="DESARCHIVER" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="33" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
+        <Button Content="DESARCHIVER" Command="{Binding DesarchiveCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="33" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
 
 
 
