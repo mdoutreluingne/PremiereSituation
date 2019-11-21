@@ -4420,11 +4420,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+      "projectUniqueName": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
       "projectName": "ModeleMetier",
-      "projectPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+      "projectPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
       "packagesPath": "C:\\Users\\AFOURNIER\\.nuget\\packages\\",
-      "outputPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\obj\\",
+      "outputPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

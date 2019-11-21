@@ -85,7 +85,7 @@ namespace ApplicationWPF
                     else
                     {
                         Rectangle rectangle = new Rectangle();
-                        rectangle.Fill = new SolidColorBrush(Colors.Green);
+                        rectangle.Fill = new SolidColorBrush(Colors.White);
                         rectangle.Margin = new Thickness(2, 2, 2, 2);
                         Grid.SetColumn(rectangle, j + 1);
                         Grid.SetRow(rectangle, i + 1);
