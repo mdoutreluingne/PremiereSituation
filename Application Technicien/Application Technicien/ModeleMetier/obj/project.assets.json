@@ -4413,25 +4413,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SIO2\\.nuget\\packages\\": {},
+    "C:\\Users\\AFOURNIER\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+      "projectUniqueName": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
       "projectName": "ModeleMetier",
-      "projectPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
-      "packagesPath": "C:\\Users\\SIO2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\obj\\",
+      "projectPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+      "packagesPath": "C:\\Users\\AFOURNIER\\.nuget\\packages\\",
+      "outputPath": "D:\\AFOURNIER\\Document\\PPE\\Projet\\PremiereSituation\\Application Technicien\\Application Technicien\\Application Technicien\\ModeleMetier\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\SIO2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\AFOURNIER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
