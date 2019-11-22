@@ -106,6 +106,11 @@ namespace WpfComptabilite.viewModel
         public ObservableCollection<Client> Lesclients
         {
             get { return this._lesclients; }
+            set
+            {
+                _lesclients = value;
+                OnPropertyChanged("Lesclients");
+            }
         }
         public ObservableCollection<Ville> Lesvilles
         {
@@ -490,39 +495,53 @@ namespace WpfComptabilite.viewModel
 
         public void ajouterClient()
         {
-            
-            if (Nom.Length == 0 || Prenom.Length == 0 || Ville_id.Nom.Length == 0 || Tel.Length == 0 || Mail.Length == 0) // A REVOIR !!!!!!!
+            List<string> lesMails = new List<string>(unDaoClient.selectMail());
+            bool valide = false;
+
+            foreach (string s in lesMails)
             {
-                MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
+                if (Mail.Contains(s) == true)
+                {
+                    valide = true;
+                    break;
+                }
+            }
+
+            if (valide == true)
+            {
+                MessageBox.Show("Le client existe déjà", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
-                ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
+                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Ville_id.Nom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true) // A REVOIR !!!!!!!
+                {
+                    MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                {
+                    ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
+                    ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
-                //foreach (Client c in _lesclients)
-                //{
-                //    if (Mail.Contains(c.Mail))
-                //    {
-                //        MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
-                //    }
-                //}
+                    Ville_id = this.collectionViewVille.CurrentItem as Ville;
+                    _lesclients.Add(ClientActif);
+                    unDaoClient.insert(ClientActif);
+                    this.collectionViewClient.Refresh();
+                    this.collectionViewClient.MoveCurrentTo(null);
+                    IsEnableNom = false;
+                    IsEnablePrenom = false;
+                    IsEnableVille = false;
+                    IsEnableTel = false;
+                    IsEnableMail = false;
+                    IsEnableLesClients = true;
+                    //ClientActif = new Client();
+                    //TransactionActive = new Transaction();
 
-                Ville_id = this.collectionViewVille.CurrentItem as Ville;
-                _lesclients.Add(ClientActif);
-                unDaoClient.insert(ClientActif);
-                this.collectionViewClient.Refresh();
-                IsEnableNom = false;
-                IsEnablePrenom = false;
-                IsEnableVille = false;
-                IsEnableTel = false;
-                IsEnableMail = false;
-                IsEnableLesClients = true;
-                ClientActif = new Client();
-                TransactionActive = new Transaction();
-                this.collectionViewClient.MoveCurrentTo(null);
+
+                }
             }
-            
+
+
+
         }
         public void updateClient() //Revoir le update pour la VILLE !
         {
@@ -608,6 +627,13 @@ namespace WpfComptabilite.viewModel
             IsEnableTel = true;
             IsEnableMail = true;
             IsEnableLesClients = false;
+
+            ClientActif = new Client();
+            TransactionActive = new Transaction();
+            this.collectionViewClient.MoveCurrentTo(null);
+            this.collectionViewClient.Refresh();
+            this.collectionViewHistoriques.MoveCurrentTo(null);
+            this.collectionViewHistoriques.Refresh();
         }
         public void viderChampsNom()
         {

@@ -40,6 +40,18 @@ namespace CoucheModele.modele
         {
             this.dbal.execRequete("SELECT nom FROM client WHERE id = " + client.Id + ";");
         }
+        public List<string> selectMail()
+        {
+            List<string> mails = new List<string>();
+            DataTable table = this.dbal.selectAll("SELECT mail FROM client");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {     
+                string unmail = table.Rows[i]["mail"].ToString();
+                mails.Add(unmail);
+            }
+            return mails;
+        }
 
         public List<Client> selectAllClient()
         {
