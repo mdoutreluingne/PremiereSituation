@@ -419,7 +419,7 @@ namespace WpfComptabilite.viewModel
             get
             {
                 if (this.modifyCommandClient == null)
-                    this.modifyCommandClient = new RelayCommand(() => this.modifyClient(), () => true);
+                    this.modifyCommandClient = new RelayCommand(() => this.updateClient(), () => true);
 
                 return this.modifyCommandClient;
             }
@@ -524,6 +524,20 @@ namespace WpfComptabilite.viewModel
             }
             
         }
+        public void updateClient() //Revoir le update pour la VILLE !
+        {
+            Ville_id = this.collectionViewVille.CurrentItem as Ville;
+            unDaoClient.update(ClientActif);
+            this.collectionViewClient.Refresh();
+            this.collectionViewClient.MoveCurrentTo(null);
+            IsEnableNom = false;
+            IsEnablePrenom = false;
+            IsEnableVille = false;
+            IsEnableTel = false;
+            IsEnableMail = false;
+            IsEnableLesClients = true;
+
+        }
         public void archiverClient()
         {
             unDaoClient.desarchiver(ClientActif);
@@ -574,11 +588,6 @@ namespace WpfComptabilite.viewModel
             }
             
 
-        }
-        public void modifyClient() //AJOUTER LES METHODES MODIFIER CHEZ MOI CAR PAR A JOUR AU LYCEE
-        {
-            string nomclient = "";
-            
         }
         public void viderDesChamps()
         {

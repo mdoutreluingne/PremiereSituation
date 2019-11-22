@@ -41,3 +41,11 @@ D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\L
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.deps.json
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.dll
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\logiciel_compta\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.pdb
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.deps.json
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Debug\netstandard2.0\CoucheModele.pdb
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Debug\netstandard2.0\CoucheModele.csprojAssemblyReference.cache
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Debug\netstandard2.0\CoucheModele.AssemblyInfoInputs.cache
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Debug\netstandard2.0\CoucheModele.AssemblyInfo.cs
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Debug\netstandard2.0\CoucheModele.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Debug\netstandard2.0\CoucheModele.pdb

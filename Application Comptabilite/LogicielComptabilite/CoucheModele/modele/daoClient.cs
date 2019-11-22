@@ -20,6 +20,10 @@ namespace CoucheModele.modele
         {
             this.dbal.execRequete("INSERT INTO client (nom, prenom, ville_id, tel, mail, archive) VALUES ('" + client.Nom + "', '" + client.Prenom + "', " + client.Ville_id.Id + ", '" + client.Tel + "', '" + client.Mail + "', " + client.Archive + ");");
         }
+        public void update(Client client)
+        {
+            this.dbal.execRequete("UPDATE client SET nom ='" + client.Nom + "', prenom ='" + client.Prenom + "', ville_id =" + client.Ville_id.Id + ", tel ='" + client.Tel + "', mail ='" + client.Mail + "' WHERE id =" + client.Id + ";");
+        }
         public void delete(Client client)
         {
             this.dbal.execRequete("DELETE FROM client WHERE id = " + client.Id + ";");

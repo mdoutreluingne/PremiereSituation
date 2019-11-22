@@ -4377,11 +4377,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+      "projectUniqueName": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
       "projectName": "CoucheModele",
-      "projectPath": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
+      "projectPath": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\LogicielComptabilite\\CoucheModele\\CoucheModele.csproj",
       "packagesPath": "C:\\Users\\Unknown\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\logiciel_compta\\LogicielComptabilite\\CoucheModele\\obj\\",
+      "outputPath": "C:\\Users\\Unknown\\source\\repos\\e4\\PremiereSituation\\Application Comptabilite\\LogicielComptabilite\\CoucheModele\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
