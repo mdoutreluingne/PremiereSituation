@@ -183,7 +183,7 @@ namespace ApplicationWPF
                     bouton.Margin = new Thickness(5, 5, 5, 45);
 
                     //Data binding
-                    viewPlanning viewPlanning = new viewPlanning(reservations[k]);
+                    viewPlanning viewPlanning = new viewPlanning(reservations[k], this);
                     Binding bind = new Binding("selectReservationCommand");
                     bind.Source = viewPlanning;
                     bouton.SetBinding(Button.CommandProperty, bind);
@@ -201,6 +201,14 @@ namespace ApplicationWPF
                 }
             } 
             #endregion
+        }
+
+        public void loadReservation(dtoReservation reservation)
+        {
+            var aaa = reservation;
+            grd_planning.Visibility = Visibility.Hidden;
+            grd_date.Visibility = Visibility.Hidden;
+            grd_reservation.Visibility = Visibility.Visible;
         }
     }
 }

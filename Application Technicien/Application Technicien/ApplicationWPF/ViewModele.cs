@@ -52,30 +52,29 @@ namespace ApplicationWPF
     class viewPlanning
     {
         private dtoReservation _reservation;
-        public viewPlanning(dtoReservation reservation)
+        private MainWindow _mainWindow;
+        private ICommand _icommand;
+        public viewPlanning(dtoReservation reservation, MainWindow mainWindow)
         {
             _reservation = reservation;
+            _mainWindow = mainWindow;
         }
 
         public ICommand selectReservationCommand
         {
             get
             {
-                if (this.selectReservationCommand == null)
-                    this.selectReservationCommand = new RelayCommand(() => this.goReservation(), () => true);
+                if (this._icommand == null)
+                    this._icommand = new RelayCommand(() => this.goReservation(), () => true);
 
-                return this.selectReservationCommand;
-            }
-            set
-            {
-
+                return this._icommand;
             }
 
         }
 
         protected void goReservation()
         {
-            Console.WriteLine("dd");
+            _mainWindow.loadReservation(_reservation);
         }
     }
 }
