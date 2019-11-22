@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {}
+    "C:\\Users\\Alexis\\Documents\\Developpement\\PPE\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {
+    "C:\\Users\\Alexis\\Documents\\Developpement\\PPE\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "projectUniqueName": "C:\\Users\\Alexis\\Documents\\Developpement\\PPE\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
         "projectName": "ModeleMetier",
-        "projectPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
-        "packagesPath": "C:\\Users\\SIO2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SIO2\\Downloads\\Application Technicien 2.0\\Application Technicien\\ModeleMetier\\obj\\",
+        "projectPath": "C:\\Users\\Alexis\\Documents\\Developpement\\PPE\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\ModeleMetier.csproj",
+        "packagesPath": "C:\\Users\\Alexis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Alexis\\Documents\\Developpement\\PPE\\PremiereSituation\\Application Technicien\\Application Technicien\\ModeleMetier\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\SIO2\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Alexis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -55,10 +50,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

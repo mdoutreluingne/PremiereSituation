@@ -181,7 +181,12 @@ namespace ApplicationWPF
                     bouton.Background =  new SolidColorBrush(c);
                     bouton.BorderBrush = null;
                     bouton.Margin = new Thickness(5, 5, 5, 45);
-                    bouton.DataContext = reservations[k];
+
+                    //Data binding
+                    viewPlanning viewPlanning = new viewPlanning(reservations[k]);
+                    Binding bind = new Binding("selectReservationCommand");
+                    bind.Source = viewPlanning;
+                    bouton.SetBinding(Button.CommandProperty, bind);
 
                     Grid.SetColumn(bouton, heure + 1);
                     Grid.SetRow(bouton, i);

@@ -8,11 +8,7 @@
         Title="Application Technicien" Height="797.378" Width="1446.577">
     <Grid x:Name="grd_principale">
         <Grid x:Name="grd_entete" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#FF74AC93">
-            <Label x:Name="lbl_appName" Content="Application Technicien" HorizontalAlignment="Center" Margin="202,27,187,0" VerticalAlignment="Top" FontSize="30" FontFamily="Consolas" FontWeight="Bold">
-                <Label.Effect>
-                    <DropShadowEffect Color="White"/>
-                </Label.Effect>
-            </Label>
+            <Label x:Name="lbl_appName" Content="Application Technicien" HorizontalAlignment="Center" Margin="202,27,187,0" VerticalAlignment="Top" FontSize="30" FontFamily="Consolas" FontWeight="Bold"/>
             <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG"/>
             <Image HorizontalAlignment="Left" Height="78" Margin="112,12,0,0" VerticalAlignment="Top" Source="image/plus.png"/>
             <Image HorizontalAlignment="Right" Height="63" Margin="0,22,48.4,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.446,0.184" Source="image/technicien.png"/>

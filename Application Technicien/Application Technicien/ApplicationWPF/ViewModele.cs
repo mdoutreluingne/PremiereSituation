@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace ApplicationWPF
 {
@@ -50,6 +51,31 @@ namespace ApplicationWPF
 
     class viewPlanning
     {
+        private dtoReservation _reservation;
+        public viewPlanning(dtoReservation reservation)
+        {
+            _reservation = reservation;
+        }
 
+        public ICommand selectReservationCommand
+        {
+            get
+            {
+                if (this.selectReservationCommand == null)
+                    this.selectReservationCommand = new RelayCommand(() => this.goReservation(), () => true);
+
+                return this.selectReservationCommand;
+            }
+            set
+            {
+
+            }
+
+        }
+
+        protected void goReservation()
+        {
+            Console.WriteLine("dd");
+        }
     }
 }
