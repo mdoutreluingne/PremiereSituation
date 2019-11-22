@@ -86,6 +86,7 @@
     </Compile>
     <Compile Include="viewModel\RelayCommand.cs" />
     <Compile Include="viewModel\viewClient.cs" />
+    <Compile Include="viewModel\viewDesarchive.cs" />
     <Compile Include="viewModel\viewModelBase.cs" />
     <Page Include="DesarchiveWindow.xaml">
       <SubType>Designer</SubType>

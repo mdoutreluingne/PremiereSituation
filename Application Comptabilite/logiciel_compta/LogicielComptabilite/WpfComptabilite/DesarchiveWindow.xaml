@@ -9,6 +9,7 @@
     <Grid>
         <ComboBox HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="272" Height="32"/>
         <Label Content="Sélectionner un client à désarchiver" HorizontalAlignment="Left" Margin="0,29,0,0" VerticalAlignment="Top" Width="292"/>
+        <Button Content="Désarchivé le client" HorizontalAlignment="Left" Margin="63,207,0,0" VerticalAlignment="Top" Width="156" Height="27" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
 
     </Grid>
 </Window>
