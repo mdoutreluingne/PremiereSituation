@@ -155,12 +155,15 @@ namespace ApplicationWPF
                     //Heures sans réservation
                     else if(_viewDate.DateSelect >= DateTime.Today)
                     {
-                        Rectangle rectangle = new Rectangle();
-                        rectangle.Fill = new SolidColorBrush(Colors.White);
-                        rectangle.Margin = new Thickness(2, 2, 2, 2);
-                        Grid.SetColumn(rectangle, j + 1);
-                        Grid.SetRow(rectangle, i + 1);
-                        grd_planning.Children.Add(rectangle);
+
+                        Button bouton = new Button();
+                        bouton.Background = new SolidColorBrush(Colors.White);
+                        bouton.BorderBrush = null;
+                        bouton.Margin = new Thickness(2, 2, 2, 2);
+
+                        Grid.SetColumn(bouton, j + 1);
+                        Grid.SetRow(bouton, i + 1);
+                        grd_planning.Children.Add(bouton);
                     }
                 }
 
@@ -174,18 +177,22 @@ namespace ApplicationWPF
                 {
                     int heure = horaires.IndexOf(reservations[k].Date.TimeOfDay.ToString());
                     Color c = Color.FromRgb(116, 172, 147);
-                    Rectangle rectangle = new Rectangle();
-                    rectangle.Fill = new SolidColorBrush(c);
-                    rectangle.Margin = new Thickness(5, 5, 5, 50);
-                    rectangle.DataContext = reservations[k];
+                    Button bouton = new Button();
+                    bouton.Background =  new SolidColorBrush(c);
+                    bouton.BorderBrush = null;
+                    bouton.Margin = new Thickness(5, 5, 5, 45);
+                    bouton.DataContext = reservations[k];
 
-                    Grid.SetColumn(rectangle, heure + 1);
-                    Grid.SetRow(rectangle, i);
-                    var rectangle_free = grd_planning.Children
-                        .Cast<UIElement>()
-                        .First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == heure + 1);
-                    grd_planning.Children.Remove(rectangle_free);
-                    grd_planning.Children.Add(rectangle);
+                    Grid.SetColumn(bouton, heure + 1);
+                    Grid.SetRow(bouton, i);
+                    if (_viewDate.DateSelect >= DateTime.Today)
+                    {
+                        var bouton_free = grd_planning.Children
+                            .Cast<UIElement>()
+                            .First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == heure + 1);
+                        grd_planning.Children.Remove(bouton_free);
+                    }
+                    grd_planning.Children.Add(bouton);
                 }
             } 
             #endregion
