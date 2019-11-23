@@ -576,6 +576,9 @@ namespace WpfComptabilite.viewModel
             IsEnableTel = false;
             IsEnableMail = false;
             IsEnableLesClients = true;
+            BoutonVisible = false;
+            AutreBoutonVisible = true;
+            
 
         }
         public void archiverClient()
