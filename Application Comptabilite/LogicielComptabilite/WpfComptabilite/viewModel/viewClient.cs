@@ -195,14 +195,15 @@ namespace WpfComptabilite.viewModel
                 }
             }
         }
-        public Ville Ville_id
+        public string Ville_id
         {
-            get => _clientActif.Ville_id;
+            get => _clientActif.Ville_id.Nom;
             set
             {
-                if (_clientActif.Ville_id != value)
+                if (_clientActif.Ville_id.Nom != value)
                 {
-                    _clientActif.Ville_id = value;
+                    Ville v = _clientActif.Ville_id;
+                    _clientActif.Ville_id.Nom = value;
                     OnPropertyChanged("Ville_id");
                 }
             }
@@ -542,7 +543,7 @@ namespace WpfComptabilite.viewModel
                     ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
                     ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
-                    Ville_id = this.collectionViewVille.CurrentItem as Ville;
+                    Ville_id = this.collectionViewVille.CurrentItem as string;
                     unDaoClient.insert(ClientActif);
                     ClientActif = unDaoClient.selectByNom(ClientActif.Nom);
                     Lesclients.Add(ClientActif);
@@ -564,9 +565,10 @@ namespace WpfComptabilite.viewModel
         }
         public void updateClient() //Revoir le update pour la VILLE !
         {
-            Ville_id = this.collectionViewVille.CurrentItem as Ville;
+            //Ville_id = this.collectionViewVille.CurrentItem as Ville;
+            _clientActif.Ville_id.Id = unDaoVille.selectByNom(ClientActif.Ville_id.Nom);
             unDaoClient.update(ClientActif);
-            //this.collectionViewClient.Refresh();
+            this.collectionViewClient.Refresh();
             this.collectionViewClient.MoveCurrentTo(null);
             IsEnableNom = false;
             IsEnablePrenom = false;
@@ -635,7 +637,7 @@ namespace WpfComptabilite.viewModel
             // Vide tous les champs
             Nom = string.Empty;
             Prenom = string.Empty;
-            Ville_id.Nom = string.Empty;
+            Ville_id = string.Empty;
             Tel = string.Empty;
             Mail = string.Empty;
             ClientActif.Nom = string.Empty;

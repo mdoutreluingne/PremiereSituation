@@ -31,6 +31,13 @@ namespace CoucheModele.modele
             return v;
 
         }
+        public int selectByNom(string nom)
+        {
+            int uneville;
+            DataTable datatable = this.dbal.SelectByNom("ville", nom);
+            uneville = (int)(datatable.Rows[0]["id"]);
+            return uneville;
+        }
         public List<Ville> selectAllVille()
         {
 
