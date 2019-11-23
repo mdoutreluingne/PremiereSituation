@@ -110,6 +110,13 @@ namespace CoucheModele.modele
 
             return dataset.Tables[0].Rows[0];
         }
+        public DataTable SelectByNom(string table, string champs)
+        {
+            string query = "SELECT * FROM " + table + " where nom='" + champs + "'";
+            DataSet dataset = Requete(query);
+
+            return dataset.Tables[0];
+        }
         public DataRow SelectByIdReservationClient(string table, int id)
         {
             string query = "SELECT * FROM " + table + " where client_id='" + id + "'";

@@ -73,11 +73,37 @@ namespace CoucheModele.modele
             }
             return lesClients;
         }
+        public List<Client> selectAllClientDesarchiver()
+        {
+
+            List<Client> lesClients = new List<Client>();
+            DataTable table = this.dbal.selectAll("SELECT * FROM client WHERE archive = 1 ORDER BY nom ASC");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                int id = (int)table.Rows[i]["id"];
+                string nom = table.Rows[i]["nom"].ToString();
+                string prenom = table.Rows[i]["prenom"].ToString();
+                Ville v = uneVille.selectById((int)table.Rows[i]["ville_id"]);
+                string tel = table.Rows[i]["tel"].ToString();
+                string mail = table.Rows[i]["mail"].ToString();
+                bool archive = (bool)table.Rows[i]["archive"];
+                lesClients.Add(new Client(id, nom, prenom, v, tel, mail, archive));
+
+            }
+            return lesClients;
+        }
         public Client selectById(int id)
         {
             DataRow datarow = this.dbal.SelectById("client", id);
             Ville v = uneVille.selectById((int)datarow["ville_id"]);
             return new Client((int)(datarow["id"]), (string)datarow["nom"], (string)datarow["prenom"], v, (string)datarow["tel"], (string)datarow["mail"], (bool)datarow["archive"]);
+        }
+        public Client selectByNom(string nom)
+        {
+            DataTable datatable = this.dbal.SelectByNom("client", nom);
+            Ville v = uneVille.selectById((int)datatable.Rows[0]["ville_id"]);
+            return new Client((int)(datatable.Rows[0]["id"]), (string)datatable.Rows[0]["nom"], (string)datatable.Rows[0]["prenom"], v, (string)datatable.Rows[0]["tel"], (string)datatable.Rows[0]["mail"], (bool)datatable.Rows[0]["archive"]);
         }
     }
 }

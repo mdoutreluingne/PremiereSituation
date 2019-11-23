@@ -37,6 +37,7 @@ namespace WpfComptabilite.viewModel
         private bool _isEnableVille = false;
         private bool _isEnableTel = false;
         private bool _isEnableMail = false;
+        private bool _isEnabledNumCheque = false;
         private bool _couleurHistorique = false;
         private bool _boutonVisible = false;
         private bool _autreBoutonVisible = true;
@@ -106,11 +107,6 @@ namespace WpfComptabilite.viewModel
         public ObservableCollection<Client> Lesclients
         {
             get { return this._lesclients; }
-            set
-            {
-                _lesclients = value;
-                OnPropertyChanged("Lesclients");
-            }
         }
         public ObservableCollection<Ville> Lesvilles
         {
@@ -141,8 +137,6 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("IsEnableLesClients");
 
 
-
-
             }
         }
         public Transaction TransactionActive //Ce fait par le SelectItem du xaml
@@ -155,8 +149,18 @@ namespace WpfComptabilite.viewModel
             get => _modeAddCreditActif;
             set 
             {
+                if (value == "Chèque")
+                {
+                    IsEnabledNumCheque = true;
+                    
+                }
+                else
+                {
+                    IsEnabledNumCheque = false;
+                }
                 _modeAddCreditActif = value;
                 OnPropertyChanged("ModeAddCreditActif");
+
             } 
         }
 
@@ -310,6 +314,15 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("IsEnableMail");
             }
 
+        }
+        public bool IsEnabledNumCheque 
+        { 
+            get => _isEnabledNumCheque;
+            set
+            {
+                _isEnabledNumCheque = value;
+                OnPropertyChanged("IsEnabledNumCheque");
+            }
         }
 
 
@@ -513,7 +526,7 @@ namespace WpfComptabilite.viewModel
             }
             else
             {
-                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Ville_id.Nom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true) // A REVOIR !!!!!!!
+                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true) // A REVOIR !!!!!!!
                 {
                     MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -523,23 +536,22 @@ namespace WpfComptabilite.viewModel
                     ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
                     Ville_id = this.collectionViewVille.CurrentItem as Ville;
-                    _lesclients.Add(ClientActif);
                     unDaoClient.insert(ClientActif);
+                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom);
+                    Lesclients.Add(ClientActif);
                     this.collectionViewClient.Refresh();
-                    this.collectionViewClient.MoveCurrentTo(null);
+                    this.collectionViewClient.MoveCurrentTo(ClientActif);
+
+                    
                     IsEnableNom = false;
                     IsEnablePrenom = false;
                     IsEnableVille = false;
                     IsEnableTel = false;
                     IsEnableMail = false;
                     IsEnableLesClients = true;
-                    //ClientActif = new Client();
-                    //TransactionActive = new Transaction();
-
-
                 }
             }
-
+            
 
 
         }
@@ -559,7 +571,7 @@ namespace WpfComptabilite.viewModel
         }
         public void archiverClient()
         {
-            unDaoClient.desarchiver(ClientActif);
+            unDaoClient.archiver(ClientActif);
             this.collectionViewClient.Refresh();
         }
         public void FenetreDesarchiver()
@@ -588,6 +600,7 @@ namespace WpfComptabilite.viewModel
         }
         public void addCredit()
         {
+            
             if (ModeAddCreditActif != null)
             {
                 DateTime date = DateTime.Now;
