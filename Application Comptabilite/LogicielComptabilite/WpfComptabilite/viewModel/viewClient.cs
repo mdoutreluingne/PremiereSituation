@@ -107,6 +107,11 @@ namespace WpfComptabilite.viewModel
         public ObservableCollection<Client> Lesclients
         {
             get { return this._lesclients; }
+            set 
+            {
+                _lesclients = value;
+                OnPropertyChanged("Lesclients");
+            }
         }
         public ObservableCollection<Ville> Lesvilles
         {
@@ -135,6 +140,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("IsEnableTel");
                 OnPropertyChanged("IsEnableMail");
                 OnPropertyChanged("IsEnableLesClients");
+                OnPropertyChanged("Lesclients");
 
 
             }
@@ -149,6 +155,7 @@ namespace WpfComptabilite.viewModel
             get => _modeAddCreditActif;
             set 
             {
+                //Active / désactive la textebox numero chèque
                 if (value == "Chèque")
                 {
                     IsEnabledNumCheque = true;
@@ -526,7 +533,7 @@ namespace WpfComptabilite.viewModel
             }
             else
             {
-                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true) // A REVOIR !!!!!!!
+                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true)
                 {
                     MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
@@ -559,7 +566,7 @@ namespace WpfComptabilite.viewModel
         {
             Ville_id = this.collectionViewVille.CurrentItem as Ville;
             unDaoClient.update(ClientActif);
-            this.collectionViewClient.Refresh();
+            //this.collectionViewClient.Refresh();
             this.collectionViewClient.MoveCurrentTo(null);
             IsEnableNom = false;
             IsEnablePrenom = false;
@@ -573,6 +580,8 @@ namespace WpfComptabilite.viewModel
         {
             unDaoClient.archiver(ClientActif);
             this.collectionViewClient.Refresh();
+            this.collectionViewClient.MoveCurrentTo(null);
+            
         }
         public void FenetreDesarchiver()
         {

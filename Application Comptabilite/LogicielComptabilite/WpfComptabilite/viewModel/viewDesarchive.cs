@@ -48,7 +48,11 @@ namespace WpfComptabilite.viewModel
         public bool LabelVisible
         {
             get => _labelVisible;
-            set => _labelVisible = value;
+            set
+            {
+                _labelVisible = value;
+                OnPropertyChanged("LabelVisible");
+            }
         }
         public ICommand DearchiveCommandClient 
         {

@@ -13,7 +13,7 @@
         <ComboBox ItemsSource="{Binding LesclientsDesarchiver}" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Width="364" Height="32"/>
         <Label Content="Sélectionner un client à désarchiver" Margin="0,29,0,0" Width="392" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontWeight="SemiBold" FontSize="20"/>
         <Button Content="Désarchivé le client" Command="{Binding DearchiveCommandClient}" HorizontalAlignment="Left" Margin="121,203,0,0" VerticalAlignment="Top" Width="156" Height="27" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
-        <Label Content="Le client a été désarchiver " HorizontalAlignment="Left" Visibility="{Binding LabelVisible, Converter={StaticResource Converter} }" Margin="108,157,0,0" VerticalAlignment="Top" Width="195" Foreground="#FF1EE81E"/>
+        <Label Content="Le client a été désarchiver " HorizontalAlignment="Left" Visibility="{Binding LabelVisible, Converter={StaticResource Converter} }" Margin="0,157,0,0" VerticalAlignment="Top" Width="392" Foreground="#FF04A604" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Bold"/>
 
     </Grid>
 </Window>
