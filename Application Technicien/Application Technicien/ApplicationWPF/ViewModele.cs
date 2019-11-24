@@ -29,6 +29,8 @@ namespace ApplicationWPF
         private DateTime _date;
         private List<dtoSalle> _salle;
         private daoReservation _daoReservation;
+        private ICommand _icommandPreview;
+        private ICommand _icommandNext;
 
         public viewDate(MainWindow mainWindow, List<dtoSalle> salle, daoReservation daoReservation)
         {
@@ -36,6 +38,7 @@ namespace ApplicationWPF
             _mainWindow = mainWindow;
             _salle = salle;
             _daoReservation = daoReservation;
+
         }
         public DateTime DateSelect
         {
@@ -47,6 +50,39 @@ namespace ApplicationWPF
                 OnPropertyChanged("DateSelect");
             }
         }
+
+        public ICommand SelectPreviewDate
+        {
+            get
+            {
+                if (this._icommandPreview == null)
+                    this._icommandPreview = new RelayCommand(() => this.goPreviewDate(), () => true);
+
+                return this._icommandPreview;
+            }
+        }
+
+        public ICommand SelectNextDate
+        {
+            get
+            {
+                if (this._icommandNext == null)
+                    this._icommandNext = new RelayCommand(() => this.goNextDate(), () => true);
+
+                return this._icommandNext;
+            }
+        }
+
+        protected void goPreviewDate()
+        {
+            _mainWindow.dtp_date.SelectedDate = Convert.ToDateTime(_mainWindow.dtp_date.SelectedDate).AddDays(-1);
+        }
+
+        protected void goNextDate()
+        {
+            _mainWindow.dtp_date.SelectedDate = Convert.ToDateTime(_mainWindow.dtp_date.SelectedDate).AddDays(1);
+        }
+
     }
 
     class viewPlanning

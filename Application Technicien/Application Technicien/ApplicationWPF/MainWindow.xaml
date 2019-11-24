@@ -20,6 +20,24 @@
                     <ColumnDefinition Width="346*"/>
                 </Grid.ColumnDefinitions>
                 <DatePicker x:Name="dtp_date" HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" />
+                <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="445,-1,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="51" RenderTransformOrigin="0.5,0.5" Command="{Binding SelectNextDate}">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0.24"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.107"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="Image/fleche_droite.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Grid.Column="1" Command="{Binding SelectPreviewDate}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Image/fleche_gauche.png"/>
+                    </Button.Background>
+                </Button>
             </Grid>
             <Grid x:Name="grd_planning" HorizontalAlignment="Stretch" Margin="20,241,10,10">
                 <!-- CHARGEMENT DYNAMIQUE -->
