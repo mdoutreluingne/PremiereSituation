@@ -180,6 +180,8 @@ namespace ApplicationWPF
         private string _mail;
         private string _telephone;
 
+        private ICommand _icommand;
+        private ICommand _icommand1;
         viewReservation(MainWindow main, List<dtoSalle> les_salles)
             :base(main)
         {
@@ -316,6 +318,43 @@ namespace ApplicationWPF
                 _telephone = value;
                 OnPropertyChanged("Telephone");
             }
+        }
+
+        public ICommand FocusNom
+        {
+            get
+            {
+                if (this._icommand == null)
+                    this._icommand = new RelayCommand(() => this.focus_nom(), () => true);
+
+                return this._icommand;
+            }
+        }
+        public ICommand LostFocusNom
+        {
+            get
+            {
+                if (this._icommand1 == null)
+                    this._icommand1 = new RelayCommand(() => this.lostfocus_nom(), () => true);
+
+                return this._icommand1;
+            }
+        }
+
+        public void focus_nom()
+        {
+            if (Nom == "NOM")
+            {
+                Nom = "";
+            };
+        }
+
+        public void lostfocus_nom()
+        {
+            if (Nom == "")
+            {
+                Nom = "NOM";
+            };
         }
     }
 }

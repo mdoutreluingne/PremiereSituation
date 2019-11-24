@@ -606,3 +606,7 @@ C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Techni
 C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\obj\Debug\ApplicationWPF.csproj.CopyComplete
 C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\obj\Debug\ApplicationWPF.exe
 C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\obj\Debug\ApplicationWPF.pdb
+C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Alexis\Documents\Developpement\PPE\PremiereSituation\Application Technicien\Application Technicien\ApplicationWPF\bin\Debug\System.Windows.Interactivity.xml

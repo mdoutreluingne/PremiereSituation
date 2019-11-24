@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:ApplicationWPF"
         mc:Ignorable="d"
         Title="Application Technicien" Height="797.378" Width="1446.577">
@@ -46,7 +47,16 @@
         <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
             <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20"/>
             <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" SelectedItem="{Binding Salle}"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus" >
+                        <i:InvokeCommandAction Command="{Binding FocusNom}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="LostFocus" >
+                        <i:InvokeCommandAction Command="{Binding LostFocusNom}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93"/>
             <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
             <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
