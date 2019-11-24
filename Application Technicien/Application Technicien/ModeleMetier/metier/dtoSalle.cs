@@ -39,7 +39,14 @@ namespace ModeleMetier.metier
         public DateTime Heure_fermeture { get => _heure_fermeture; set => _heure_fermeture = value; }
         public bool Archive { get => _archive; set => _archive = value; }
         public dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; }
-        public dtoTheme DtoTheme { get => _dtoTheme; set => _dtoTheme = value; } 
+        public dtoTheme DtoTheme { get => _dtoTheme; set => _dtoTheme = value; }
+        #endregion
+
+        #region
+        public override string ToString()
+        {
+            return "Salle n° " + _numero.ToString();
+        }
         #endregion
     }
 }

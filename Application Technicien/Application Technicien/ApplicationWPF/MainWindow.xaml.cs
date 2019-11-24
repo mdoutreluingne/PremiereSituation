@@ -28,6 +28,8 @@ namespace ApplicationWPF
             "12:30:00","14:00:00", "15:30:00", "17:00:00", "18:30:00", "20:00:00", "21:30:00", "23:00:00"
         };
         private static viewDate _viewDate;
+        private static viewReservation _viewReservation;
+        private static viewPlanning _viewPlanning;
         
         public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
         {
@@ -45,8 +47,12 @@ namespace ApplicationWPF
             List<dtoSalle> salle = (List<dtoSalle>)daoSalle.select("*", "WHERE ville_id = " + ville.Id + " AND archive = false");
 
             //MVVM
-            _viewDate = new viewDate(this, salle, daoReservation);
+            _viewPlanning = new viewPlanning(null, null, this);
+            _viewDate = viewDate.Instance(salle, daoReservation, this);
+            _viewReservation = viewReservation.Instance(this, salle, Visibility.Hidden);
+            grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
+            grd_reservation.DataContext = _viewReservation;
 
             //On charge le planning
             loadColumnRow(salle);
@@ -161,6 +167,11 @@ namespace ApplicationWPF
                         bouton.BorderBrush = null;
                         bouton.Margin = new Thickness(2, 2, 2, 2);
 
+                        viewPlanning viewPlanning = new viewPlanning(_viewPlanning, null, this);
+                        Binding bind = new Binding("selectReservationCommand");
+                        bind.Source = viewPlanning;
+                        bouton.SetBinding(Button.CommandProperty, bind);
+
                         Grid.SetColumn(bouton, j + 1);
                         Grid.SetRow(bouton, i + 1);
                         grd_planning.Children.Add(bouton);
@@ -183,7 +194,7 @@ namespace ApplicationWPF
                     bouton.Margin = new Thickness(5, 5, 5, 45);
 
                     //Data binding
-                    viewPlanning viewPlanning = new viewPlanning(reservations[k], this);
+                    viewPlanning viewPlanning = new viewPlanning(_viewPlanning ,reservations[k], this);
                     Binding bind = new Binding("selectReservationCommand");
                     bind.Source = viewPlanning;
                     bouton.SetBinding(Button.CommandProperty, bind);
@@ -201,14 +212,6 @@ namespace ApplicationWPF
                 }
             } 
             #endregion
-        }
-
-        public void loadReservation(dtoReservation reservation)
-        {
-            var aaa = reservation;
-            grd_planning.Visibility = Visibility.Hidden;
-            grd_date.Visibility = Visibility.Hidden;
-            grd_reservation.Visibility = Visibility.Visible;
         }
     }
 }

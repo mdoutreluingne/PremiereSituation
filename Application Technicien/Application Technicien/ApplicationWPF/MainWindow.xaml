@@ -14,7 +14,7 @@
             <Image HorizontalAlignment="Right" Height="63" Margin="0,22,48.4,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.446,0.184" Source="image/technicien.png"/>
         </Grid>
         <Grid x:Name="grd_base" Visibility="Visible">
-            <Grid x:Name="grd_date" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
+            <Grid x:Name="grd_date" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="346*"/>
@@ -39,18 +39,18 @@
                     </Button.Background>
                 </Button>
             </Grid>
-            <Grid x:Name="grd_planning" HorizontalAlignment="Stretch" Margin="20,241,10,10">
+            <Grid x:Name="grd_planning" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Margin="20,241,10,10">
                 <!-- CHARGEMENT DYNAMIQUE -->
             </Grid>
         </Grid>
-        <Grid x:Name="grd_reservation" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
+        <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
             <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20"/>
-            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="NOM" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="PRENOM" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93"/>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="VILLE" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="MAIL" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="TELEPHONE" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" SelectedItem="{Binding Salle}"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="{Binding Telephone}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial"/>
             <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93"/>
             <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="492,198,0,0" TextWrapping="Wrap" Text="SOLDE" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20"/>

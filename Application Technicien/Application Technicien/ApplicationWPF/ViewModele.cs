@@ -11,8 +11,9 @@ using System.Windows.Input;
 
 namespace ApplicationWPF
 {
-    class ViewModele : INotifyPropertyChanged
+    public class ViewModele : INotifyPropertyChanged
     {
+        protected MainWindow _mainWindow;
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string caller = null)
         {
@@ -21,25 +22,47 @@ namespace ApplicationWPF
                 PropertyChanged(this, new PropertyChangedEventArgs(caller));
             }
         }
+
+        public ViewModele(MainWindow mainWindow)
+        {
+            _mainWindow = mainWindow;
+        }
     }
 
-    class viewDate : ViewModele
+    public class viewDate : ViewModele
     {
-        private MainWindow _mainWindow;
+        private static viewDate _instance = null;
+        private static readonly object _padlock = new object();
+
         private DateTime _date;
         private List<dtoSalle> _salle;
         private daoReservation _daoReservation;
         private ICommand _icommandPreview;
         private ICommand _icommandNext;
+        private System.Windows.Visibility _visibilite;
 
-        public viewDate(MainWindow mainWindow, List<dtoSalle> salle, daoReservation daoReservation)
+        viewDate(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
+            :base(main)
         {
             _date = DateTime.Today;
-            _mainWindow = mainWindow;
             _salle = salle;
             _daoReservation = daoReservation;
 
         }
+
+        //singleton
+        public static viewDate Instance(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
+        {
+            lock (_padlock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new viewDate(salle, daoReservation, main);
+                }
+                return _instance;
+            }
+        }
+
         public DateTime DateSelect
         {
             get { return _date; }
@@ -75,25 +98,39 @@ namespace ApplicationWPF
 
         protected void goPreviewDate()
         {
-            _mainWindow.dtp_date.SelectedDate = Convert.ToDateTime(_mainWindow.dtp_date.SelectedDate).AddDays(-1);
+            DateSelect = Convert.ToDateTime(DateSelect).AddDays(-1);
         }
 
         protected void goNextDate()
         {
-            _mainWindow.dtp_date.SelectedDate = Convert.ToDateTime(_mainWindow.dtp_date.SelectedDate).AddDays(1);
+            DateSelect = Convert.ToDateTime(DateSelect).AddDays(1);
         }
 
+        public System.Windows.Visibility Visibilite
+        {
+            get
+            {
+                return _visibilite;
+            }
+            set
+            {
+                _visibilite = value;
+                OnPropertyChanged("Visibilite");
+            }
+        }
     }
 
-    class viewPlanning
+    public class viewPlanning : ViewModele
     {
+        private viewPlanning _origin;
         private dtoReservation _reservation;
-        private MainWindow _mainWindow;
+        private System.Windows.Visibility _visibilite;
         private ICommand _icommand;
-        public viewPlanning(dtoReservation reservation, MainWindow mainWindow)
+        public viewPlanning(viewPlanning origin, dtoReservation reservation, MainWindow main)
+            :base(main)
         {
+            _origin = origin;
             _reservation = reservation;
-            _mainWindow = mainWindow;
         }
 
         public ICommand selectReservationCommand
@@ -105,12 +142,180 @@ namespace ApplicationWPF
 
                 return this._icommand;
             }
-
         }
 
         protected void goReservation()
         {
-            _mainWindow.loadReservation(_reservation);
+            _origin.Visibilite = System.Windows.Visibility.Hidden;
+            viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
+            viewReservation.Instance(_mainWindow, null,  System.Windows.Visibility.Visible).LoadReservation = _reservation;
+
+        }
+        public System.Windows.Visibility Visibilite
+        {
+            get
+            {
+                return _visibilite;
+            }
+            set
+            {
+                _visibilite = value;
+                OnPropertyChanged("Visibilite");
+            }
+        }
+    }
+
+    public sealed class viewReservation : ViewModele
+    {
+        private static viewReservation _instance = null;
+        private static readonly object _padlock = new object();
+
+        private System.Windows.Visibility _visibilite;
+        private List<dtoSalle> _les_salles;
+
+        private dtoSalle _salle;
+        private string _nom;
+        private string _prenom;
+        private string _ville;
+        private string _mail;
+        private string _telephone;
+
+        viewReservation(MainWindow main, List<dtoSalle> les_salles)
+            :base(main)
+        {
+            _les_salles = les_salles;
+        }
+
+        //singleton
+        public static viewReservation Instance(MainWindow main, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
+        {
+            lock (_padlock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new viewReservation(main, les_salles);
+                }
+                _instance.Visibilite = visibility;
+                return _instance;
+            }
+        }
+
+        public System.Windows.Visibility Visibilite
+        {
+            get
+            {
+                return _visibilite;
+            }
+            set
+            {
+                _visibilite = value;
+                OnPropertyChanged("Visibilite");
+            }
+        }
+
+        public List<dtoSalle> LesSalles
+        {
+            get
+            {
+                return _les_salles;
+            }
+        }
+
+        public dtoReservation LoadReservation
+        {
+            set
+            {
+                if (value != null)
+                {
+                    Salle = value.DtoSalle;
+                    Nom = value.Client.Nom;
+                    Prenom = value.Client.Prenom;
+                    Ville = value.Client.DtoVille.Nom;
+                    Mail = value.Client.Mail;
+                    Telephone = value.Client.Tel;
+                }
+                else
+                {
+                    Nom = "NOM";
+                    Prenom = "PRENOM";
+                    Ville = "VILLE";
+                    Mail = "MAIL";
+                    Telephone = "TELEPHONE";
+                }
+            }
+        }
+
+        public dtoSalle Salle
+        {
+            get
+            {
+                return _salle;
+            }
+            set
+            {
+                _salle = value;
+                OnPropertyChanged("Salle");
+            }
+        }
+        public string Nom
+        {
+            get
+            {
+                return _nom;
+            }
+            set
+            {
+                _nom = value;
+                OnPropertyChanged("Nom");
+            }
+        }
+        public string Prenom
+        {
+            get
+            {
+                return _prenom;
+            }
+            set
+            {
+                _prenom = value;
+                OnPropertyChanged("Prenom");
+            }
+        }
+        public string Ville
+        {
+            get
+            {
+                return _ville;
+            }
+            set
+            {
+                _ville = value;
+                OnPropertyChanged("Ville");
+            }
+        }
+        public string Mail
+        {
+            get
+            {
+                return _mail;
+            }
+            set
+            {
+                _mail = value;
+                OnPropertyChanged("Mail");
+            }
+        }
+        public string Telephone
+        {
+            get
+            {
+                return _telephone;
+            }
+            set
+            {
+                _telephone = value;
+                OnPropertyChanged("Telephone");
+            }
         }
     }
 }

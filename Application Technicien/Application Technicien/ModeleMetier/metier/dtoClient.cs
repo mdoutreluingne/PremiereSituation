@@ -36,7 +36,7 @@ namespace ModeleMetier.metier
         public string Tel { get => _tel; set => _tel = value; }
         public string Mail { get => _mail; set => _mail = value; }
         public bool Archive { get => _archive; set => _archive = value; }
-        internal dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; } 
+        public dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; } 
         #endregion
     }
 }

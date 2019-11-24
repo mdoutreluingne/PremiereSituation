@@ -33,8 +33,8 @@ namespace ModeleMetier.metier
         public DateTime Date { get => _date; set => _date = value; }
         public string Commentaire { get => _commentaire; set => _commentaire = value; }
         public int NbJoueur { get => _nbJoueur; set => _nbJoueur = value; }
-        internal dtoClient Client { get => _client; set => _client = value; }
-        internal dtoSalle DtoSalle { get => _dtoSalle; set => _dtoSalle = value; } 
+        public dtoClient Client { get => _client; set => _client = value; }
+        public dtoSalle DtoSalle { get => _dtoSalle; set => _dtoSalle = value; } 
         #endregion
     }
 }
