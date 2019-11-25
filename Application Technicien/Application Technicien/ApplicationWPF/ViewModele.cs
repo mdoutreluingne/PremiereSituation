@@ -148,7 +148,7 @@ namespace ApplicationWPF
         {
             _origin.Visibilite = System.Windows.Visibility.Hidden;
             viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
-            viewReservation.Instance(_mainWindow, null,  System.Windows.Visibility.Visible).LoadReservation = _reservation;
+            viewReservation.Instance(_mainWindow, null,null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
 
         }
         public System.Windows.Visibility Visibilite
@@ -170,32 +170,39 @@ namespace ApplicationWPF
         private static viewReservation _instance = null;
         private static readonly object _padlock = new object();
 
+        private daoClient _daoClient;
+        private daoTransaction _daoTransaction;
         private System.Windows.Visibility _visibilite;
         private List<dtoSalle> _les_salles;
+        private List<dtoClient> _les_clients;
 
         private dtoSalle _salle;
+        private dtoClient _client;
         private string _nom;
         private string _prenom;
         private string _ville;
         private string _mail;
         private string _telephone;
+        private decimal _solde;
 
         private ICommand _icommand;
         private ICommand _icommand1;
-        viewReservation(MainWindow main, List<dtoSalle> les_salles)
+        viewReservation(MainWindow main, daoClient daoClient, daoTransaction daoTransaction, List<dtoSalle> les_salles)
             :base(main)
         {
+            _daoClient = daoClient;
+            _daoTransaction = daoTransaction;
             _les_salles = les_salles;
         }
 
         //singleton
-        public static viewReservation Instance(MainWindow main, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
+        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoTransaction daoTransaction, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewReservation(main, les_salles);
+                    _instance = new viewReservation(main, daoClient, daoTransaction, les_salles);
                 }
                 _instance.Visibilite = visibility;
                 return _instance;
@@ -214,7 +221,18 @@ namespace ApplicationWPF
                 OnPropertyChanged("Visibilite");
             }
         }
-
+        public List<dtoClient> LesClients
+        {
+            get
+            {
+                return _les_clients;
+            }
+            set
+            {
+                _les_clients = value;
+                OnPropertyChanged("LesClients");
+            }
+        }
         public List<dtoSalle> LesSalles
         {
             get
@@ -235,6 +253,8 @@ namespace ApplicationWPF
                     Ville = value.Client.DtoVille.Nom;
                     Mail = value.Client.Mail;
                     Telephone = value.Client.Tel;
+                    List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("SUM(montant)", "WHERE client_id = " + value.Client.Id);
+                    Solde = le_solde[0].Montant;
                 }
                 else
                 {
@@ -243,6 +263,7 @@ namespace ApplicationWPF
                     Ville = "VILLE";
                     Mail = "MAIL";
                     Telephone = "TELEPHONE";
+                    Solde = 0;
                 }
             }
         }
@@ -319,7 +340,38 @@ namespace ApplicationWPF
                 OnPropertyChanged("Telephone");
             }
         }
+        public decimal Solde
+        {
+            get
+            {
+                return _solde;
+            }
+            set
+            {
+                _solde = value;
+                OnPropertyChanged("Solde");
+            }
+        }
 
+        public dtoClient SelectClient
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                _client = value;
+                Nom = value.Nom;
+                Prenom = value.Prenom;
+                Ville = value.DtoVille.Nom;
+                Mail = value.Mail;
+                Telephone = value.Tel;
+                List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("id, date, SUM(montant) as 'montant', type, numero, commentaire, reservation_id, client_id", "WHERE client_id = " + value.Id);
+                Solde = le_solde[0].Montant;
+                OnPropertyChanged("SelectClient");
+            }
+        }
         public ICommand FocusNom
         {
             get
@@ -354,7 +406,11 @@ namespace ApplicationWPF
             if (Nom == "")
             {
                 Nom = "NOM";
-            };
+            }
+            else if(Nom.Length >= 3)
+            {
+                LesClients = (List<dtoClient>)_daoClient.select("*", "WHERE nom LIKE '%" + Nom + "%'");
+            }
         }
     }
 }
