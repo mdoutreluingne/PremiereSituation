@@ -19,7 +19,7 @@ namespace CoucheModele.metier
             Id = 0;
             Nom = "";
             Prenom = "";
-            Ville_id = null;
+            Ville_id = new Ville();
             Tel = "";
             Mail = "";
             Archive = false;

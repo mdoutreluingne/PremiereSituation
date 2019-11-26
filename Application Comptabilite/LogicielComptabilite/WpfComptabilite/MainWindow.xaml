@@ -49,8 +49,14 @@
         </Grid>
         <TextBox x:Name="txt_nom" IsEnabled="{Binding IsEnableNom}" HorizontalAlignment="Left" Height="26" Margin="24,101,0,0" TextWrapping="Wrap" Text="{Binding Nom}" VerticalAlignment="Top" Width="318" BorderThickness="1"/>
         <TextBox x:Name="txt_prenom" IsEnabled="{Binding IsEnablePrenom}" HorizontalAlignment="Left" Height="25" Margin="24,138,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="318"/>
-        <ComboBox x:Name="cmb_ville" IsEnabled="{Binding IsEnableVille}" ItemsSource="{Binding Lesvilles}" Text="{Binding Ville_id}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Ville_id}" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26" IsEditable="True"/>
-        <TextBox x:Name="txt_tel" IsEnabled="{Binding IsEnableTel}" HorizontalAlignment="Left" Height="25" Margin="24,214,0,0" TextWrapping="Wrap" Text="{Binding Tel}" VerticalAlignment="Top" Width="318"/>
+        <ComboBox x:Name="cmb_ville" IsEnabled="{Binding IsEnableVille}" ItemsSource="{Binding Lesvilles}" Text="{Binding Ville_id}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Ville_id}" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26" IsEditable="True">
+            <i:Interaction.Triggers>
+            <i:EventTrigger EventName="LostFocus">
+                <i:InvokeCommandAction Command="{Binding autocomplete_ville}" CommandParameter="ViewImportProgress" />
+            </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+            <TextBox x:Name="txt_tel" IsEnabled="{Binding IsEnableTel}" HorizontalAlignment="Left" Height="25" Margin="24,214,0,0" TextWrapping="Wrap" Text="{Binding Tel}" VerticalAlignment="Top" Width="318"/>
         <TextBox x:Name="txt_mail" IsEnabled="{Binding IsEnableMail}" HorizontalAlignment="Left" Height="27" Margin="24,254,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="318"/>
         <Button x:Name="btn_archive" Content="ARCHIVER" Command="{Binding ArchiveCommand}" HorizontalAlignment="Left" Margin="43,331,0,0" VerticalAlignment="Top" Width="156" Height="27" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
         <Button x:Name="btn_modify" Command="{Binding ModifyCommandClient}" Content="MODIFIER" Visibility="{Binding BoutonVisible, Converter={StaticResource BooleanToVisibilityConverter} }" HorizontalAlignment="Left" Margin="43,295,0,0" VerticalAlignment="Top" Width="156" Height="27" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>

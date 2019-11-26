@@ -82,12 +82,12 @@ namespace WpfComptabilite.viewModel
             _lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
             _lesHistoriques = new ObservableCollection<Transaction>();
 
-            foreach (Client unclient in _lesclients)
-            {
-                int i = 0;
-                while (unclient.Ville_id.Nom != _lesvilles[i].Nom) i++;
-                unclient.Ville_id = _lesvilles[i];
-            }
+            //foreach (Client unclient in _lesclients)
+            //{
+            //    int i = 0;
+            //    while (unclient.Ville_id.Nom != _lesvilles[i].Nom) i++;
+            //    unclient.Ville_id = _lesvilles[i];
+            //}
 
 
 
@@ -519,6 +519,7 @@ namespace WpfComptabilite.viewModel
             List<string> lesMails = new List<string>(unDaoClient.selectMail());
             bool valide = false;
 
+            //Cherche si un mail est déjà éxistant
             foreach (string s in lesMails)
             {
                 if (Mail.Contains(s) == true)
@@ -532,7 +533,7 @@ namespace WpfComptabilite.viewModel
             {
                 MessageBox.Show("Le client existe déjà", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else
+            else //Ajoute le client
             {
                 if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true)
                 {
@@ -543,9 +544,9 @@ namespace WpfComptabilite.viewModel
                     ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
                     ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
-                    Ville_id = this.collectionViewVille.CurrentItem as string;
+                    _clientActif.Ville_id.Id = unDaoVille.selectByNom(_clientActif.Ville_id.Nom); //Récupère l'id du pays saisie
                     unDaoClient.insert(ClientActif);
-                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom);
+                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client ajouté dans la bdd
                     Lesclients.Add(ClientActif);
                     this.collectionViewClient.Refresh();
                     this.collectionViewClient.MoveCurrentTo(ClientActif);
@@ -563,10 +564,9 @@ namespace WpfComptabilite.viewModel
 
 
         }
-        public void updateClient() //Revoir le update pour la VILLE !
+        public void updateClient()
         {
-            //Ville_id = this.collectionViewVille.CurrentItem as Ville;
-            _clientActif.Ville_id.Id = unDaoVille.selectByNom(ClientActif.Ville_id.Nom);
+            _clientActif.Ville_id.Id = unDaoVille.selectByNom(ClientActif.Ville_id.Nom); //Récupère l'id du pays saisie
             unDaoClient.update(ClientActif);
             this.collectionViewClient.Refresh();
             this.collectionViewClient.MoveCurrentTo(null);
@@ -640,12 +640,12 @@ namespace WpfComptabilite.viewModel
             // Vide tous les champs
             Nom = string.Empty;
             Prenom = string.Empty;
-            Ville_id = string.Empty;
+            //Ville_id = string.Empty;
             Tel = string.Empty;
             Mail = string.Empty;
             ClientActif.Nom = string.Empty;
             ClientActif.Prenom = string.Empty;
-            ClientActif.Ville_id.Nom = string.Empty;
+            //ClientActif.Ville_id.Nom = string.Empty;
             ClientActif.Tel = string.Empty;
             ClientActif.Mail = string.Empty;
             IsEnableNom = true;
@@ -697,6 +697,13 @@ namespace WpfComptabilite.viewModel
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
         }
+        //public void autocomplete_ville()
+        //{
+        //    if (Ville_id.Length >= 3)
+        //    {
+        //        Ville_id = (List<dtoClient>)unDaoVille.sec("*", "WHERE nom LIKE '%" + Nom + "%'");
+        //    }
+        //}
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             if (this.collectionViewClient.CurrentItem != null)
