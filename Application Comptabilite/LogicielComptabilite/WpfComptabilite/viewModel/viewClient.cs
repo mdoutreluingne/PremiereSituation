@@ -116,6 +116,11 @@ namespace WpfComptabilite.viewModel
         public ObservableCollection<Ville> Lesvilles
         {
             get { return _lesvilles; }
+            set
+            {
+                _lesvilles = value;
+                OnPropertyChanged("Lesvilles");
+            }
         }
         public Client ClientActif
         {
@@ -546,7 +551,7 @@ namespace WpfComptabilite.viewModel
 
                     _clientActif.Ville_id.Id = unDaoVille.selectByNom(_clientActif.Ville_id.Nom); //Récupère l'id du pays saisie
                     unDaoClient.insert(ClientActif);
-                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client ajouté dans la bdd
+                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client après ajout dans la bdd
                     Lesclients.Add(ClientActif);
                     this.collectionViewClient.Refresh();
                     this.collectionViewClient.MoveCurrentTo(ClientActif);
@@ -638,16 +643,16 @@ namespace WpfComptabilite.viewModel
         public void viderDesChamps()
         {
             // Vide tous les champs
-            Nom = string.Empty;
-            Prenom = string.Empty;
+            //Nom = string.Empty;
+            //Prenom = string.Empty;
             //Ville_id = string.Empty;
-            Tel = string.Empty;
-            Mail = string.Empty;
-            ClientActif.Nom = string.Empty;
-            ClientActif.Prenom = string.Empty;
+            //Tel = string.Empty;
+            //Mail = string.Empty;
+            //ClientActif.Nom = string.Empty;
+            //ClientActif.Prenom = string.Empty;
             //ClientActif.Ville_id.Nom = string.Empty;
-            ClientActif.Tel = string.Empty;
-            ClientActif.Mail = string.Empty;
+            //ClientActif.Tel = string.Empty;
+            //ClientActif.Mail = string.Empty;
             IsEnableNom = true;
             IsEnablePrenom = true;
             IsEnableVille = true;
@@ -697,13 +702,13 @@ namespace WpfComptabilite.viewModel
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
         }
-        //public void autocomplete_ville()
-        //{
-        //    if (Ville_id.Length >= 3)
-        //    {
-        //        Ville_id = (List<dtoClient>)unDaoVille.sec("*", "WHERE nom LIKE '%" + Nom + "%'");
-        //    }
-        //}
+        public void autocomplete_ville()
+        {
+            if (Ville_id.Length >= 3)
+            {
+                Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '%" + Nom + "%'"));
+            }
+        }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             if (this.collectionViewClient.CurrentItem != null)

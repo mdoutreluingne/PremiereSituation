@@ -53,5 +53,20 @@ namespace CoucheModele.modele
             }
             return lesVilles;
         }
+        public List<Ville> selectFilter(string element, string join_where) //Pour autocomplete ville
+        {
+
+            List<Ville> listVilles = new List<Ville>();
+            DataTable table = this.dbal.selectAll("SELECT " + element + " FROM ville " + join_where + ";");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                int id = (int)table.Rows[i]["id"];
+                string nom = table.Rows[i]["nom"].ToString();
+                listVilles.Add(new Ville(id, nom));
+
+            }
+            return listVilles;
+        }
     }
 }
