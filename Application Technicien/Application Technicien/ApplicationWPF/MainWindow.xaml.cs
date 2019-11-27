@@ -49,7 +49,7 @@ namespace ApplicationWPF
             //MVVM
             _viewPlanning = new viewPlanning(null, null, this);
             _viewDate = viewDate.Instance(salle, daoReservation, this);
-            _viewReservation = viewReservation.Instance(this, daoClient, daoTransaction, salle, Visibility.Hidden);
+            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, Visibility.Hidden);
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
             grd_reservation.DataContext = _viewReservation;

@@ -21,7 +21,14 @@ namespace ModeleMetier.metier
 
         #region Accesseurs
         public int Id { get => _id; set => _id = value; }
-        public string Nom { get => _nom; set => _nom = value; } 
+        public string Nom { get => _nom; set => _nom = value; }
+        #endregion
+
+        #region Méthodes
+        public override string ToString()
+        {
+            return _nom;
+        }
         #endregion
     }
 }

@@ -2,11 +2,13 @@
 using ModeleMetier.modele;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ApplicationWPF
@@ -148,7 +150,7 @@ namespace ApplicationWPF
         {
             _origin.Visibilite = System.Windows.Visibility.Hidden;
             viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
-            viewReservation.Instance(_mainWindow, null,null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
+            viewReservation.Instance(_mainWindow, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
 
         }
         public System.Windows.Visibility Visibilite
@@ -171,10 +173,13 @@ namespace ApplicationWPF
         private static readonly object _padlock = new object();
 
         private daoClient _daoClient;
+        private daoVille _daoVille;
         private daoTransaction _daoTransaction;
         private System.Windows.Visibility _visibilite;
-        private List<dtoSalle> _les_salles;
-        private List<dtoClient> _les_clients;
+        private ObservableCollection<dtoSalle> _les_salles;
+        private ObservableCollection<dtoClient> _les_clients;
+        private ObservableCollection<dtoVille> _les_villes;
+        private readonly ICollectionView collectionView;
 
         private dtoSalle _salle;
         private dtoClient _client;
@@ -184,29 +189,58 @@ namespace ApplicationWPF
         private string _mail;
         private string _telephone;
         private decimal _solde;
+        private string _commentaire;
 
-        private ICommand _icommand;
-        private ICommand _icommand1;
-        viewReservation(MainWindow main, daoClient daoClient, daoTransaction daoTransaction, List<dtoSalle> les_salles)
+        /// <summary>
+        /// Les attributs Icommands
+        /// </summary>
+        #region Attributs Icommand
+        private ICommand _commandFocusNom;
+        private ICommand _commandLostNom;
+
+        private ICommand _commandFocusPrenom;
+        private ICommand _commandLostPrenom;
+
+        private ICommand _commandFocusVille;
+        private ICommand _commandLostVille;
+
+        private ICommand _commandFocusMail;
+        private ICommand _commandLostMail;
+
+        private ICommand _commandFocusTelephone;
+        private ICommand _commandLostTelephone;
+
+        private ICommand _commandFocusCommentaire;
+        private ICommand _commandLostCommentaire;
+        #endregion
+        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles)
             :base(main)
         {
             _daoClient = daoClient;
+            _daoVille = daoVille;
             _daoTransaction = daoTransaction;
-            _les_salles = les_salles;
+            _les_salles = new ObservableCollection<dtoSalle>(les_salles);
+            this.collectionView = CollectionViewSource.GetDefaultView(this._les_salles);
+            if (this.collectionView == null) throw new NullReferenceException("collectionView");
+            this.collectionView.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+
         }
 
         //singleton
-        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoTransaction daoTransaction, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
+        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewReservation(main, daoClient, daoTransaction, les_salles);
+                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles);
                 }
                 _instance.Visibilite = visibility;
                 return _instance;
             }
+        }
+        private void OnCollectionViewCurrentChanged(object sender, EventArgs e) 
+        {
         }
 
         public System.Windows.Visibility Visibilite
@@ -221,7 +255,7 @@ namespace ApplicationWPF
                 OnPropertyChanged("Visibilite");
             }
         }
-        public List<dtoClient> LesClients
+        public ObservableCollection<dtoClient> LesClients
         {
             get
             {
@@ -233,14 +267,25 @@ namespace ApplicationWPF
                 OnPropertyChanged("LesClients");
             }
         }
-        public List<dtoSalle> LesSalles
+        public ObservableCollection<dtoSalle> LesSalles
         {
             get
             {
                 return _les_salles;
             }
         }
-
+        public ObservableCollection<dtoVille> LesVilles
+        {
+            get
+            {
+                return _les_villes;
+            }
+            set
+            {
+                _les_villes = value;
+                OnPropertyChanged("LesVilles");
+            }
+        }
         public dtoReservation LoadReservation
         {
             set
@@ -253,8 +298,9 @@ namespace ApplicationWPF
                     Ville = value.Client.DtoVille.Nom;
                     Mail = value.Client.Mail;
                     Telephone = value.Client.Tel;
-                    List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("SUM(montant)", "WHERE client_id = " + value.Client.Id);
+                    List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("id, date, SUM(montant) as montant, type, numero, commentaire, reservation_id, client_id", "WHERE client_id = " + value.Client.Id);
                     Solde = le_solde[0].Montant;
+                    Commentaire = value.Commentaire;
                 }
                 else
                 {
@@ -264,10 +310,35 @@ namespace ApplicationWPF
                     Mail = "MAIL";
                     Telephone = "TELEPHONE";
                     Solde = 0;
+                    Commentaire = "COMMENTAIRE";
                 }
             }
         }
+        public dtoClient SelectClient
+        {
+            get
+            {
+                return null;
+            }
+            set
+            {
+                _client = value;
+                Nom = value.Nom;
+                Prenom = value.Prenom;
+                Ville = value.DtoVille.Nom;
+                Mail = value.Mail;
+                Telephone = value.Tel;
+                List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("id, date, SUM(montant) as 'montant', type, numero, commentaire, reservation_id, client_id", "WHERE client_id = " + value.Id);
+                Solde = le_solde[0].Montant;
+                OnPropertyChanged("SelectClient");
+            }
+        }
 
+
+        /// <summary>
+        /// Le contenue des textBoxs 
+        /// </summary>
+        #region TextBoxs
         public dtoSalle Salle
         {
             get
@@ -352,47 +423,88 @@ namespace ApplicationWPF
                 OnPropertyChanged("Solde");
             }
         }
-
-        public dtoClient SelectClient
+        public string Commentaire
         {
             get
             {
-                return null;
+                return _commentaire;
             }
             set
             {
-                _client = value;
-                Nom = value.Nom;
-                Prenom = value.Prenom;
-                Ville = value.DtoVille.Nom;
-                Mail = value.Mail;
-                Telephone = value.Tel;
-                List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("id, date, SUM(montant) as 'montant', type, numero, commentaire, reservation_id, client_id", "WHERE client_id = " + value.Id);
-                Solde = le_solde[0].Montant;
-                OnPropertyChanged("SelectClient");
+                _commentaire = value;
+                OnPropertyChanged("Commentaire");
             }
-        }
+        } 
+        #endregion
+
+        /// <summary>
+        /// Focus des TextBoxs
+        /// </summary>
+        #region Focus
+        // --- Les Commandes--- //
         public ICommand FocusNom
         {
             get
             {
-                if (this._icommand == null)
-                    this._icommand = new RelayCommand(() => this.focus_nom(), () => true);
+                if (this._commandFocusNom == null)
+                    this._commandFocusNom = new RelayCommand(() => this.focus_nom(), () => true);
 
-                return this._icommand;
+                return this._commandFocusNom;
             }
         }
-        public ICommand LostFocusNom
+        public ICommand FocusPrenom
         {
             get
             {
-                if (this._icommand1 == null)
-                    this._icommand1 = new RelayCommand(() => this.lostfocus_nom(), () => true);
+                if (this._commandFocusPrenom == null)
+                    this._commandFocusPrenom = new RelayCommand(() => this.focus_prenom(), () => true);
 
-                return this._icommand1;
+                return this._commandFocusPrenom;
             }
         }
+        public ICommand FocusVille
+        {
+            get
+            {
+                if (this._commandFocusVille == null)
+                    this._commandFocusVille = new RelayCommand(() => this.focus_ville(), () => true);
 
+                return this._commandFocusVille;
+            }
+        }
+        public ICommand FocusMail
+        {
+            get
+            {
+                if (this._commandFocusMail == null)
+                    this._commandFocusMail = new RelayCommand(() => this.focus_mail(), () => true);
+
+                return this._commandFocusMail;
+            }
+        }
+        public ICommand FocusTelephone
+        {
+            get
+            {
+                if (this._commandFocusTelephone == null)
+                    this._commandFocusTelephone = new RelayCommand(() => this.focus_telephone(), () => true);
+
+                return this._commandFocusTelephone;
+            }
+        }
+        public ICommand FocusCommentaire
+        {
+            get
+            {
+                if (this._commandFocusCommentaire == null)
+                    this._commandFocusCommentaire = new RelayCommand(() => this.focus_commentaire(), () => true);
+
+                return this._commandFocusCommentaire;
+            }
+        }
+        // --- --- --- //
+
+        // --- Les Méthodes --- //
         public void focus_nom()
         {
             if (Nom == "NOM")
@@ -400,17 +512,163 @@ namespace ApplicationWPF
                 Nom = "";
             };
         }
+        public void focus_prenom()
+        {
+            if (Prenom == "PRENOM")
+            {
+                Prenom = "";
+            };
+        }
+        public void focus_ville()
+        {
+            if (Ville == "VILLE")
+            {
+                Ville = "";
+            };
+        }
+        public void focus_mail()
+        {
+            if (Mail == "MAIL")
+            {
+                Mail = "";
+            };
+        }
+        public void focus_telephone()
+        {
+            if (Telephone == "TELEPHONE")
+            {
+                Telephone = "";
+            };
+        }
+        public void focus_commentaire()
+        {
+            if (Commentaire == "COMMENTAIRE")
+            {
+                Commentaire = "";
+            };
+        }
+        // --- --- --- //
+        #endregion
 
+        /// <summary>
+        /// lostFocus des TextBoxs
+        /// </summary>
+        #region LostFocus
+        // --- Les Commandes--- //
+        public ICommand LostFocusNom
+        {
+            get
+            {
+                if (this._commandLostNom == null)
+                    this._commandLostNom = new RelayCommand(() => this.lostfocus_nom(), () => true);
+
+                return this._commandLostNom;
+            }
+        }
+        public ICommand LostFocusPrenom
+        {
+            get
+            {
+                if (this._commandLostPrenom == null)
+                    this._commandLostPrenom = new RelayCommand(() => this.lostfocus_prenom(), () => true);
+
+                return this._commandLostPrenom;
+            }
+        }
+        public ICommand LostFocusVille
+        {
+            get
+            {
+                if (this._commandLostVille == null)
+                    this._commandLostVille = new RelayCommand(() => this.lostfocus_ville(), () => true);
+
+                return this._commandLostVille;
+            }
+        }
+        public ICommand LostFocusMail
+        {
+            get
+            {
+                if (this._commandLostMail == null)
+                    this._commandLostMail = new RelayCommand(() => this.lostfocus_mail(), () => true);
+
+                return this._commandLostMail;
+            }
+        }
+        public ICommand LostFocusTelephone
+        {
+            get
+            {
+                if (this._commandLostTelephone == null)
+                    this._commandLostTelephone = new RelayCommand(() => this.lostfocus_telephone(), () => true);
+
+                return this._commandLostTelephone;
+            }
+        }
+        public ICommand LostFocusCommentaire
+        {
+            get
+            {
+                if (this._commandLostCommentaire == null)
+                    this._commandLostCommentaire = new RelayCommand(() => this.lostfocus_commentaire(), () => true);
+
+                return this._commandLostCommentaire;
+            }
+        }
+        // --- --- --- //
+
+        // --- Les Méthodes --- //
         public void lostfocus_nom()
         {
             if (Nom == "")
             {
                 Nom = "NOM";
             }
-            else if(Nom.Length >= 3)
+            else if (Nom.Length >= 3)
             {
-                LesClients = (List<dtoClient>)_daoClient.select("*", "WHERE nom LIKE '%" + Nom + "%'");
+                LesClients = new ObservableCollection<dtoClient>((List<dtoClient>)_daoClient.select("*", "WHERE nom LIKE '%" + Nom + "%'"));
             }
         }
+        public void lostfocus_prenom()
+        {
+            if (Prenom == "")
+            {
+                Prenom = "PRENOM";
+            }
+        }
+        public void lostfocus_ville()
+        {
+            if (Ville == "")
+            {
+                Ville = "VILLE";
+            }
+            else if (Ville.Length >= 3)
+            {
+                LesVilles = new ObservableCollection<dtoVille>((List<dtoVille>)_daoVille.select("*", "WHERE nom LIKE '" + Ville + "%'"));
+            }
+        }
+        public void lostfocus_mail()
+        {
+            if (Mail == "")
+            {
+                Mail = "MAIL";
+            }
+        }
+        public void lostfocus_telephone()
+        {
+            if (Telephone == "")
+            {
+                Telephone = "TELEPHONE";
+            }
+        }
+        public void lostfocus_commentaire()
+        {
+            if (Commentaire == "")
+            {
+                Commentaire = "COMMENTAIRE";
+            }
+        }
+        // --- --- --- //
+        #endregion
     }
 }
