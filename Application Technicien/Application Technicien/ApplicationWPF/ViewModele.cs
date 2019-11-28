@@ -71,12 +71,15 @@ namespace ApplicationWPF
 
         public void goPlanning()
         {
-            MessageBoxResult mr =  MessageBox.Show("Etes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
-            if (mr == MessageBoxResult.Yes)
+            if (_viewPlanning.Visibilite == Visibility.Hidden)
             {
-                viewReservation.Instance(null, null, null, null, null, null, System.Windows.Visibility.Hidden);
-                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
-                _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
+                MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
+                if (mr == MessageBoxResult.Yes)
+                {
+                    viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                    viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                    _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
+                }
             }
         }
 
@@ -202,7 +205,7 @@ namespace ApplicationWPF
         {
             _origin.Visibilite = System.Windows.Visibility.Hidden;
             viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
-            viewReservation.Instance(_mainWindow, null, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
+            viewReservation.Instance(_mainWindow, null, null, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
 
         }
         public System.Windows.Visibility Visibilite
@@ -223,6 +226,7 @@ namespace ApplicationWPF
     {
         private static viewReservation _instance = null;
         private static readonly object _padlock = new object();
+        private viewPlanning _viewPlanning;
 
         private daoClient _daoClient;
         private daoVille _daoVille;
@@ -269,10 +273,14 @@ namespace ApplicationWPF
 
         private ICommand _commandFocusCommentaire;
         private ICommand _commandLostCommentaire;
+
+        private ICommand _commandAnnulerResa;
+        private ICommand _commandValiderResa;
         #endregion
-        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures)
+        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, viewPlanning viewPlanning)
             :base(main)
         {
+            _viewPlanning = viewPlanning;
             _daoClient = daoClient;
             _daoVille = daoVille;
             _daoTransaction = daoTransaction;
@@ -290,13 +298,13 @@ namespace ApplicationWPF
         }
 
         //singleton
-        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, System.Windows.Visibility visibility)
+        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, viewPlanning viewPlanning, System.Windows.Visibility visibility)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles, les_heures);
+                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles, les_heures, viewPlanning);
                 }
                 _instance.Visibilite = visibility;
                 return _instance;
@@ -423,7 +431,6 @@ namespace ApplicationWPF
                 OnPropertyChanged("SelectClient");
             }
         }
-
 
         /// <summary>
         /// Le contenue des textBoxs 
@@ -625,6 +632,16 @@ namespace ApplicationWPF
                 return this._commandFocusCommentaire;
             }
         }
+        public ICommand AnnulerResa
+        {
+            get
+            {
+                if (this._commandAnnulerResa == null)
+                    this._commandAnnulerResa = new RelayCommand(() => this.annuler_reservation(), () => true);
+
+                return this._commandAnnulerResa;
+            }
+        }
         // --- --- --- //
 
         // --- Les Méthodes --- //
@@ -669,6 +686,16 @@ namespace ApplicationWPF
             {
                 Commentaire = "";
             };
+        }
+        public void annuler_reservation()
+        {
+            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
+            }
         }
         // --- --- --- //
         #endregion

@@ -10,14 +10,14 @@
     <Grid x:Name="grd_principale">
         <Grid x:Name="grd_entete" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#FF74AC93">
             <Label x:Name="lbl_appName" Content="Application Technicien" HorizontalAlignment="Center" Margin="202,27,187,0" VerticalAlignment="Top" FontSize="30" FontFamily="Consolas" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG">
+            <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG" Cursor="Hand">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown" >
                         <i:InvokeCommandAction Command="{Binding GoPlanning}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Image>
-            <Image HorizontalAlignment="Left" Height="78" Margin="112,12,0,0" VerticalAlignment="Top" Source="image/plus.png"/>
+            <Image HorizontalAlignment="Left" Height="78" Margin="112,12,0,0" VerticalAlignment="Top" Source="image/plus.png" Cursor="Hand"/>
             <Image HorizontalAlignment="Right" Height="63" Margin="0,22,48.4,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.446,0.184" Source="image/technicien.png"/>
         </Grid>
         <Grid x:Name="grd_base" Visibility="Visible">
@@ -26,8 +26,8 @@
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="346*"/>
                 </Grid.ColumnDefinitions>
-                <DatePicker x:Name="dtp_date" HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" />
-                <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="445,-1,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="51" RenderTransformOrigin="0.5,0.5" Command="{Binding SelectNextDate}">
+                <DatePicker x:Name="dtp_date" HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" Cursor="Hand" />
+                <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="445,-1,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="51" RenderTransformOrigin="0.5,0.5" Command="{Binding SelectNextDate}" Cursor="Hand">
                     <Button.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -40,7 +40,7 @@
                         <ImageBrush ImageSource="Image/fleche_droite.png"/>
                     </Button.Background>
                 </Button>
-                <Button Content="Button" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Grid.Column="1" Command="{Binding SelectPreviewDate}">
+                <Button Content="Button" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Grid.Column="1" Command="{Binding SelectPreviewDate}" Cursor="Hand">
                     <Button.Background>
                         <ImageBrush ImageSource="Image/fleche_gauche.png"/>
                     </Button.Background>
@@ -51,9 +51,9 @@
             </Grid>
         </Grid>
         <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
-            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True"/>
-            <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}"/>
-            <ComboBox HorizontalAlignment="Left" Margin="53,278,0,0" VerticalAlignment="Top" Width="270" Height="45" ItemsSource="{Binding LesVilles}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,278,0,0" VerticalAlignment="Top" Width="270" Height="45" ItemsSource="{Binding LesVilles}" Cursor="Hand"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="GotFocus" >
@@ -104,8 +104,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
-            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}"/>
-            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True"/>
+            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}" Cursor="Hand"/>
+            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="492,198,0,0" TextWrapping="Wrap" Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
             <TextBox HorizontalAlignment="Left" Height="44" Margin="492,279,0,0" TextWrapping="Wrap" Text="{Binding NombreJoueur}" VerticalAlignment="Top" Width="322"  Foreground="#FF74AC93" FontSize="20"/>
             <TextBox HorizontalAlignment="Left" Height="127" Margin="492,356,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="702" Foreground="#FF74AC93" FontSize="20">
@@ -118,8 +118,8 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
-            <Button Content="VALIDER" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3"/>
-            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}"/>
+            <Button Content="VALIDER" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
+            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
         </Grid>
     </Grid>
 </Window>

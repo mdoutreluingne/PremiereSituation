@@ -50,7 +50,7 @@ namespace ApplicationWPF
             //MVVM
             _viewPlanning = new viewPlanning(null, null, this);
             _viewDate = viewDate.Instance(salle, daoReservation, this);
-            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, Visibility.Hidden);
+            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
             _viewEntete = viewEntete.Instance(this, _viewPlanning);
             grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
@@ -168,6 +168,7 @@ namespace ApplicationWPF
                         bouton.Background = new SolidColorBrush(Colors.White);
                         bouton.BorderBrush = null;
                         bouton.Margin = new Thickness(2, 2, 2, 2);
+                        bouton.Cursor = Cursors.Hand;
 
                         string la_date = DateTime.Now.ToShortDateString() + " " + horaires[j];
                         viewPlanning viewPlanning = new viewPlanning(_viewPlanning, new dtoReservation(0, Convert.ToDateTime(la_date), null, 1, null, salle[i]), this);
@@ -195,6 +196,7 @@ namespace ApplicationWPF
                     bouton.Background =  new SolidColorBrush(c);
                     bouton.BorderBrush = null;
                     bouton.Margin = new Thickness(5, 5, 5, 45);
+                    bouton.Cursor = Cursors.Hand;
 
                     //Data binding
                     viewPlanning viewPlanning = new viewPlanning(_viewPlanning ,reservations[k], this);
