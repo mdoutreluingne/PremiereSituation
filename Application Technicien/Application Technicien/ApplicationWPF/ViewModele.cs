@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -29,6 +30,57 @@ namespace ApplicationWPF
         {
             _mainWindow = mainWindow;
         }
+    }
+
+    public class viewEntete : ViewModele
+    {
+        private static viewEntete _instance = null;
+        private static readonly object _padlock = new object();
+        private viewPlanning _viewPlanning;
+
+        private ICommand _icommandGoPlanning;
+        viewEntete(MainWindow main, viewPlanning viewPlanning)
+            :base(main)
+        {
+            _viewPlanning = viewPlanning;
+        }
+
+        //singleton
+        public static viewEntete Instance(MainWindow main, viewPlanning viewPlanning)
+        {
+            lock (_padlock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new viewEntete(main, viewPlanning);
+                }
+                return _instance;
+            }
+        }
+
+        public ICommand GoPlanning
+        {
+            get
+            {
+                if (this._icommandGoPlanning == null)
+                    this._icommandGoPlanning = new RelayCommand(() => this.goPlanning(), () => true);
+
+                return this._icommandGoPlanning;
+            }
+        }
+
+        public void goPlanning()
+        {
+            MessageBoxResult mr =  MessageBox.Show("Etes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                viewReservation.Instance(null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
+            }
+        }
+
+
     }
 
     public class viewDate : ViewModele
@@ -150,7 +202,7 @@ namespace ApplicationWPF
         {
             _origin.Visibilite = System.Windows.Visibility.Hidden;
             viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
-            viewReservation.Instance(_mainWindow, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
+            viewReservation.Instance(_mainWindow, null, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
 
         }
         public System.Windows.Visibility Visibilite
@@ -179,7 +231,9 @@ namespace ApplicationWPF
         private ObservableCollection<dtoSalle> _les_salles;
         private ObservableCollection<dtoClient> _les_clients;
         private ObservableCollection<dtoVille> _les_villes;
-        private readonly ICollectionView collectionView;
+        private ObservableCollection<string> _les_heures;
+        private readonly ICollectionView collectionViewSalles;
+        private readonly ICollectionView collectionViewHeures;
 
         private dtoSalle _salle;
         private dtoClient _client;
@@ -188,7 +242,10 @@ namespace ApplicationWPF
         private string _ville;
         private string _mail;
         private string _telephone;
+        private DateTime _date;
+        private string _heure;
         private decimal _solde;
+        private int _nombreJoueur;
         private string _commentaire;
 
         /// <summary>
@@ -213,27 +270,33 @@ namespace ApplicationWPF
         private ICommand _commandFocusCommentaire;
         private ICommand _commandLostCommentaire;
         #endregion
-        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles)
+        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures)
             :base(main)
         {
             _daoClient = daoClient;
             _daoVille = daoVille;
             _daoTransaction = daoTransaction;
             _les_salles = new ObservableCollection<dtoSalle>(les_salles);
-            this.collectionView = CollectionViewSource.GetDefaultView(this._les_salles);
-            if (this.collectionView == null) throw new NullReferenceException("collectionView");
-            this.collectionView.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+            _les_clients = new ObservableCollection<dtoClient>();
+            _les_heures = new ObservableCollection<string>(les_heures);
+            this.collectionViewSalles = CollectionViewSource.GetDefaultView(this._les_salles);
+            if (this.collectionViewSalles == null) throw new NullReferenceException("collectionView");
+            this.collectionViewSalles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+
+            this.collectionViewHeures = CollectionViewSource.GetDefaultView(this._les_heures);
+            if (this.collectionViewHeures == null) throw new NullReferenceException("collectionView");
+            this.collectionViewHeures.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
 
         }
 
         //singleton
-        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, System.Windows.Visibility visibility)
+        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, System.Windows.Visibility visibility)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles);
+                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles, les_heures);
                 }
                 _instance.Visibilite = visibility;
                 return _instance;
@@ -241,6 +304,15 @@ namespace ApplicationWPF
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e) 
         {
+            if (this.collectionViewSalles.CurrentItem != null)
+            {
+                Salle = this.collectionViewSalles.CurrentItem as dtoSalle;
+            }
+
+            if (this.collectionViewHeures.CurrentItem != null)
+            {
+                Heure = this.collectionViewHeures.CurrentItem as string;
+            }
         }
 
         public System.Windows.Visibility Visibilite
@@ -286,30 +358,48 @@ namespace ApplicationWPF
                 OnPropertyChanged("LesVilles");
             }
         }
+        public ObservableCollection<string> LesHeures
+        {
+            get
+            {
+                return _les_heures;
+            }
+        }
         public dtoReservation LoadReservation
         {
             set
             {
-                if (value != null)
+                if (value.Id != 0)
                 {
                     Salle = value.DtoSalle;
+                    this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
                     Nom = value.Client.Nom;
                     Prenom = value.Client.Prenom;
                     Ville = value.Client.DtoVille.Nom;
                     Mail = value.Client.Mail;
                     Telephone = value.Client.Tel;
+                    Date = value.Date;
+                    Heure = value.Date.TimeOfDay.ToString();
+                    this.collectionViewHeures.MoveCurrentTo(value.Date.TimeOfDay.ToString());
                     List<dtoTransaction> le_solde = (List<dtoTransaction>)_daoTransaction.select("id, date, SUM(montant) as montant, type, numero, commentaire, reservation_id, client_id", "WHERE client_id = " + value.Client.Id);
                     Solde = le_solde[0].Montant;
+                    NombreJoueur = value.NbJoueur;
                     Commentaire = value.Commentaire;
                 }
                 else
                 {
+                    Salle = value.DtoSalle;
+                    this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
+                    Date = value.Date;
+                    Heure = value.Date.TimeOfDay.ToString();
+                    this.collectionViewHeures.MoveCurrentTo(value.Date.TimeOfDay.ToString());
                     Nom = "NOM";
                     Prenom = "PRENOM";
                     Ville = "VILLE";
                     Mail = "MAIL";
                     Telephone = "TELEPHONE";
                     Solde = 0;
+                    NombreJoueur = value.NbJoueur;
                     Commentaire = "COMMENTAIRE";
                 }
             }
@@ -411,6 +501,27 @@ namespace ApplicationWPF
                 OnPropertyChanged("Telephone");
             }
         }
+        public DateTime Date
+        {
+            get { return _date; }
+            set
+            {
+                _date = value;
+                OnPropertyChanged("Date");
+            }
+        }
+        public string Heure
+        {
+            get
+            {
+                return _heure;
+            }
+            set
+            {
+                _heure = value;
+                OnPropertyChanged("Heure");
+            }
+        }
         public decimal Solde
         {
             get
@@ -421,6 +532,18 @@ namespace ApplicationWPF
             {
                 _solde = value;
                 OnPropertyChanged("Solde");
+            }
+        }
+        public int NombreJoueur
+        {
+            get
+            {
+                return _nombreJoueur;
+            }
+            set
+            {
+                _nombreJoueur = value;
+                OnPropertyChanged("NombreJoueur");
             }
         }
         public string Commentaire

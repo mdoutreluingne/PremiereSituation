@@ -10,7 +10,13 @@
     <Grid x:Name="grd_principale">
         <Grid x:Name="grd_entete" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#FF74AC93">
             <Label x:Name="lbl_appName" Content="Application Technicien" HorizontalAlignment="Center" Margin="202,27,187,0" VerticalAlignment="Top" FontSize="30" FontFamily="Consolas" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG"/>
+            <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding GoPlanning}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
             <Image HorizontalAlignment="Left" Height="78" Margin="112,12,0,0" VerticalAlignment="Top" Source="image/plus.png"/>
             <Image HorizontalAlignment="Right" Height="63" Margin="0,22,48.4,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.446,0.184" Source="image/technicien.png"/>
         </Grid>
@@ -98,10 +104,11 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
-            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93"/>
-            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20"/>
+            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="492,198,0,0" TextWrapping="Wrap" Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <TextBox HorizontalAlignment="Left" Height="204" Margin="492,279,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="702" Foreground="#FF74AC93" FontSize="20">
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="492,279,0,0" TextWrapping="Wrap" Text="{Binding NombreJoueur}" VerticalAlignment="Top" Width="322"  Foreground="#FF74AC93" FontSize="20"/>
+            <TextBox HorizontalAlignment="Left" Height="127" Margin="492,356,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="702" Foreground="#FF74AC93" FontSize="20">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="GotFocus" >
                         <i:InvokeCommandAction Command="{Binding FocusCommentaire}" />
@@ -112,7 +119,7 @@
                 </i:Interaction.Triggers>
             </TextBox>
             <Button Content="VALIDER" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3"/>
-            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3"/>
+            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}"/>
         </Grid>
     </Grid>
 </Window>

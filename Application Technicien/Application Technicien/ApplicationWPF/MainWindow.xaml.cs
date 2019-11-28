@@ -27,6 +27,7 @@ namespace ApplicationWPF
             "00:30:00", "02:00:00", "03:30:00", "05:00:00", "06:30:00", "08:00:00", "09:30:00", "11:00:00",
             "12:30:00","14:00:00", "15:30:00", "17:00:00", "18:30:00", "20:00:00", "21:30:00", "23:00:00"
         };
+        private static viewEntete _viewEntete;
         private static viewDate _viewDate;
         private static viewReservation _viewReservation;
         private static viewPlanning _viewPlanning;
@@ -49,7 +50,9 @@ namespace ApplicationWPF
             //MVVM
             _viewPlanning = new viewPlanning(null, null, this);
             _viewDate = viewDate.Instance(salle, daoReservation, this);
-            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, Visibility.Hidden);
+            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, Visibility.Hidden);
+            _viewEntete = viewEntete.Instance(this, _viewPlanning);
+            grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
             grd_reservation.DataContext = _viewReservation;
@@ -58,7 +61,6 @@ namespace ApplicationWPF
             loadColumnRow(salle);
             loadPlanning(salle, daoReservation);
         }
-
         public void loadColumnRow(List<dtoSalle> salle)
         {
             RowDefinition row = new RowDefinition();
@@ -167,7 +169,8 @@ namespace ApplicationWPF
                         bouton.BorderBrush = null;
                         bouton.Margin = new Thickness(2, 2, 2, 2);
 
-                        viewPlanning viewPlanning = new viewPlanning(_viewPlanning, null, this);
+                        string la_date = DateTime.Now.ToShortDateString() + " " + horaires[j];
+                        viewPlanning viewPlanning = new viewPlanning(_viewPlanning, new dtoReservation(0, Convert.ToDateTime(la_date), null, 1, null, salle[i]), this);
                         Binding bind = new Binding("selectReservationCommand");
                         bind.Source = viewPlanning;
                         bouton.SetBinding(Button.CommandProperty, bind);
