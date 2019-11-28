@@ -73,6 +73,26 @@ namespace CoucheModele.modele
             }
             return lesClients;
         }
+        public List<Client> selectFilter(string element, string join_where) //Pour autocomplete ville
+        {
+
+            List<Client> lesClients = new List<Client>();
+            DataTable table = this.dbal.selectAll("SELECT " + element + " FROM client " + join_where + ";");
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                int id = (int)table.Rows[i]["id"];
+                string nom = table.Rows[i]["nom"].ToString();
+                string prenom = table.Rows[i]["prenom"].ToString();
+                Ville v = uneVille.selectById((int)table.Rows[i]["ville_id"]);
+                string tel = table.Rows[i]["tel"].ToString();
+                string mail = table.Rows[i]["mail"].ToString();
+                bool archive = (bool)table.Rows[i]["archive"];
+                lesClients.Add(new Client(id, nom, prenom, v, tel, mail, archive));
+
+            }
+            return lesClients;
+        }
         public List<Client> selectAllClientDesarchiver()
         {
 

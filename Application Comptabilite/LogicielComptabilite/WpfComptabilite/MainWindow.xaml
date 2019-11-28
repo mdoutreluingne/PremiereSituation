@@ -22,7 +22,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="#FF74AC93" HorizontalAlignment="Stretch" Height="33" Stroke="#FF74AC93" VerticalAlignment="Top" Width="Auto"/>
-        <ComboBox x:Name="cmb_client" ItemsSource="{Binding Lesclients}" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding IsEnableLesClients}" Margin="24,50,0,0" Height="34" VerticalAlignment="Top" Width="364" HorizontalAlignment="Left"/>
+        <ComboBox x:Name="cmb_client" ItemsSource="{Binding Lesclients}" IsEnabled="{Binding IsEnableLesClients}" SelectedItem="{Binding ClientActif}" Margin="24,50,0,0" Height="34" VerticalAlignment="Top" Width="364" HorizontalAlignment="Left"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="24,50,0,0" TextWrapping="Wrap" Text="{Binding SelectClient}" VerticalAlignment="Top" Width="340" Panel.ZIndex="9999">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction Command="{Binding FilterClient}" CommandParameter="ViewImportProgress" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
         <Grid x:Name="infosUser" Height="386" Margin="416,33,0,0">
             <Rectangle Height="185" Stroke="#FF74AC93" VerticalAlignment="Top" Width="Auto" Fill="White"/>
             <Rectangle Fill="White" Height="201" Margin="0,185,0,0" Stroke="#FF74AC93" VerticalAlignment="Top" Width="Auto"/>
@@ -107,6 +114,6 @@
             </i:Interaction.Triggers>
         </Image>
         <Button Content="DESARCHIVER" Command="{Binding DesarchiveCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="33" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
-        
+
     </Grid>
 </Window>

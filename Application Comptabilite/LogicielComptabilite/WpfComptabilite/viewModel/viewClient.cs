@@ -56,6 +56,8 @@ namespace WpfComptabilite.viewModel
         private ICommand viderTel;
         private ICommand viderMail;
         private ICommand filterVille;
+        private ICommand filterClient;
+        private string _clientSaisie;
 
 
 
@@ -83,15 +85,6 @@ namespace WpfComptabilite.viewModel
             _lesclients = new ObservableCollection<Client>(unDaoClient.selectAllClient());
             //_lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
             _lesHistoriques = new ObservableCollection<Transaction>();
-
-            //foreach (Client unclient in _lesclients)
-            //{
-            //    int i = 0;
-            //    while (unclient.Ville_id.Nom != _lesvilles[i].Nom) i++;
-            //    unclient.Ville_id = _lesvilles[i];
-            //}
-
-
 
             this.collectionViewVille = CollectionViewSource.GetDefaultView(this._lesvilles);
 
@@ -124,7 +117,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("Lesvilles");
             }
         }
-        public string SelectVille
+        public string SelectVille //Ville sélectionner
         {
             get { return null; }
             set
@@ -133,32 +126,44 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("SelectVille");
             }
         }
+        public string SelectClient
+        {
+            get { return _clientSaisie; }
+            set
+            {
+                _clientSaisie = value;
+                OnPropertyChanged("SelectClient");
+            }
+        }
         public Client ClientActif
         {
             get => _clientActif;
             set
             {
-                _clientActif = value;
-                OnPropertyChanged("Nom");
-                OnPropertyChanged("Prenom");
-                OnPropertyChanged("Ville_id");
-                OnPropertyChanged("Tel");
-                OnPropertyChanged("Mail");
-                OnPropertyChanged("Soldes");
-                OnPropertyChanged("LesHistoriques");
-                OnPropertyChanged("CodeCouleurHistorique");
-                OnPropertyChanged("BoutonVisible");
-                OnPropertyChanged("AutreBoutonVisible");
-                OnPropertyChanged("ArchiveCommand");
-                OnPropertyChanged("IsEnableNom");
-                OnPropertyChanged("IsEnablePrenom");
-                OnPropertyChanged("IsEnableVille");
-                OnPropertyChanged("IsEnableTel");
-                OnPropertyChanged("IsEnableMail");
-                OnPropertyChanged("IsEnableLesClients");
-                OnPropertyChanged("Lesclients");
-                OnPropertyChanged("SelectVille");
-                OnPropertyChanged("LesVillesVisible");
+                if (value != null)
+                {
+                    _clientActif = value;
+                    OnPropertyChanged("Nom");
+                    OnPropertyChanged("Prenom");
+                    OnPropertyChanged("Ville_id");
+                    OnPropertyChanged("Tel");
+                    OnPropertyChanged("Mail");
+                    OnPropertyChanged("Soldes");
+                    OnPropertyChanged("LesHistoriques");
+                    OnPropertyChanged("CodeCouleurHistorique");
+                    OnPropertyChanged("BoutonVisible");
+                    OnPropertyChanged("AutreBoutonVisible");
+                    OnPropertyChanged("ArchiveCommand");
+                    OnPropertyChanged("IsEnableNom");
+                    OnPropertyChanged("IsEnablePrenom");
+                    OnPropertyChanged("IsEnableVille");
+                    OnPropertyChanged("IsEnableTel");
+                    OnPropertyChanged("IsEnableMail");
+                    OnPropertyChanged("IsEnableLesClients");
+                    OnPropertyChanged("Lesclients");
+                    OnPropertyChanged("SelectVille");
+                    OnPropertyChanged("LesVillesVisible");
+                }
 
 
             }
@@ -191,7 +196,10 @@ namespace WpfComptabilite.viewModel
 
         public string Nom
         {
-            get => _clientActif.Nom;
+            get
+            {
+               return _clientActif.Nom;
+            }
             set
             {
                 if (_clientActif.Nom != value)
@@ -213,7 +221,7 @@ namespace WpfComptabilite.viewModel
                 }
             }
         }
-        public string Ville_id
+        public string Ville_id //Ville dans la textbox
         {
             get => _clientActif.Ville_id.Nom;
             set
@@ -405,6 +413,15 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("AutreBoutonVisible");
             }
         }
+        public bool LesVillesVisible
+        {
+            get => _lesVillesVisible;
+            set
+            {
+                _lesVillesVisible = value;
+                OnPropertyChanged("LesVillesVisible");
+            }
+        }
 
         public ICommand AddCommandClient 
         {
@@ -541,13 +558,14 @@ namespace WpfComptabilite.viewModel
             }
         }
 
-        public bool LesVillesVisible
+        public ICommand FilterClient
         {
-            get => _lesVillesVisible;
-            set
+            get
             {
-                _lesVillesVisible = value;
-                OnPropertyChanged("LesVillesVisible");
+                if (this.filterClient == null)
+                    this.filterClient = new RelayCommand(() => this.autocomplete_client(), () => true);
+
+                return this.filterClient;
             }
         }
 
@@ -673,6 +691,7 @@ namespace WpfComptabilite.viewModel
                 ModeAddCreditActif = string.Empty;
                 Montant = 0;
                 Commentaire = string.Empty;
+                ClientActif = ClientActif; // A faire
             }
             else
             {
@@ -739,6 +758,10 @@ namespace WpfComptabilite.viewModel
             {
                 Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '" + Ville_id + "%'"));
             }
+        }
+        public void autocomplete_client()
+        {
+            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%'"));
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
