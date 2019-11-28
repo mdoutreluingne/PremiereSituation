@@ -42,6 +42,7 @@ namespace WpfComptabilite.viewModel
         private bool _boutonVisible = false;
         private bool _autreBoutonVisible = true;
         private bool _lesVillesVisible = false;
+        private bool _lesClientsVisible = true;
         private object _soldes = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
@@ -422,7 +423,15 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("LesVillesVisible");
             }
         }
-
+        public bool LesClientsVisible 
+        { 
+            get => _lesClientsVisible;
+            set
+            {
+                _lesClientsVisible = value;
+                OnPropertyChanged("LesClientsVisible");
+            }
+        }
         public ICommand AddCommandClient 
         {
             get
@@ -569,6 +578,8 @@ namespace WpfComptabilite.viewModel
             }
         }
 
+        
+
         public void ajouterClient()
         {
             List<string> lesMails = new List<string>(unDaoClient.selectMail());
@@ -615,13 +626,15 @@ namespace WpfComptabilite.viewModel
                     unDaoTransac.insert(_transactionActive);
                     this.collectionViewHistoriques.Refresh();
 
-
+                    //Désactive les champs
                     IsEnableNom = false;
                     IsEnablePrenom = false;
                     IsEnableVille = false;
                     IsEnableTel = false;
                     IsEnableMail = false;
                     IsEnableLesClients = true;
+                    LesVillesVisible = false;
+                    LesClientsVisible = true;
                 }
             }
             
@@ -643,6 +656,15 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = false;
             AutreBoutonVisible = true;
             LesVillesVisible = false;
+            LesClientsVisible = true;
+            SelectClient = string.Empty;
+
+            ClientActif = new Client();
+            TransactionActive = new Transaction();
+            this.collectionViewClient.MoveCurrentTo(null);
+            this.collectionViewClient.Refresh();
+            this.collectionViewHistoriques.MoveCurrentTo(null);
+            this.collectionViewHistoriques.Refresh();
 
         }
         public void archiverClient()
@@ -691,7 +713,6 @@ namespace WpfComptabilite.viewModel
                 ModeAddCreditActif = string.Empty;
                 Montant = 0;
                 Commentaire = string.Empty;
-                ClientActif = ClientActif; // A faire
             }
             else
             {
@@ -708,6 +729,8 @@ namespace WpfComptabilite.viewModel
             IsEnableTel = true;
             IsEnableMail = true;
             IsEnableLesClients = false;
+            LesVillesVisible = true;
+            LesClientsVisible = false;
 
             ClientActif = new Client();
             TransactionActive = new Transaction();
@@ -722,6 +745,7 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = true;
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
+            LesClientsVisible = false;
         }
         public void viderChampsPrenom()
         {
@@ -729,6 +753,7 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = true;
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
+            LesClientsVisible = false;
         }
         public void viderChampsVille()
         {
@@ -737,6 +762,7 @@ namespace WpfComptabilite.viewModel
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
             LesVillesVisible = true;
+            LesClientsVisible = false;
         }
         public void viderChampsTel()
         {
@@ -744,6 +770,7 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = true;
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
+            LesClientsVisible = false;
         }
         public void viderChampsMail()
         {
@@ -751,6 +778,7 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = true;
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
+            LesClientsVisible = false;
         }
         public void autocomplete_ville()
         {

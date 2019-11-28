@@ -22,8 +22,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Rectangle Fill="#FF74AC93" HorizontalAlignment="Stretch" Height="33" Stroke="#FF74AC93" VerticalAlignment="Top" Width="Auto"/>
-        <ComboBox x:Name="cmb_client" ItemsSource="{Binding Lesclients}" IsEnabled="{Binding IsEnableLesClients}" SelectedItem="{Binding ClientActif}" Margin="24,50,0,0" Height="34" VerticalAlignment="Top" Width="364" HorizontalAlignment="Left"/>
-        <TextBox HorizontalAlignment="Left" Height="34" Margin="24,50,0,0" TextWrapping="Wrap" Text="{Binding SelectClient}" VerticalAlignment="Top" Width="340" Panel.ZIndex="9999">
+        <ComboBox x:Name="cmb_client" ItemsSource="{Binding Lesclients}" IsEnabled="{Binding IsEnableLesClients}" SelectedItem="{Binding ClientActif}" Visibility="{Binding LesClientsVisible, Converter={StaticResource BooleanToVisibilityConverter} }" Margin="24,50,0,0" Height="34" VerticalAlignment="Top" Width="364" HorizontalAlignment="Left"/>
+        <TextBox HorizontalAlignment="Left" Height="34" Margin="24,50,0,0" TextWrapping="Wrap" IsEnabled="{Binding IsEnableLesClients}" Text="{Binding SelectClient}" VerticalAlignment="Top" Width="340">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="LostFocus">
                     <i:InvokeCommandAction Command="{Binding FilterClient}" CommandParameter="ViewImportProgress" />
@@ -56,8 +56,8 @@
         </Grid>
         <TextBox x:Name="txt_nom" IsEnabled="{Binding IsEnableNom}" HorizontalAlignment="Left" Height="26" Margin="24,101,0,0" TextWrapping="Wrap" Text="{Binding Nom}" VerticalAlignment="Top" Width="318" BorderThickness="1"/>
         <TextBox x:Name="txt_prenom" IsEnabled="{Binding IsEnablePrenom}" HorizontalAlignment="Left" Height="25" Margin="24,138,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="318"/>
-        <ComboBox x:Name="cmb_ville" IsEnabled="{Binding IsEnableVille}" ItemsSource="{Binding Lesvilles}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectVille}"  Visibility="{Binding LesVillesVisible, Converter={StaticResource BooleanToVisibilityConverter} }" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="24,176,0,0" TextWrapping="Wrap" IsEnabled="{Binding IsEnableVille}" Text="{Binding Ville_id}" VerticalAlignment="Top" Width="299" Panel.ZIndex="9999">
+        <ComboBox x:Name="cmb_ville" IsEnabled="{Binding IsEnableVille}" ItemsSource="{Binding Lesvilles}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding SelectVille}" Visibility="{Binding LesVillesVisible, Converter={StaticResource BooleanToVisibilityConverter} }" HorizontalAlignment="Left" Margin="24,176,0,0" VerticalAlignment="Top" Width="318" Height="26"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="24,176,0,0" TextWrapping="Wrap" IsEnabled="{Binding IsEnableVille}" Text="{Binding Ville_id}" VerticalAlignment="Top" Width="299">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="LostFocus">
                     <i:InvokeCommandAction Command="{Binding FilterVille}" CommandParameter="ViewImportProgress" />
