@@ -41,6 +41,7 @@ namespace WpfComptabilite.viewModel
         private bool _couleurHistorique = false;
         private bool _boutonVisible = false;
         private bool _autreBoutonVisible = true;
+        private bool _lesVillesVisible = false;
         private object _soldes = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
@@ -54,6 +55,7 @@ namespace WpfComptabilite.viewModel
         private ICommand viderVille;
         private ICommand viderTel;
         private ICommand viderMail;
+        private ICommand filterVille;
 
 
 
@@ -79,7 +81,7 @@ namespace WpfComptabilite.viewModel
             unDaoSalle = ds;
             unDaoReserv = dr;
             _lesclients = new ObservableCollection<Client>(unDaoClient.selectAllClient());
-            _lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
+            //_lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
             _lesHistoriques = new ObservableCollection<Transaction>();
 
             //foreach (Client unclient in _lesclients)
@@ -122,6 +124,15 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("Lesvilles");
             }
         }
+        public string SelectVille
+        {
+            get { return null; }
+            set
+            {
+                Ville_id = value;
+                OnPropertyChanged("SelectVille");
+            }
+        }
         public Client ClientActif
         {
             get => _clientActif;
@@ -146,6 +157,8 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("IsEnableMail");
                 OnPropertyChanged("IsEnableLesClients");
                 OnPropertyChanged("Lesclients");
+                OnPropertyChanged("SelectVille");
+                OnPropertyChanged("LesVillesVisible");
 
 
             }
@@ -517,7 +530,26 @@ namespace WpfComptabilite.viewModel
             }
         }
 
-        
+        public ICommand FilterVille
+        {
+            get
+            {
+                if (this.filterVille == null)
+                    this.filterVille = new RelayCommand(() => this.autocomplete_ville(), () => true);
+
+                return this.filterVille;
+            }
+        }
+
+        public bool LesVillesVisible
+        {
+            get => _lesVillesVisible;
+            set
+            {
+                _lesVillesVisible = value;
+                OnPropertyChanged("LesVillesVisible");
+            }
+        }
 
         public void ajouterClient()
         {
@@ -549,6 +581,7 @@ namespace WpfComptabilite.viewModel
                     ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
                     ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
+                    //AJout du client
                     _clientActif.Ville_id.Id = unDaoVille.selectByNom(_clientActif.Ville_id.Nom); //Récupère l'id du pays saisie
                     unDaoClient.insert(ClientActif);
                     ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client après ajout dans la bdd
@@ -556,7 +589,15 @@ namespace WpfComptabilite.viewModel
                     this.collectionViewClient.Refresh();
                     this.collectionViewClient.MoveCurrentTo(ClientActif);
 
-                    
+                    //Ajout de la transaction par default
+                    DateTime date = DateTime.Now;
+                    Client c = unDaoClient.selectById(_clientActif.Id);
+                    _transactionActive = new Transaction(null, date, 0, "Carte bancaire", null, "Creation du compte", null, c);
+                    _lesHistoriques.Add(_transactionActive);
+                    unDaoTransac.insert(_transactionActive);
+                    this.collectionViewHistoriques.Refresh();
+
+
                     IsEnableNom = false;
                     IsEnablePrenom = false;
                     IsEnableVille = false;
@@ -583,7 +624,7 @@ namespace WpfComptabilite.viewModel
             IsEnableLesClients = true;
             BoutonVisible = false;
             AutreBoutonVisible = true;
-            
+            LesVillesVisible = false;
 
         }
         public void archiverClient()
@@ -638,21 +679,10 @@ namespace WpfComptabilite.viewModel
                 MessageBox.Show("Sélectionner un mode de paiement", "Erreur lors d'ajout de crédit", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             
-
         }
         public void viderDesChamps()
         {
             // Vide tous les champs
-            //Nom = string.Empty;
-            //Prenom = string.Empty;
-            //Ville_id = string.Empty;
-            //Tel = string.Empty;
-            //Mail = string.Empty;
-            //ClientActif.Nom = string.Empty;
-            //ClientActif.Prenom = string.Empty;
-            //ClientActif.Ville_id.Nom = string.Empty;
-            //ClientActif.Tel = string.Empty;
-            //ClientActif.Mail = string.Empty;
             IsEnableNom = true;
             IsEnablePrenom = true;
             IsEnableVille = true;
@@ -687,6 +717,7 @@ namespace WpfComptabilite.viewModel
             BoutonVisible = true;
             AutreBoutonVisible = false;
             IsEnableLesClients = false;
+            LesVillesVisible = true;
         }
         public void viderChampsTel()
         {
@@ -706,7 +737,7 @@ namespace WpfComptabilite.viewModel
         {
             if (Ville_id.Length >= 3)
             {
-                Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '%" + Nom + "%'"));
+                Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '" + Ville_id + "%'"));
             }
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
