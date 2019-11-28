@@ -27,7 +27,14 @@ namespace ModeleMetier.metier
         public int Id { get => _id; set => _id = value; }
         public string Libelle { get => _libelle; set => _libelle = value; }
         public decimal Montant { get => _montant; set => _montant = value; }
-        public bool Archive { get => _archive; set => _archive = value; } 
+        public bool Archive { get => _archive; set => _archive = value; }
+        #endregion
+
+        #region Méthodes
+        public override string ToString()
+        {
+            return _libelle.ToUpper();
+        } 
         #endregion
     }
 }

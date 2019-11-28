@@ -821,4 +821,89 @@ namespace ApplicationWPF
         // --- --- --- //
         #endregion
     }
+
+    public class viewObjet : ViewModele
+    {
+        private static viewObjet _instance = null;
+        private static readonly object _padlock = new object();
+        public daoArticle _daoArticle;
+        public Visibility _visibilite;
+        private viewPlanning _viewPlanning;
+        private dtoSalle _salle;
+        private dtoObstacle _obstacleSelect;
+        private ObservableCollection<dtoArticle> _les_articles;
+        private readonly ICollectionView collectionViewArticles;
+
+        viewObjet(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning, dtoSalle salle)
+            : base(main)
+        {
+            _daoArticle = daoArticle;
+            _viewPlanning = viewPlanning;
+            _salle = salle;
+            if (_salle != null)
+            {
+                _les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_daoArticle.select("*", "JOIN article_theme ON article_id = id​ WHERE theme_id = " + _salle.DtoTheme.Id​));
+            }
+            else
+            {
+                _les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_daoArticle.select("*", ""));
+            }
+
+            this.collectionViewArticles = CollectionViewSource.GetDefaultView(this._les_articles);
+            if (this.collectionViewArticles == null) throw new NullReferenceException("collectionView");
+            this.collectionViewArticles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+        }
+
+        //singleton
+        public static viewObjet Instance(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning, dtoSalle salle)
+        {
+            lock (_padlock)
+            {
+                if (_instance == null)
+                {
+                    _instance = new viewObjet(main, daoArticle, viewPlanning, salle);
+                }
+                return _instance;
+            }
+        }
+        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
+        {
+            if (this.collectionViewArticles.CurrentItem != null)
+            {
+                ObstacleSelect = this.collectionViewArticles.CurrentItem as dtoObstacle;
+            }
+        }
+        public  ObservableCollection<dtoArticle> lesArticles
+        {
+            get
+            {
+                return _les_articles;
+            }
+        }
+
+        public dtoObstacle ObstacleSelect
+        {
+            get
+            {
+                return _obstacleSelect;
+            }
+            set
+            {
+                _obstacleSelect = value;
+                OnPropertyChanged("ObstacleSelect");
+            }
+        }
+        public Visibility Visibilite
+        {
+            get
+            {
+                return _visibilite;
+            }
+            set
+            {
+                _visibilite = value;
+                OnPropertyChanged("Visibilite");
+            }
+        }
+    }
 }

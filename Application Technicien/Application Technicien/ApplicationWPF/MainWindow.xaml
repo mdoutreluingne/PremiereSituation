@@ -21,7 +21,7 @@
             <Image HorizontalAlignment="Right" Height="63" Margin="0,22,48.4,0" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.446,0.184" Source="image/technicien.png"/>
         </Grid>
         <Grid x:Name="grd_base" Visibility="Visible">
-            <Grid x:Name="grd_date" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
+            <Grid x:Name="grd_date" Visibility="Hidden" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35*"/>
                     <ColumnDefinition Width="346*"/>
@@ -46,11 +46,12 @@
                     </Button.Background>
                 </Button>
             </Grid>
-            <Grid x:Name="grd_planning" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Margin="20,241,10,10">
+            <Grid x:Name="grd_planning" Visibility="Hidden" HorizontalAlignment="Stretch" Margin="20,241,10,10">
                 <!-- CHARGEMENT DYNAMIQUE -->
             </Grid>
         </Grid>
-        <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
+        <!--Visibility="{Binding Visibilite}"-->
+        <Grid x:Name="grd_reservation"  Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
             <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
             <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand"/>
             <ComboBox HorizontalAlignment="Left" Margin="53,278,0,0" VerticalAlignment="Top" Width="270" Height="45" ItemsSource="{Binding LesVilles}" Cursor="Hand"/>
@@ -120,6 +121,17 @@
             </TextBox>
             <Button Content="VALIDER" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
             <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
+        </Grid>
+        <Grid x:Name="grd_objet" HorizontalAlignment="Left" Height="654" Margin="10,104,0,0" VerticalAlignment="Top" Width="1420">
+            <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding lesArticles}" FontSize="20" SelectedItem="{Binding ObstacleChange}"/>
+            <ListBox HorizontalAlignment="Left" Height="594" Margin="399,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0"/>
+            <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
+            <Label Content="VOTRE SELECTION" HorizontalAlignment="Left" Margin="453,13,0,0" VerticalAlignment="Top" Width="196" FontSize="20" Foreground="#FF74AC93" FontWeight="Bold"/>
+            <Rectangle Fill="White" HorizontalAlignment="Left" Height="314" Margin="880,60,0,0" Stroke="Gray" VerticalAlignment="Top" Width="509" StrokeThickness="2"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="979,396,0,0" TextWrapping="Wrap"  Text="SOLDE" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="979,482,0,0" TextWrapping="Wrap"  Text="PRIX" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <Button Content="VALIDER" HorizontalAlignment="Left" Margin="1140,582,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding }" Cursor="Hand"/>
+            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="799,582,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding }" Cursor="Hand"/>
         </Grid>
     </Grid>
 </Window>
