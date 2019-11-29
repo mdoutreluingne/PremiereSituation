@@ -7,18 +7,28 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfComptabilite.ConnexionWindow"
         mc:Ignorable="d"
         Title="ConnexionWindow" Height="450" Width="800" MinWidth="800" MinHeight="450">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF4AD698" Offset="0"/>
+            <GradientStop Color="#FF423E3E" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
-        <Button x:Name="btn_connecter" Content="Se connecter" Margin="351,226,0,0" VerticalAlignment="Top" Width="120" Height="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="connecter_Click"/>
-        <Button x:Name="btn_modif_pass" Content="Changer son mot de passe" HorizontalAlignment="Left" Margin="548,226,0,0" VerticalAlignment="Top" Width="166" Height="30"/>
-        <WrapPanel HorizontalAlignment="Left" Height="100" Margin="88,105,0,0" VerticalAlignment="Top" Width="264">
-            <ComboBox  x:Name="cmb_ville" VerticalAlignment="Top" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">
-                <System:String>Annecy-</System:String>
-                <System:String>Thonon-</System:String>
-                <System:String>Bonneville-</System:String>
-                <System:String>Chamonix-</System:String>
-            </ComboBox>
-            <TextBox x:Name="txt_login" Height="24" TextWrapping="Wrap" Text="" Width="120" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="26" Width="120"/>
-        </WrapPanel>
+        <Button x:Name="btn_connecter" Content="SE CONNECTER" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" Margin="285,306,0,0" VerticalAlignment="Top" Width="215" Height="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="connecter_Click" FontFamily="Segoe UI Semibold" FontSize="14" Foreground="White"/>
+        <Button x:Name="btn_update" Content="Modifier" Margin="285,294,0,0" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" VerticalAlignment="Top" Width="215" Height="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="btn_update_Click" Visibility="Hidden" Foreground="White"/>
+        <Button x:Name="btn_modif_pass" Content="CHANGER SON MOT DE PASSE" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" HorizontalAlignment="Left" Margin="285,358,0,0" VerticalAlignment="Top" Width="215" Height="34" Click="btn_modif_pass_Click" FontFamily="Segoe UI Semibold" FontSize="14" Foreground="White"/>
+        <ComboBox  x:Name="cmb_ville" VerticalAlignment="Top" Width="179" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="211,138,0,0" Height="28" FontFamily="Segoe UI Semibold" FontSize="14">
+            <System:String>Annecy-</System:String>
+            <System:String>Thonon-</System:String>
+            <System:String>Bonneville-</System:String>
+            <System:String>Chamonix-</System:String>
+        </ComboBox>
+        <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="179" Margin="390,196,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
+        <PasswordBox x:Name="pass_confirm" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="32" Width="179" Margin="390,257,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
+        <TextBox x:Name="txt_login" Height="30" TextWrapping="Wrap" Text="" Width="179" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,138,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
+        <Label Content="Connexion" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="792" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Semibold" Foreground="White"/>
+        <Label Content="Login :" HorizontalAlignment="Left" Margin="390,112,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Mot de passe :" HorizontalAlignment="Left" Margin="390,168,0,0" VerticalAlignment="Top" Width="179" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lbl_comfirm_pass" Content="Confirmation mot de passe :" HorizontalAlignment="Left" Margin="390,231,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Width="179" Visibility="Hidden" Foreground="White"/>
     </Grid>
 </Window>
