@@ -200,3 +200,5 @@ D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabil
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.csproj.CopyComplete
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.exe
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\WpfComptabilite.pdb
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\ConnexionWindow.g.cs
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\ConnexionWindow.baml

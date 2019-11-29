@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\App.xaml
-22087981296
+3-1255420904
 
-111525380286
+121161499047
 30-1762870467
-DesarchiveWindow.xaml;MainWindow.xaml;
+ConnexionWindow.xaml;DesarchiveWindow.xaml;MainWindow.xaml;
 
-False
+True
 
