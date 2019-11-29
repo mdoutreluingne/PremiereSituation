@@ -30,8 +30,13 @@ namespace ModeleMetier.metier
         public int Position { get => _position; set => _position = value; }
         public string Commentaire { get => _commentaire; set => _commentaire = value; }
         public int Qte { get => _qte; set => _qte = value; }
-        internal dtoArticle DtoArticle { get => _dtoArticle; set => _dtoArticle = value; }
-        internal dtoReservation DtoReservation { get => _dtoReservation; set => _dtoReservation = value; } 
+        public dtoArticle DtoArticle { get => _dtoArticle; set => _dtoArticle = value; }
+        public dtoReservation DtoReservation { get => _dtoReservation; set => _dtoReservation = value; }
         #endregion
+
+        public override string ToString()
+        {
+            return _dtoArticle.Libelle + " |Position : " + _position + " |Qantite : "  + _qte;
+        }
     }
 }

@@ -77,6 +77,7 @@ namespace ApplicationWPF
                 if (mr == MessageBoxResult.Yes)
                 {
                     viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                    viewObjet.Instance(null, null, null, null).Visibilite = Visibility.Hidden;
                     viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
                     _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
                 }
@@ -632,16 +633,7 @@ namespace ApplicationWPF
                 return this._commandFocusCommentaire;
             }
         }
-        public ICommand AnnulerResa
-        {
-            get
-            {
-                if (this._commandAnnulerResa == null)
-                    this._commandAnnulerResa = new RelayCommand(() => this.annuler_reservation(), () => true);
 
-                return this._commandAnnulerResa;
-            }
-        }
         // --- --- --- //
 
         // --- Les Méthodes --- //
@@ -686,16 +678,6 @@ namespace ApplicationWPF
             {
                 Commentaire = "";
             };
-        }
-        public void annuler_reservation()
-        {
-            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
-            if (mr == MessageBoxResult.Yes)
-            {
-                viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
-                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
-                _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
-            }
         }
         // --- --- --- //
         #endregion
@@ -820,6 +802,44 @@ namespace ApplicationWPF
         }
         // --- --- --- //
         #endregion
+        public ICommand AnnulerResa
+        {
+            get
+            {
+                if (this._commandAnnulerResa == null)
+                    this._commandAnnulerResa = new RelayCommand(() => this.annuler_reservation(), () => true);
+
+                return this._commandAnnulerResa;
+            }
+        }
+        public void annuler_reservation()
+        {
+            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
+            }
+        }
+
+        public ICommand ValiderResa
+        {
+            get
+            {
+                if (this._commandValiderResa == null)
+                    this._commandValiderResa = new RelayCommand(() => this.valider_reservation(), () => true);
+
+                return this._commandValiderResa;
+            }
+        }
+
+        public void valider_reservation()
+        {
+            dtoReservation reservation = new dtoReservation(-1, _date, _commentaire, _nombreJoueur, _client, _salle);
+            Visibilite = Visibility.Hidden;
+            viewObjet.Instance(null, null, null, reservation).Visibilite = Visibility.Visible;
+        }
     }
 
     public class viewObjet : ViewModele
@@ -828,49 +848,81 @@ namespace ApplicationWPF
         private static readonly object _padlock = new object();
         public daoArticle _daoArticle;
         public Visibility _visibilite;
+        public Visibility _visibiliteAjout;
+
         private viewPlanning _viewPlanning;
         private dtoSalle _salle;
-        private dtoObstacle _obstacleSelect;
-        private ObservableCollection<dtoArticle> _les_articles;
-        private readonly ICollectionView collectionViewArticles;
+        private dtoArticle _articleSelect;
+        private dtoReservation _reservation;
+        private bool _enableArticle;
 
-        viewObjet(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning, dtoSalle salle)
+        private string _nomObstacle;
+        private int _positionObstacle;
+        private int _quantiteObstacle;
+        private decimal _prixObstacle;
+        private string _commentaireObstacle;
+        private ObservableCollection<dtoArticle> _les_articles;
+        private ObservableCollection<dtoObstacle> _les_obstacles;
+        private readonly ICollectionView collectionViewArticles;
+        private readonly ICollectionView collectionViewObstacles;
+        private ICommand _commandAnnulerObstacle;
+        private ICommand _commandPlacerObstacle;
+
+        viewObjet(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning)
             : base(main)
         {
             _daoArticle = daoArticle;
             _viewPlanning = viewPlanning;
-            _salle = salle;
-            if (_salle != null)
-            {
-                _les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_daoArticle.select("*", "JOIN article_theme ON article_id = id​ WHERE theme_id = " + _salle.DtoTheme.Id​));
-            }
-            else
-            {
-                _les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_daoArticle.select("*", ""));
-            }
+            Visibilite = Visibility.Hidden;
+            VisibiliteAjout = Visibility.Hidden;
+            EnableArticle = true;
+            _les_obstacles = new ObservableCollection<dtoObstacle>();
+            _les_articles = new ObservableCollection<dtoArticle>();
 
             this.collectionViewArticles = CollectionViewSource.GetDefaultView(this._les_articles);
             if (this.collectionViewArticles == null) throw new NullReferenceException("collectionView");
             this.collectionViewArticles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+
+            this.collectionViewObstacles = CollectionViewSource.GetDefaultView(this._les_obstacles);
+            if (this.collectionViewObstacles == null) throw new NullReferenceException("collectionView");
+            this.collectionViewObstacles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
         }
 
         //singleton
-        public static viewObjet Instance(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning, dtoSalle salle)
+        public static viewObjet Instance(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning,dtoReservation dtoReservation)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewObjet(main, daoArticle, viewPlanning, salle);
+                    _instance = new viewObjet(main, daoArticle, viewPlanning);
+                }
+                if (dtoReservation != null)
+                {
+                    _instance.Reservation = dtoReservation;
+                    _instance.Salle = dtoReservation.DtoSalle;
+                    string joinWhere = " JOIN article_salle ON article.id = article_salle.article_id"
+                        + " JOIN salle ON article_salle.salle_id = salle.id"
+                        + " WHERE salle.id = "+ _instance.Salle.DtoTheme.Id;
+                    _instance._les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_instance._daoArticle.select("*", joinWhere​));
+                    _instance.lesArticles = null;
                 }
                 return _instance;
             }
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
-            if (this.collectionViewArticles.CurrentItem != null)
+            if (((ICollectionView)sender).CurrentItem != null)
             {
-                ObstacleSelect = this.collectionViewArticles.CurrentItem as dtoObstacle;
+                if (this.collectionViewArticles.CurrentItem != null)
+                {
+                    ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                }
+
+                if (this.collectionViewObstacles.CurrentItem != null)
+                {
+                    //ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                }
             }
         }
         public  ObservableCollection<dtoArticle> lesArticles
@@ -879,18 +931,41 @@ namespace ApplicationWPF
             {
                 return _les_articles;
             }
+            set
+            {
+                OnPropertyChanged("lesArticles");
+            }
         }
 
-        public dtoObstacle ObstacleSelect
+        public ObservableCollection<dtoObstacle> lesObstacles
         {
             get
             {
-                return _obstacleSelect;
+                return _les_obstacles;
             }
             set
             {
-                _obstacleSelect = value;
-                OnPropertyChanged("ObstacleSelect");
+                OnPropertyChanged("lesObstacles");
+            }
+        }
+
+        public dtoArticle ArticleSelect
+        {
+            get => _articleSelect;
+            set
+            {
+                Console.WriteLine(value);
+                if (_articleSelect != null)
+                {
+                    VisibiliteAjout = Visibility.Visible;
+                }
+                _articleSelect = value;
+                NomObstacle = value.Libelle;
+                PrixObstacle = value.Montant;
+                QuantiteObstacle = 1;
+                PositionObstacle = 1;
+                CommentaireObstacle = "";
+                OnPropertyChanged("ArticleSelect");
             }
         }
         public Visibility Visibilite
@@ -905,5 +980,176 @@ namespace ApplicationWPF
                 OnPropertyChanged("Visibilite");
             }
         }
+        public Visibility VisibiliteAjout
+        {
+            get
+            {
+                return _visibiliteAjout;
+            }
+            set
+            {
+                _visibiliteAjout = value;
+                EnableArticle = false;
+                OnPropertyChanged("VisibiliteAjout");
+            }
+        }
+
+        public bool EnableArticle
+        {
+            get
+            {
+                return _enableArticle;
+            }
+            set
+            {
+                _enableArticle = value;
+                OnPropertyChanged("EnableArticle");
+            }
+        }
+        public dtoReservation Reservation
+        {
+            get
+            {
+                return _reservation;
+            }
+            set
+            {
+                _reservation = value;
+            }
+        }
+        public dtoSalle Salle
+        {
+            get
+            {
+                return _salle;
+            }
+            set
+            {
+                _salle = value;
+            }
+        }
+        public string NomObstacle
+        {
+            get
+            {
+                return _nomObstacle;
+            }
+             set
+            {
+                if (value != "")
+                {
+                    _nomObstacle = value;
+                }
+                else
+                {
+                    _nomObstacle = "NOM";
+                }
+                OnPropertyChanged("NomObstacle");
+            }
+        }
+        public int PositionObstacle
+        {
+            get
+            {
+                return _positionObstacle;
+            }
+            set
+            {
+                _positionObstacle = value;
+                OnPropertyChanged("PositionObstacle");
+            }
+        }
+        public int QuantiteObstacle
+        {
+            get
+            {
+                return _quantiteObstacle;
+            }
+            set
+            {
+                _quantiteObstacle = value;
+                OnPropertyChanged("PositionObstacle");
+            }
+        }
+        public decimal PrixObstacle
+        {
+            get
+            {
+                return _prixObstacle;
+            }
+            set
+            {
+                _prixObstacle = value;
+                OnPropertyChanged("PrixObstalce");
+            }
+        }
+        public string CommentaireObstacle
+        {
+            get
+            {
+                return _commentaireObstacle;
+            }
+            set
+            {
+                if (value != "")
+                {
+                    _commentaireObstacle = value;
+                }
+                else
+                {
+                    _commentaireObstacle = "COMMENTAIRE";
+                }
+                OnPropertyChanged("CommentaireObstacle");
+            }
+        }
+        public ICommand AnnulerObstacle
+        {
+            get
+            {
+                if (this._commandAnnulerObstacle == null)
+                    this._commandAnnulerObstacle = new RelayCommand(() => this.annulerObstacle(), () => true);
+
+                return this._commandAnnulerObstacle;
+            }
+        }
+        public ICommand PlacerObstacle
+        {
+            get
+            {
+                if (this._commandPlacerObstacle == null)
+                    this._commandPlacerObstacle = new RelayCommand(() => this.placerObstacle(), () => true);
+
+                return this._commandPlacerObstacle;
+            }
+        }
+        public void placerObstacle()
+        {
+            bool existe = false;
+            dtoObstacle obstacle = new dtoObstacle(-1, _positionObstacle, _commentaireObstacle ,_quantiteObstacle, _articleSelect, _reservation);
+            foreach (var o in _les_obstacles)
+            {
+                if (o.DtoArticle.Libelle == obstacle.DtoArticle.Libelle)
+                {
+                    existe = true;
+                }
+            }
+            if (!existe)
+            {
+                _les_obstacles.Add(obstacle);
+                lesObstacles = null;
+            }
+            VisibiliteAjout = Visibility.Hidden;
+            EnableArticle = true;
+        }
+        public void annulerObstacle()
+        {
+            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner l'ajout de l'objet ?", "Abandon", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                VisibiliteAjout = Visibility.Hidden;
+                EnableArticle = true;
+            }
+        }
+
     }
 }
