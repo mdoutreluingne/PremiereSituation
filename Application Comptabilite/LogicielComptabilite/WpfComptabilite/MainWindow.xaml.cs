@@ -38,7 +38,6 @@ namespace WpfComptabilite
             InitializeComponent();
             vc = new viewClient(theDaoTransac, theDaoVille, theDaoClient, bdd, theDaoTheme, theDaoSalle, theDaoReserv);
             principale.DataContext = vc;
-            cmb_ville.SelectedIndex = -1;
         }
 
     }

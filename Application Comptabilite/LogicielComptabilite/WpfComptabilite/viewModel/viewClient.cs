@@ -60,7 +60,6 @@ namespace WpfComptabilite.viewModel
         private ICommand filterClient;
 
 
-
         private ObservableCollection<Client> _lesclients;
         private readonly ICollectionView collectionViewClient;
 
@@ -95,9 +94,11 @@ namespace WpfComptabilite.viewModel
             this.collectionViewClient = CollectionViewSource.GetDefaultView(this._lesclients);
             if (this.collectionViewClient == null) throw new NullReferenceException("collectionViewClient");
             this.collectionViewClient.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
+
+            NumCheque = "Numéro de cheque";
+            Commentaire = "Commentaire";
         } 
         #endregion
-
 
         public ObservableCollection<Client> Lesclients
         {
@@ -126,7 +127,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("SelectVille");
             }
         }
-        public string SelectClient
+        public string SelectClient //Client sélectionner
         {
             get { return _clientSaisie; }
             set
@@ -164,8 +165,6 @@ namespace WpfComptabilite.viewModel
                     OnPropertyChanged("LesVillesVisible");
                     
                 }
-
-
             }
         }
         public Transaction TransactionActive //Ce fait par le SelectItem du xaml
@@ -193,7 +192,6 @@ namespace WpfComptabilite.viewModel
 
             } 
         }
-
         public string Nom
         {
             get
@@ -556,6 +554,7 @@ namespace WpfComptabilite.viewModel
             }
         }
 
+        #region Méthodes
         public void ajouterClient()
         {
             List<string> lesMails = new List<string>(unDaoClient.selectMail());
@@ -575,47 +574,53 @@ namespace WpfComptabilite.viewModel
             {
                 MessageBox.Show("Le client existe déjà", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else //Ajoute le client
+            else 
             {
-                if (String.IsNullOrEmpty(Nom) == true && String.IsNullOrEmpty(Prenom) == true && String.IsNullOrEmpty(Tel) == true && String.IsNullOrEmpty(Mail) == true)
+                if (String.IsNullOrEmpty(Nom) == true || String.IsNullOrEmpty(Prenom) == true || String.IsNullOrEmpty(Ville_id) == true || String.IsNullOrEmpty(Tel) == true || String.IsNullOrEmpty(Mail) == true)
                 {
-                    MessageBox.Show("Cliquer sur l'icone à droite du bouton pour vider les champs", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Certains champs sont vides", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
                 else
                 {
                     ClientActif.Nom = Nom[0].ToString().ToUpper() + Nom.Substring(1).ToLower(); // Met la première lettre en majuscule
                     ClientActif.Prenom = Prenom[0].ToString().ToUpper() + Prenom.Substring(1).ToLower(); // Met la première lettre en majuscule
 
-                    //AJout du client
-                    _clientActif.Ville_id.Id = unDaoVille.selectByNom(_clientActif.Ville_id.Nom); //Récupère l'id du pays saisie
-                    unDaoClient.insert(ClientActif);
-                    ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client après ajout dans la bdd
-                    Lesclients.Add(ClientActif);
-                    this.collectionViewClient.Refresh();
-                    this.collectionViewClient.MoveCurrentTo(ClientActif);
+                    if (ClientActif.Nom == "Nom" || ClientActif.Prenom == "Prenom" || ClientActif.Tel == "Téléphone" || ClientActif.Ville_id.Nom == "Ville" || ClientActif.Mail == "Email")
+                    {
+                        MessageBox.Show("Saisir les informations du client à ajouter", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                    else
+                    {
+                        //AJout du client
+                        _clientActif.Ville_id.Id = unDaoVille.selectByNom(_clientActif.Ville_id.Nom); //Récupère l'id du pays saisie
+                        unDaoClient.insert(ClientActif);
+                        ClientActif = unDaoClient.selectByNom(ClientActif.Nom); //Recupère l'id du client après ajout dans la bdd
+                        Lesclients.Add(ClientActif);
+                        this.collectionViewClient.Refresh();
+                        this.collectionViewClient.MoveCurrentTo(ClientActif);
 
-                    //Ajout de la transaction par default
-                    DateTime date = DateTime.Now;
-                    Client c = unDaoClient.selectById(_clientActif.Id);
-                    _transactionActive = new Transaction(null, date, 0, "Carte bancaire", null, "Creation du compte", null, c);
-                    _lesHistoriques.Add(_transactionActive);
-                    unDaoTransac.insert(_transactionActive);
-                    this.collectionViewHistoriques.Refresh();
+                        //Ajout de la transaction par default
+                        DateTime date = DateTime.Now;
+                        Client c = unDaoClient.selectById(_clientActif.Id);
+                        _transactionActive = new Transaction(null, date, 0, "Carte bancaire", null, "Creation du compte", null, c);
+                        _lesHistoriques.Add(_transactionActive);
+                        unDaoTransac.insert(_transactionActive);
+                        this.collectionViewHistoriques.Refresh();
 
-                    //Désactive les champs
-                    IsEnableNom = false;
-                    IsEnablePrenom = false;
-                    IsEnableVille = false;
-                    IsEnableTel = false;
-                    IsEnableMail = false;
-                    IsEnableLesClients = true;
-                    LesVillesVisible = false;
-                    LesClientsVisible = true;
+                        //Désactive les champs
+                        IsEnableNom = false;
+                        IsEnablePrenom = false;
+                        IsEnableVille = false;
+                        IsEnableTel = false;
+                        IsEnableMail = false;
+                        IsEnableLesClients = true;
+                        LesVillesVisible = false;
+                        LesClientsVisible = true;
+                    }
+                    
                 }
             }
             
-
-
         }
         public void updateClient()
         {
@@ -635,6 +640,7 @@ namespace WpfComptabilite.viewModel
             LesClientsVisible = true;
             SelectClient = string.Empty;
 
+            //Met les champs vide
             ClientActif = new Client();
             TransactionActive = new Transaction();
             this.collectionViewClient.MoveCurrentTo(null);
@@ -650,6 +656,7 @@ namespace WpfComptabilite.viewModel
             this.collectionViewClient.MoveCurrentTo(null);
             SelectClient = string.Empty;
 
+            //Met les champs vide
             ClientActif = new Client();
             TransactionActive = new Transaction();
             this.collectionViewClient.MoveCurrentTo(null);
@@ -705,6 +712,32 @@ namespace WpfComptabilite.viewModel
             }
             
         }
+        public void autocomplete_ville()
+        {
+            if (Ville_id.Length >= 3)
+            {
+                Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '" + Ville_id + "%'"));
+            }
+        }
+        public void autocomplete_client()
+        {
+            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%' AND archive = 0;"));
+        }
+        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
+        {
+            if (this.collectionViewClient.CurrentItem != null)
+            {
+                ClientActif = this.collectionViewClient.CurrentItem as Client;
+            }
+            if (this.collectionViewHistoriques.CurrentItem != null)
+            {
+                TransactionActive = this.collectionViewHistoriques.CurrentItem as Transaction;
+            }
+
+        }
+        #endregion
+
+        #region Vidage des champs
         public void viderDesChamps()
         {
             // Vide tous les champs
@@ -723,6 +756,12 @@ namespace WpfComptabilite.viewModel
             this.collectionViewClient.Refresh();
             this.collectionViewHistoriques.MoveCurrentTo(null);
             this.collectionViewHistoriques.Refresh();
+
+            Nom = "Nom";
+            Prenom = "Prenom";
+            Ville_id = "Ville";
+            Tel = "Téléphone";
+            Mail = "Email";
         }
         public void viderChampsNom()
         {
@@ -765,29 +804,8 @@ namespace WpfComptabilite.viewModel
             IsEnableLesClients = false;
             LesClientsVisible = false;
         }
-        public void autocomplete_ville()
-        {
-            if (Ville_id.Length >= 3)
-            {
-                Lesvilles = new ObservableCollection<Ville>(unDaoVille.selectFilter("*", "WHERE nom LIKE '" + Ville_id + "%'"));
-            }
-        }
-        public void autocomplete_client()
-        {
-            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%' AND archive = 0;"));
-        }
-        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
-        {
-            if (this.collectionViewClient.CurrentItem != null)
-            {
-                ClientActif = this.collectionViewClient.CurrentItem as Client;
-            }
-            if (this.collectionViewHistoriques.CurrentItem != null)
-            {
-                TransactionActive = this.collectionViewHistoriques.CurrentItem as Transaction;
-            }
-
-        }
+        #endregion
+        
         
     }
 }
