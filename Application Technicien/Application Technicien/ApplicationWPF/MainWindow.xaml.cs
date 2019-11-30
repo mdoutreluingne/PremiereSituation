@@ -53,7 +53,7 @@ namespace ApplicationWPF
             _viewDate = ViewDate.Instance(salle, daoReservation, this);
             _viewReservation = ViewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
             _viewEntete = ViewEntete.Instance(this, _viewPlanning);
-            _viewObjet = ViewObjet.Instance(this, daoReservation,daoArticle, _viewPlanning, null);
+            _viewObjet = ViewObjet.Instance(this, daoReservation,daoArticle, daoObstacle, _viewPlanning, null);
             grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;

@@ -19,7 +19,32 @@ namespace ModeleMetier.modele
         }
         public override void insert(object o)
         {
-            throw new NotImplementedException();
+            dtoObstacle obstacle = (dtoObstacle)o;
+            string commentaire = obstacle.Commentaire;
+            int id = obstacle.DtoReservation.Id;
+            if (id == -1)
+            {
+                List<dtoReservation> lastResa = (List<dtoReservation>)_daoReservation.select("*", "ORDER BY id DESC LIMIT 1;");
+                id = lastResa[0].Id;
+
+            }
+            if (obstacle.Commentaire == "COMMENTAIRE")
+            {
+                commentaire = "";
+            }
+            string request = "INSERT INTO obstacle VALUES(NULL,"
+                + obstacle.Position + ",'"
+                + commentaire + "',"
+                + obstacle.Qte + ","
+                + obstacle.DtoArticle.Id + ","
+                + id + ");";
+            _dbal.command(request);
+        }
+
+        public void delete(string where)
+        {
+            string request = "DELETE FROM obstacle " + where;
+            _dbal.command(request);
         }
 
         public override object select(string elements, string join_where)

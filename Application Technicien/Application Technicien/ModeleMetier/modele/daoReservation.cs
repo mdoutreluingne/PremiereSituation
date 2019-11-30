@@ -25,15 +25,45 @@ namespace ModeleMetier.modele
             string heure = reservation.Date.ToShortTimeString();
             string[] separe = date.Split('/');
             date = separe[2] + "-" + separe[1] + "-" + separe[0] + " " + heure;
+            string commentaire = reservation.Commentaire;
+            if (commentaire == "COMMENTAIRE")
+            {
+                commentaire = "";
+            }
             string request = "INSERT INTO reservation VALUES(NULL,'"
                 + date + "','"
-                + reservation.Commentaire + "',"
+                + commentaire + "',"
                 + reservation.NbJoueur + ","
                 + reservation.Client.Id + ","
                 + reservation.DtoSalle.Id + ");";
-            _dbal.insert(request);
+            _dbal.command(request);
         }
 
+        public void delete(string where)
+        {
+            string request = "DELETE FROM obstacle " + where;
+            _dbal.command(request);
+        }
+
+        public void update(dtoReservation reservation, string where)
+        {
+            string date = reservation.Date.ToShortDateString();
+            string heure = reservation.Date.ToShortTimeString();
+            string[] separe = date.Split('/');
+            date = separe[2] + "-" + separe[1] + "-" + separe[0] + " " + heure;
+            string commentaire = reservation.Commentaire;
+            if (commentaire == "COMMENTAIRE")
+            {
+                commentaire = "";
+            }
+            string request = "update reservation SET "
+                + "date = '" + date
+                + "',commentaire = '" + commentaire
+                + "',nbJoueur = " + reservation.NbJoueur
+                + ",client_id = " + reservation.Client.Id
+                + ",salle_id = " + reservation.DtoSalle.Id + " " + where;
+            _dbal.command(request);
+        }
         public override object select(string elements, string join_where)
         {
             List<dtoReservation> listReservation = new List<dtoReservation>();

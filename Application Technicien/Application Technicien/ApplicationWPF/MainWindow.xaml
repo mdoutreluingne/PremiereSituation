@@ -51,7 +51,7 @@
             </Grid>
         </Grid>
         <!--Visibility="{Binding Visibilite}"-->
-        <Grid x:Name="grd_reservation"  Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
+        <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
             <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
             <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
@@ -83,7 +83,7 @@
                 </i:Interaction.Triggers>
             </TextBox>
             <Button Content="SUIVANT" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
-            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
+            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
             <Image HorizontalAlignment="Left" Height="38" Margin="771,282,0,0" VerticalAlignment="Top" Width="38" Source="Image/peoples.png"/>
             <Image HorizontalAlignment="Left" Height="38" Margin="767,202,0,0" VerticalAlignment="Top" Width="42" Source="Image/coin.png"/>
         </Grid>
@@ -109,7 +109,7 @@
                 </Image>
             </Grid>
             <Grid  Visibility="{Binding VisibiliteDelete}" Margin="753,570,843,6">
-                <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
+                <Rectangle Fill="White" Stroke="#FFAC7474" StrokeThickness="2"/>
                 <Image Margin="10,1,8,3" RenderTransformOrigin="3.207,-0.87" Source="Image/delete.png" Cursor="Hand">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown" >
@@ -125,11 +125,15 @@
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="132,223,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PrixObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="132,157,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding QuantiteObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20"/>
                 <TextBox HorizontalAlignment="Left" Height="170" Margin="356,88,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CommentaireObstacle}" VerticalAlignment="Top" Width="325" Foreground="#FF74AC93" FontSize="20" RenderTransformOrigin="1.362,0.486"/>
-                <Button Content="ANNULER" HorizontalAlignment="Left" Margin="29,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerObstacle}" Cursor="Hand"/>
+                <Button Content="ANNULER" HorizontalAlignment="Left" Margin="29,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerObstacle}" Cursor="Hand"/>
                 <Button Content="PLACER" HorizontalAlignment="Left" Margin="492,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand"/>
                 <Label Content="POSITION" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="PRIX" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="QUANTITE" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+            </Grid>
+            <Grid Visibility="{Binding VisibiliteSupPaye}" HorizontalAlignment="Left" Height="75" Margin="916,8,0,0" VerticalAlignment="Top" Width="758">
+                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="467,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20"/>
+                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}"/>
             </Grid>
         </Grid>
     </Grid>

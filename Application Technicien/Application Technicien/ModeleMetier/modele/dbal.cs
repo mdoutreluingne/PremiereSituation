@@ -47,7 +47,7 @@ namespace ModeleMetier.modele
             }
         }
 
-        public void insert(string request)
+        public void command(string request)
         {
             this.connection.Open();
             MySqlCommand query = new MySqlCommand(request, connection);
