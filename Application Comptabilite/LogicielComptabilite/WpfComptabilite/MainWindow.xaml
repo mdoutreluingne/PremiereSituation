@@ -46,7 +46,7 @@
             <TextBox x:Name="txt_commentaire" Text="{Binding Commentaire}" HorizontalAlignment="Left" Height="27" Margin="77,307,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="213"/>
             <TextBlock x:Name="lbl_date" Margin="51,26,0,0" TextWrapping="Wrap" Text="Date" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="14" RenderTransformOrigin="0.828,-0.947"/>
             <TextBlock x:Name="lbl_montant" Margin="275,26,0,0" TextWrapping="Wrap" Text="Montant" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="14"/>
-            <ListView x:Name="lst_transactions" HorizontalAlignment="Left" ItemsSource="{Binding LesHistoriques}" SelectedItem="{Binding TransactionActive}" IsSynchronizedWithCurrentItem="True" Height="121" Margin="34,45,0,0" VerticalAlignment="Top" Width="313" Foreground="{Binding CodeCouleurHistorique}">
+            <ListView x:Name="lst_transactions" HorizontalAlignment="Left" ItemsSource="{Binding LesHistoriques}" SelectedItem="{Binding TransactionActive}" IsSynchronizedWithCurrentItem="True" Height="121" Margin="34,45,0,0" VerticalAlignment="Top" Width="313">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
                         <i:InvokeCommandAction Command="{Binding DetailHistoriqueCommand}" CommandParameter="ViewImportProgress" />

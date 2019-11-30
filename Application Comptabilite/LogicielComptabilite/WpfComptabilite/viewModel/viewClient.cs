@@ -31,6 +31,7 @@ namespace WpfComptabilite.viewModel
         private string _numCheque;
         private decimal _montant;
         private string _commentaire;
+        private string _clientSaisie;
         private bool _isEnableLesClients = true;
         private bool _isEnableNom = false;
         private bool _isEnablePrenom = false;
@@ -38,7 +39,6 @@ namespace WpfComptabilite.viewModel
         private bool _isEnableTel = false;
         private bool _isEnableMail = false;
         private bool _isEnabledNumCheque = false;
-        private bool _couleurHistorique = false;
         private bool _boutonVisible = false;
         private bool _autreBoutonVisible = true;
         private bool _lesVillesVisible = false;
@@ -58,7 +58,6 @@ namespace WpfComptabilite.viewModel
         private ICommand viderMail;
         private ICommand filterVille;
         private ICommand filterClient;
-        private string _clientSaisie;
 
 
 
@@ -151,7 +150,6 @@ namespace WpfComptabilite.viewModel
                     OnPropertyChanged("Mail");
                     OnPropertyChanged("Soldes");
                     OnPropertyChanged("LesHistoriques");
-                    OnPropertyChanged("CodeCouleurHistorique");
                     OnPropertyChanged("BoutonVisible");
                     OnPropertyChanged("AutreBoutonVisible");
                     OnPropertyChanged("ArchiveCommand");
@@ -164,6 +162,7 @@ namespace WpfComptabilite.viewModel
                     OnPropertyChanged("Lesclients");
                     OnPropertyChanged("SelectVille");
                     OnPropertyChanged("LesVillesVisible");
+                    
                 }
 
 
@@ -366,19 +365,7 @@ namespace WpfComptabilite.viewModel
             get
             {
 
-                _lesHistoriques = new ObservableCollection<Transaction>(unDaoTransac.selectAllHistorique(_clientActif.Id));
-                foreach (Transaction t in _lesHistoriques)
-                {
-                    if (t.Montant < 0)
-                    {
-                        _couleurHistorique = true;
-                    }
-                    else
-                    {
-                        _couleurHistorique = false;
-                    }
-                }
-
+                _lesHistoriques = new ObservableCollection<Transaction>(unDaoTransac.selectAllHistorique(_clientActif.Id)); 
                 return this._lesHistoriques;
             }
             set
@@ -387,15 +374,6 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("LesHistoriques");
             }
              
-        }
-        public Brush CodeCouleurHistorique
-        {
-            get
-            {
-                if (_couleurHistorique == true) { return Brushes.Red; }
-                else { return Brushes.Green; }
-            }
-
         }
         public bool BoutonVisible
         {
@@ -578,8 +556,6 @@ namespace WpfComptabilite.viewModel
             }
         }
 
-        
-
         public void ajouterClient()
         {
             List<string> lesMails = new List<string>(unDaoClient.selectMail());
@@ -672,7 +648,15 @@ namespace WpfComptabilite.viewModel
             unDaoClient.archiver(ClientActif);
             this.collectionViewClient.Refresh();
             this.collectionViewClient.MoveCurrentTo(null);
-            
+            SelectClient = string.Empty;
+
+            ClientActif = new Client();
+            TransactionActive = new Transaction();
+            this.collectionViewClient.MoveCurrentTo(null);
+            this.collectionViewClient.Refresh();
+            this.collectionViewHistoriques.MoveCurrentTo(null);
+            this.collectionViewHistoriques.Refresh();
+
         }
         public void FenetreDesarchiver()
         {
@@ -713,6 +697,7 @@ namespace WpfComptabilite.viewModel
                 ModeAddCreditActif = string.Empty;
                 Montant = 0;
                 Commentaire = string.Empty;
+                SelectClient = string.Empty;
             }
             else
             {
@@ -789,7 +774,7 @@ namespace WpfComptabilite.viewModel
         }
         public void autocomplete_client()
         {
-            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%'"));
+            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%' AND archive = 0;"));
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
