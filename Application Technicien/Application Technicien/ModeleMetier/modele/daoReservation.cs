@@ -20,7 +20,18 @@ namespace ModeleMetier.modele
 
         public override void insert(object o)
         {
-            throw new NotImplementedException();
+            dtoReservation reservation = (dtoReservation)o;
+            string date = reservation.Date.ToShortDateString();
+            string heure = reservation.Date.ToShortTimeString();
+            string[] separe = date.Split('/');
+            date = separe[2] + "-" + separe[1] + "-" + separe[0] + " " + heure;
+            string request = "INSERT INTO reservation VALUES(NULL,'"
+                + date + "','"
+                + reservation.Commentaire + "',"
+                + reservation.NbJoueur + ","
+                + reservation.Client.Id + ","
+                + reservation.DtoSalle.Id + ");";
+            _dbal.insert(request);
         }
 
         public override object select(string elements, string join_where)

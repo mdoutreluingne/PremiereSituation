@@ -32,27 +32,27 @@ namespace ApplicationWPF
         }
     }
 
-    public class viewEntete : ViewModele
+    public class ViewEntete : ViewModele
     {
-        private static viewEntete _instance = null;
+        private static ViewEntete _instance = null;
         private static readonly object _padlock = new object();
-        private viewPlanning _viewPlanning;
+        private ViewPlanning _viewPlanning;
 
         private ICommand _icommandGoPlanning;
-        viewEntete(MainWindow main, viewPlanning viewPlanning)
+        ViewEntete(MainWindow main, ViewPlanning viewPlanning)
             :base(main)
         {
             _viewPlanning = viewPlanning;
         }
 
         //singleton
-        public static viewEntete Instance(MainWindow main, viewPlanning viewPlanning)
+        public static ViewEntete Instance(MainWindow main, ViewPlanning viewPlanning)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewEntete(main, viewPlanning);
+                    _instance = new ViewEntete(main, viewPlanning);
                 }
                 return _instance;
             }
@@ -76,9 +76,9 @@ namespace ApplicationWPF
                 MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
                 if (mr == MessageBoxResult.Yes)
                 {
-                    viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
-                    viewObjet.Instance(null, null, null, null).Visibilite = Visibility.Hidden;
-                    viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                    ViewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                    ViewObjet.Instance(null, null, null, null, null).Visibilite = Visibility.Hidden;
+                    ViewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
                     _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
                 }
             }
@@ -87,9 +87,9 @@ namespace ApplicationWPF
 
     }
 
-    public class viewDate : ViewModele
+    public class ViewDate : ViewModele
     {
-        private static viewDate _instance = null;
+        private static ViewDate _instance = null;
         private static readonly object _padlock = new object();
 
         private DateTime _date;
@@ -99,7 +99,7 @@ namespace ApplicationWPF
         private ICommand _icommandNext;
         private System.Windows.Visibility _visibilite;
 
-        viewDate(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
+        ViewDate(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
             :base(main)
         {
             _date = DateTime.Today;
@@ -109,13 +109,13 @@ namespace ApplicationWPF
         }
 
         //singleton
-        public static viewDate Instance(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
+        public static ViewDate Instance(List<dtoSalle> salle, daoReservation daoReservation, MainWindow main)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewDate(salle, daoReservation, main);
+                    _instance = new ViewDate(salle, daoReservation, main);
                 }
                 return _instance;
             }
@@ -178,13 +178,13 @@ namespace ApplicationWPF
         }
     }
 
-    public class viewPlanning : ViewModele
+    public class ViewPlanning : ViewModele
     {
-        private viewPlanning _origin;
+        private ViewPlanning _origin;
         private dtoReservation _reservation;
         private System.Windows.Visibility _visibilite;
         private ICommand _icommand;
-        public viewPlanning(viewPlanning origin, dtoReservation reservation, MainWindow main)
+        public ViewPlanning(ViewPlanning origin, dtoReservation reservation, MainWindow main)
             :base(main)
         {
             _origin = origin;
@@ -205,8 +205,8 @@ namespace ApplicationWPF
         protected void goReservation()
         {
             _origin.Visibilite = System.Windows.Visibility.Hidden;
-            viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
-            viewReservation.Instance(_mainWindow, null, null, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
+            ViewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Hidden;
+            ViewReservation.Instance(_mainWindow, null, null, null, null, null, null, System.Windows.Visibility.Visible).LoadReservation = _reservation;
 
         }
         public System.Windows.Visibility Visibilite
@@ -223,11 +223,11 @@ namespace ApplicationWPF
         }
     }
 
-    public sealed class viewReservation : ViewModele
+    public sealed class ViewReservation : ViewModele
     {
-        private static viewReservation _instance = null;
+        private static ViewReservation _instance = null;
         private static readonly object _padlock = new object();
-        private viewPlanning _viewPlanning;
+        private ViewPlanning _viewPlanning;
 
         private daoClient _daoClient;
         private daoVille _daoVille;
@@ -260,25 +260,13 @@ namespace ApplicationWPF
         private ICommand _commandFocusNom;
         private ICommand _commandLostNom;
 
-        private ICommand _commandFocusPrenom;
-        private ICommand _commandLostPrenom;
-
-        private ICommand _commandFocusVille;
-        private ICommand _commandLostVille;
-
-        private ICommand _commandFocusMail;
-        private ICommand _commandLostMail;
-
-        private ICommand _commandFocusTelephone;
-        private ICommand _commandLostTelephone;
-
         private ICommand _commandFocusCommentaire;
         private ICommand _commandLostCommentaire;
 
         private ICommand _commandAnnulerResa;
         private ICommand _commandValiderResa;
         #endregion
-        viewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, viewPlanning viewPlanning)
+        ViewReservation(MainWindow main, daoClient daoClient,daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, ViewPlanning viewPlanning)
             :base(main)
         {
             _viewPlanning = viewPlanning;
@@ -299,13 +287,13 @@ namespace ApplicationWPF
         }
 
         //singleton
-        public static viewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, viewPlanning viewPlanning, System.Windows.Visibility visibility)
+        public static ViewReservation Instance(MainWindow main, daoClient daoClient, daoVille daoVille, daoTransaction daoTransaction, List<dtoSalle> les_salles, List<string> les_heures, ViewPlanning viewPlanning, System.Windows.Visibility visibility)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewReservation(main, daoClient, daoVille, daoTransaction, les_salles, les_heures, viewPlanning);
+                    _instance = new ViewReservation(main, daoClient, daoVille, daoTransaction, les_salles, les_heures, viewPlanning);
                 }
                 _instance.Visibilite = visibility;
                 return _instance;
@@ -382,6 +370,7 @@ namespace ApplicationWPF
                 {
                     Salle = value.DtoSalle;
                     this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
+                    _client = value.Client;
                     Nom = value.Client.Nom;
                     Prenom = value.Client.Prenom;
                     Ville = value.Client.DtoVille.Nom;
@@ -583,46 +572,6 @@ namespace ApplicationWPF
                 return this._commandFocusNom;
             }
         }
-        public ICommand FocusPrenom
-        {
-            get
-            {
-                if (this._commandFocusPrenom == null)
-                    this._commandFocusPrenom = new RelayCommand(() => this.focus_prenom(), () => true);
-
-                return this._commandFocusPrenom;
-            }
-        }
-        public ICommand FocusVille
-        {
-            get
-            {
-                if (this._commandFocusVille == null)
-                    this._commandFocusVille = new RelayCommand(() => this.focus_ville(), () => true);
-
-                return this._commandFocusVille;
-            }
-        }
-        public ICommand FocusMail
-        {
-            get
-            {
-                if (this._commandFocusMail == null)
-                    this._commandFocusMail = new RelayCommand(() => this.focus_mail(), () => true);
-
-                return this._commandFocusMail;
-            }
-        }
-        public ICommand FocusTelephone
-        {
-            get
-            {
-                if (this._commandFocusTelephone == null)
-                    this._commandFocusTelephone = new RelayCommand(() => this.focus_telephone(), () => true);
-
-                return this._commandFocusTelephone;
-            }
-        }
         public ICommand FocusCommentaire
         {
             get
@@ -642,34 +591,6 @@ namespace ApplicationWPF
             if (Nom == "NOM")
             {
                 Nom = "";
-            };
-        }
-        public void focus_prenom()
-        {
-            if (Prenom == "PRENOM")
-            {
-                Prenom = "";
-            };
-        }
-        public void focus_ville()
-        {
-            if (Ville == "VILLE")
-            {
-                Ville = "";
-            };
-        }
-        public void focus_mail()
-        {
-            if (Mail == "MAIL")
-            {
-                Mail = "";
-            };
-        }
-        public void focus_telephone()
-        {
-            if (Telephone == "TELEPHONE")
-            {
-                Telephone = "";
             };
         }
         public void focus_commentaire()
@@ -697,46 +618,7 @@ namespace ApplicationWPF
                 return this._commandLostNom;
             }
         }
-        public ICommand LostFocusPrenom
-        {
-            get
-            {
-                if (this._commandLostPrenom == null)
-                    this._commandLostPrenom = new RelayCommand(() => this.lostfocus_prenom(), () => true);
-
-                return this._commandLostPrenom;
-            }
-        }
-        public ICommand LostFocusVille
-        {
-            get
-            {
-                if (this._commandLostVille == null)
-                    this._commandLostVille = new RelayCommand(() => this.lostfocus_ville(), () => true);
-
-                return this._commandLostVille;
-            }
-        }
-        public ICommand LostFocusMail
-        {
-            get
-            {
-                if (this._commandLostMail == null)
-                    this._commandLostMail = new RelayCommand(() => this.lostfocus_mail(), () => true);
-
-                return this._commandLostMail;
-            }
-        }
-        public ICommand LostFocusTelephone
-        {
-            get
-            {
-                if (this._commandLostTelephone == null)
-                    this._commandLostTelephone = new RelayCommand(() => this.lostfocus_telephone(), () => true);
-
-                return this._commandLostTelephone;
-            }
-        }
+        
         public ICommand LostFocusCommentaire
         {
             get
@@ -761,38 +643,7 @@ namespace ApplicationWPF
                 LesClients = new ObservableCollection<dtoClient>((List<dtoClient>)_daoClient.select("*", "WHERE nom LIKE '%" + Nom + "%'"));
             }
         }
-        public void lostfocus_prenom()
-        {
-            if (Prenom == "")
-            {
-                Prenom = "PRENOM";
-            }
-        }
-        public void lostfocus_ville()
-        {
-            if (Ville == "")
-            {
-                Ville = "VILLE";
-            }
-            else if (Ville.Length >= 3)
-            {
-                LesVilles = new ObservableCollection<dtoVille>((List<dtoVille>)_daoVille.select("*", "WHERE nom LIKE '" + Ville + "%'"));
-            }
-        }
-        public void lostfocus_mail()
-        {
-            if (Mail == "")
-            {
-                Mail = "MAIL";
-            }
-        }
-        public void lostfocus_telephone()
-        {
-            if (Telephone == "")
-            {
-                Telephone = "TELEPHONE";
-            }
-        }
+        
         public void lostfocus_commentaire()
         {
             if (Commentaire == "")
@@ -817,8 +668,8 @@ namespace ApplicationWPF
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
             if (mr == MessageBoxResult.Yes)
             {
-                viewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
-                viewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
+                ViewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Hidden);
+                ViewDate.Instance(null, null, null).Visibilite = System.Windows.Visibility.Visible;
                 _viewPlanning.Visibilite = System.Windows.Visibility.Visible;
             }
         }
@@ -836,66 +687,81 @@ namespace ApplicationWPF
 
         public void valider_reservation()
         {
-            dtoReservation reservation = new dtoReservation(-1, _date, _commentaire, _nombreJoueur, _client, _salle);
-            Visibilite = Visibility.Hidden;
-            viewObjet.Instance(null, null, null, reservation).Visibilite = Visibility.Visible;
+            if (_client != null)
+            {
+                dtoReservation reservation = new dtoReservation(-1, _date, _commentaire, _nombreJoueur, _client, _salle);
+                Visibilite = Visibility.Hidden;
+                ViewObjet.Instance(null, null, null, null, reservation).Visibilite = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Veuillez sélectionner un client", "Reservation Invalide", MessageBoxButton.OK);
+            }
         }
     }
 
-    public class viewObjet : ViewModele
+    public class ViewObjet : ViewModele
     {
-        private static viewObjet _instance = null;
+        private static ViewObjet _instance = null;
         private static readonly object _padlock = new object();
+        public daoReservation _daoReservation;
         public daoArticle _daoArticle;
         public Visibility _visibilite;
         public Visibility _visibiliteAjout;
+        public Visibility _visibiliteModif;
+        public Visibility _visibiliteDelete;
 
-        private viewPlanning _viewPlanning;
+        private ViewPlanning _viewPlanning;
         private dtoSalle _salle;
         private dtoArticle _articleSelect;
+        private dtoObstacle _obstacleSelect;
         private dtoReservation _reservation;
         private bool _enableArticle;
+        private bool _enableObstacle;
+        private string _passeur;
 
         private string _nomObstacle;
         private int _positionObstacle;
         private int _quantiteObstacle;
         private decimal _prixObstacle;
         private string _commentaireObstacle;
+        private decimal _prix;
+        private decimal _solde;
         private ObservableCollection<dtoArticle> _les_articles;
         private ObservableCollection<dtoObstacle> _les_obstacles;
-        private readonly ICollectionView collectionViewArticles;
-        private readonly ICollectionView collectionViewObstacles;
+        private ICollectionView collectionViewArticles;
+        private ICollectionView collectionViewObstacles;
         private ICommand _commandAnnulerObstacle;
         private ICommand _commandPlacerObstacle;
+        private ICommand _commandModifierObstacle;
+        private ICommand _commandDeleteObstacle;
+        private ICommand _commandPrecedent;
+        private ICommand _commandFinResa;
 
-        viewObjet(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning)
+        ViewObjet(MainWindow main, daoReservation daoReservation, daoArticle daoArticle, ViewPlanning viewPlanning)
             : base(main)
         {
+            _daoReservation = daoReservation;
             _daoArticle = daoArticle;
             _viewPlanning = viewPlanning;
             Visibilite = Visibility.Hidden;
             VisibiliteAjout = Visibility.Hidden;
+            VisibiliteModif = Visibility.Hidden;
+            VisibiliteDelete = Visibility.Hidden;
             EnableArticle = true;
+            EnableObstacle = true;
             _les_obstacles = new ObservableCollection<dtoObstacle>();
             _les_articles = new ObservableCollection<dtoArticle>();
-
-            this.collectionViewArticles = CollectionViewSource.GetDefaultView(this._les_articles);
-            if (this.collectionViewArticles == null) throw new NullReferenceException("collectionView");
-            this.collectionViewArticles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
-
-            this.collectionViewObstacles = CollectionViewSource.GetDefaultView(this._les_obstacles);
-            if (this.collectionViewObstacles == null) throw new NullReferenceException("collectionView");
-            this.collectionViewObstacles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
         }
 
         //singleton
-        public static viewObjet Instance(MainWindow main, daoArticle daoArticle, viewPlanning viewPlanning,dtoReservation dtoReservation)
+        public static ViewObjet Instance(MainWindow main, daoReservation daoReservation, daoArticle daoArticle, ViewPlanning viewPlanning,dtoReservation dtoReservation)
         {
             lock (_padlock)
             {
                 if (_instance == null)
                 {
-                    _instance = new viewObjet(main, daoArticle, viewPlanning);
+                    _instance = new ViewObjet(main, daoReservation,daoArticle, viewPlanning);
                 }
                 if (dtoReservation != null)
                 {
@@ -905,27 +771,37 @@ namespace ApplicationWPF
                         + " JOIN salle ON article_salle.salle_id = salle.id"
                         + " WHERE salle.id = "+ _instance.Salle.DtoTheme.Id;
                     _instance._les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_instance._daoArticle.select("*", joinWhere​));
-                    _instance.lesArticles = null;
+                    _instance.LesArticles = null;
+                    _instance.Prix = 0;
+                    _instance.Solde = ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).Solde;
+                    _instance.collectionViewArticles = CollectionViewSource.GetDefaultView(_instance._les_articles);
+                    if (_instance.collectionViewArticles == null) throw new NullReferenceException("collectionView");
+                    _instance.collectionViewArticles.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
+
+                    _instance.collectionViewObstacles = CollectionViewSource.GetDefaultView(_instance._les_obstacles);
+                    if (_instance.collectionViewObstacles == null) throw new NullReferenceException("collectionView");
+                    _instance.collectionViewObstacles.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
                 }
                 return _instance;
             }
         }
+
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             if (((ICollectionView)sender).CurrentItem != null)
             {
-                if (this.collectionViewArticles.CurrentItem != null)
+                if (this.collectionViewArticles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoArticle))
                 {
                     ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
                 }
 
-                if (this.collectionViewObstacles.CurrentItem != null)
+                if (this.collectionViewObstacles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoObstacle))
                 {
-                    //ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                    ObstacleSelect = this.collectionViewObstacles.CurrentItem as dtoObstacle;
                 }
             }
         }
-        public  ObservableCollection<dtoArticle> lesArticles
+        public  ObservableCollection<dtoArticle> LesArticles
         {
             get
             {
@@ -933,11 +809,11 @@ namespace ApplicationWPF
             }
             set
             {
-                OnPropertyChanged("lesArticles");
+                OnPropertyChanged("LesArticles");
             }
         }
 
-        public ObservableCollection<dtoObstacle> lesObstacles
+        public ObservableCollection<dtoObstacle> LesObstacles
         {
             get
             {
@@ -945,7 +821,7 @@ namespace ApplicationWPF
             }
             set
             {
-                OnPropertyChanged("lesObstacles");
+                OnPropertyChanged("LesObstacles");
             }
         }
 
@@ -954,11 +830,8 @@ namespace ApplicationWPF
             get => _articleSelect;
             set
             {
-                Console.WriteLine(value);
-                if (_articleSelect != null)
-                {
-                    VisibiliteAjout = Visibility.Visible;
-                }
+                _passeur = "Article";
+                VisibiliteAjout = Visibility.Visible;
                 _articleSelect = value;
                 NomObstacle = value.Libelle;
                 PrixObstacle = value.Montant;
@@ -966,6 +839,17 @@ namespace ApplicationWPF
                 PositionObstacle = 1;
                 CommentaireObstacle = "";
                 OnPropertyChanged("ArticleSelect");
+            }
+        }
+        public dtoObstacle ObstacleSelect
+        {
+            get => _obstacleSelect;
+            set
+            {
+                _obstacleSelect = value;
+                VisibiliteModif = Visibility.Visible;
+                VisibiliteDelete = Visibility.Visible;
+                OnPropertyChanged("ObstacleSelect");
             }
         }
         public Visibility Visibilite
@@ -990,7 +874,32 @@ namespace ApplicationWPF
             {
                 _visibiliteAjout = value;
                 EnableArticle = false;
+                EnableObstacle = false;
                 OnPropertyChanged("VisibiliteAjout");
+            }
+        }
+        public Visibility VisibiliteModif
+        {
+            get
+            {
+                return _visibiliteModif;
+            }
+            set
+            {
+                _visibiliteModif = value;
+                OnPropertyChanged("VisibiliteModif");
+            }
+        }
+        public Visibility VisibiliteDelete
+        {
+            get
+            {
+                return _visibiliteDelete;
+            }
+            set
+            {
+                _visibiliteDelete = value;
+                OnPropertyChanged("VisibiliteDelete");
             }
         }
 
@@ -1004,6 +913,18 @@ namespace ApplicationWPF
             {
                 _enableArticle = value;
                 OnPropertyChanged("EnableArticle");
+            }
+        }
+        public bool EnableObstacle
+        {
+            get
+            {
+                return _enableObstacle;
+            }
+            set
+            {
+                _enableObstacle = value;
+                OnPropertyChanged("EnableObstacle");
             }
         }
         public dtoReservation Reservation
@@ -1068,7 +989,7 @@ namespace ApplicationWPF
             set
             {
                 _quantiteObstacle = value;
-                OnPropertyChanged("PositionObstacle");
+                OnPropertyChanged("QuantiteObstacle");
             }
         }
         public decimal PrixObstacle
@@ -1080,7 +1001,35 @@ namespace ApplicationWPF
             set
             {
                 _prixObstacle = value;
-                OnPropertyChanged("PrixObstalce");
+                OnPropertyChanged("PrixObstacle");
+            }
+        }
+        public decimal Prix
+        {
+            get
+            {
+                return _prix;
+            }
+            set
+            {
+                _prix = _salle.Prix;
+                foreach (var o in _les_obstacles)
+                {
+                    _prix += o.Qte * o.DtoArticle.Montant;
+                }
+                OnPropertyChanged("Prix");
+            }
+        }
+        public decimal Solde
+        {
+            get
+            {
+                return _solde;
+            }
+            set
+            {
+                _solde = value;
+                OnPropertyChanged("Solde");
             }
         }
         public string CommentaireObstacle
@@ -1122,24 +1071,80 @@ namespace ApplicationWPF
                 return this._commandPlacerObstacle;
             }
         }
+        public ICommand ModifierObstacle
+        {
+            get
+            {
+                if (this._commandModifierObstacle == null)
+                    this._commandModifierObstacle = new RelayCommand(() => this.modifierObstacle(), () => true);
+
+                return this._commandModifierObstacle;
+            }
+        }
+        public ICommand DeleteObstacle
+        {
+            get
+            {
+                if (this._commandDeleteObstacle == null)
+                    this._commandDeleteObstacle = new RelayCommand(() => this.deleteObstacle(), () => true);
+
+                return this._commandDeleteObstacle;
+            }
+        }
+        public ICommand Precedent
+        {
+            get
+            {
+                if (this._commandPrecedent == null)
+                    this._commandPrecedent = new RelayCommand(() => this.precedent(), () => true);
+
+                return this._commandPrecedent;
+            }
+        }
+        public ICommand FinReservation
+        {
+            get
+            {
+                if (this._commandFinResa == null)
+                    this._commandFinResa = new RelayCommand(() => this.finResa(), () => true);
+
+                return this._commandFinResa;
+            }
+        }
         public void placerObstacle()
         {
-            bool existe = false;
-            dtoObstacle obstacle = new dtoObstacle(-1, _positionObstacle, _commentaireObstacle ,_quantiteObstacle, _articleSelect, _reservation);
+            dtoObstacle existe = null;
+            dtoObstacle obstacle = null;
+            if (_passeur == "Article")
+            {
+                obstacle = new dtoObstacle(-1, _positionObstacle, _commentaireObstacle, _quantiteObstacle, _articleSelect, _reservation);
+            }
+            else
+            {
+                obstacle = new dtoObstacle(-1, _positionObstacle, _commentaireObstacle, _quantiteObstacle, _obstacleSelect.DtoArticle, _reservation);
+            }
             foreach (var o in _les_obstacles)
             {
                 if (o.DtoArticle.Libelle == obstacle.DtoArticle.Libelle)
                 {
-                    existe = true;
+                    existe = o;
                 }
             }
-            if (!existe)
+            if (existe == null)
             {
                 _les_obstacles.Add(obstacle);
-                lesObstacles = null;
+                LesObstacles = null;
             }
+            else
+            {
+                _les_obstacles.Remove(existe);
+                _les_obstacles.Add(obstacle);
+                LesObstacles = null;
+            }
+            Prix = 0;
             VisibiliteAjout = Visibility.Hidden;
             EnableArticle = true;
+            EnableObstacle = true;
         }
         public void annulerObstacle()
         {
@@ -1148,8 +1153,60 @@ namespace ApplicationWPF
             {
                 VisibiliteAjout = Visibility.Hidden;
                 EnableArticle = true;
+                EnableObstacle = true;
             }
         }
-
+        public void modifierObstacle()
+        {
+            _passeur = "Obstacle";
+            VisibiliteAjout = Visibility.Visible;
+            NomObstacle = _obstacleSelect.DtoArticle.Libelle;
+            PrixObstacle = _obstacleSelect.DtoArticle.Montant;
+            QuantiteObstacle = _obstacleSelect.Qte;
+            PositionObstacle = _obstacleSelect.Position;
+            CommentaireObstacle = _obstacleSelect.Commentaire;
+        }
+        public void deleteObstacle()
+        {
+            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir supprimer l'obstacle ?", "Suppression", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                _les_obstacles.Remove(_obstacleSelect);
+                LesObstacles = null;
+                if (_les_obstacles.Count == 0)
+                {
+                    VisibiliteDelete = Visibility.Hidden;
+                    VisibiliteModif = Visibility.Hidden;
+                }
+            }
+        }
+        public void precedent()
+        {
+            Visibilite = Visibility.Hidden;
+            ViewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Visible);
+        }
+        public void finResa()
+        {
+            string obstaclesString = "";
+            foreach (var o in _les_obstacles)
+            {
+                obstaclesString += "    - " + o + "\n";
+            }
+            string message = "===== Résumé de la réservation ====="
+                + "\nClient : " + _reservation.Client
+                + "\nSalle : " + _reservation.DtoSalle.Numero
+                + "\nDate : " + _reservation.Date
+                + "\nNombre de joueurs : " + _reservation.NbJoueur
+                + "\nCommentaire : " + _reservation.Commentaire
+                + "\nObstacles : \n" + obstaclesString
+                + "\nPrix Total : " + _prix
+                + "\nSolde Restant : " + (_solde - _prix)
+                + "\n\nVoulez vous valider la réservation ?";
+            MessageBoxResult mr =  MessageBox.Show(message, "Valider la réservation", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                _daoReservation.insert(_reservation);
+            }
+        }
     }
 }

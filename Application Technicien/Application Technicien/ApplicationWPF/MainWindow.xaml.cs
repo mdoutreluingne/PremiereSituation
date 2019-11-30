@@ -27,11 +27,11 @@ namespace ApplicationWPF
             "00:30:00", "02:00:00", "03:30:00", "05:00:00", "06:30:00", "08:00:00", "09:30:00", "11:00:00",
             "12:30:00","14:00:00", "15:30:00", "17:00:00", "18:30:00", "20:00:00", "21:30:00", "23:00:00"
         };
-        private static viewEntete _viewEntete;
-        private static viewDate _viewDate;
-        private static viewReservation _viewReservation;
-        private static viewPlanning _viewPlanning;
-        private static viewObjet _viewObjet;
+        private static ViewEntete _viewEntete;
+        private static ViewDate _viewDate;
+        private static ViewReservation _viewReservation;
+        private static ViewPlanning _viewPlanning;
+        private static ViewObjet _viewObjet;
         
         public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
         {
@@ -49,11 +49,11 @@ namespace ApplicationWPF
             List<dtoSalle> salle = (List<dtoSalle>)daoSalle.select("*", "WHERE ville_id = " + ville.Id + " AND archive = false");
 
             //MVVM
-            _viewPlanning = new viewPlanning(null, null, this);
-            _viewDate = viewDate.Instance(salle, daoReservation, this);
-            _viewReservation = viewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
-            _viewEntete = viewEntete.Instance(this, _viewPlanning);
-            _viewObjet = viewObjet.Instance(this,daoArticle, _viewPlanning, null);
+            _viewPlanning = new ViewPlanning(null, null, this);
+            _viewDate = ViewDate.Instance(salle, daoReservation, this);
+            _viewReservation = ViewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
+            _viewEntete = ViewEntete.Instance(this, _viewPlanning);
+            _viewObjet = ViewObjet.Instance(this, daoReservation,daoArticle, _viewPlanning, null);
             grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
@@ -174,7 +174,7 @@ namespace ApplicationWPF
                         bouton.Cursor = Cursors.Hand;
 
                         string la_date = DateTime.Now.ToShortDateString() + " " + horaires[j];
-                        viewPlanning viewPlanning = new viewPlanning(_viewPlanning, new dtoReservation(0, Convert.ToDateTime(la_date), null, 1, null, salle[i]), this);
+                        ViewPlanning viewPlanning = new ViewPlanning(_viewPlanning, new dtoReservation(0, Convert.ToDateTime(la_date), null, 1, null, salle[i]), this);
                         Binding bind = new Binding("selectReservationCommand");
                         bind.Source = viewPlanning;
                         bouton.SetBinding(Button.CommandProperty, bind);
@@ -202,7 +202,7 @@ namespace ApplicationWPF
                     bouton.Cursor = Cursors.Hand;
 
                     //Data binding
-                    viewPlanning viewPlanning = new viewPlanning(_viewPlanning ,reservations[k], this);
+                    ViewPlanning viewPlanning = new ViewPlanning(_viewPlanning ,reservations[k], this);
                     Binding bind = new Binding("selectReservationCommand");
                     bind.Source = viewPlanning;
                     bouton.SetBinding(Button.CommandProperty, bind);

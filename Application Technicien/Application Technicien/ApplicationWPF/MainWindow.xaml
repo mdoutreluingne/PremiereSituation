@@ -54,7 +54,6 @@
         <Grid x:Name="grd_reservation"  Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
             <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
             <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand"/>
-            <ComboBox HorizontalAlignment="Left" Margin="53,278,0,0" VerticalAlignment="Top" Width="270" Height="45" ItemsSource="{Binding LesVilles}" Cursor="Hand"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="GotFocus" >
@@ -65,46 +64,10 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="GotFocus" >
-                        <i:InvokeCommandAction Command="{Binding FocusPrenom}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="LostFocus" >
-                        <i:InvokeCommandAction Command="{Binding LostFocusPrenom}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="221" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="GotFocus" >
-                        <i:InvokeCommandAction Command="{Binding FocusVille}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="LostFocus" >
-                        <i:InvokeCommandAction Command="{Binding LostFocusVille}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="GotFocus" >
-                        <i:InvokeCommandAction Command="{Binding FocusMail}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="LostFocus" >
-                        <i:InvokeCommandAction Command="{Binding LostFocusMail}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="{Binding Telephone}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="GotFocus" >
-                        <i:InvokeCommandAction Command="{Binding FocusTelephone}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="LostFocus" >
-                        <i:InvokeCommandAction Command="{Binding LostFocusTelephone}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </TextBox>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="{Binding Telephone}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial" IsEnabled="False"/>
             <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}" Cursor="Hand"/>
             <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="492,198,0,0" TextWrapping="Wrap" Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
@@ -119,19 +82,42 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBox>
-            <Button Content="VALIDER" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
+            <Button Content="SUIVANT" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
             <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
+            <Image HorizontalAlignment="Left" Height="38" Margin="771,282,0,0" VerticalAlignment="Top" Width="38" Source="Image/peoples.png"/>
+            <Image HorizontalAlignment="Left" Height="38" Margin="767,202,0,0" VerticalAlignment="Top" Width="42" Source="Image/coin.png"/>
         </Grid>
+        <!--Visibility="{Binding Visibilite}"-->
         <Grid x:Name="grd_objet" Visibility="{Binding Visibilite}" HorizontalAlignment="Left" Height="654" Margin="10,104,0,0" VerticalAlignment="Top" Width="1674">
-            <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding lesArticles}" FontSize="20" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding EnableArticle}"/>
-            <ListBox HorizontalAlignment="Left" Height="594" Margin="399,60,0,0" VerticalAlignment="Top" Width="512" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding lesObstacles}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
+            <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesArticles}" FontSize="20" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding EnableArticle}"/>
+            <ListBox HorizontalAlignment="Left" Height="594" Margin="399,60,0,0" VerticalAlignment="Top" Width="512" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesObstacles}" IsSynchronizedWithCurrentItem="True" FontSize="20" IsEnabled="{Binding EnableObstacle}"/>
             <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
-            <Label Content="VOTRE SELECTION" HorizontalAlignment="Left" Margin="453,13,0,0" VerticalAlignment="Top" Width="196" FontSize="20" Foreground="#FF74AC93" FontWeight="Bold"/>
+            <Label Content="VOTRE SELECTION" HorizontalAlignment="Left" Margin="553,12,0,0" VerticalAlignment="Top" Width="196" FontSize="20" Foreground="#FF74AC93" FontWeight="Bold"/>
 
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,396,0,0" TextWrapping="Wrap"  Text="SOLDE" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,485,0,0" TextWrapping="Wrap"  Text="PRIX" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding }" Cursor="Hand"/>
-            <Button Content="ANNULER" HorizontalAlignment="Right" Margin="0,594,373,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding }" Cursor="Hand"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,396,0,0" TextWrapping="Wrap"  Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,485,0,0" TextWrapping="Wrap"  Text="{Binding Prix}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand"/>
+            <Button Content="PRECEDENT" HorizontalAlignment="Right" Margin="0,594,373,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding Precedent}" Cursor="Hand"/>
+            <Grid Visibility="{Binding VisibiliteModif}" Margin="454,572,1142,4">
+                <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
+                <Image Margin="10,0,8,4" RenderTransformOrigin="3.207,-0.87" Source="Image/edit.png" Cursor="Hand">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding ModifierObstacle}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+            <Grid  Visibility="{Binding VisibiliteDelete}" Margin="753,570,843,6">
+                <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
+                <Image Margin="10,1,8,3" RenderTransformOrigin="3.207,-0.87" Source="Image/delete.png" Cursor="Hand">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding DeleteObstacle}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
             <Grid Visibility="{Binding VisibiliteAjout}" HorizontalAlignment="Left" Height="381" Margin="549,127,0,0" VerticalAlignment="Top" Width="727" RenderTransformOrigin="-5.097,0.557">
                 <Rectangle Fill="White" HorizontalAlignment="Left" Height="361" Margin="-7,10,0,0" Stroke="Gray" VerticalAlignment="Top" Width="733" StrokeThickness="2"/>
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="29,33,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding NomObstacle}" VerticalAlignment="Top" Width="652" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>

@@ -140,5 +140,17 @@
     <Resource Include="Image\fleche_droite.png" />
     <Resource Include="Image\fleche_gauche.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\peoples.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\coin.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
