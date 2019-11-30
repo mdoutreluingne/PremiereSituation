@@ -52,9 +52,9 @@
         </Grid>
         <!--Visibility="{Binding Visibilite}"-->
         <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
-            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
-            <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
+            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="{Binding EnablePayement}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="GotFocus" >
                         <i:InvokeCommandAction Command="{Binding FocusNom}" />
@@ -68,11 +68,11 @@
             <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
             <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
             <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="{Binding Telephone}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial" IsEnabled="False"/>
-            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}" Cursor="Hand"/>
-            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True" Cursor="Hand"/>
+            <DatePicker HorizontalAlignment="Left" Margin="492,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="492,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="492,198,0,0" TextWrapping="Wrap" Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <TextBox HorizontalAlignment="Left" Height="44" Margin="492,279,0,0" TextWrapping="Wrap" Text="{Binding NombreJoueur}" VerticalAlignment="Top" Width="322"  Foreground="#FF74AC93" FontSize="20"/>
-            <TextBox HorizontalAlignment="Left" Height="127" Margin="492,356,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="702" Foreground="#FF74AC93" FontSize="20">
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="492,279,0,0" TextWrapping="Wrap" Text="{Binding NombreJoueur}" VerticalAlignment="Top" Width="322"  Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
+            <TextBox HorizontalAlignment="Left" Height="127" Margin="492,356,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="702" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="GotFocus" >
                         <i:InvokeCommandAction Command="{Binding FocusCommentaire}" />
@@ -96,7 +96,7 @@
 
             <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,396,0,0" TextWrapping="Wrap"  Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
             <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,485,0,0" TextWrapping="Wrap"  Text="{Binding Prix}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand"/>
+            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
             <Button Content="PRECEDENT" HorizontalAlignment="Right" Margin="0,594,373,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding Precedent}" Cursor="Hand"/>
             <Grid Visibility="{Binding VisibiliteModif}" Margin="454,572,1142,4">
                 <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
@@ -110,7 +110,7 @@
             </Grid>
             <Grid  Visibility="{Binding VisibiliteDelete}" Margin="753,570,843,6">
                 <Rectangle Fill="White" Stroke="#FFAC7474" StrokeThickness="2"/>
-                <Image Margin="10,1,8,3" RenderTransformOrigin="3.207,-0.87" Source="Image/delete.png" Cursor="Hand">
+                <Image Margin="10,1,8,3" RenderTransformOrigin="3.207,-0.87" Source="Image/delete.png" Cursor="Hand" IsEnabled="{Binding EnablePayement}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown" >
                             <i:InvokeCommandAction Command="{Binding DeleteObstacle}" />
@@ -121,19 +121,19 @@
             <Grid Visibility="{Binding VisibiliteAjout}" HorizontalAlignment="Left" Height="381" Margin="549,127,0,0" VerticalAlignment="Top" Width="727" RenderTransformOrigin="-5.097,0.557">
                 <Rectangle Fill="White" HorizontalAlignment="Left" Height="361" Margin="-7,10,0,0" Stroke="Gray" VerticalAlignment="Top" Width="733" StrokeThickness="2"/>
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="29,33,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding NomObstacle}" VerticalAlignment="Top" Width="652" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,88,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PositionObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,88,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PositionObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="132,223,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PrixObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,157,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding QuantiteObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20"/>
-                <TextBox HorizontalAlignment="Left" Height="170" Margin="356,88,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CommentaireObstacle}" VerticalAlignment="Top" Width="325" Foreground="#FF74AC93" FontSize="20" RenderTransformOrigin="1.362,0.486"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,157,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding QuantiteObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
+                <TextBox HorizontalAlignment="Left" Height="170" Margin="356,88,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CommentaireObstacle}" VerticalAlignment="Top" Width="325" Foreground="#FF74AC93" FontSize="20" RenderTransformOrigin="1.362,0.486" IsEnabled="{Binding EnablePayement}"/>
                 <Button Content="ANNULER" HorizontalAlignment="Left" Margin="29,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerObstacle}" Cursor="Hand"/>
-                <Button Content="PLACER" HorizontalAlignment="Left" Margin="492,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand"/>
+                <Button Content="PLACER" HorizontalAlignment="Left" Margin="492,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
                 <Label Content="POSITION" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="PRIX" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="QUANTITE" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
             </Grid>
             <Grid Visibility="{Binding VisibiliteSupPaye}" HorizontalAlignment="Left" Height="75" Margin="916,8,0,0" VerticalAlignment="Top" Width="758">
-                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="467,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20"/>
-                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}"/>
+                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="467,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding PayerReservation}" IsEnabled="{Binding EnablePayement}"/>
+                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}" IsEnabled="{Binding EnablePayement}"/>
             </Grid>
         </Grid>
     </Grid>

@@ -41,7 +41,7 @@ namespace ModeleMetier.modele
 
         public void delete(string where)
         {
-            string request = "DELETE FROM obstacle " + where;
+            string request = "DELETE FROM reservation " + where;
             _dbal.command(request);
         }
 

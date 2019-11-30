@@ -19,7 +19,23 @@ namespace ModeleMetier.modele
         }
         public override void insert(object o)
         {
-            throw new NotImplementedException();
+
+        }
+        public void insert(object o, decimal montant)
+        {
+            string prix = montant.ToString();
+            prix = prix.Replace(",", ".");
+            dtoReservation reservation = (dtoReservation)o;
+            string date = DateTime.Now.ToShortDateString();
+            string heure = DateTime.Now.ToShortTimeString();
+            string[] separe = date.Split('/');
+            date = separe[2] + "-" + separe[1] + "-" + separe[0] + " " + heure;
+            string request = "INSERT INTO transaction VALUES(NULL,'"
+                + date + "','-"
+                + prix + "','Prélèvement',NULL,'NULL',"
+                + reservation.Id + ","
+                + reservation.Client.Id + ");";
+            _dbal.command(request);
         }
 
         public override object select(string elements, string join_where)

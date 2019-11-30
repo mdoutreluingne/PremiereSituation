@@ -50,10 +50,10 @@ namespace ApplicationWPF
 
             //MVVM
             _viewPlanning = new ViewPlanning(null, null, this);
-            _viewDate = ViewDate.Instance(salle, daoReservation, this);
+            _viewDate = ViewDate.Instance(salle, daoReservation, daoTransaction, this);
             _viewReservation = ViewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
             _viewEntete = ViewEntete.Instance(this, _viewPlanning);
-            _viewObjet = ViewObjet.Instance(this, daoReservation,daoArticle, daoObstacle, _viewPlanning, null);
+            _viewObjet = ViewObjet.Instance(this,daoTransaction, daoReservation,daoArticle, daoObstacle, _viewPlanning, null);
             grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
@@ -62,7 +62,7 @@ namespace ApplicationWPF
 
             //On charge le planning
             loadColumnRow(salle);
-            loadPlanning(salle, daoReservation);
+            loadPlanning(salle, daoReservation, daoTransaction);
         }
         public void loadColumnRow(List<dtoSalle> salle)
         {
@@ -81,7 +81,7 @@ namespace ApplicationWPF
                 grd_planning.RowDefinitions.Add(rw);
             }
         }
-        public void loadPlanning(List<dtoSalle> salle, daoReservation daoReservation)
+        public void loadPlanning(List<dtoSalle> salle, daoReservation daoReservation, daoTransaction daoTransaction)
         {
             #region Horaires
             Label label = new Label();
@@ -195,6 +195,10 @@ namespace ApplicationWPF
                 {
                     int heure = horaires.IndexOf(reservations[k].Date.TimeOfDay.ToString());
                     Color c = Color.FromRgb(116, 172, 147);
+                    if (((List<dtoTransaction>)daoTransaction.select("*","WHERE reservation_id = " + reservations[k].Id)).Count == 0)
+                    {
+                        c = Color.FromRgb(227, 166, 67);
+                    }
                     Button bouton = new Button();
                     bouton.Background =  new SolidColorBrush(c);
                     bouton.BorderBrush = null;
