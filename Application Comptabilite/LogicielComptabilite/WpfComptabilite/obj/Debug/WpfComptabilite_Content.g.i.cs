@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons8_edit_property_1px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("ico_compta.ico")]
 
 

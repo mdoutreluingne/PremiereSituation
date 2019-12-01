@@ -362,7 +362,7 @@ namespace WpfComptabilite.viewModel
         {
             get
             {
-
+                //Sélectionne toutes les transactions du client sélectionner
                 _lesHistoriques = new ObservableCollection<Transaction>(unDaoTransac.selectAllHistorique(_clientActif.Id)); 
                 return this._lesHistoriques;
             }
@@ -570,7 +570,7 @@ namespace WpfComptabilite.viewModel
                 }
             }
 
-            if (valide == true)
+            if (valide == true) //Erreur si mail existe déjà
             {
                 MessageBox.Show("Le client existe déjà", "Erreur lors d'ajout d'un client", MessageBoxButton.OK, MessageBoxImage.Warning);
             }

@@ -15,20 +15,22 @@
     </Window.Background>
     <Grid>
         <Button x:Name="btn_connecter" Content="SE CONNECTER" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" Margin="285,306,0,0" VerticalAlignment="Top" Width="215" Height="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="connecter_Click" FontFamily="Segoe UI Semibold" FontSize="14" Foreground="White"/>
-        <Button x:Name="btn_update" Content="Modifier" Margin="285,294,0,0" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" VerticalAlignment="Top" Width="215" Height="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="btn_update_Click" Visibility="Hidden" Foreground="White"/>
+        <Button x:Name="btn_update" Content="MODIFIER" Margin="285,306,0,0" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" VerticalAlignment="Top" Width="215" Height="34" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Click="btn_update_Click" Foreground="White" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
         <Button x:Name="btn_modif_pass" Content="CHANGER SON MOT DE PASSE" BorderThickness="3" BorderBrush="#FF6C6969" Background="#FF74AC93" HorizontalAlignment="Left" Margin="285,358,0,0" VerticalAlignment="Top" Width="215" Height="34" Click="btn_modif_pass_Click" FontFamily="Segoe UI Semibold" FontSize="14" Foreground="White"/>
-        <ComboBox  x:Name="cmb_ville" VerticalAlignment="Top" Width="179" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="211,138,0,0" Height="28" FontFamily="Segoe UI Semibold" FontSize="14">
+        <ComboBox  x:Name="cmb_ville" VerticalAlignment="Top" Width="178" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="199,70,0,0" Height="28" FontFamily="Segoe UI Semibold" FontSize="14">
             <System:String>Annecy-</System:String>
             <System:String>Thonon-</System:String>
             <System:String>Bonneville-</System:String>
             <System:String>Chamonix-</System:String>
         </ComboBox>
-        <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="179" Margin="390,196,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
-        <PasswordBox x:Name="pass_confirm" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="32" Width="179" Margin="390,257,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
-        <TextBox x:Name="txt_login" Height="30" TextWrapping="Wrap" Text="" Width="179" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="390,138,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
-        <Label Content="Connexion" HorizontalAlignment="Left" Margin="0,34,0,0" VerticalAlignment="Top" Width="792" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Semibold" Foreground="White"/>
-        <Label Content="Login :" HorizontalAlignment="Left" Margin="390,112,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
-        <Label Content="Mot de passe :" HorizontalAlignment="Left" Margin="390,168,0,0" VerticalAlignment="Top" Width="179" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
-        <Label x:Name="lbl_comfirm_pass" Content="Confirmation mot de passe :" HorizontalAlignment="Left" Margin="390,231,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Width="179" Visibility="Hidden" Foreground="White"/>
+        <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="180" Margin="377,128,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
+        <PasswordBox x:Name="pass_confirm" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="32" Width="180" Margin="377,252,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
+        <TextBox x:Name="txt_login" Height="30" TextWrapping="Wrap" Text="" Width="180" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,70,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
+        <Label Content="Connexion" HorizontalAlignment="Left" VerticalAlignment="Top" Width="792" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Semibold" Foreground="White"/>
+        <Label Content="Login :" HorizontalAlignment="Left" Margin="377,44,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Mot de passe :" HorizontalAlignment="Left" Margin="377,100,0,0" VerticalAlignment="Top" Width="180" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
+        <Label x:Name="lbl_comfirm_pass" Content="Confirmation mot de passe :" HorizontalAlignment="Left" Margin="377,226,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Width="180" Foreground="White" Visibility="Hidden"/>
+        <PasswordBox x:Name="pass_new" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="32" Width="180" Margin="377,189,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
+        <Label x:Name="lbl_new_mdp" Content="Nouveau mot de passe :" HorizontalAlignment="Left" Margin="377,163,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Width="180" Foreground="White" Visibility="Hidden"/>
     </Grid>
 </Window>

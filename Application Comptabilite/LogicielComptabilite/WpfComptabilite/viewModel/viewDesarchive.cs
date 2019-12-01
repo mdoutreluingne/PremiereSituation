@@ -64,9 +64,6 @@ namespace WpfComptabilite.viewModel
                 return this.dearchiveCommandClient;
             }
         }
-
-       
-
         public void desarchiverLeClient()
         {
             LeDaoClient.desarchiver(ClientActifDesarchiver);

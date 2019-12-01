@@ -80,6 +80,8 @@ namespace WpfComptabilite
 
         private void btn_modif_pass_Click(object sender, RoutedEventArgs e)
         {
+            lbl_new_mdp.Visibility = Visibility.Visible;
+            pass_new.Visibility = Visibility.Visible;
             lbl_comfirm_pass.Visibility = Visibility.Visible;
             pass_confirm.Visibility = Visibility.Visible;
             btn_connecter.Visibility = Visibility.Hidden;
@@ -92,6 +94,7 @@ namespace WpfComptabilite
             string login = cmb_ville.Text + txt_login.Text;
             bool erreur_login = false;
             bool erreur_pass = false;
+            bool comfirm_pass = false;
 
             if (txt_login.Text != "" || pass.Password != "")
             {
@@ -99,21 +102,35 @@ namespace WpfComptabilite
                 {
                     if (login.Contains(user.Login) == true)
                     {
-                        if (pass.Password == pass_confirm.Password)
+                        if (pass.Password.Contains(user.Mdp) == true)
                         {
-                            unDaoUtilisateur.update("UPDATE utilisateur SET mdp = '" + pass.Password + "' WHERE login = '" + login + "'");
-                            lbl_comfirm_pass.Visibility = Visibility.Hidden;
-                            pass_confirm.Visibility = Visibility.Hidden;
-                            btn_connecter.Visibility = Visibility.Visible;
-                            btn_update.Visibility = Visibility.Hidden;
-                            erreur_login = false;
-                            lesUsers = new List<Utilisateur>(unDaoUtilisateur.selectAllClient()); //Rechargement des utilisateurs après modification mdp
-                            break;
+                            
+                            if (pass_new.Password == pass_confirm.Password)
+                            {
+                                unDaoUtilisateur.update("UPDATE utilisateur SET mdp = '" + pass_new.Password + "' WHERE login = '" + login + "'");
+                                lbl_new_mdp.Visibility = Visibility.Hidden;
+                                pass_new.Visibility = Visibility.Hidden;
+                                lbl_comfirm_pass.Visibility = Visibility.Hidden;
+                                pass_confirm.Visibility = Visibility.Hidden;
+                                btn_connecter.Visibility = Visibility.Visible;
+                                btn_update.Visibility = Visibility.Hidden;
+                                erreur_login = false;
+                                lesUsers = new List<Utilisateur>(unDaoUtilisateur.selectAllClient()); //Rechargement des utilisateurs après modification mdp
+                                break;
+                            }
+                            else
+                            {
+                                erreur_login = false;
+                                erreur_pass = false;
+                                comfirm_pass = true;
+                                break;
+                            }
 
                         }
                         else
                         {
                             erreur_login = false;
+                            comfirm_pass = false;
                             erreur_pass = true;
                             break;
                         }
@@ -135,6 +152,10 @@ namespace WpfComptabilite
                 MessageBox.Show("Login incorrect", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             if (erreur_pass == true)
+            {
+                MessageBox.Show("Mot de passe incorrect", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (comfirm_pass == true)
             {
                 MessageBox.Show("Les mots de passe saisie ne sont pas identiques", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
             }
