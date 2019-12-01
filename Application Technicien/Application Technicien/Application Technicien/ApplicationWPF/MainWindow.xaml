@@ -1,0 +1,214 @@
+﻿<Window x:Class="ApplicationWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:ApplicationWPF"
+        mc:Ignorable="d"
+        Title="Application Technicien" Height="797.378" Width="1700.577">
+    <Grid x:Name="grd_principale">
+        <Grid x:Name="grd_entete" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#FF74AC93">
+            <Label x:Name="lbl_appName" Content="Application Technicien" HorizontalAlignment="Center" Margin="202,27,187,0" VerticalAlignment="Top" FontSize="30" FontFamily="Consolas" FontWeight="Bold"/>
+            <Image HorizontalAlignment="Left" Height="55" Margin="23,22,0,0" VerticalAlignment="Top" Source="image/calendar.PNG" Cursor="Hand">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding GoPlanning}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+            <Image HorizontalAlignment="Left" Height="60" Margin="130,17,0,0" VerticalAlignment="Top" Source="Image/article.png" Cursor="Hand" Width="72">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding GoGestionArticle}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+        </Grid>
+        <Grid x:Name="grd_base" Visibility="Visible">
+            <Grid x:Name="grd_date" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="346*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker x:Name="dtp_date" HorizontalAlignment="Center" Margin="194.928,5,248,0" VerticalAlignment="Top" RenderTransformOrigin="0.394,1.306" Height="40" Width="249" FontSize="22" Grid.Column="1" SelectedDate="{Binding DateSelect}" Cursor="Hand" />
+                <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="445,-1,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="51" RenderTransformOrigin="0.5,0.5" Command="{Binding SelectNextDate}" Cursor="Hand">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="0.24"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.107"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                    <Button.Background>
+                        <ImageBrush ImageSource="Image/fleche_droite.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Button" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Top" Width="55" BorderBrush="{x:Null}" Foreground="{x:Null}" Height="50" Grid.Column="1" Command="{Binding SelectPreviewDate}" Cursor="Hand">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Image/fleche_gauche.png"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid x:Name="grd_planning" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Margin="20,241,10,10">
+                <!-- CHARGEMENT DYNAMIQUE -->
+            </Grid>
+        </Grid>
+        <!--Visibility="{Binding Visibilite}"-->
+        <Grid x:Name="grd_reservation" Visibility="{Binding Visibilite}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="653" Margin="203,105,10,0" Width="1227">
+            <ComboBox HorizontalAlignment="Left" Margin="53,36,0,0" VerticalAlignment="Top" Width="270" Height="43" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="True" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="53,115,0,0" VerticalAlignment="Top" Width="270" Height="45" Foreground="#FF74AC93" FontSize="20" ItemsSource="{Binding LesClients}" SelectedItem="{Binding SelectClient}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221"  Text="{Binding Nom}" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus" >
+                        <i:InvokeCommandAction Command="{Binding FocusNom}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="LostFocus" >
+                        <i:InvokeCommandAction Command="{Binding LostFocusNom}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="53,198,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="270" FontFamily="Arial" FontSize="20" Foreground="#FF74AC93" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,279,0,0" TextWrapping="Wrap" Text="{Binding Ville}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,356,0,0" TextWrapping="Wrap" Text="{Binding Mail}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontFamily="Arial" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="53,439,0,0" TextWrapping="Wrap" Text="{Binding Telephone}" VerticalAlignment="Top" Width="270" Foreground="#FF74AC93" FontSize="20" FontFamily="Arial" IsEnabled="False"/>
+            <DatePicker HorizontalAlignment="Left" Margin="576,36,0,0" VerticalAlignment="Top" Height="43" Width="322" FontSize="20" Foreground="#FF74AC93" SelectedDate="{Binding Date}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <ComboBox HorizontalAlignment="Left" Margin="576,115,0,0" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" Height="43" FontSize="20" ItemsSource="{Binding LesHeures}" IsSynchronizedWithCurrentItem="True" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="576,198,0,0" TextWrapping="Wrap" Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="44" Margin="576,279,0,0" TextWrapping="Wrap" Text="{Binding NombreJoueur}" VerticalAlignment="Top" Width="322"  Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
+            <TextBox HorizontalAlignment="Left" Height="127" Margin="576,356,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Commentaire}" VerticalAlignment="Top" Width="618" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="GotFocus" >
+                        <i:InvokeCommandAction Command="{Binding FocusCommentaire}" />
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="LostFocus" >
+                        <i:InvokeCommandAction Command="{Binding LostFocusCommentaire}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+            <Button Content="SUIVANT" HorizontalAlignment="Left" Margin="924,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ValiderResa}" Cursor="Hand"/>
+            <Button Content="ANNULER" HorizontalAlignment="Left" Margin="492,562,0,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerResa}" Cursor="Hand"/>
+            <Image HorizontalAlignment="Left" Height="38" Margin="855,282,0,0" VerticalAlignment="Top" Width="38" Source="Image/peoples.png"/>
+            <Image HorizontalAlignment="Left" Height="38" Margin="851,202,0,0" VerticalAlignment="Top" Width="42" Source="Image/coin.png"/>
+            <Label Content="JOUEURS" HorizontalAlignment="Left" Margin="468,282,0,0" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38"/>
+            <Label HorizontalAlignment="Left" Margin="491,202,0,0" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38"/>
+            <Label Content="HEURE" HorizontalAlignment="Left" Margin="468,120,0,0" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38"/>
+            <Label Content="SOLDE" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="468,202,0,0"/>
+            <Label Content="DATE" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="468,41,0,0" RenderTransformOrigin="0.614,0.412"/>
+            <Label Content="PRENOM" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,202,0,0"/>
+            <Label Content="NOM" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,115,0,0" RenderTransformOrigin="0.782,0.561"/>
+            <Label Content="SALLE" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,41,0,0"/>
+            <Label Content="VILLE" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,279,0,0"/>
+            <Label Content="MAIL" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,356,0,0"/>
+            <Label Content="TEL." HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38" Margin="-58,445,0,0"/>
+            <Label Content="JOUEURS" HorizontalAlignment="Left" Margin="468,282,0,0" VerticalAlignment="Top" Foreground="#FF74AC93" FontSize="20" Height="38"/>
+        </Grid>
+        <!--Visibility="{Binding Visibilite}"-->
+        <Grid x:Name="grd_objet" Visibility="{Binding Visibilite}" HorizontalAlignment="Left" Height="654" Margin="10,104,0,0" VerticalAlignment="Top" Width="1674">
+            <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesArticles}" FontSize="20" IsSynchronizedWithCurrentItem="True" IsEnabled="{Binding EnableArticle}"/>
+            <ListBox HorizontalAlignment="Left" Height="594" Margin="399,60,0,0" VerticalAlignment="Top" Width="512" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesObstacles}" IsSynchronizedWithCurrentItem="True" FontSize="20" IsEnabled="{Binding EnableObstacle}"/>
+            <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
+            <Label Content="VOTRE SELECTION" HorizontalAlignment="Left" Margin="553,12,0,0" VerticalAlignment="Top" Width="196" FontSize="20" Foreground="#FF74AC93" FontWeight="Bold"/>
+
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,396,0,0" TextWrapping="Wrap"  Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,485,0,0" TextWrapping="Wrap"  Text="{Binding Prix}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <Label Content="SOLDE" HorizontalAlignment="Left" Margin="1088,396,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
+            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <Button Content="PRECEDENT" HorizontalAlignment="Right" Margin="0,594,373,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding Precedent}" Cursor="Hand"/>
+            <Grid Visibility="{Binding VisibiliteModif}" Margin="454,572,1142,4">
+                <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
+                <Image Margin="10,0,8,4" RenderTransformOrigin="3.207,-0.87" Source="Image/edit.png" Cursor="Hand">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding ModifierObstacle}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+            <Grid  Visibility="{Binding VisibiliteDelete}" Margin="753,570,843,6">
+                <Rectangle Fill="White" Stroke="#FFAC7474" StrokeThickness="2"/>
+                <Image Margin="10,1,8,3" RenderTransformOrigin="3.207,-0.87" Source="Image/delete.png" Cursor="Hand" IsEnabled="{Binding EnablePayement}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding DeleteObstacle}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+            <!--Visibility="{Binding VisibiliteAjout}"-->
+            <Grid Visibility="{Binding VisibiliteAjout}" HorizontalAlignment="Left" Height="381" Margin="549,127,0,0" VerticalAlignment="Top" Width="727" RenderTransformOrigin="-5.097,0.557">
+                <Rectangle Fill="White" HorizontalAlignment="Left" Height="361" Margin="-7,10,0,0" Stroke="Gray" VerticalAlignment="Top" Width="733" StrokeThickness="2"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="29,33,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding NomObstacle}" VerticalAlignment="Top" Width="652" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,88,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PositionObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,223,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding PrixObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="132,157,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding QuantiteObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
+                <TextBox HorizontalAlignment="Left" Height="170" Margin="356,88,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CommentaireObstacle}" VerticalAlignment="Top" Width="325" Foreground="#FF74AC93" FontSize="20" RenderTransformOrigin="1.362,0.486" IsEnabled="{Binding EnablePayement}"/>
+                <Button Content="ANNULER" HorizontalAlignment="Left" Margin="29,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerObstacle}" Cursor="Hand"/>
+                <Button Content="PLACER" HorizontalAlignment="Left" Margin="492,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+                <Label Content="POSITION" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+                <Label Content="PRIX UNIT" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+                <Label Content="QUANTITE" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+            </Grid>
+            <Grid Visibility="{Binding VisibiliteSupPaye}" HorizontalAlignment="Left" Height="75" Margin="916,8,0,0" VerticalAlignment="Top" Width="758">
+                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="467,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding PayerReservation}" IsEnabled="{Binding EnablePayement}"/>
+                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}" IsEnabled="{Binding EnablePayement}"/>
+            </Grid>
+            <Label Content="PRIX" HorizontalAlignment="Left" Margin="1088,485,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
+        </Grid>
+        <Grid x:Name="grd_article" Visibility="{Binding Visibilite}" HorizontalAlignment="Left" Height="653" Margin="10,100,0,0" VerticalAlignment="Top" Width="1674" RenderTransformOrigin="-2.763,-2.003">
+            <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesArticles}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
+            <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
+            <Grid HorizontalAlignment="Left" Height="641" Margin="1167,12,0,0" VerticalAlignment="Top" Width="497">
+                <ListBox HorizontalAlignment="Left" Height="584" Margin="10,57,0,0" VerticalAlignment="Top" Width="477" BorderBrush="Gray" BorderThickness="2,0,0,0" ItemsSource="{Binding LesArticlesArchive}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
+                <Label Content="LES ARTICLES ARCHIVES" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="335" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
+                <Rectangle HorizontalAlignment="Left" Height="69" Margin="230,568,0,0" Stroke="#FFAC7474" StrokeThickness="2" VerticalAlignment="Top" Width="75"/>
+                <Image HorizontalAlignment="Left" Height="39" Margin="238,592,0,0" VerticalAlignment="Top" Width="58" Source="Image/moins.png" RenderTransformOrigin="4.26,0.413" Cursor="Hand">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding Desarchive}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+            </Grid>
+            <Grid Visibility="{Binding VisibiliteAjout}" HorizontalAlignment="Left" Height="433" Margin="348,127,0,0" VerticalAlignment="Top" Width="828" RenderTransformOrigin="-5.097,0.557">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="225*"/>
+                    <RowDefinition Height="208*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Fill="White" Margin="-22,0,-13,0.333" Stroke="Gray" StrokeThickness="2" Grid.RowSpan="2"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="128,33,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding Libelle}" VerticalAlignment="Top" Width="647" Foreground="#FF74AC93" FontSize="20"/>
+                <TextBox HorizontalAlignment="Left" Height="35" Margin="128,86,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding Prix}" VerticalAlignment="Top" Width="256" Foreground="#FF74AC93" FontSize="20"/>
+                <Button Content="ARCHIVER" HorizontalAlignment="Left" Margin="29,139.833,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding ArchiverArticle}" Cursor="Hand" IsEnabled="{Binding EnableArchive}" Grid.Row="1"/>
+                <Button Content="AJOUTER" HorizontalAlignment="Left" Margin="586,139.833,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AjouterArticle}" Cursor="Hand" Grid.Row="1"/>
+                <Label Content="PRIX" HorizontalAlignment="Left" Margin="29,86,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+                <Label Content="SALLES" HorizontalAlignment="Left" Margin="29,156,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+                <ComboBox HorizontalAlignment="Left" Margin="128,156,0,0" VerticalAlignment="Top" Width="256" Height="35" BorderBrush="#FFABADB3" Foreground="#FF74AC93" ItemsSource="{Binding LesSalles}" IsSynchronizedWithCurrentItem="true" FontSize="20">
+                    <ComboBox.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="#FFF0F0F0" Offset="0"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ComboBox.Background>
+                </ComboBox>
+                <ListBox HorizontalAlignment="Left" Height="249" Margin="409,86,0,0" VerticalAlignment="Top" Width="366" ItemsSource="{Binding SallesSelect}" IsSynchronizedWithCurrentItem="true" FontSize="20" Grid.RowSpan="2"/>
+                <Image Visibility="{Binding VisibiliteDelete}" HorizontalAlignment="Left" Height="70" Margin="333,39.833,0,0" VerticalAlignment="Top" Width="71" Source="Image/delete.png" OpacityMask="Black" Cursor="Hand" Grid.Row="1">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseLeftButtonDown" >
+                            <i:InvokeCommandAction Command="{Binding DeleteSalle}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Image>
+                <Label Content="LIBELLE" HorizontalAlignment="Left" Margin="29,33,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
+            </Grid>
+            <Rectangle HorizontalAlignment="Left" Height="69" Margin="123,572,0,0" Stroke="#FF74AC93" StrokeThickness="2" VerticalAlignment="Top" Width="75"/>
+            <Image HorizontalAlignment="Left" Height="68" Margin="127,572,0,0" VerticalAlignment="Top" Width="71" Source="Image/plus.png" Cursor="Hand">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown" >
+                        <i:InvokeCommandAction Command="{Binding AjoutArticle}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+        </Grid>
+    </Grid>
+</Window>
