@@ -39,6 +39,7 @@ namespace ApplicationWPF
         private ViewPlanning _viewPlanning;
 
         private ICommand _icommandGoPlanning;
+        private ICommand _icommandGoGestionArticle;
         ViewEntete(MainWindow main, ViewPlanning viewPlanning)
             :base(main)
         {
@@ -68,24 +69,49 @@ namespace ApplicationWPF
                 return this._icommandGoPlanning;
             }
         }
+        public ICommand GoGestionArticle
+        {
+            get
+            {
+                if (this._icommandGoGestionArticle == null)
+                    this._icommandGoGestionArticle = new RelayCommand(() => this.goArticle(), () => true);
+
+                return this._icommandGoGestionArticle;
+            }
+        }
 
         public void goPlanning()
         {
             if (_viewPlanning.Visibilite == Visibility.Hidden)
             {
-                MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner la réservation ?", "Abandon", MessageBoxButton.YesNo);
+                MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir retourner au planning ?", "Planning", MessageBoxButton.YesNo);
                 if (mr == MessageBoxResult.Yes)
                 {
                     ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden);
                     ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
                     ViewObjet.Instance(null, null, null, null, null, null, null).Visibilite = Visibility.Hidden;
+                    ViewArticle.Instance(null, null, null, null, null).Visibilite = Visibility.Hidden;
                     ViewDate.Instance(null,null, null, null).Visibilite = Visibility.Visible;
                     _viewPlanning.Visibilite = Visibility.Visible;
                 }
             }
         }
-
-
+        public void goArticle()
+        {
+            ViewArticle viewA = ViewArticle.Instance(null, null, null, null, null);
+            if (viewA.Visibilite == Visibility.Hidden)
+            {
+                MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir rejoindre le menu de gestion des articles ?", "Gestion des articles", MessageBoxButton.YesNo);
+                if (mr == MessageBoxResult.Yes)
+                {
+                    ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden);
+                    ViewObjet.Instance(null, null, null, null, null, null, null).Visibilite = Visibility.Hidden;
+                    ViewDate.Instance(null, null, null, null).Visibilite = Visibility.Hidden;
+                    _viewPlanning.Visibilite = Visibility.Hidden;
+                    viewA.Visibilite = Visibility.Visible;
+                }
+            }
+        }
     }
 
     public class ViewDate : ViewModele
@@ -815,7 +841,7 @@ namespace ApplicationWPF
                     _instance.Salle = dtoReservation.DtoSalle;
                     string joinWhere = " JOIN article_salle ON article.id = article_salle.article_id"
                         + " JOIN salle ON article_salle.salle_id = salle.id"
-                        + " WHERE salle.id = "+ _instance.Salle.DtoTheme.Id + " AND archive = 0";
+                        + " WHERE salle.id = "+ _instance.Salle.DtoTheme.Id + " AND article.archive = 0";
                     _instance._les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_instance._daoArticle.select("*", joinWhere​));
                     _instance.LesArticles = null;
                     _instance.Solde = ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).Solde;
@@ -1398,10 +1424,12 @@ namespace ApplicationWPF
         private daoSalle _daoSalle;
         private daoArticleSalle _daoArticleSalle;
         private ObservableCollection<dtoArticle> _les_articles;
+        private ObservableCollection<dtoArticle> _les_articles_archives;
         private ObservableCollection<dtoSalle> _les_salles;
         private ObservableCollection<dtoSalle> _les_salles_select;
 
         private dtoArticle _articleSelect;
+        private dtoArticle _articleArchiveSelect;
         private dtoSalle _laSalleSelect;
         private bool _chargementSalle;
         private bool _chargementArticle;
@@ -1409,6 +1437,7 @@ namespace ApplicationWPF
         private string _libelle;
         private decimal _prix;
 
+        private Visibility _visibilite;
         private Visibility _visibiliteAjout;
         private Visibility _visibiliteDelete;
 
@@ -1416,8 +1445,10 @@ namespace ApplicationWPF
         private ICommand _commandDeleteSalle;
         private ICommand _commandArchiverArticle;
         private ICommand _commandAjouterArticle;
+        private ICommand _commandDesarchive;
 
         private ICollectionView collectionViewArticles;
+        private ICollectionView collectionViewArticlesArchives;
         private ICollectionView collectionViewSalles;
         private ICollectionView collectionViewSallesSelect;
         #endregion
@@ -1435,6 +1466,7 @@ namespace ApplicationWPF
             _chargementSalle = false;
             _chargementArticle = false;
 
+            _visibilite = Visibility.Hidden;
             _visibiliteAjout = Visibility.Hidden;
             _visibiliteDelete = Visibility.Hidden;
 
@@ -1468,9 +1500,19 @@ namespace ApplicationWPF
                 _instance._les_articles = new ObservableCollection<dtoArticle>((List<dtoArticle>)_instance._daoArticle.select("*", joinWhere​));
                 _instance.LesArticles = null;
 
+                joinWhere = "JOIN article_salle on article.id = article_salle.article_id"
+                    + " WHERE article_salle.salle_id IN(" + inSql + ") AND archive = 1"
+                    + " GROUP BY id;";
+                _instance._les_articles_archives = new ObservableCollection<dtoArticle>((List<dtoArticle>)_instance._daoArticle.select("*", joinWhere​));
+                _instance.LesArticlesArchive = null;
+
                 _instance.collectionViewArticles = CollectionViewSource.GetDefaultView(_instance._les_articles);
                 if (_instance.collectionViewArticles == null) throw new NullReferenceException("collectionView");
                 _instance.collectionViewArticles.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
+
+                _instance.collectionViewArticlesArchives = CollectionViewSource.GetDefaultView(_instance._les_articles_archives);
+                if (_instance.collectionViewArticlesArchives == null) throw new NullReferenceException("collectionView");
+                _instance.collectionViewArticlesArchives.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
 
                 return _instance;
             }
@@ -1480,9 +1522,13 @@ namespace ApplicationWPF
         {
             if (((ICollectionView)sender).CurrentItem != null)
             {
-                if (this.collectionViewArticles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoArticle))
+                if (this.collectionViewArticles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles.Count)
                 {
                     ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                }
+                if (this.collectionViewArticlesArchives.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles_archives.Count)
+                {
+                    ArticleArchiveSelect = this.collectionViewArticlesArchives.CurrentItem as dtoArticle;
                 }
                 if (this.collectionViewSalles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_salles.Count)
                 {
@@ -1508,6 +1554,18 @@ namespace ApplicationWPF
             set
             {
                 OnPropertyChanged("LesArticles");
+            }
+        }
+
+        public ObservableCollection<dtoArticle> LesArticlesArchive
+        {
+            get
+            {
+                return _les_articles_archives;
+            }
+            set
+            {
+                OnPropertyChanged("LesArticlesArchive");
             }
         }
         public ObservableCollection<dtoSalle> LesSalles
@@ -1593,6 +1651,17 @@ namespace ApplicationWPF
                 }
             }
         }
+        public dtoArticle ArticleArchiveSelect
+        {
+            get
+            {
+                return _articleArchiveSelect;
+            }
+            set
+            {
+                _articleArchiveSelect = value;
+            }
+        }
         public dtoSalle LaSalleSelect
         {
             get
@@ -1643,6 +1712,18 @@ namespace ApplicationWPF
             }
         }
 
+        public Visibility Visibilite
+        {
+            get
+            {
+                return _visibilite;
+            }
+            set
+            {
+                _visibilite = value;
+                OnPropertyChanged("Visibilite");
+            }
+        }
         public Visibility VisibiliteDelete
         {
             get
@@ -1710,6 +1791,16 @@ namespace ApplicationWPF
                 return this._commandAjouterArticle;
             }
         }
+        public ICommand Desarchive
+        {
+            get
+            {
+                if (this._commandDesarchive == null)
+                    this._commandDesarchive = new RelayCommand(() => this.desarchive(), () => true);
+
+                return this._commandDesarchive;
+            }
+        }
 
         public void ajoutArticle()
         {
@@ -1733,9 +1824,11 @@ namespace ApplicationWPF
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir archiver l'article?", "Archivage", MessageBoxButton.YesNo);
             if (mr == MessageBoxResult.Yes)
             {
-                _daoArticle.archive(ArticleSelect);
+                _daoArticle.archive(ArticleSelect, 1);
+                _les_articles_archives.Add(ArticleSelect);
                 _les_articles.Remove(ArticleSelect);
                 LesArticles = null;
+                LesArticlesArchive = null;
                 VisibiliteAjout = Visibility.Hidden;
             }
         }
@@ -1773,6 +1866,18 @@ namespace ApplicationWPF
                     VisibiliteAjout = Visibility.Hidden;
                     LesArticles = null;
                 }
+            }
+        }
+        public void desarchive()
+        {
+            MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir désarchiver l'article?", "Archivage", MessageBoxButton.YesNo);
+            if (mr == MessageBoxResult.Yes)
+            {
+                _daoArticle.archive(ArticleArchiveSelect, 0);
+                _les_articles.Add(ArticleArchiveSelect);
+                _les_articles_archives.Remove(ArticleArchiveSelect);
+                LesArticlesArchive = null;
+                LesArticles = null;
             }
         }
     }

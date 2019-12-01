@@ -34,9 +34,9 @@ namespace ModeleMetier.modele
             _dbal.command(request);
         }
 
-        public void archive(dtoArticle article)
+        public void archive(dtoArticle article, int archive)
         {
-            string request = "UPDATE article SET archive = 1"
+            string request = "UPDATE article SET archive = " + archive
                 + " WHERE id = " + article.Id;
             _dbal.command(request);
         }
