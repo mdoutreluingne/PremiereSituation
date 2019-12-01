@@ -10,19 +10,34 @@ namespace ApplicationWPF.MVVM
 {
     public class ViewEntete : ViewModele
     {
+        #region Attributs
         private static ViewEntete _instance = null;
         private static readonly object _padlock = new object();
+
         private ViewPlanning _viewPlanning;
 
         private ICommand _icommandGoPlanning;
         private ICommand _icommandGoGestionArticle;
+        #endregion
+
+        #region Constructeur
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="viewPlanning"></param>
         ViewEntete(MainWindow main, ViewPlanning viewPlanning)
             : base(main)
         {
             _viewPlanning = viewPlanning;
         }
 
-        //singleton
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="viewPlanning"></param>
+        /// <returns></returns>
         public static ViewEntete Instance(MainWindow main, ViewPlanning viewPlanning)
         {
             lock (_padlock)
@@ -34,7 +49,12 @@ namespace ApplicationWPF.MVVM
                 return _instance;
             }
         }
+        #endregion
 
+        #region Accesseurs
+        /// <summary>
+        /// Commande pour aller au planning
+        /// </summary>
         public ICommand GoPlanning
         {
             get
@@ -45,6 +65,10 @@ namespace ApplicationWPF.MVVM
                 return this._icommandGoPlanning;
             }
         }
+
+        /// <summary>
+        /// Commande pour aller à la gestion des articles
+        /// </summary>
         public ICommand GoGestionArticle
         {
             get
@@ -55,7 +79,12 @@ namespace ApplicationWPF.MVVM
                 return this._icommandGoGestionArticle;
             }
         }
+        #endregion
 
+        #region Méthodes
+        /// <summary>
+        /// Direction planning !
+        /// </summary>
         public void goPlanning()
         {
             if (_viewPlanning.Visibilite == Visibility.Hidden)
@@ -72,6 +101,10 @@ namespace ApplicationWPF.MVVM
                 }
             }
         }
+
+        /// <summary>
+        /// En avant vers la gestion des articles !
+        /// </summary>
         public void goArticle()
         {
             ViewArticle viewA = ViewArticle.Instance(null, null, null, null, null);
@@ -87,6 +120,7 @@ namespace ApplicationWPF.MVVM
                     viewA.Visibilite = Visibility.Visible;
                 }
             }
-        }
+        } 
+        #endregion
     }
 }

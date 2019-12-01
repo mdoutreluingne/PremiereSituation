@@ -15,12 +15,36 @@ namespace ApplicationWPF.MVVM
 {
     public class ViewObjet : ViewModele
     {
+        #region Attributs
         private static ViewObjet _instance = null;
         private static readonly object _padlock = new object();
+
         private daoTransaction _daoTransaction;
         private daoReservation _daoReservation;
         private daoArticle _daoArticle;
         private daoObstacle _daoObstacle;
+        private dtoSalle _salle;
+        private dtoArticle _articleSelect;
+        private dtoObstacle _obstacleSelect;
+        private dtoReservation _reservation;
+
+        private bool _enableArticle;
+        private bool _enableObstacle;
+        private bool _enablePayement;
+        private bool _nouveau;
+        private string _passeur;
+        private string _commentaireObstacle;
+        private string _nomObstacle;
+        private int _positionObstacle;
+        private int _quantiteObstacle;
+        private decimal _prixObstacle;
+        private decimal _prix;
+        private decimal _solde;
+
+        private ViewPlanning _viewPlanning;
+
+        private ObservableCollection<dtoArticle> _les_articles;
+        private ObservableCollection<dtoObstacle> _les_obstacles;
 
         public Visibility _visibilite;
         public Visibility _visibiliteAjout;
@@ -28,28 +52,9 @@ namespace ApplicationWPF.MVVM
         public Visibility _visibiliteDelete;
         public Visibility _visibiliteSupPaye;
 
-        private ViewPlanning _viewPlanning;
-        private dtoSalle _salle;
-        private dtoArticle _articleSelect;
-        private dtoObstacle _obstacleSelect;
-        private dtoReservation _reservation;
-        private bool _enableArticle;
-        private bool _enableObstacle;
-        private bool _enablePayement;
-        private string _passeur;
-
-        private bool _nouveau;
-        private string _nomObstacle;
-        private int _positionObstacle;
-        private int _quantiteObstacle;
-        private decimal _prixObstacle;
-        private string _commentaireObstacle;
-        private decimal _prix;
-        private decimal _solde;
-        private ObservableCollection<dtoArticle> _les_articles;
-        private ObservableCollection<dtoObstacle> _les_obstacles;
         private ICollectionView collectionViewArticles;
         private ICollectionView collectionViewObstacles;
+
         private ICommand _commandAnnulerObstacle;
         private ICommand _commandPlacerObstacle;
         private ICommand _commandModifierObstacle;
@@ -58,7 +63,18 @@ namespace ApplicationWPF.MVVM
         private ICommand _commandFinResa;
         private ICommand _commandSupprimerReservation;
         private ICommand _commandPayerReservation;
+        #endregion
 
+        #region Constructeur
+        /// <summary>
+        /// Constructeurs
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="daoTransaction"></param>
+        /// <param name="daoReservation"></param>
+        /// <param name="daoArticle"></param>
+        /// <param name="daoObstacle"></param>
+        /// <param name="viewPlanning"></param>
         ViewObjet(MainWindow main, daoTransaction daoTransaction, daoReservation daoReservation, daoArticle daoArticle, daoObstacle daoObstacle, ViewPlanning viewPlanning)
             : base(main)
         {
@@ -78,15 +94,27 @@ namespace ApplicationWPF.MVVM
             _les_articles = new ObservableCollection<dtoArticle>();
         }
 
-        //singleton
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="daoTransaction"></param>
+        /// <param name="daoReservation"></param>
+        /// <param name="daoArticle"></param>
+        /// <param name="daoObstacle"></param>
+        /// <param name="viewPlanning"></param>
+        /// <param name="dtoReservation"></param>
+        /// <returns></returns>
         public static ViewObjet Instance(MainWindow main, daoTransaction daoTransaction, daoReservation daoReservation, daoArticle daoArticle, daoObstacle daoObstacle, ViewPlanning viewPlanning, dtoReservation dtoReservation)
         {
             lock (_padlock)
             {
+                //--- Si le constructeur n'éxiste pas ---//
                 if (_instance == null)
                 {
                     _instance = new ViewObjet(main, daoTransaction, daoReservation, daoArticle, daoObstacle, viewPlanning);
                 }
+                //--- ----- --//
                 if (dtoReservation != null)
                 {
                     _instance._nouveau = ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).Nouveau;
@@ -131,25 +159,17 @@ namespace ApplicationWPF.MVVM
                     _instance.collectionViewObstacles.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
                     _instance.Prix = 0;
                 }
+
                 return _instance;
             }
         }
 
-        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
-        {
-            if (((ICollectionView)sender).CurrentItem != null)
-            {
-                if (this.collectionViewArticles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoArticle))
-                {
-                    ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
-                }
+        #endregion
 
-                if (this.collectionViewObstacles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoObstacle))
-                {
-                    ObstacleSelect = this.collectionViewObstacles.CurrentItem as dtoObstacle;
-                }
-            }
-        }
+        #region Accesseurs
+        /// <summary>
+        /// La liste des articles
+        /// </summary>
         public ObservableCollection<dtoArticle> LesArticles
         {
             get
@@ -162,6 +182,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// La liste des obstacles
+        /// </summary>
         public ObservableCollection<dtoObstacle> LesObstacles
         {
             get
@@ -174,6 +197,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// L'article séléctionné dans la liste
+        /// </summary>
         public dtoArticle ArticleSelect
         {
             get => _articleSelect;
@@ -190,6 +216,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("ArticleSelect");
             }
         }
+
+        /// <summary>
+        /// L'objet séléctionné dans la liste
+        /// </summary>
         public dtoObstacle ObstacleSelect
         {
             get => _obstacleSelect;
@@ -201,6 +231,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("ObstacleSelect");
             }
         }
+
+        /// <summary>
+        /// Visibilite de la page
+        /// </summary>
         public Visibility Visibilite
         {
             get
@@ -213,6 +247,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("Visibilite");
             }
         }
+
+        /// <summary>
+        /// Visibilite du bouton d'ajout
+        /// </summary>
         public Visibility VisibiliteAjout
         {
             get
@@ -227,6 +265,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("VisibiliteAjout");
             }
         }
+
+        /// <summary>
+        /// Visibilite du bouton de modification
+        /// </summary>
         public Visibility VisibiliteModif
         {
             get
@@ -239,6 +281,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("VisibiliteModif");
             }
         }
+
+        /// <summary>
+        /// Visibilite du bouton de suppression
+        /// </summary>
         public Visibility VisibiliteDelete
         {
             get
@@ -251,6 +297,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("VisibiliteDelete");
             }
         }
+
+        /// <summary>
+        /// Visibilite du bouton de payement
+        /// </summary>
         public Visibility VisibiliteSupPaye
         {
             get
@@ -264,6 +314,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Autorisation de l'utilisation de la liste d'article
+        /// </summary>
         public bool EnableArticle
         {
             get
@@ -276,6 +329,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("EnableArticle");
             }
         }
+
+        /// <summary>
+        /// Autorisation de l'utilisation de la liste d'obstacle
+        /// </summary>
         public bool EnableObstacle
         {
             get
@@ -288,6 +345,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("EnableObstacle");
             }
         }
+
+        /// <summary>
+        /// Autorisation de l'utilisation du bouton de payement
+        /// </summary>
         public bool EnablePayement
         {
             get
@@ -300,6 +361,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("EnablePayement");
             }
         }
+
+        /// <summary>
+        /// La réservation actuelle
+        /// </summary>
         public dtoReservation Reservation
         {
             get
@@ -311,6 +376,10 @@ namespace ApplicationWPF.MVVM
                 _reservation = value;
             }
         }
+
+        /// <summary>
+        /// La salle actuelle
+        /// </summary>
         public dtoSalle Salle
         {
             get
@@ -322,6 +391,10 @@ namespace ApplicationWPF.MVVM
                 _salle = value;
             }
         }
+
+        /// <summary>
+        /// Nom de l'obstacle
+        /// </summary>
         public string NomObstacle
         {
             get
@@ -341,6 +414,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("NomObstacle");
             }
         }
+
+        /// <summary>
+        /// Poisition de l'obstacle
+        /// </summary>
         public int PositionObstacle
         {
             get
@@ -353,6 +430,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("PositionObstacle");
             }
         }
+
+        /// <summary>
+        /// Quantité de l'obstacle
+        /// </summary>
         public int QuantiteObstacle
         {
             get
@@ -365,6 +446,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("QuantiteObstacle");
             }
         }
+
+        /// <summary>
+        /// Prix de l'obstacle
+        /// </summary>
         public decimal PrixObstacle
         {
             get
@@ -377,6 +462,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("PrixObstacle");
             }
         }
+
+        /// <summary>
+        /// Prix total à payer
+        /// </summary>
         public decimal Prix
         {
             get
@@ -394,6 +483,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("Prix");
             }
         }
+
+        /// <summary>
+        /// Solde du client
+        /// </summary>
         public decimal Solde
         {
             get
@@ -406,6 +499,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("Solde");
             }
         }
+
+        /// <summary>
+        /// Commentaire de l'obstacle
+        /// </summary>
         public string CommentaireObstacle
         {
             get
@@ -425,6 +522,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("CommentaireObstacle");
             }
         }
+
+        /// <summary>
+        /// Commande pour annuler un obstacle
+        /// </summary>
         public ICommand AnnulerObstacle
         {
             get
@@ -435,6 +536,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandAnnulerObstacle;
             }
         }
+
+        /// <summary>
+        /// Commande pour placer l'obstacle
+        /// </summary>
         public ICommand PlacerObstacle
         {
             get
@@ -445,6 +550,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandPlacerObstacle;
             }
         }
+
+        /// <summary>
+        /// Commande pour modifier un obstacle
+        /// </summary>
         public ICommand ModifierObstacle
         {
             get
@@ -455,6 +564,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandModifierObstacle;
             }
         }
+
+        /// <summary>
+        /// Commande pour supprimer un obstacle
+        /// </summary>
         public ICommand DeleteObstacle
         {
             get
@@ -465,6 +578,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandDeleteObstacle;
             }
         }
+
+        /// <summary>
+        /// Commande pour retourner à la réservation
+        /// </summary>
         public ICommand Precedent
         {
             get
@@ -475,6 +592,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandPrecedent;
             }
         }
+
+        /// <summary>
+        /// Commande pour valider la réservation
+        /// </summary>
         public ICommand FinReservation
         {
             get
@@ -485,6 +606,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandFinResa;
             }
         }
+
+        /// <summary>
+        /// Commande pour supprimer la réservation
+        /// </summary>
         public ICommand SupprimerReservation
         {
             get
@@ -495,6 +620,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandSupprimerReservation;
             }
         }
+
+        /// <summary>
+        /// Commande pour payer la réservation
+        /// </summary>
         public ICommand PayerReservation
         {
             get
@@ -505,6 +634,33 @@ namespace ApplicationWPF.MVVM
                 return this._commandPayerReservation;
             }
         }
+        #endregion
+
+        #region Méthodes
+        /// <summary>
+        /// Lors du changement de séléction d'une collection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
+        {
+            if (((ICollectionView)sender).CurrentItem != null)
+            {
+                if (this.collectionViewArticles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoArticle))
+                {
+                    ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                }
+
+                if (this.collectionViewObstacles.CurrentItem != null && ((ICollectionView)sender).CurrentItem.GetType() == typeof(dtoObstacle))
+                {
+                    ObstacleSelect = this.collectionViewObstacles.CurrentItem as dtoObstacle;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Placer l'obstacle
+        /// </summary>
         public void placerObstacle()
         {
             dtoObstacle existe = null;
@@ -540,6 +696,10 @@ namespace ApplicationWPF.MVVM
             EnableArticle = true;
             EnableObstacle = true;
         }
+
+        /// <summary>
+        /// Annuler l'obstacle
+        /// </summary>
         public void annulerObstacle()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir abandonner l'ajout de l'objet ?", "Abandon", MessageBoxButton.YesNo);
@@ -550,6 +710,10 @@ namespace ApplicationWPF.MVVM
                 EnableObstacle = true;
             }
         }
+
+        /// <summary>
+        /// Modifier l'obstacle
+        /// </summary>
         public void modifierObstacle()
         {
             _passeur = "Obstacle";
@@ -560,6 +724,10 @@ namespace ApplicationWPF.MVVM
             PositionObstacle = _obstacleSelect.Position;
             CommentaireObstacle = _obstacleSelect.Commentaire;
         }
+
+        /// <summary>
+        /// Supprimer l'obstacle
+        /// </summary>
         public void deleteObstacle()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir supprimer l'obstacle ?", "Suppression", MessageBoxButton.YesNo);
@@ -574,11 +742,19 @@ namespace ApplicationWPF.MVVM
                 }
             }
         }
+
+        /// <summary>
+        /// Retour vers la réservation
+        /// </summary>
         public void precedent()
         {
             Visibilite = Visibility.Hidden;
             ViewReservation.Instance(null, null, null, null, null, null, null, System.Windows.Visibility.Visible);
         }
+
+        /// <summary>
+        /// Création de la réservation
+        /// </summary>
         public void finResa()
         {
             string obstaclesString = "";
@@ -628,6 +804,10 @@ namespace ApplicationWPF.MVVM
                 ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
             }
         }
+
+        /// <summary>
+        /// Suppression de la réservation
+        /// </summary>
         public void supprimerReservation()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir supprimer la réservation ?", "Suppression", MessageBoxButton.YesNo);
@@ -643,6 +823,10 @@ namespace ApplicationWPF.MVVM
                 ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
             }
         }
+
+        /// <summary>
+        /// Payement de la réservation
+        /// </summary>
         public void payerReservation()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir payer la réservation ?", "Suppression", MessageBoxButton.YesNo);
@@ -663,6 +847,7 @@ namespace ApplicationWPF.MVVM
                     ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
                 }
             }
-        }
+        } 
+        #endregion
     }
 }

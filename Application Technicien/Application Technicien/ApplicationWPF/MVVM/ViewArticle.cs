@@ -22,10 +22,6 @@ namespace ApplicationWPF.MVVM
         private daoArticle _daoArticle;
         private daoSalle _daoSalle;
         private daoArticleSalle _daoArticleSalle;
-        private ObservableCollection<dtoArticle> _les_articles;
-        private ObservableCollection<dtoArticle> _les_articles_archives;
-        private ObservableCollection<dtoSalle> _les_salles;
-        private ObservableCollection<dtoSalle> _les_salles_select;
 
         private dtoArticle _articleSelect;
         private dtoArticle _articleArchiveSelect;
@@ -35,6 +31,11 @@ namespace ApplicationWPF.MVVM
         private bool _enableArchive;
         private string _libelle;
         private decimal _prix;
+
+        private ObservableCollection<dtoArticle> _les_articles;
+        private ObservableCollection<dtoArticle> _les_articles_archives;
+        private ObservableCollection<dtoSalle> _les_salles;
+        private ObservableCollection<dtoSalle> _les_salles_select;
 
         private Visibility _visibilite;
         private Visibility _visibiliteAjout;
@@ -52,12 +53,22 @@ namespace ApplicationWPF.MVVM
         private ICollectionView collectionViewSallesSelect;
         #endregion
 
+        #region Constructeur
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="daoArticle"></param>
+        /// <param name="daoSalle"></param>
+        /// <param name="salle"></param>
+        /// <param name="daoArticleSalle"></param>
         ViewArticle(MainWindow main, daoArticle daoArticle, daoSalle daoSalle, List<dtoSalle> salle, daoArticleSalle daoArticleSalle)
             : base(main)
         {
             _daoArticle = daoArticle;
             _daoSalle = daoSalle;
             _daoArticleSalle = daoArticleSalle;
+
             _les_articles = new ObservableCollection<dtoArticle>();
             _les_salles = new ObservableCollection<dtoSalle>(salle);
             _les_salles_select = new ObservableCollection<dtoSalle>();
@@ -78,15 +89,27 @@ namespace ApplicationWPF.MVVM
             collectionViewSallesSelect.CurrentChanged += new EventHandler(OnCollectionViewCurrentChanged);
         }
 
-        //singleton
+        /// <summary>
+        /// Singleton
+        /// </summary>
+        /// <param name="main"></param>
+        /// <param name="daoArticle"></param>
+        /// <param name="daoSalle"></param>
+        /// <param name="salle"></param>
+        /// <param name="daoArticleSalle"></param>
+        /// <returns></returns>
         public static ViewArticle Instance(MainWindow main, daoArticle daoArticle, daoSalle daoSalle, List<dtoSalle> salle, daoArticleSalle daoArticleSalle)
         {
             lock (_padlock)
             {
+                //--- Création du constructeur ---//
                 if (_instance == null)
                 {
                     _instance = new ViewArticle(main, daoArticle, daoSalle, salle, daoArticleSalle);
                 }
+                //--- ----- ---//
+
+                //--- Séléction des articles ---//
                 string inSql = "";
                 foreach (dtoSalle s in _instance._les_salles)
                 {
@@ -112,38 +135,17 @@ namespace ApplicationWPF.MVVM
                 _instance.collectionViewArticlesArchives = CollectionViewSource.GetDefaultView(_instance._les_articles_archives);
                 if (_instance.collectionViewArticlesArchives == null) throw new NullReferenceException("collectionView");
                 _instance.collectionViewArticlesArchives.CurrentChanged += new EventHandler(_instance.OnCollectionViewCurrentChanged);
+                //--- ----- ---//
 
                 return _instance;
             }
         }
+        #endregion
 
-        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
-        {
-            if (((ICollectionView)sender).CurrentItem != null)
-            {
-                if (this.collectionViewArticles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles.Count)
-                {
-                    ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
-                }
-                if (this.collectionViewArticlesArchives.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles_archives.Count)
-                {
-                    ArticleArchiveSelect = this.collectionViewArticlesArchives.CurrentItem as dtoArticle;
-                }
-                if (this.collectionViewSalles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_salles.Count)
-                {
-                    SelectSalle = this.collectionViewSalles.CurrentItem as dtoSalle;
-                }
-                if (this.collectionViewSallesSelect.CurrentItem != null && ((ListCollectionView)sender).Count == _les_salles_select.Count)
-                {
-                    if (_les_salles_select.Count > 0)
-                    {
-                        VisibiliteDelete = Visibility.Visible;
-                        LaSalleSelect = this.collectionViewSallesSelect.CurrentItem as dtoSalle;
-                    }
-                }
-            }
-        }
-
+        #region Accesseurs
+        /// <summary>
+        /// La liste des articles
+        /// </summary>
         public ObservableCollection<dtoArticle> LesArticles
         {
             get
@@ -156,6 +158,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// La liste des articles archivés
+        /// </summary>
         public ObservableCollection<dtoArticle> LesArticlesArchive
         {
             get
@@ -167,6 +172,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("LesArticlesArchive");
             }
         }
+
+        /// <summary>
+        /// La liste des salles disponibles
+        /// </summary>
         public ObservableCollection<dtoSalle> LesSalles
         {
             get
@@ -179,6 +188,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// La liste des salles séléctionnés
+        /// </summary>
         public ObservableCollection<dtoSalle> SallesSelect
         {
             get
@@ -191,6 +203,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// La salle séléctionné dans la combobox
+        /// </summary>
         public dtoSalle SelectSalle
         {
             set
@@ -206,6 +221,10 @@ namespace ApplicationWPF.MVVM
                 }
             }
         }
+
+        /// <summary>
+        /// L'article séléctionné dans la liste
+        /// </summary>
         public dtoArticle ArticleSelect
         {
             get
@@ -250,6 +269,10 @@ namespace ApplicationWPF.MVVM
                 }
             }
         }
+
+        /// <summary>
+        /// L'article archivé séléctionné dans la liste
+        /// </summary>
         public dtoArticle ArticleArchiveSelect
         {
             get
@@ -261,6 +284,10 @@ namespace ApplicationWPF.MVVM
                 _articleArchiveSelect = value;
             }
         }
+
+        /// <summary>
+        /// La salle séléctionné dans la liste
+        /// </summary>
         public dtoSalle LaSalleSelect
         {
             get
@@ -273,6 +300,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Le libelle de l'article
+        /// </summary>
         public string Libelle
         {
             get
@@ -285,6 +315,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("Libelle");
             }
         }
+
+        /// <summary>
+        /// Le prix de l'article
+        /// </summary>
         public decimal Prix
         {
             get
@@ -298,6 +332,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Si l'article peut être archivé
+        /// </summary>
         public bool EnableArchive
         {
             get
@@ -311,6 +348,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Visibilité de la page
+        /// </summary>
         public Visibility Visibilite
         {
             get
@@ -323,6 +363,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("Visibilite");
             }
         }
+
+        /// <summary>
+        /// Visibilité du bouton supprimer (poubelle)
+        /// </summary>
         public Visibility VisibiliteDelete
         {
             get
@@ -335,6 +379,10 @@ namespace ApplicationWPF.MVVM
                 OnPropertyChanged("VisibiliteDelete");
             }
         }
+
+        /// <summary>
+        /// Visibilite du bouton d'ajout
+        /// </summary>
         public Visibility VisibiliteAjout
         {
             get
@@ -348,6 +396,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Commande du bouton d'ajout (+)
+        /// </summary>
         public ICommand AjoutArticle
         {
             get
@@ -358,6 +409,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandAjoutArticle;
             }
         }
+
+        /// <summary>
+        /// Commande du bouton de suppression (poubelle)
+        /// </summary>
         public ICommand DeleteSalle
         {
             get
@@ -369,6 +424,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Commande du bouton archiver
+        /// </summary>
         public ICommand ArchiverArticle
         {
             get
@@ -380,6 +438,9 @@ namespace ApplicationWPF.MVVM
             }
         }
 
+        /// <summary>
+        /// Commande du bouton 
+        /// </summary>
         public ICommand AjouterArticle
         {
             get
@@ -390,6 +451,10 @@ namespace ApplicationWPF.MVVM
                 return this._commandAjouterArticle;
             }
         }
+
+        /// <summary>
+        /// Commande de désarchivage
+        /// </summary>
         public ICommand Desarchive
         {
             get
@@ -400,7 +465,44 @@ namespace ApplicationWPF.MVVM
                 return this._commandDesarchive;
             }
         }
+        #endregion
 
+        #region Méthodes
+        /// <summary>
+        /// Selection d'un objet dans une des collections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
+        {
+            if (((ICollectionView)sender).CurrentItem != null)
+            {
+                if (this.collectionViewArticles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles.Count)
+                {
+                    ArticleSelect = this.collectionViewArticles.CurrentItem as dtoArticle;
+                }
+                if (this.collectionViewArticlesArchives.CurrentItem != null && ((ListCollectionView)sender).Count == _les_articles_archives.Count)
+                {
+                    ArticleArchiveSelect = this.collectionViewArticlesArchives.CurrentItem as dtoArticle;
+                }
+                if (this.collectionViewSalles.CurrentItem != null && ((ListCollectionView)sender).Count == _les_salles.Count)
+                {
+                    SelectSalle = this.collectionViewSalles.CurrentItem as dtoSalle;
+                }
+                if (this.collectionViewSallesSelect.CurrentItem != null && ((ListCollectionView)sender).Count == _les_salles_select.Count)
+                {
+                    if (_les_salles_select.Count > 0)
+                    {
+                        VisibiliteDelete = Visibility.Visible;
+                        LaSalleSelect = this.collectionViewSallesSelect.CurrentItem as dtoSalle;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clique sur ajouter un article (+)
+        /// </summary>
         public void ajoutArticle()
         {
             Libelle = "";
@@ -410,6 +512,10 @@ namespace ApplicationWPF.MVVM
             EnableArchive = false;
             VisibiliteAjout = Visibility.Visible;
         }
+
+        /// <summary>
+        /// Supression d'une salle d'un article (icon poubelle)
+        /// </summary>
         public void deleteSalle()
         {
             _les_salles_select.Remove(_laSalleSelect);
@@ -418,6 +524,10 @@ namespace ApplicationWPF.MVVM
                 VisibiliteDelete = Visibility.Hidden;
             }
         }
+
+        /// <summary>
+        /// Archivage d'un article (bouton)
+        /// </summary>
         public void archiverArticle()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir archiver l'article?", "Archivage", MessageBoxButton.YesNo);
@@ -431,6 +541,10 @@ namespace ApplicationWPF.MVVM
                 VisibiliteAjout = Visibility.Hidden;
             }
         }
+
+        /// <summary>
+        /// Ajout d'un article dans la BDD (bouton)
+        /// </summary>
         public void ajouterArticle()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir ajouter l'article?", "Archivage", MessageBoxButton.YesNo);
@@ -467,6 +581,10 @@ namespace ApplicationWPF.MVVM
                 }
             }
         }
+
+        /// <summary>
+        /// Désarchivage d'un article (-)
+        /// </summary>
         public void desarchive()
         {
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir désarchiver l'article?", "Archivage", MessageBoxButton.YesNo);
@@ -478,6 +596,7 @@ namespace ApplicationWPF.MVVM
                 LesArticlesArchive = null;
                 LesArticles = null;
             }
-        }
+        } 
+        #endregion
     }
 }
