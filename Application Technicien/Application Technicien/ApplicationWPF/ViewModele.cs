@@ -367,6 +367,7 @@ namespace ApplicationWPF
                 OnPropertyChanged("Visibilite");
             }
         }
+
         public ObservableCollection<dtoClient> LesClients
         {
             get

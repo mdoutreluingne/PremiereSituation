@@ -192,7 +192,7 @@ namespace ApplicationWPF
                 string date = _viewDate.DateSelect.ToShortDateString();
                 string[] jourMoisAn = date.Split('/');
                 date = jourMoisAn[2] + "-" + jourMoisAn[1] + "-" + jourMoisAn[0];
-                string joinWhere = "WHERE reservation.date LIKE '%" + date + "%' AND salle_id = " + i;
+                string joinWhere = "WHERE reservation.date LIKE '%" + date + "%' AND salle_id = " + (i+1);
                 List<dtoReservation> reservations = (List<dtoReservation>)daoReservation.select("*", joinWhere);
                 for (int k = 0; k < reservations.Count; k++)
                 {
@@ -215,12 +215,12 @@ namespace ApplicationWPF
                     bouton.SetBinding(Button.CommandProperty, bind);
 
                     Grid.SetColumn(bouton, heure + 1);
-                    Grid.SetRow(bouton, i);
+                    Grid.SetRow(bouton, i + 1);
                     if (_viewDate.DateSelect >= DateTime.Today)
                     {
                         var bouton_free = grd_planning.Children
                             .Cast<UIElement>()
-                            .First(e => Grid.GetRow(e) == i && Grid.GetColumn(e) == heure + 1);
+                            .First(e => Grid.GetRow(e) == i + 1 && Grid.GetColumn(e) == heure + 1);
                         grd_planning.Children.Remove(bouton_free);
                     }
                     grd_planning.Children.Add(bouton);
