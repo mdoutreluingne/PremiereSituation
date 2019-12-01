@@ -1,4 +1,5 @@
-﻿using ModeleMetier.metier;
+﻿using ApplicationWPF.MVVM;
+using ModeleMetier.metier;
 using ModeleMetier.modele;
 using System;
 using System.Collections.Generic;

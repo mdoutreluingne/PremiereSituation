@@ -25,7 +25,7 @@
                 </i:Interaction.Triggers>
             </Image>
         </Grid>
-        <Grid x:Name="grd_base" Visibility="Visible">
+        <Grid x:Name="grd_base" Visibility="{Binding Visibilite}">
             <Grid x:Name="grd_date" Visibility="{Binding Visibilite}" HorizontalAlignment="Stretch" Height="50" Margin="226,154,226.4,0" VerticalAlignment="Top" Width="762">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="35*"/>
@@ -111,11 +111,20 @@
             <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
             <Label Content="VOTRE SELECTION" HorizontalAlignment="Left" Margin="553,12,0,0" VerticalAlignment="Top" Width="196" FontSize="20" Foreground="#FF74AC93" FontWeight="Bold"/>
 
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,396,0,0" TextWrapping="Wrap"  Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <TextBox HorizontalAlignment="Left" Height="45" Margin="1181,485,0,0" TextWrapping="Wrap"  Text="{Binding Prix}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
-            <Label Content="SOLDE" HorizontalAlignment="Left" Margin="1088,396,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
-            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,10,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
-            <Button Content="PRECEDENT" HorizontalAlignment="Right" Margin="0,594,373,0" VerticalAlignment="Top" Width="270" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding Precedent}" Cursor="Hand"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1078,393,0,0" TextWrapping="Wrap"  Text="{Binding Solde}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="45" Margin="1078,481,0,0" TextWrapping="Wrap"  Text="{Binding Prix}" VerticalAlignment="Top" Width="322" Foreground="#FF74AC93" FontSize="20" IsEnabled="False"/>
+            <Label Content="SOLDE" HorizontalAlignment="Left" Margin="965,393,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
+            <Button Content="VALIDER" HorizontalAlignment="Right" Margin="0,594,173,0" VerticalAlignment="Top" Width="236" Height="40" Foreground="#FF74AC93" Background="White" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding FinReservation}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+            <Button Content="PRECEDENT" HorizontalAlignment="Right" Margin="0,594,489,0" VerticalAlignment="Top" Width="225" Height="40" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding Precedent}" Cursor="Hand" RenderTransformOrigin="0.5,0.5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.082"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
             <Grid Visibility="{Binding VisibiliteModif}" Margin="454,572,1142,4">
                 <Rectangle Fill="White" Stroke="#FF74AC93" StrokeThickness="2"/>
                 <Image Margin="10,0,8,4" RenderTransformOrigin="3.207,-0.87" Source="Image/edit.png" Cursor="Hand">
@@ -145,25 +154,25 @@
                 <TextBox HorizontalAlignment="Left" Height="35" Margin="132,157,0,0" TextWrapping="Wrap" AcceptsReturn="False" Text="{Binding QuantiteObstacle}" VerticalAlignment="Top" Width="189" Foreground="#FF74AC93" FontSize="20" IsEnabled="{Binding EnablePayement}"/>
                 <TextBox HorizontalAlignment="Left" Height="170" Margin="356,88,0,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CommentaireObstacle}" VerticalAlignment="Top" Width="325" Foreground="#FF74AC93" FontSize="20" RenderTransformOrigin="1.362,0.486" IsEnabled="{Binding EnablePayement}"/>
                 <Button Content="ANNULER" HorizontalAlignment="Left" Margin="29,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FFAC7474" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding AnnulerObstacle}" Cursor="Hand"/>
-                <Button Content="PLACER" HorizontalAlignment="Left" Margin="492,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
+                <Button Content="PLACER" HorizontalAlignment="Left" Margin="399,320,0,0" VerticalAlignment="Top" Width="189" Height="35" Background="White" Foreground="#FF74AC93" FontSize="20" BorderBrush="#FFABADB3" Command="{Binding PlacerObstacle}" Cursor="Hand" IsEnabled="{Binding EnablePayement}"/>
                 <Label Content="POSITION" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="PRIX UNIT" HorizontalAlignment="Left" Margin="10,223,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
                 <Label Content="QUANTITE" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top" Height="35" Width="117" FontSize="20" Foreground="#FF74AC93"/>
             </Grid>
-            <Grid Visibility="{Binding VisibiliteSupPaye}" HorizontalAlignment="Left" Height="75" Margin="916,8,0,0" VerticalAlignment="Top" Width="758">
-                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="467,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding PayerReservation}" IsEnabled="{Binding EnablePayement}"/>
-                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="270" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}" IsEnabled="{Binding EnablePayement}"/>
+            <Grid Visibility="{Binding VisibiliteSupPaye}" HorizontalAlignment="Left" Height="75" Margin="815,4,0,0" VerticalAlignment="Top" Width="758">
+                <Button Content="Payer la réservation" HorizontalAlignment="Left" Margin="439,16,0,0" VerticalAlignment="Top" Width="214" Height="40" Foreground="#FF74AC93" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding PayerReservation}" IsEnabled="{Binding EnablePayement}"/>
+                <Button Content="Supprimer la réservation" HorizontalAlignment="Left" Margin="141,16,0,0" VerticalAlignment="Top" Width="228" Height="40" Foreground="#FFAC7474" Background="White" BorderBrush="#FFABADB3" FontSize="20" Command="{Binding SupprimerReservation}" IsEnabled="{Binding EnablePayement}"/>
             </Grid>
-            <Label Content="PRIX" HorizontalAlignment="Left" Margin="1088,485,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
+            <Label Content="PRIX" HorizontalAlignment="Left" Margin="965,482,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF74AC93" Height="45" Width="93"/>
         </Grid>
         <Grid x:Name="grd_article" Visibility="{Binding Visibilite}" HorizontalAlignment="Left" Height="653" Margin="10,100,0,0" VerticalAlignment="Top" Width="1674" RenderTransformOrigin="-2.763,-2.003">
             <ListBox HorizontalAlignment="Left" Height="584" Margin="10,60,0,0" VerticalAlignment="Top" Width="336" BorderBrush="Gray" BorderThickness="0,0,2,0" ItemsSource="{Binding LesArticles}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
             <Label Content="LES ARTICLES" HorizontalAlignment="Left" Margin="107,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="155" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
-            <Grid HorizontalAlignment="Left" Height="641" Margin="1167,12,0,0" VerticalAlignment="Top" Width="497">
-                <ListBox HorizontalAlignment="Left" Height="584" Margin="10,57,0,0" VerticalAlignment="Top" Width="477" BorderBrush="Gray" BorderThickness="2,0,0,0" ItemsSource="{Binding LesArticlesArchive}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
-                <Label Content="LES ARTICLES ARCHIVES" HorizontalAlignment="Left" Margin="152,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="335" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
-                <Rectangle HorizontalAlignment="Left" Height="69" Margin="230,568,0,0" Stroke="#FFAC7474" StrokeThickness="2" VerticalAlignment="Top" Width="75"/>
-                <Image HorizontalAlignment="Left" Height="39" Margin="238,592,0,0" VerticalAlignment="Top" Width="58" Source="Image/moins.png" RenderTransformOrigin="4.26,0.413" Cursor="Hand">
+            <Grid HorizontalAlignment="Left" Height="641" Margin="1077,12,0,0" VerticalAlignment="Top" Width="497">
+                <ListBox HorizontalAlignment="Left" Height="584" Margin="-44,57,0,0" VerticalAlignment="Top" Width="477" BorderBrush="Gray" BorderThickness="2,0,0,0" ItemsSource="{Binding LesArticlesArchive}" IsSynchronizedWithCurrentItem="True" FontSize="20"/>
+                <Label Content="LES ARTICLES ARCHIVES" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.531,-0.711" Width="335" Height="36" Foreground="#FF74AC93" FontSize="20" FontWeight="Bold"/>
+                <Rectangle HorizontalAlignment="Left" Height="69" Margin="186,568,0,0" Stroke="#FFAC7474" StrokeThickness="2" VerticalAlignment="Top" Width="75"/>
+                <Image HorizontalAlignment="Left" Height="39" Margin="194,592,0,0" VerticalAlignment="Top" Width="58" Source="Image/moins.png" RenderTransformOrigin="4.26,0.413" Cursor="Hand">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseLeftButtonDown" >
                             <i:InvokeCommandAction Command="{Binding Desarchive}" />
@@ -171,6 +180,7 @@
                     </i:Interaction.Triggers>
                 </Image>
             </Grid>
+            <!--{Binding VisibiliteAjout}-->
             <Grid Visibility="{Binding VisibiliteAjout}" HorizontalAlignment="Left" Height="433" Margin="348,127,0,0" VerticalAlignment="Top" Width="828" RenderTransformOrigin="-5.097,0.557">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="225*"/>
