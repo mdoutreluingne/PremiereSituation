@@ -34,15 +34,11 @@ namespace ApplicationWPF
         private static ViewObjet _viewObjet;
         private static ViewArticle _viewArticle;
 
-        public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
+        public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle, dtoUtilisateur utilisateur)
         {
             InitializeComponent();
-            //On donne l'utilisateur qui se connecte
-            List<dtoUtilisateur> lesUser = (List<dtoUtilisateur>)daoUtilisateur.select("*", "");
-            dtoUtilisateur user = lesUser[2];
-
             //On récupère la ville de l'utilisateur
-            string nomVille = user.Login.Substring(0, user.Login.IndexOf('-'));
+            string nomVille = utilisateur.Login.Substring(0, utilisateur.Login.IndexOf('-'));
             List<dtoVille> lesVille = (List<dtoVille>)daoVille.select("*", "WHERE nom LIKE '" + nomVille + "%'");
             dtoVille ville = lesVille[0];
 
@@ -192,7 +188,7 @@ namespace ApplicationWPF
                 string date = _viewDate.DateSelect.ToShortDateString();
                 string[] jourMoisAn = date.Split('/');
                 date = jourMoisAn[2] + "-" + jourMoisAn[1] + "-" + jourMoisAn[0];
-                string joinWhere = "WHERE reservation.date LIKE '%" + date + "%' AND salle_id = " + (i+1);
+                string joinWhere = "WHERE reservation.date LIKE '%" + date + "%' AND salle_id = " + salle[i].Id ;
                 List<dtoReservation> reservations = (List<dtoReservation>)daoReservation.select("*", joinWhere);
                 for (int k = 0; k < reservations.Count; k++)
                 {

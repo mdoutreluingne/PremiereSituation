@@ -81,8 +81,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="ViewModele.cs" />
+    <Compile Include="Connexion\ConnexionWindow.xaml.cs">
+      <DependentUpon>ConnexionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\RelayCommand.cs" />
+    <Compile Include="MVVM\ViewArticle.cs" />
+    <Compile Include="MVVM\ViewDate.cs" />
+    <Compile Include="MVVM\ViewEntete.cs" />
+    <Compile Include="MVVM\ViewModele.cs" />
+    <Compile Include="MVVM\ViewObjet.cs" />
+    <Compile Include="MVVM\ViewPlanning.cs" />
+    <Compile Include="MVVM\ViewReservation.cs" />
+    <Page Include="Connexion\ConnexionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,9 +165,7 @@
   <ItemGroup>
     <Resource Include="Image\coin.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MVVM\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Image\moins.png" />
   </ItemGroup>

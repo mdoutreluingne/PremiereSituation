@@ -19,6 +19,12 @@ namespace ModeleMetier.modele
             throw new NotImplementedException();
         }
 
+        public void update(string login, string password)
+        {
+            string request = "UPDATE utilisateur SET mdp = '" + password + "' WHERE login = '" + login + "'";
+            _dbal.command(request);
+        }
+
         public override object select(string elements, string join_where)
         {
             List<dtoUtilisateur> listUtilisateur = new List<dtoUtilisateur>();

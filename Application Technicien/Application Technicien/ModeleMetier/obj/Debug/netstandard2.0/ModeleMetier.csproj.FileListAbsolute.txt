@@ -102,3 +102,11 @@ C:\Users\SIO2\Documents\PPE\PremiereSituation\Application Technicien\Application
 C:\Users\SIO2\Documents\PPE\PremiereSituation\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.AssemblyInfo.cs
 C:\Users\SIO2\Documents\PPE\PremiereSituation\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.dll
 C:\Users\SIO2\Documents\PPE\PremiereSituation\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.pdb
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\bin\Debug\netstandard2.0\ModeleMetier.deps.json
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\bin\Debug\netstandard2.0\ModeleMetier.dll
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\bin\Debug\netstandard2.0\ModeleMetier.pdb
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.csprojAssemblyReference.cache
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.AssemblyInfoInputs.cache
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.AssemblyInfo.cs
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.dll
+C:\Users\Alexis\Documents\Developpement\Application Technicien\Application Technicien\ModeleMetier\obj\Debug\netstandard2.0\ModeleMetier.pdb
