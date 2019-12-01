@@ -21,7 +21,18 @@ namespace ModeleMetier.modele
         {
             throw new NotImplementedException();
         }
+        public void insert(int article_id, int article_salle)
+        {
+            string request = "INSERT INTO article_salle VALUES("
+                + article_id + "," + article_salle + ");";
+            _dbal.command(request);
+        }
 
+        public void delete(int article_id)
+        {
+            string request = "DELETE FROM article_salle WHERE article_id = " + article_id + ";";
+            _dbal.command(request);
+        }
         public override object select(string elements, string join_where)
         {
             List<dtoArticleSalle> listArticleSalle = new List<dtoArticleSalle>();

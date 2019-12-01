@@ -45,7 +45,7 @@ namespace ModeleMetier.metier
         #region
         public override string ToString()
         {
-            return "Salle n° " + _numero.ToString();
+            return "Salle n° " + _numero.ToString() + " | " + _dtoTheme.Nom;
         }
         #endregion
     }

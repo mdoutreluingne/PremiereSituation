@@ -152,5 +152,11 @@
   <ItemGroup>
     <Resource Include="Image\coin.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MVVM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\moins.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

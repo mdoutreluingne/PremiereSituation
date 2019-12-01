@@ -16,7 +16,29 @@ namespace ModeleMetier.modele
 
         public override void insert(object o)
         {
-            throw new NotImplementedException();
+            dtoArticle article = (dtoArticle)o;
+            string prix = article.Montant.ToString();
+            prix = prix.Replace(",", ".");
+            string request = "INSERT INTO article VALUES(NULL,'"
+                + article.Libelle + "'," + prix + ",0);";
+            _dbal.command(request);
+        }
+        public void update(dtoArticle article)
+        {
+            string prix = article.Montant.ToString();
+            prix = prix.Replace(",", ".");
+            string request = "UPDATE article SET "
+                + "libelle = '" + article.Libelle
+                + "',montant = " + prix
+                + " WHERE id = " + article.Id + ";";
+            _dbal.command(request);
+        }
+
+        public void archive(dtoArticle article)
+        {
+            string request = "UPDATE article SET archive = 1"
+                + " WHERE id = " + article.Id;
+            _dbal.command(request);
         }
 
         public override object select(string elements, string join_where)

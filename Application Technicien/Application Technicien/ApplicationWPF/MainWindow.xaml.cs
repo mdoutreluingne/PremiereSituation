@@ -32,7 +32,8 @@ namespace ApplicationWPF
         private static ViewReservation _viewReservation;
         private static ViewPlanning _viewPlanning;
         private static ViewObjet _viewObjet;
-        
+        private static ViewArticle _viewArticle;
+
         public MainWindow(daoUtilisateur daoUtilisateur, daoArticle daoArticle, daoVille daoVille, daoTheme daoTheme, daoSalle daoSalle, daoClient daoClient, daoReservation daoReservation, daoTransaction daoTransaction, daoObstacle daoObstacle, daoArticleSalle daoArticleSalle)
         {
             InitializeComponent();
@@ -54,11 +55,13 @@ namespace ApplicationWPF
             _viewReservation = ViewReservation.Instance(this, daoClient, daoVille, daoTransaction, salle, horaires, _viewPlanning, Visibility.Hidden);
             _viewEntete = ViewEntete.Instance(this, _viewPlanning);
             _viewObjet = ViewObjet.Instance(this,daoTransaction, daoReservation,daoArticle, daoObstacle, _viewPlanning, null);
+            _viewArticle = ViewArticle.Instance(this, daoArticle, daoSalle, salle, daoArticleSalle);
             grd_entete.DataContext = _viewEntete;
             grd_planning.DataContext = _viewPlanning;
             grd_date.DataContext = _viewDate;
             grd_reservation.DataContext = _viewReservation;
             grd_objet.DataContext = _viewObjet;
+            grd_article.DataContext = _viewArticle;
 
             //On charge le planning
             loadColumnRow(salle);
