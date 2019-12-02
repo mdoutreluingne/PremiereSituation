@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj": {}
+    "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj": {}
   },
   "projects": {
-    "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj": {
+    "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
+        "projectUniqueName": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
         "projectName": "modeleMetier",
-        "projectPath": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
-        "packagesPath": "C:\\Users\\Bryan JOACHIM\\.nuget\\packages\\",
-        "outputPath": "D:\\EE4\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\obj\\",
+        "projectPath": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\modeleMetier.csproj",
+        "packagesPath": "C:\\Users\\barra\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\barra\\OneDrive\\Documents\\Visual Studio 2019\\PPE\\PremiereSituation\\Application Direction\\Application Direction\\Application Direction\\modeleMetier\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Bryan JOACHIM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\barra\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -52,13 +51,23 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "ZedGraph": {
+              "target": "Package",
+              "version": "[5.1.7, )"
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

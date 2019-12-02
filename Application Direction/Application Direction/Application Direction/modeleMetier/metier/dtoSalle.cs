@@ -14,7 +14,8 @@ namespace ModeleMetier.metier
         private DateTime _heure_ouverture;
         private DateTime _heure_fermeture;
         private bool _archive;
-        private dtoTheme _dtoTheme; 
+        private dtoTheme _dtoTheme;
+        
         #endregion
 
         #region Constructeur
@@ -28,6 +29,7 @@ namespace ModeleMetier.metier
             _heure_fermeture = heure_fermeture;
             _archive = archive;
             _dtoTheme = dtoTheme;
+            
         } 
         #endregion
 
@@ -40,6 +42,7 @@ namespace ModeleMetier.metier
         public bool Archive { get => _archive; set => _archive = value; }
         public dtoVille DtoVille { get => _dtoVille; set => _dtoVille = value; }
         public dtoTheme DtoTheme { get => _dtoTheme; set => _dtoTheme = value; }
+       
         #endregion
     }
 }

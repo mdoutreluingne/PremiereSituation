@@ -6,16 +6,28 @@
         xmlns:local="clr-namespace:WPFApplication"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
+
     <Grid>
         <!--Title-->
         <Grid x:Name="grd_nomapp" VerticalAlignment="Top" Grid.RowSpan="2" Background="#FF74AC93" MinHeight="20" MaxHeight="35" Margin="0,0,0,379">
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label x:Name="lbl_Titre" Content="APPLICATION DIRECTION" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" RenderTransformOrigin="0.477,0.692" Margin="250,0,282,0" FontSize="20" Height="35" Width="260" />
+            <Label x:Name="lbl_Titre" Content="APPLICATION DIRECTION" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" RenderTransformOrigin="0.477,0.692" Margin="265,0,267,0" FontSize="20" Height="35" Width="260" />
+           <!--Button Paramètre -->
+            <Button x:Name="btn_para" Content="" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="35" Height="35" RenderTransformOrigin="0.484,0.17">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/paramr.png" Stretch="Uniform"/>
+                </Button.Background>
+            </Button>
+            <!--Button retour -->
+            <Button x:Name="btn_return" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="37" Margin="50,0,0,0" Height="35" Visibility="Hidden">
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/return.png"/>
+                </Button.Background>
+            </Button>
         </Grid>
-        <ComboBox x:Name="cbb_filtre" MinHeight="30" MaxHeight="30" IsEditable="True" Margin="0,35,0,286" VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderBrush="#FF7A7777" >
+        <ComboBox x:Name="cbb_filtre" MinHeight="30" MaxHeight="30" IsEditable="True" Margin="0,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderBrush="#FF7A7777" >
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF0F0F0" Offset="0"/>
@@ -26,7 +38,7 @@
         </ComboBox>
 
 
-        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="10,101,0,0" Grid.Row="1" >
+        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="8,101,12,10" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -110,3 +122,4 @@
         </Grid>-->
     </Grid>
 </Window>
+

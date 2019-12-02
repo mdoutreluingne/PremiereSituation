@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.18" />
+    <PackageReference Include="ZedGraph" Version="5.1.7" />
   </ItemGroup>
 
 </Project>

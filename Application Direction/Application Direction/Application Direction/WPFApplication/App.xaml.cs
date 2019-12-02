@@ -26,8 +26,8 @@ namespace WPFApplication
 
         public void App_Startup(object sender, StartupEventArgs e)
         {
-            _dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
-           // _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
+           // _dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
+            _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
             _daoUtilisateur = new daoUtilisateur(_dbal);
             _daoVille = new daoVille(_dbal);
             _daoTheme = new daoTheme(_dbal);
