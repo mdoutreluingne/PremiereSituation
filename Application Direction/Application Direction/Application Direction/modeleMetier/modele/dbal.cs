@@ -65,6 +65,16 @@ namespace ModeleMetier.modele
             DataTableCollection table = dataSet.Tables;
             return table;
         }
-        #endregion
+
+        public void update(string request)
+        {
+            this.connection.Open();
+            MySqlCommand cmd = new MySqlCommand(request, connection);
+            cmd.ExecuteNonQuery();
+            this.connection.Close();
+        }
+      
     }
+    #endregion
 }
+

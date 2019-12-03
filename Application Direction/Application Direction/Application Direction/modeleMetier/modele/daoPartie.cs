@@ -36,5 +36,10 @@ namespace ModeleMetier.modele
             }
             return listPartie;
         }
+
+        public override object update(string elementss, string join_where)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -40,11 +40,16 @@ namespace ModeleMetier.modele
                 List<dtoSalle> les_salles = (List<dtoSalle>)_daoSalle.select("*", "WHERE id = " + salle_id);
                 List<dtoClient> les_clients = (List<dtoClient>)_daoClient.select("*", "WHERE id = " + client_id);
                 dtoSalle salle = les_salles[0];
-                dtoClient client = les_clients[0]; 
+                dtoClient client = les_clients[0];
                 listAvis.Add(new dtoAvis(id, note, date, commentaire, salle, client));
             }
             return listAvis;
         }
 
+        public override object update(string elementss, string join_where)
+        {
+            throw new NotImplementedException();
+        }
     }
+   
 }

@@ -25,7 +25,6 @@ namespace ModeleMetier.modele
             List<dtoClient> listClient = new List<dtoClient>();
             string request = "SELECT " + elements + " FROM client " + join_where + ";";
             DataTableCollection table = _dbal.select(request);
-            
             for (int i = 0; i < table[0].Rows.Count; i++)
             {
                 int id = (int)table[0].Rows[i]["id"];
@@ -40,6 +39,12 @@ namespace ModeleMetier.modele
                 listClient.Add(new dtoClient(id, nom, prenom, ville, tel, mail, archive));
             }
             return listClient;
+
+        }
+
+        public override object update(string elementss, string join_where)
+        {
+            throw new NotImplementedException();
         }
     }
 }

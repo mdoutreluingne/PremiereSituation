@@ -34,5 +34,10 @@ namespace ModeleMetier.modele
             }
             return listUtilisateur;
         }
+
+        public override object update(string elementss, string join_where)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

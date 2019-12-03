@@ -35,7 +35,7 @@ namespace ModeleMetier.modele
                 int ville_id = (int)table[0].Rows[i]["ville_id"];
                 int numero = (int)table[0].Rows[i]["numero"];
                 decimal prix = (decimal)table[0].Rows[i]["prix"];
-                
+
                 DateTime heure_ouverture = Convert.ToDateTime(table[0].Rows[i]["heure_ouverture"].ToString());
                 DateTime heure_fermeture = Convert.ToDateTime(table[0].Rows[i]["heure_fermeture"].ToString());
                 bool archive = (bool)table[0].Rows[i]["archive"];
@@ -49,6 +49,15 @@ namespace ModeleMetier.modele
                 listSalle.Add(new dtoSalle(id, ville, numero, prix, heure_ouverture, heure_fermeture, archive, theme));
             }
             return listSalle;
+        }
+
+        public override object update(string elements, string join_where)
+        {
+            List<dtoSalle> listSalle = new List<dtoSalle>();
+            string request = "Update " + elements + "VALUES " + join_where + ";";
+            
+
+            return ; 
         }
     }
 }

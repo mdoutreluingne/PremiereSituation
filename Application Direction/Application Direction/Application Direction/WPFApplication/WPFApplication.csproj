@@ -41,6 +41,27 @@
     <Reference Include="Google.Protobuf, Version=3.10.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.10.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="Habanero.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=1fb6a9c86f815c07, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.3.0.1\lib\Habanero.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.BO, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b7599514c88df7f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.3.0.1\lib\Habanero.BO.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Console, Version=3.0.0.0, Culture=neutral, PublicKeyToken=eae2c64fef8aa18b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.3.0.1\lib\Habanero.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.DB, Version=3.0.0.0, Culture=neutral, PublicKeyToken=13cd8e0ef3c14147, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.3.0.1\lib\Habanero.DB.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Faces.Base, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a8408464fc128d8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Faces.3.0.0\lib\Habanero.Faces.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Faces.VWG, Version=3.0.0.0, Culture=neutral, PublicKeyToken=090d21830e2665f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Faces.3.0.0\lib\Habanero.Faces.VWG.dll</HintPath>
+    </Reference>
+    <Reference Include="Habanero.Faces.Win, Version=3.0.0.0, Culture=neutral, PublicKeyToken=0e9ee1bfff5ba48c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Habanero.Faces.3.0.0\lib\Habanero.Faces.Win.dll</HintPath>
+    </Reference>
     <Reference Include="modeleMetier">
       <HintPath>..\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.dll</HintPath>
     </Reference>
@@ -60,6 +81,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,6 +103,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FlexibleMessageBox.cs" />
+    <Compile Include="RelayCommand.cs" />
     <Compile Include="viewModele.cs" />
     <Page Include="graphique.xaml">
       <SubType>Designer</SubType>
@@ -136,7 +160,7 @@
     <Resource Include="Images\return.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="License-LGPL.txt" />
+    <Resource Include="Images\valider.png.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

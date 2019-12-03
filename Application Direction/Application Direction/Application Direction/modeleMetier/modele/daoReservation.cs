@@ -48,5 +48,10 @@ namespace ModeleMetier.modele
 
             return listReservation;
         }
+
+        public override object update(string elementss, string join_where)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -89,3 +89,10 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\zh-tw\ZedGraph.resources.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\graphique.g.cs
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\graphique.baml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Base.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.BO.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Console.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.DB.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Base.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.VWG.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Win.dll
