@@ -162,5 +162,8 @@
   <ItemGroup>
     <Resource Include="Images\valider.png.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plus-31216_640.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
-    <Grid>
+    <Grid >
         <!--Title-->
         <Grid x:Name="grd_nomapp" VerticalAlignment="Top" Grid.RowSpan="2" Background="#FF74AC93" MinHeight="20" MaxHeight="35" Margin="0,0,0,379">
             <Grid.RowDefinitions>
@@ -32,6 +32,13 @@
                     <ImageBrush ImageSource="Images/valider.png.png"/>
                 </Button.Background>
             </Button>
+            <!--Button Ajout -->
+            <Button x:Name="btn_ajout" Content="" HorizontalAlignment="Right" Width="37" Visibility="{Binding IsVisible}" Command="{Binding Ajout}"  Margin="0,0,42,0" >
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/plus-31216_640.png"/>
+                </Button.Background>
+            </Button>
+
 
         </Grid>
         <ComboBox x:Name="cbb_filtre" MinHeight="30" MaxHeight="30" IsEditable="True" Margin="0,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderBrush="#FF7A7777" >
@@ -45,7 +52,7 @@
         </ComboBox>
 
 
-        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="8,101,12,10" >
+        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="8,101,12,10"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>

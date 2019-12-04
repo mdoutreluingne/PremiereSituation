@@ -20,7 +20,7 @@ namespace ModeleMetier.modele
         /// <param name="join_where">Join + where </param>
         /// <returns></returns>
         public abstract object select(string elements, string join_where);
-        public abstract object update(string elementss, string join_where); 
+        public abstract object update(object o); 
         
     }
 }

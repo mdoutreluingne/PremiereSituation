@@ -51,13 +51,21 @@ namespace ModeleMetier.modele
             return listSalle;
         }
 
-        public override object update(string elements, string join_where)
+       public override object update(object o)
         {
-            List<dtoSalle> listSalle = new List<dtoSalle>();
-            string request = "Update " + elements + "VALUES " + join_where + ";";
+            dtoSalle Salle =(dtoSalle)o;
+
+
+            // List<dtoVille> lesVilles = (List<dtoVille>)_daoVille.select("*", "WHERE nom = " + ville_id);
+               
+            string request = "Update salle(ville_id,numero,prix,heure_ouverture,heure_fermeture,archive,theme_id) " +
+                "Values" + 
+                Salle.DtoVille.Nom + "," + Salle.Numero.ToString() + "," + Salle.DtoTheme.ToString() + "," + Salle.Prix.ToString() + "," + 
+                Salle.Heure_ouverture.ToString() + "," + Salle.Heure_fermeture.ToString()+ "," + Salle.Archive.ToString()+ ";";
+
             
 
-            return ; 
+            return Salle; 
         }
     }
 }

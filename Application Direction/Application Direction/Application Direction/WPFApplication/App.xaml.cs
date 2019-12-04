@@ -19,6 +19,7 @@ namespace WPFApplication
             MainWindow wnd = new MainWindow();
             wnd.WindowState = WindowState.Maximized;
             wnd.Show();
+            
         }
     }
 }

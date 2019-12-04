@@ -66,7 +66,7 @@ namespace ModeleMetier.modele
             return table;
         }
 
-        public void update(string request)
+        public void Commande(string request)
         {
             this.connection.Open();
             MySqlCommand cmd = new MySqlCommand(request, connection);

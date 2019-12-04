@@ -37,7 +37,7 @@ namespace ModeleMetier.modele
             return listPartie;
         }
 
-        public override object update(string elementss, string join_where)
+        public override object update(object o)
         {
             throw new NotImplementedException();
         }

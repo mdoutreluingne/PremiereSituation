@@ -18,7 +18,6 @@ D:\EE4\PremiereSituation\Application Direction\Application Direction\Application
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.deps.json
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\bin\Debug\netstandard2.0\modeleMetier.pdb
-C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.csprojAssemblyReference.cache
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.AssemblyInfoInputs.cache
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.AssemblyInfo.cs
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\modeleMetier\obj\Debug\netstandard2.0\modeleMetier.dll

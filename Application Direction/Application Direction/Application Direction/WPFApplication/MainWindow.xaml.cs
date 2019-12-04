@@ -45,20 +45,30 @@ namespace WPFApplication
             _daoAvis = new daoAvis(_dbal, _daoSalle, _daoClient);
             _daoPartie = new daoPartie(_dbal, _daoReservation);
 
+            List<viewModele> _lesViews = new List<viewModele>(); 
             InitializeComponent();
-            viewModele _viewModele = viewModele.Instance(_daoAvis);
-            DataContext = _viewModele; 
+           
+          //dans le code alexis --> xaml.cs -> l.209 -> exemple de ce qu'il y à faire. 
 
             #region Liste Salles
             List<dtoSalle> salles = (List<dtoSalle>)_daoSalle.select("*", "Where archive = false ORDER BY id");
+
+            viewModele _viewModele = new viewModele(_daoAvis,_daoSalle,null);                     
+            
+
             List<dtoAvis> avis = new List<dtoAvis>();
             foreach (dtoSalle s in salles)
             {
                 avis.Add(((List<dtoAvis>)_daoAvis.select("id,  AVG(note) as 'note', date, commentaire, salle_id, client_id", "Where salle_id = " + s.Id))[0]);
             }
-
+            
             for (int i = 0; i < salles.Count; i++)
             {
+
+                viewModele viewModele = new viewModele(_daoAvis, _daoSalle, salles[i]);
+                _lesViews.Add(viewModele); 
+
+
                 ColumnDefinition cw = new ColumnDefinition();
                 grd_listSalle.ColumnDefinitions.Add(cw);
 
@@ -73,10 +83,16 @@ namespace WPFApplication
                 txt_Nom.Width = 200;
                 Grid.SetRow(txt_Nom, 0);
                 Grid.SetColumn(txt_Nom, i + 1);
-
+                
                 Binding bind_Nom = new Binding("EnableModification");
-                bind_Nom.Source = _viewModele;
+                bind_Nom.Source = viewModele;
                 txt_Nom.SetBinding(TextBox.IsEnabledProperty, bind_Nom);
+
+                Binding texte_Nom = new Binding("NomVille");
+                texte_Nom.Source = viewModele;
+                txt_Nom.SetBinding(TextBox.TextProperty,texte_Nom);
+
+                grd_listSalle.Children.Add(txt_Nom);
 
                 //num salle 
                 TextBox txt_Num = new TextBox();
@@ -87,8 +103,12 @@ namespace WPFApplication
                 Grid.SetColumn(txt_Num, i + 1);
 
                 Binding bind_Num = new Binding("EnableModification");
-                bind_Num.Source = _viewModele;
+                bind_Num.Source = viewModele;
                 txt_Num.SetBinding(TextBox.IsEnabledProperty, bind_Num);
+
+                Binding texte_Num = new Binding("NumSalle");
+                texte_Num.Source = viewModele;
+                txt_Num.SetBinding(TextBox.TextProperty, texte_Num);
 
                 grd_listSalle.Children.Add(txt_Num);
 
@@ -101,9 +121,12 @@ namespace WPFApplication
                 Grid.SetColumn(txt_theme, i + 1);
 
                 Binding bind_theme = new Binding("EnableModification");
-                bind_theme.Source = _viewModele;
+                bind_theme.Source = viewModele;
                 txt_theme.SetBinding(TextBox.IsEnabledProperty, bind_Num);
 
+                Binding texte_theme = new Binding("themeSalle");
+                texte_theme.Source = viewModele;
+                txt_theme.SetBinding(TextBox.TextProperty, texte_theme);
 
                 grd_listSalle.Children.Add(txt_theme);
 
@@ -116,8 +139,13 @@ namespace WPFApplication
                 Grid.SetColumn(txt_prix, i + 1);
 
                 Binding bind_prix = new Binding("EnableModification");
-                bind_prix.Source = _viewModele;
+                bind_prix.Source = viewModele;
                 txt_prix.SetBinding(TextBox.IsEnabledProperty, bind_prix);
+
+                Binding texte_prix = new Binding("prixSalle");
+                texte_prix.Source = viewModele;
+                txt_prix.SetBinding(TextBox.TextProperty, texte_prix);
+
 
                 grd_listSalle.Children.Add(txt_prix);
 
@@ -130,8 +158,12 @@ namespace WPFApplication
                 Grid.SetColumn(txt_horaires, i + 1);
 
                 Binding bind_horaires = new Binding("EnableModification");
-                bind_horaires.Source = _viewModele;
+                bind_horaires.Source = viewModele;
                 txt_horaires.SetBinding(TextBox.IsEnabledProperty, bind_horaires);
+
+                Binding texte_horaires = new Binding("horaireSalle");
+                texte_horaires.Source = viewModele;
+                txt_horaires.SetBinding(TextBox.TextProperty, texte_horaires);
 
                 grd_listSalle.Children.Add(txt_horaires);
 
@@ -146,7 +178,7 @@ namespace WPFApplication
                 Grid.SetColumn(btn_avis, i + 1);
                 grd_listSalle.Children.Add(btn_avis);
 
-                //Bouton Supprimer salle 
+                //Bouton archiver salle 
 
                 Button btn_suppr = new Button();
                 btn_suppr.Content = "ARCHIVER";
@@ -157,6 +189,10 @@ namespace WPFApplication
                 Grid.SetColumn(btn_suppr, i + 1);
                 grd_listSalle.Children.Add(btn_suppr);
 
+                Binding bind_archive = new Binding("EnableModification");
+                bind_archive.Source = viewModele;
+                btn_suppr.SetBinding(TextBox.IsEnabledProperty, bind_archive);
+
                 /*Ajout des bordures
                 Border brd = new Border();
                 brd.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -164,8 +200,13 @@ namespace WPFApplication
                 Grid.SetColumnSpan(brd, 17);
                 Grid.SetRowSpan(brd, i + 2);
                 grd_listSalle.Children.Add(brd);*/
+
+
                 #endregion
             }
+            _viewModele.compteLesView(_lesViews);
+            DataContext = _viewModele;
+
         }
 
         private void btn_avis_Click(object sender, RoutedEventArgs e)

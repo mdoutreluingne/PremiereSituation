@@ -20,9 +20,11 @@ namespace WPFApplication
         private static viewModele _instance = null;
         private static readonly object _padlock = new object();
 
+        public List<viewModele> _lesViews; 
         private daoAvis _daoavis;
         private dtoSalle _salle;
         private daoSalle _daoSalle;
+        private List<dtoSalle> _lesSalles; 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ICommand _commandModifier;
@@ -34,23 +36,94 @@ namespace WPFApplication
         private bool _disableProperty;
 
         private ICommand _commandValider;
-        private bool _validerModif; 
-        private viewModele(daoAvis daoAvis)
+        private bool _validerModif;
+
+        private string _NomVille;
+        private string _NumSalle;
+        private string _themeSalle;
+        private string _prixSalle;
+        private string _horaireSalle;
+
+
+        public viewModele(daoAvis daoAvis,daoSalle daoSalle, dtoSalle laSalle)
         {
             _daoavis = daoAvis;
-
-            IsVisible = Visibility.Hidden;
+            _daoSalle = daoSalle;
+            _salle = laSalle;
+            if(laSalle != null)
+            {
+                _NomVille = laSalle.DtoVille.Nom;
+                _NumSalle = laSalle.Numero.ToString();
+                _themeSalle = laSalle.DtoTheme.Nom.ToString();
+                _prixSalle = laSalle.Prix.ToString();
+                _horaireSalle =laSalle.Heure_ouverture.TimeOfDay.ToString()+ "\n\nHoraire de fermeture :\n" + laSalle.Heure_fermeture.TimeOfDay.ToString(); 
+            }
+        IsVisible = Visibility.Hidden;
         }
 
-        public static viewModele Instance(daoAvis daoAvis)
+     
+        public string NomVille
         {
-            lock (_padlock)
+            get 
             {
-                if (_instance == null)
-                {
-                    _instance = new viewModele(daoAvis);
-                }
-                return _instance;
+                return _NomVille; 
+            }
+            set
+            {
+                _NomVille = value;
+                OnPropertyChanged("NomVille");
+            }
+        }
+
+        public string NumSalle
+        {
+            get
+            {
+                return "Salle n°" + _NumSalle;
+            }
+            set
+            {
+                _NumSalle = value;
+                OnPropertyChanged("NumSalle");
+            }
+        }
+
+        public string themeSalle
+        {
+            get
+            {
+                return "Thème :\n" + _themeSalle;
+            }
+            set
+            {
+                _themeSalle = value;
+                OnPropertyChanged("themeSalle");
+            }
+        }
+
+        public string prixSalle
+        {
+            get
+            {
+                return "Prix :\n "+_prixSalle+"€";
+            }
+            set
+            {
+                _prixSalle = value;
+                OnPropertyChanged("prixSalle");
+            }
+        }
+
+        public string horaireSalle
+        {
+            get
+            {
+                return "Horaire d'ouverture :\n" + _horaireSalle;
+            }
+            set
+            {
+                _horaireSalle = value;
+                OnPropertyChanged("horaireSalle");
             }
         }
 
@@ -130,7 +203,12 @@ namespace WPFApplication
             }
             set
             {
-                _enableModification = value;
+                _enableModification = true; 
+                foreach (viewModele v in _lesViews)
+                {
+                    v._lesViews = new List<viewModele>();
+                    v.EnableModification = true; 
+                }              
                 OnPropertyChanged("EnableModification");
             }
         }
@@ -148,21 +226,26 @@ namespace WPFApplication
         {
             DisableModification = true;
             IsVisible = Visibility.Hidden;
-            EnableModification = false; 
-
+            EnableModification = false;   
         }
 
         private void valider()
         {
             //List<dtoAvis> lesavis = ((List<dtoAvis>)_daoAvis.select("*", "WHERE salle_id =" + el_verfificator.Tag));
-
             string message = "Voulez-vous validez vos changements?";
             string title = "Validation";
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult result = MessageBox.Show(message, title, buttons);
             if (result == DialogResult.Yes)
             {
-               List<dtoSalle> lesalles = ((List<dtoSalle>)_daoSalle.)
+                
+                foreach (dtoSalle s in _lesSalles)
+                {
+                    //pour chaque salle -> update
+                    _daoSalle.update(s);
+
+                }
+
             }
             else
             {
@@ -171,11 +254,13 @@ namespace WPFApplication
             DisableModification = true;
             IsVisible = Visibility.Hidden;
             EnableModification = false;
-
         }
 
+        public void compteLesView(List<viewModele> uneListe)
+        {
+            _lesViews = uneListe; 
+        }
         #endregion
-
 
     }
 }

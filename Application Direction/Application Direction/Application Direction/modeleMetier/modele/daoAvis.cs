@@ -46,7 +46,7 @@ namespace ModeleMetier.modele
             return listAvis;
         }
 
-        public override object update(string elementss, string join_where)
+        public override object update(object o)
         {
             throw new NotImplementedException();
         }
