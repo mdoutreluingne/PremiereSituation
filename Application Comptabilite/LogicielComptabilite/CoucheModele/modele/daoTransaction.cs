@@ -20,7 +20,8 @@ namespace CoucheModele.modele
         }
         public void insert(Transaction transaction)
         {
-            this.dbal.execRequete("INSERT INTO transaction (date, montant, type, numero, commentaire, client_id) VALUES ('" + transaction.Date.ToString("yyyy-MM-dd HH:mm") + "', " + transaction.Montant + ", '" + transaction.Type + "', '" + transaction.Numero + "', '" + transaction.Commentaire + "', " + transaction.Client_id.Id + ");");
+            string commentaire = transaction.Commentaire.Replace("'", "\"");
+            this.dbal.execRequete("INSERT INTO transaction (date, montant, type, numero, commentaire, client_id) VALUES ('" + transaction.Date.ToString("yyyy-MM-dd HH:mm") + "', " + transaction.Montant + ", '" + transaction.Type + "', '" + transaction.Numero + "', '" + commentaire + "', " + transaction.Client_id.Id + ");");
         }
         public void delete(Transaction transaction)
         {

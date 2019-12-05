@@ -22,8 +22,8 @@ namespace WpfComptabilite
     public partial class ConnexionWindow : Window
     {
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
-        //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
-        static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
+        static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
+        //static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
         static private daoUtilisateur unDaoUtilisateur = new daoUtilisateur(bdd);
         static private List<Utilisateur> lesUsers = new List<Utilisateur>(unDaoUtilisateur.selectAllClient());
 
