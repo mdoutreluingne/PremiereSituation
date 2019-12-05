@@ -123,3 +123,5 @@ D:\EE4\PremiereSituation\Application Direction\Application Direction\Application
 D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\zh-tw\ZedGraph.resources.dll
 D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\Connexion\ConnexionWindow.baml
 D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\graphique.baml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\Connexion\ConnexionWindow.g.cs
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\Connexion\ConnexionWindow.baml

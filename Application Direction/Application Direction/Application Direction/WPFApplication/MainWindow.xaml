@@ -50,15 +50,7 @@
 
         <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="-74,101,94,10"  >
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -70,74 +62,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <!--Label des champs-->
+
 
         </Grid>
-        <!--
-        <Grid x:Name="grd_glob" VerticalAlignment="Stretch" Margin="10,100,10,10" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="grd_s1"/>
-                <ColumnDefinition x:Name="grd_space1" Width="10"/>
-                <ColumnDefinition x:Name="grd_s2"/>
-                <ColumnDefinition x:Name="grd_space2" Width="10"/>
-                <ColumnDefinition x:Name="grd_s3"/>
-                <ColumnDefinition x:Name="grd_space3" Width="10"/>
-                <ColumnDefinition x:Name="grd_s4"/>
-                <ColumnDefinition x:Name="grd_space4" Width="10"/>
-                <ColumnDefinition x:Name="grd_s5"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
-             Rectangle 1/2 .1 l1
-            <Rectangle x:Name="rtc_s1"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" />
-            <Rectangle x:Name="rtc_s2"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="0"/>
-            <Rectangle x:Name="rtc_s3"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="0"/>
-            <Rectangle x:Name="rtc_s4"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="0"/>
-            <Rectangle x:Name="rtc_s5"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="0"/>
-
-             Rectangle 1/2 .1 l3
-            <Rectangle x:Name="rtc_s6"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" />
-            <Rectangle x:Name="rtc_s7"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="2"/>
-            <Rectangle x:Name="rtc_s8"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="2"/>
-            <Rectangle x:Name="rtc_s9"  Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="2"/>
-            <Rectangle x:Name="rtc_s10" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="2"/>
-
-             Rectangle 1/2 .1 l5
-            <Rectangle x:Name="rtc_s11" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" />
-            <Rectangle x:Name="rtc_s12" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="4"/>
-            <Rectangle x:Name="rtc_s13" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="4"/>
-            <Rectangle x:Name="rtc_s14" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="4"/>
-            <Rectangle x:Name="rtc_s15" Fill="#FF74AC93" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="4"/>
-
-             Rectangle 1/2 .2 l2 
-            <Rectangle x:Name="rtc_s16" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" />
-            <Rectangle x:Name="rtc_s17" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="1"/>
-            <Rectangle x:Name="rtc_s18" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="1"/>
-            <Rectangle x:Name="rtc_s19" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="1"/>
-            <Rectangle x:Name="rtc_s20" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="1"/>
-
-             Rectangle 1/2 .2 l4 
-            <Rectangle x:Name="rtc_s21" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" />
-            <Rectangle x:Name="rtc_s22" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="3"/>
-            <Rectangle x:Name="rtc_s23" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="3"/>
-            <Rectangle x:Name="rtc_s24" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="3"/>
-            <Rectangle x:Name="rtc_s25" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="3"/>
-
-             Rectangle 1/2 .2 l6 
-            <Rectangle x:Name="rtc_s26" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" />
-            <Rectangle x:Name="rtc_s27" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="2" Grid.Row="5"/>
-            <Rectangle x:Name="rtc_s28" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="4" Grid.Row="5"/>
-            <Rectangle x:Name="rtc_s29" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="6" Grid.Row="5"/>
-            <Rectangle x:Name="rtc_s30" Fill="#FF3A6350" Stroke="Black"  RenderTransformOrigin="1.5,1.243" Margin="0,0,0,0" Grid.Column="8" Grid.Row="5"/>
-            
-        </Grid>-->
     </Grid>
 </Window>
 

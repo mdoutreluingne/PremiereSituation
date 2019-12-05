@@ -83,7 +83,7 @@ namespace WPFApplication
         }
 
      
-        public string NomVille
+        public string NomVille //gère les villes des salles 
         {
             get 
             {
@@ -96,7 +96,7 @@ namespace WPFApplication
             }
         }
 
-        public int NumSalle
+        public int NumSalle //gère les numero des salles 
         {
             get
             {
@@ -109,7 +109,7 @@ namespace WPFApplication
             }
         }
 
-        public string themeSalle
+        public string themeSalle  //gère les themes des salles 
         {
             get
             {
@@ -122,7 +122,7 @@ namespace WPFApplication
             }
         }
 
-        public decimal prixSalle
+        public decimal prixSalle //gère les prix des salles 
         {
             get
             {
@@ -135,7 +135,7 @@ namespace WPFApplication
             }
         }
 
-        public string horaireSalleOuverture
+        public string horaireSalleOuverture //gère les heures d'ouverture des salles 
         {
             get
             {
@@ -148,7 +148,7 @@ namespace WPFApplication
             }
         }
 
-        public string horaireSalleFermeture
+        public string horaireSalleFermeture//gère les heures de fermeture des salles 
         {
             get
             {
@@ -169,7 +169,7 @@ namespace WPFApplication
             }
         }
 
-        public Visibility IsVisible
+        public Visibility IsVisible //permet de recuperer et modifié la valeure de la visibilité d'un évènement
         {
 
             get { return _isVisible; }
@@ -179,7 +179,7 @@ namespace WPFApplication
                 OnPropertyChanged("IsVisible");
             }
         }
-        public ICommand Modifier
+        public ICommand Modifier //permet de gérer les différents évènements prévus lors des modifications en faisant appel à la méthode modifier
         {
             get
             {
@@ -192,7 +192,7 @@ namespace WPFApplication
 
         }
 
-        public ICommand Desarchiver
+        public ICommand Desarchiver //permet de gérer le bouton permettant de désarchiver une salle dans l'application  en faisant appel à la méthode desarchiver
         {
             get
             {
@@ -205,7 +205,7 @@ namespace WPFApplication
 
         }
 
-        public ICommand Retour
+        public ICommand Retour //permet le retour en arrière dans l'application en faisant appel à la méthode retour 
         {
             get
             {
@@ -217,7 +217,7 @@ namespace WPFApplication
             }
         }
 
-        public ICommand Valider
+        public ICommand Valider //permet de valider les modifications en faisant appel à la méthode valider 
         {
             get
             {
@@ -229,7 +229,7 @@ namespace WPFApplication
             }
         }
 
-        public ICommand Archiver
+        public ICommand Archiver //permet d'archiver une salle en cliquant sur un bouton  en faisant appel à la méthode archive
         {
             get
             {
@@ -241,7 +241,7 @@ namespace WPFApplication
             }
         }
 
-        public ICommand Statistiques
+        public ICommand Statistiques //permet d'afficher les statistiques d'une salle en cliquant sur un bouton en faisant appel à la méthode statistique
         {
             get
             {

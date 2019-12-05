@@ -80,7 +80,6 @@ namespace WPFApplication
                 txt_Nom.Width = 200;
                 Grid.SetRow(txt_Nom, 0);
                 Grid.SetColumn(txt_Nom, i + 1);
-                
 
                 Binding bind_Nom = new Binding("EnableModification");
                 bind_Nom.Source = viewModele;
@@ -96,7 +95,7 @@ namespace WPFApplication
                 bouton_ville.Margin = new Thickness(0, 70, 0, 0);
                 bouton_ville.Height = 25;
                 bouton_ville.Width = 200;
-                Grid.SetRow(bouton_ville, 0);
+                Grid.SetRow(bouton_ville, 1);
                 Grid.SetColumn(bouton_ville, i + 1);
 
                 Binding bind_btn_ville = new Binding("Statistiques");
@@ -134,7 +133,7 @@ namespace WPFApplication
                 txt_theme.VerticalAlignment = VerticalAlignment.Center;
                 txt_theme.FontWeight = FontWeights.Bold;
                 txt_theme.Width = 200;
-                Grid.SetRow(txt_theme, 4);
+                Grid.SetRow(txt_theme, 3);
                 Grid.SetColumn(txt_theme, i + 1);
 
                 Binding bind_theme = new Binding("EnableModification");
@@ -153,7 +152,7 @@ namespace WPFApplication
                 txt_prix.VerticalAlignment = VerticalAlignment.Center;
                 txt_prix.FontWeight = FontWeights.Bold;
                 txt_prix.Width = 200;
-                Grid.SetRow(txt_prix, 6);
+                Grid.SetRow(txt_prix, 4);
                 Grid.SetColumn(txt_prix, i + 1);
 
                 Binding bind_prix = new Binding("EnableModification");
@@ -173,7 +172,7 @@ namespace WPFApplication
                 txt_ouverture.VerticalAlignment = VerticalAlignment.Stretch;
                 txt_ouverture.FontWeight = FontWeights.Bold;
                 txt_ouverture.Width = 200;
-                Grid.SetRow(txt_ouverture, 8);
+                Grid.SetRow(txt_ouverture, 5);
                 Grid.SetColumn(txt_ouverture, i + 1);
 
                 Binding bind_enableOuverture = new Binding("EnableModification");
@@ -191,7 +190,7 @@ namespace WPFApplication
                 txt_fermeture.VerticalAlignment = VerticalAlignment.Stretch;
                 txt_fermeture.FontWeight = FontWeights.Bold;
                 txt_fermeture.Width = 200;
-                Grid.SetRow(txt_fermeture, 10);
+                Grid.SetRow(txt_fermeture, 6);
                 Grid.SetColumn(txt_fermeture, i + 1);
 
                 Binding bind_enableFermeture = new Binding("EnableModification");
@@ -212,7 +211,7 @@ namespace WPFApplication
                 btn_avis.FontWeight = FontWeights.Bold;
                 btn_avis.Click += btn_avis_Click;
                 btn_avis.Width = 200;
-                Grid.SetRow(btn_avis, 12);
+                Grid.SetRow(btn_avis, 7);
                 Grid.SetColumn(btn_avis, i + 1);
                 grd_listSalle.Children.Add(btn_avis);
 
@@ -223,7 +222,7 @@ namespace WPFApplication
                 btn_suppr.FontWeight = FontWeights.Bold;
                 btn_suppr.Width = 175;
 
-                Grid.SetRow(btn_suppr, 14);
+                Grid.SetRow(btn_suppr, 8);
                 Grid.SetColumn(btn_suppr, i + 1);
                 grd_listSalle.Children.Add(btn_suppr);
 
