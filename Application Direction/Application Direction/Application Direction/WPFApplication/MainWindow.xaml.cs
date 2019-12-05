@@ -23,31 +23,24 @@ namespace WPFApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private dbal _dbal;
-        private daoUtilisateur _daoUtilisateur;
-        private daoAvis _daoAvis;
-        private daoPartie _daoPartie;
-        private daoClient _daoClient;
-        private daoReservation _daoReservation;
-        private daoSalle _daoSalle;
-        private daoTheme _daoTheme;
-        private daoVille _daoVille;
         private viewModele _viewModele;
-        public MainWindow()
+        private daoSalle _daoSalle;
+        private daoAvis _daoAvis;
+        private daoVille _daoVille;
+        private daoPartie _daoPartie;
+        private daoTheme _daoTheme;
+
+        public MainWindow(daoSalle daoSalle, daoAvis daoAvis, daoVille daoVille, daoPartie daoPartie, daoTheme daoTheme )
         {
-            // _dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
-            _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
-            _daoUtilisateur = new daoUtilisateur(_dbal);
-            _daoVille = new daoVille(_dbal);
-            _daoTheme = new daoTheme(_dbal);
-            _daoSalle = new daoSalle(_dbal, _daoVille, _daoTheme);
-            _daoClient = new daoClient(_dbal, _daoVille);
-            _daoReservation = new daoReservation(_dbal, _daoClient, _daoSalle);
-            _daoAvis = new daoAvis(_dbal, _daoSalle, _daoClient);
-            _daoPartie = new daoPartie(_dbal, _daoReservation);
             InitializeComponent();
 
             //dans le code alexis --> xaml.cs -> l.209 -> exemple de ce qu'il y à faire. 
+
+            _daoSalle = daoSalle;
+            _daoAvis = daoAvis;
+            _daoVille = daoVille;
+            _daoPartie = daoPartie;
+            _daoTheme = daoTheme;
 
             #region Liste Salles
             List<dtoSalle> salles = (List<dtoSalle>)_daoSalle.select("*", "Where archive = false ORDER BY id");

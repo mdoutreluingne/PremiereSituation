@@ -103,9 +103,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Connexion\ConnexionWindow.xaml.cs">
+      <DependentUpon>ConnexionWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlexibleMessageBox.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="viewModele.cs" />
+    <Page Include="Connexion\ConnexionWindow.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </Page>
     <Page Include="graphique.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,5 +174,6 @@
   <ItemGroup>
     <Resource Include="Images\Folder-Archive-icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

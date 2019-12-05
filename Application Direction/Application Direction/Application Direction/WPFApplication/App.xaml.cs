@@ -14,12 +14,5 @@ namespace WPFApplication
     /// </summary>
     public partial class App : Application
     {
-        public void App_Startup(object sender, StartupEventArgs e)
-        {
-            MainWindow wnd = new MainWindow();
-            wnd.WindowState = WindowState.Maximized;
-            wnd.Show();
-            
-        }
     }
 }

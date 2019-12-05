@@ -96,3 +96,30 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Win.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\modeleMetier.pdb
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\WPFApplication.csprojAssemblyReference.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\Connexion\ConnexionWindow.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\graphique.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Base.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.BO.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Console.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.DB.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Base.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.VWG.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Win.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\ZedGraph.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Google.Protobuf.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\ZedGraph.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\de\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\es\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\fr\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\hu\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\it\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\ja\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\pt\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\ru\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\sk\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\sv\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\tr\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\zh-cn\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\zh-tw\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\Connexion\ConnexionWindow.baml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\graphique.baml

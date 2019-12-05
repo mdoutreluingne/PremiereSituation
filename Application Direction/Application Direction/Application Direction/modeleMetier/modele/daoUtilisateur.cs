@@ -13,6 +13,11 @@ namespace ModeleMetier.modele
         {
 
         }
+        public void update(string login, string password)
+        {
+            string request = "UPDATE utilisateur SET mdp = '" + password + "' WHERE login = '" + login + "'";
+            _dbal.Commande(request);
+        }
 
         public override void insert(object o)
         {
