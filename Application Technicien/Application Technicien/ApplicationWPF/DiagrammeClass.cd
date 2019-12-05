@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ApplicationWPF.App" Collapsed="true">
+    <Position X="37.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationWPF.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAgSABAAAAAAAAABAAEAAAADAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ApplicationWPF.Connexion.ConnexionWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="35" Y="19.5" Width="1.5" />
+    <AssociationLine Name="_daoArticle" Type="ModeleMetier.modele.daoArticle" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35" Y="19.875" />
+        <Point X="29" Y="19.875" />
+        <Point X="29" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoArticleSalle" Type="ModeleMetier.modele.daoArticleSalle" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35" Y="19.882" />
+        <Point X="27.25" Y="19.882" />
+        <Point X="27.25" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoClient" Type="ModeleMetier.modele.daoClient" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="19.997" />
+        <Point X="43.344" Y="19.997" />
+        <Point X="43.344" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoObstacle" Type="ModeleMetier.modele.daoObstacle" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="19.997" />
+        <Point X="37.406" Y="19.997" />
+        <Point X="37.406" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoReservation" Type="ModeleMetier.modele.daoReservation" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35" Y="19.882" />
+        <Point X="31.875" Y="19.882" />
+        <Point X="31.875" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoSalle" Type="ModeleMetier.modele.daoSalle" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35" Y="19.882" />
+        <Point X="25.344" Y="19.882" />
+        <Point X="25.344" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoTheme" Type="ModeleMetier.modele.daoTheme" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="19.997" />
+        <Point X="45.594" Y="19.997" />
+        <Point X="45.594" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoTransaction" Type="ModeleMetier.modele.daoTransaction" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="19.997" />
+        <Point X="36.75" Y="19.997" />
+        <Point X="36.75" Y="14.816" />
+        <Point X="35.156" Y="14.816" />
+        <Point X="35.156" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoUtilisateur" Type="ModeleMetier.modele.daoUtilisateur" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35" Y="19.882" />
+        <Point X="34.625" Y="19.882" />
+        <Point X="34.625" Y="14.816" />
+        <Point X="37.323" Y="14.816" Type="JumpStart" />
+        <Point X="37.49" Y="14.816" Type="JumpEnd" />
+        <Point X="38.844" Y="14.816" />
+        <Point X="38.844" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoVille" Type="ModeleMetier.modele.daoVille" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.5" Y="19.997" />
+        <Point X="40.844" Y="19.997" />
+        <Point X="40.844" Y="14.441" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>EAACAAhAAAAAACAJAQAAAEAgAAAQAAAAAAIAAAAAggA=</HashCode>
+      <FileName>Connexion\ConnexionWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_daoArticle" />
+      <Field Name="_daoArticleSalle" />
+      <Field Name="_daoClient" />
+      <Field Name="_daoObstacle" />
+      <Field Name="_daoReservation" />
+      <Field Name="_daoSalle" />
+      <Field Name="_daoTheme" />
+      <Field Name="_daoTransaction" />
+      <Field Name="_daoUtilisateur" />
+      <Field Name="_daoVille" />
+      <Field Name="_dbal" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.RelayCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="39.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\RelayCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewArticle" Collapsed="true">
+    <Position X="27.75" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35.25" Y="8.188" />
+        <Point X="28.5" Y="8.188" />
+        <Point X="28.5" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_daoArticle" Type="ModeleMetier.modele.daoArticle" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="29.25" Y="10.438" />
+        <Point X="29.5" Y="10.438" />
+        <Point X="29.5" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoArticleSalle" Type="ModeleMetier.modele.daoArticleSalle" FixedFromPoint="true">
+      <Path>
+        <Point X="28.062" Y="10.691" />
+        <Point X="28.062" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoSalle" Type="ModeleMetier.modele.daoSalle" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="27.75" Y="10.25" />
+        <Point X="26.375" Y="10.25" />
+        <Point X="26.375" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQWGgAAKgACAVNQQQJAkECCUggwCFApCQQqGCEAAgAQ=</HashCode>
+      <FileName>MVVM\ViewArticle.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_daoArticle" />
+      <Field Name="_daoArticleSalle" />
+      <Field Name="_daoSalle" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewDate" Collapsed="true">
+    <Position X="34.25" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true">
+      <Path>
+        <Point X="36.75" Y="7.875" />
+        <Point X="37.125" Y="7.875" />
+        <Point X="37.125" Y="9.625" />
+        <Point X="35" Y="9.625" />
+        <Point X="35" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_daoReservation" Type="ModeleMetier.modele.daoReservation" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="34.25" Y="10.125" />
+        <Point X="32.563" Y="10.125" />
+        <Point X="32.563" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAQGAAACCAAgAgAABAAAAAEAQAAAAAgAQYAAAAAAAgE=</HashCode>
+      <FileName>MVVM\ViewDate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_daoReservation" />
+      <Field Name="_daoTransaction" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewEntete" Collapsed="true">
+    <Position X="38.75" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true">
+      <Path>
+        <Point X="36.75" Y="7.875" />
+        <Point X="38.375" Y="7.875" />
+        <Point X="38.375" Y="10.142" />
+        <Point X="38.75" Y="10.142" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>BAAGAAACAAQAAAgAAABAAAAACAAAAAAAQAAAAAAAAgA=</HashCode>
+      <FileName>MVVM\ViewEntete.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_viewPlanning" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewModele">
+    <Position X="35.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAABAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MVVM\ViewModele.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_mainWindow" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewObjet" Collapsed="true">
+    <Position X="30.5" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35.25" Y="8.188" />
+        <Point X="31.25" Y="8.188" />
+        <Point X="31.25" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_daoArticle" Type="ModeleMetier.modele.daoArticle" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="30.5" Y="10.187" />
+        <Point X="29.5" Y="10.187" />
+        <Point X="29.5" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoObstacle" Type="ModeleMetier.modele.daoObstacle" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.375" Y="10.691" />
+        <Point X="31.375" Y="13.375" />
+        <Point X="32.479" Y="13.375" Type="JumpStart" />
+        <Point X="32.646" Y="13.375" Type="JumpEnd" />
+        <Point X="34.354" Y="13.375" Type="JumpStart" />
+        <Point X="34.521" Y="13.375" Type="JumpEnd" />
+        <Point X="35.073" Y="13.375" Type="JumpStart" />
+        <Point X="35.24" Y="13.375" Type="JumpEnd" />
+        <Point X="37" Y="13.375" />
+        <Point X="37" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoReservation" Type="ModeleMetier.modele.daoReservation" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="30.625" Y="10.691" />
+        <Point X="30.625" Y="14.125" />
+        <Point X="31.5" Y="14.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_daoTransaction" Type="ModeleMetier.modele.daoTransaction" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.375" Y="10.691" />
+        <Point X="31.375" Y="13.375" />
+        <Point X="32.479" Y="13.375" Type="JumpStart" />
+        <Point X="32.646" Y="13.375" Type="JumpEnd" />
+        <Point X="34.354" Y="13.375" Type="JumpStart" />
+        <Point X="34.521" Y="13.375" Type="JumpEnd" />
+        <Point X="34.812" Y="13.375" />
+        <Point X="34.812" Y="13.75" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="_viewPlanning" Type="ApplicationWPF.MVVM.ViewPlanning" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="31.562" Y="10.691" />
+        <Point X="31.562" Y="11.066" />
+        <Point X="32.479" Y="11.066" Type="JumpStart" />
+        <Point X="32.646" Y="11.066" Type="JumpEnd" />
+        <Point X="34.354" Y="11.066" Type="JumpStart" />
+        <Point X="34.521" Y="11.066" Type="JumpEnd" />
+        <Point X="37" Y="11.066" />
+        <Point X="37" Y="10.691" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AoUOkBsDAEWeUFQMWSlIACI0AuJBAQjQRSABiAiAgwE=</HashCode>
+      <FileName>MVVM\ViewObjet.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_daoArticle" />
+      <Field Name="_daoObstacle" />
+      <Field Name="_daoReservation" />
+      <Field Name="_daoTransaction" />
+      <Field Name="_viewPlanning" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewPlanning" Collapsed="true">
+    <Position X="36.5" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="36.75" Y="7.875" />
+        <Point X="37.375" Y="7.875" />
+        <Point X="37.375" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAAAAAAAACAAAAAAAAAgABAAIAAIAAAA=</HashCode>
+      <FileName>MVVM\ViewPlanning.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationWPF.MVVM.ViewReservation" Collapsed="true">
+    <Position X="40.75" Y="10" Width="1.5" />
+    <InheritanceLine Type="ApplicationWPF.MVVM.ViewModele" FixedFromPoint="true">
+      <Path>
+        <Point X="36.75" Y="7.875" />
+        <Point X="40.51" Y="7.875" />
+        <Point X="40.51" Y="10.346" />
+        <Point X="40.75" Y="10.346" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="_viewPlanning" Type="ApplicationWPF.MVVM.ViewPlanning" ManuallyRouted="true">
+      <Path>
+        <Point X="41.094" Y="10.691" />
+        <Point X="41.094" Y="11.076" />
+        <Point X="37.25" Y="11.076" />
+        <Point X="37.25" Y="10.691" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>wESGJRKCAERAAHFABQJIAEKkFCQABggBwKCBsQUACgM=</HashCode>
+      <FileName>MVVM\ViewReservation.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_daoClient" />
+      <Field Name="_daoTransaction" />
+      <Field Name="_daoVille" />
+      <Field Name="_viewPlanning" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationWPF.Properties.Resources" Collapsed="true">
+    <Position X="39.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationWPF.Properties.Settings" Collapsed="true">
+    <Position X="37.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModeleMetier.modele.dao">
+    <Position X="35" Y="15.75" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="_dbal" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ModeleMetier.modele.daoArticle" Collapsed="true">
+    <Position X="28.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoArticleSalle" Collapsed="true">
+    <Position X="26.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoClient" Collapsed="true">
+    <Position X="43" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoObstacle" Collapsed="true">
+    <Position X="36.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoReservation" Collapsed="true">
+    <Position X="31.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoSalle" Collapsed="true">
+    <Position X="25" Y="13.75" Width="1.5" />
+    <InheritanceLine Type="ModeleMetier.modele.dao" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="35.75" Y="15.75" />
+        <Point X="35.75" Y="14.816" />
+        <Point X="31.958" Y="14.816" Type="JumpStart" />
+        <Point X="31.792" Y="14.816" Type="JumpEnd" />
+        <Point X="29.083" Y="14.816" Type="JumpStart" />
+        <Point X="28.917" Y="14.816" Type="JumpEnd" />
+        <Point X="27.333" Y="14.816" Type="JumpStart" />
+        <Point X="27.167" Y="14.816" Type="JumpEnd" />
+        <Point X="25.875" Y="14.816" />
+        <Point X="25.875" Y="14.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoTheme" Collapsed="true">
+    <Position X="45.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoTransaction" Collapsed="true">
+    <Position X="34" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoUtilisateur" Collapsed="true">
+    <Position X="38.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.daoVille" Collapsed="true">
+    <Position X="40.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="ModeleMetier.modele.dbal" Collapsed="true">
+    <Position X="35" Y="18.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
