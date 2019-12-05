@@ -56,10 +56,8 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\MySql.Data.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Renci.SshNet.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Google.Protobuf.xml
-C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\modeleMetier.pdb
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\MySql.Data.xml
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Renci.SshNet.xml
-C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\WPFApplication.csprojAssemblyReference.cache
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\MainWindow.g.cs
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\App.g.cs
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\WPFApplication_MarkupCompile.cache
@@ -96,3 +94,5 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Base.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.VWG.dll
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\Habanero.Faces.Win.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Debug\modeleMetier.pdb
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Debug\WPFApplication.csprojAssemblyReference.cache

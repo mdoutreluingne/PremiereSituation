@@ -33,10 +33,5 @@ namespace ModeleMetier.modele
             }
             return listTheme;
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

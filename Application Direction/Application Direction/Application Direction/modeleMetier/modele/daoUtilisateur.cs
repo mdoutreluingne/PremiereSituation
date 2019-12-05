@@ -34,10 +34,5 @@ namespace ModeleMetier.modele
             }
             return listUtilisateur;
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

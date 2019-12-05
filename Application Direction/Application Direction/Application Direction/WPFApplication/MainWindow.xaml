@@ -21,38 +21,34 @@
                 </Button.Background>
             </Button>
             <!--Button retour -->
-            <Button x:Name="btn_return" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="37" Margin="50,0,0,0" Height="35" Visibility="{Binding IsVisible}" Command="{Binding Retour}">
+            <Button x:Name="btn_return" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="37" Margin="671,0,0,0" Height="35" Visibility="{Binding IsVisible}" Command="{Binding Retour}" RenderTransformOrigin="14.473,0.214">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/return.png"/>
                 </Button.Background>
             </Button>
             <!--Button valider -->
-            <Button x:Name="btn_valider" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="37" Margin="650,0,0,0" Height="35" Visibility="{Binding IsVisible}" Command="{Binding Valider}">
+            <Button x:Name="btn_valider" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="37" Margin="0,0,42,0" Height="35" Visibility="{Binding IsVisible}" Command="{Binding Valider}" RenderTransformOrigin="-0.014,0.557">
                 <Button.Background>
                     <ImageBrush ImageSource="Images/valider.png.png"/>
                 </Button.Background>
             </Button>
             <!--Button Ajout -->
-            <Button x:Name="btn_ajout" Content="" HorizontalAlignment="Right" Width="37" Visibility="{Binding IsVisible}" Command="{Binding Ajout}"  Margin="0,0,42,0" >
+            <Button x:Name="btn_ajout" Content="" HorizontalAlignment="Right" Width="38" Visibility="{Binding IsVisible}" Command="{Binding Ajout}"  Margin="0,0,84,0" RenderTransformOrigin="0.095,0.557" >
                 <Button.Background>
                     <ImageBrush ImageSource="Images/plus-31216_640.png"/>
                 </Button.Background>
             </Button>
-
+            <!--Button Archive -->
+            <Button x:Name="btn_Archive" Content="" HorizontalAlignment="Left" Width="37"  Command="{Binding Desarchiver}"  Margin="50,0,0,0" RenderTransformOrigin="-15.297,0.643" >
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/Folder-Archive-icon.png"/>
+                </Button.Background>
+            </Button>
 
         </Grid>
-        <ComboBox x:Name="cbb_filtre" MinHeight="30" MaxHeight="30" IsEditable="True" Margin="0,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderBrush="#FF7A7777" >
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF0F0F0" Offset="0"/>
-                    <GradientStop Color="#FF474545" Offset="0.928"/>
-                    <GradientStop Color="#FE616161"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
 
 
-        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="8,101,12,10"  >
+        <Grid x:Name="grd_listSalle" HorizontalAlignment="Stretch"  Margin="-74,101,94,10"  >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -62,10 +58,17 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
             <!--Label des champs-->
 

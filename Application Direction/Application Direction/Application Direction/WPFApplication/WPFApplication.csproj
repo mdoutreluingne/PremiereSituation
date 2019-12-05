@@ -165,5 +165,8 @@
   <ItemGroup>
     <Resource Include="Images\plus-31216_640.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Folder-Archive-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

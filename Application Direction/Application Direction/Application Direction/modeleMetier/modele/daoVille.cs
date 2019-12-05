@@ -34,10 +34,5 @@ namespace ModeleMetier.modele
             }
             return listVille;
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

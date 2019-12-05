@@ -22,24 +22,10 @@ namespace ModeleMetier.modele
 
         public override object select(string elements, string join_where)
         {
-            List<dtoPartie> listPartie = new List<dtoPartie>();
+            List<object> listPartie = new List<object>();
             string request = "SELECT " + elements + " FROM partie " + join_where + ";";
             DataTableCollection table = _dbal.select(request);
-
-            for (int i = 0; i < table[0].Rows.Count; i++)
-            {
-                int reservation_id = (int)table[0].Rows[i]["reservation_id"];
-                DateTime temps = Convert.ToDateTime(table[0].Rows[i]["temps"].ToString());
-                List<dtoReservation> les_reservations = (List<dtoReservation>)_daoReservation.select("*", "WHERE id = " +reservation_id);
-                dtoReservation reservation = les_reservations[0];
-                listPartie.Add(new dtoPartie(reservation, temps));
-            }
-            return listPartie;
-        }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
+            return table;
         }
     }
 }

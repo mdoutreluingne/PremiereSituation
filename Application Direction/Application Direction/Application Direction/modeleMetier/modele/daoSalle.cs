@@ -51,21 +51,30 @@ namespace ModeleMetier.modele
             return listSalle;
         }
 
-       public override object update(object o)
+       public void update(object o, int id)
         {
             dtoSalle Salle =(dtoSalle)o;
+            string prix = Salle.Prix.ToString().Replace(",", ".");
+            string request = "Update salle "
+                + "SET ville_id = '" + Salle.DtoVille.Id
+                + "', numero = " + Salle.Numero 
+                + ", prix =" + prix
+                + ",heure_ouverture ='" + Salle.Heure_ouverture.ToShortTimeString()
+                + "',heure_fermeture ='" + Salle.Heure_fermeture.ToShortTimeString()
+                + "',theme_id = " + Salle.DtoTheme.Id +" WHERE id = " + id + ";";
+            _dbal.Commande(request);
+       }
+
+        public void archive(int id, int archive)
+        {
 
 
-            // List<dtoVille> lesVilles = (List<dtoVille>)_daoVille.select("*", "WHERE nom = " + ville_id);
-               
-            string request = "Update salle(ville_id,numero,prix,heure_ouverture,heure_fermeture,archive,theme_id) " +
-                "Values" + 
-                Salle.DtoVille.Nom + "," + Salle.Numero.ToString() + "," + Salle.DtoTheme.ToString() + "," + Salle.Prix.ToString() + "," + 
-                Salle.Heure_ouverture.ToString() + "," + Salle.Heure_fermeture.ToString()+ "," + Salle.Archive.ToString()+ ";";
+            string request = "Update salle "
+               + "SET archive = " + archive            
+               + " WHERE id = " + id + ";";
+            _dbal.Commande(request);
 
-            
-
-            return Salle; 
         }
+
     }
 }

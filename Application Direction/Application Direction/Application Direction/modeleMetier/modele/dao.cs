@@ -19,8 +19,6 @@ namespace ModeleMetier.modele
         /// <param name="elements"> ce qu'il y a avant le "From"</param>
         /// <param name="join_where">Join + where </param>
         /// <returns></returns>
-        public abstract object select(string elements, string join_where);
-        public abstract object update(object o); 
-        
+        public abstract object select(string elements, string join_where);    
     }
 }

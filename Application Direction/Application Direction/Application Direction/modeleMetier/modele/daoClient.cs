@@ -41,10 +41,5 @@ namespace ModeleMetier.modele
             return listClient;
 
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

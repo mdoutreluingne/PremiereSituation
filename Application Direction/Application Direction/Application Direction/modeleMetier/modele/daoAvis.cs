@@ -45,11 +45,6 @@ namespace ModeleMetier.modele
             }
             return listAvis;
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
    
 }

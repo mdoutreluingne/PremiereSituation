@@ -32,6 +32,7 @@ namespace WPFApplication
         private daoSalle _daoSalle;
         private daoTheme _daoTheme;
         private daoVille _daoVille;
+        private viewModele _viewModele;
         public MainWindow()
         {
             // _dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
@@ -44,37 +45,40 @@ namespace WPFApplication
             _daoReservation = new daoReservation(_dbal, _daoClient, _daoSalle);
             _daoAvis = new daoAvis(_dbal, _daoSalle, _daoClient);
             _daoPartie = new daoPartie(_dbal, _daoReservation);
-
-            List<viewModele> _lesViews = new List<viewModele>(); 
             InitializeComponent();
-           
-          //dans le code alexis --> xaml.cs -> l.209 -> exemple de ce qu'il y à faire. 
+
+            //dans le code alexis --> xaml.cs -> l.209 -> exemple de ce qu'il y à faire. 
 
             #region Liste Salles
             List<dtoSalle> salles = (List<dtoSalle>)_daoSalle.select("*", "Where archive = false ORDER BY id");
-
-            viewModele _viewModele = new viewModele(_daoAvis,_daoSalle,null);                     
-            
-
             List<dtoAvis> avis = new List<dtoAvis>();
             foreach (dtoSalle s in salles)
             {
                 avis.Add(((List<dtoAvis>)_daoAvis.select("id,  AVG(note) as 'note', date, commentaire, salle_id, client_id", "Where salle_id = " + s.Id))[0]);
             }
-            
-            for (int i = 0; i < salles.Count; i++)
+            _viewModele = new viewModele(_daoAvis, _daoSalle, null, _daoVille, _daoPartie, _daoTheme, this, salles, avis); 
+            loadPage(salles, avis);
+            DataContext = _viewModele;
+
+        }
+
+        public void loadPage(List<dtoSalle> salles, List<dtoAvis> avis)
+        {
+            List<viewModele> lesViews = new List<viewModele>();
+            for (int i = 0; i < salles.Count + 1; i++)
             {
-
-                viewModele viewModele = new viewModele(_daoAvis, _daoSalle, salles[i]);
-                _lesViews.Add(viewModele); 
-
-
                 ColumnDefinition cw = new ColumnDefinition();
                 grd_listSalle.ColumnDefinitions.Add(cw);
+            }
 
+            for (int i = 0; i < salles.Count; i++)
+            {
+                viewModele viewModele = new viewModele(_daoAvis, _daoSalle, salles[i], _daoVille, _daoPartie, _daoTheme, this, salles, avis);
+                lesViews.Add(viewModele);
                 //Ajout des labels 
 
-                //ville
+                //ville        
+                          
                 TextBox txt_Nom = new TextBox();
                 txt_Nom.Text = salles[i].DtoVille.Nom;
                 txt_Nom.VerticalAlignment = VerticalAlignment.Center;
@@ -84,22 +88,41 @@ namespace WPFApplication
                 Grid.SetRow(txt_Nom, 0);
                 Grid.SetColumn(txt_Nom, i + 1);
                 
+
                 Binding bind_Nom = new Binding("EnableModification");
                 bind_Nom.Source = viewModele;
                 txt_Nom.SetBinding(TextBox.IsEnabledProperty, bind_Nom);
 
                 Binding texte_Nom = new Binding("NomVille");
                 texte_Nom.Source = viewModele;
-                txt_Nom.SetBinding(TextBox.TextProperty,texte_Nom);
-
+                txt_Nom.SetBinding(TextBox.TextProperty, texte_Nom);
                 grd_listSalle.Children.Add(txt_Nom);
 
+                Button bouton_ville = new Button();
+                bouton_ville.Content = "Statistiques";
+                bouton_ville.Margin = new Thickness(0, 70, 0, 0);
+                bouton_ville.Height = 25;
+                bouton_ville.Width = 200;
+                Grid.SetRow(bouton_ville, 0);
+                Grid.SetColumn(bouton_ville, i + 1);
+
+                Binding bind_btn_ville = new Binding("Statistiques");
+                bind_btn_ville.Source = viewModele;
+                bouton_ville.SetBinding(Button.CommandProperty, bind_btn_ville);
+
+                grd_listSalle.Children.Add(bouton_ville);
+
+
                 //num salle 
+                Label lbl_Num = new Label();
+                lbl_Num.Content = "Ville :";
+
                 TextBox txt_Num = new TextBox();
                 txt_Num.Text = "Salle n°" + salles[i].Numero.ToString();
                 txt_Num.VerticalAlignment = VerticalAlignment.Center;
                 txt_Num.FontWeight = FontWeights.Bold;
-                Grid.SetRow(txt_Num, 1);
+                txt_Num.Width = 200;
+                Grid.SetRow(txt_Num, 2);
                 Grid.SetColumn(txt_Num, i + 1);
 
                 Binding bind_Num = new Binding("EnableModification");
@@ -114,10 +137,11 @@ namespace WPFApplication
 
                 //theme
                 TextBox txt_theme = new TextBox();
-                txt_theme.Text = "Thème:\n " + salles[i].DtoTheme.Nom;
+                txt_theme.Text = salles[i].DtoTheme.Nom;
                 txt_theme.VerticalAlignment = VerticalAlignment.Center;
                 txt_theme.FontWeight = FontWeights.Bold;
-                Grid.SetRow(txt_theme, 2);
+                txt_theme.Width = 200;
+                Grid.SetRow(txt_theme, 4);
                 Grid.SetColumn(txt_theme, i + 1);
 
                 Binding bind_theme = new Binding("EnableModification");
@@ -135,7 +159,8 @@ namespace WPFApplication
                 txt_prix.Text = "Prix: " + salles[i].Prix.ToString() + " €";
                 txt_prix.VerticalAlignment = VerticalAlignment.Center;
                 txt_prix.FontWeight = FontWeights.Bold;
-                Grid.SetRow(txt_prix, 3);
+                txt_prix.Width = 200;
+                Grid.SetRow(txt_prix, 6);
                 Grid.SetColumn(txt_prix, i + 1);
 
                 Binding bind_prix = new Binding("EnableModification");
@@ -150,22 +175,41 @@ namespace WPFApplication
                 grd_listSalle.Children.Add(txt_prix);
 
                 //horaires
-                TextBox txt_horaires = new TextBox();
-                txt_horaires.Text = "Ouverture: " + salles[i].Heure_ouverture.ToString() + "\n\nFermeture : " + salles[i].Heure_fermeture.ToString();
-                txt_horaires.VerticalAlignment = VerticalAlignment.Stretch;
-                txt_horaires.FontWeight = FontWeights.Bold;
-                Grid.SetRow(txt_horaires, 4);
-                Grid.SetColumn(txt_horaires, i + 1);
+                TextBox txt_ouverture = new TextBox();
+                txt_ouverture.Text = salles[i].Heure_ouverture.ToString();
+                txt_ouverture.VerticalAlignment = VerticalAlignment.Stretch;
+                txt_ouverture.FontWeight = FontWeights.Bold;
+                txt_ouverture.Width = 200;
+                Grid.SetRow(txt_ouverture, 8);
+                Grid.SetColumn(txt_ouverture, i + 1);
 
-                Binding bind_horaires = new Binding("EnableModification");
-                bind_horaires.Source = viewModele;
-                txt_horaires.SetBinding(TextBox.IsEnabledProperty, bind_horaires);
+                Binding bind_enableOuverture = new Binding("EnableModification");
+                bind_enableOuverture.Source = viewModele;
+                txt_ouverture.SetBinding(TextBox.IsEnabledProperty, bind_enableOuverture);
 
-                Binding texte_horaires = new Binding("horaireSalle");
-                texte_horaires.Source = viewModele;
-                txt_horaires.SetBinding(TextBox.TextProperty, texte_horaires);
+                Binding heureOuverture = new Binding("horaireSalleOuverture");
+                heureOuverture.Source = viewModele;
+                txt_ouverture.SetBinding(TextBox.TextProperty, heureOuverture);
 
-                grd_listSalle.Children.Add(txt_horaires);
+                grd_listSalle.Children.Add(txt_ouverture);
+
+                TextBox txt_fermeture = new TextBox();
+                txt_fermeture.Text = salles[i].Heure_fermeture.ToString();
+                txt_fermeture.VerticalAlignment = VerticalAlignment.Stretch;
+                txt_fermeture.FontWeight = FontWeights.Bold;
+                txt_fermeture.Width = 200;
+                Grid.SetRow(txt_fermeture, 10);
+                Grid.SetColumn(txt_fermeture, i + 1);
+
+                Binding bind_enableFermeture = new Binding("EnableModification");
+                bind_enableFermeture.Source = viewModele;
+                txt_fermeture.SetBinding(TextBox.IsEnabledProperty, bind_enableFermeture);
+
+                Binding bind_horairesFermeture = new Binding("horaireSalleFermeture");
+                bind_horairesFermeture.Source = viewModele;
+                txt_fermeture.SetBinding(TextBox.TextProperty, bind_horairesFermeture);
+
+                grd_listSalle.Children.Add(txt_fermeture);
 
                 //avis moyen 
                 Button btn_avis = new Button();
@@ -174,7 +218,8 @@ namespace WPFApplication
                 btn_avis.VerticalAlignment = VerticalAlignment.Center;
                 btn_avis.FontWeight = FontWeights.Bold;
                 btn_avis.Click += btn_avis_Click;
-                Grid.SetRow(btn_avis, 5);
+                btn_avis.Width = 200;
+                Grid.SetRow(btn_avis, 12);
                 Grid.SetColumn(btn_avis, i + 1);
                 grd_listSalle.Children.Add(btn_avis);
 
@@ -183,15 +228,19 @@ namespace WPFApplication
                 Button btn_suppr = new Button();
                 btn_suppr.Content = "ARCHIVER";
                 btn_suppr.FontWeight = FontWeights.Bold;
-                btn_suppr.Margin = new Thickness(20, 20, 20, 20);
+                btn_suppr.Width = 175;
 
-                Grid.SetRow(btn_suppr, 6);
+                Grid.SetRow(btn_suppr, 14);
                 Grid.SetColumn(btn_suppr, i + 1);
                 grd_listSalle.Children.Add(btn_suppr);
 
                 Binding bind_archive = new Binding("EnableModification");
                 bind_archive.Source = viewModele;
                 btn_suppr.SetBinding(TextBox.IsEnabledProperty, bind_archive);
+
+                Binding bind_btn = new Binding("Archiver");
+                bind_btn.Source = viewModele;
+                btn_suppr.SetBinding(Button.CommandProperty, bind_btn);
 
                 /*Ajout des bordures
                 Border brd = new Border();
@@ -200,14 +249,11 @@ namespace WPFApplication
                 Grid.SetColumnSpan(brd, 17);
                 Grid.SetRowSpan(brd, i + 2);
                 grd_listSalle.Children.Add(brd);*/
-
-
                 #endregion
             }
-            _viewModele.compteLesView(_lesViews);
-            DataContext = _viewModele;
-
+            _viewModele.compteLesView(lesViews);
         }
+            
 
         private void btn_avis_Click(object sender, RoutedEventArgs e)
         {

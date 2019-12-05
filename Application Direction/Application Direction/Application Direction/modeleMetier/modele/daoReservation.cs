@@ -48,10 +48,5 @@ namespace ModeleMetier.modele
 
             return listReservation;
         }
-
-        public override object update(object o)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
