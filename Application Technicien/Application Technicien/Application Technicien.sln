@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeleMetier", "ModeleMetie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationWPF", "ApplicationWPF\ApplicationWPF.csproj", "{34233F97-AE1A-4440-90C2-9C8E8E8165CA}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupApplicationTechnicien", "SetupApplicationTechnicien\SetupApplicationTechnicien.vdproj", "{C6BD5B7F-0E3D-46F9-9518-CC97CDCD0C59}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupApplicationTechnicien", "SetupApplicationTechnicien\SetupApplicationTechnicien.vdproj", "{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6BD5B7F-0E3D-46F9-9518-CC97CDCD0C59}.Debug|Any CPU.ActiveCfg = Debug
-		{C6BD5B7F-0E3D-46F9-9518-CC97CDCD0C59}.Release|Any CPU.ActiveCfg = Release
+		{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}.Debug|Any CPU.ActiveCfg = Debug
+		{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

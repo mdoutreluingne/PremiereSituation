@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,23 +23,38 @@ namespace ApplicationWPF.Connexion
     /// </summary>
     public partial class ConnexionWindow : Window
     {
-        //_dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
-        //_dbal = new dbal("172.31.135.2","admin","bdd_escape_game","admin");
-        static private dbal _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
-        static private daoUtilisateur _daoUtilisateur = new daoUtilisateur(_dbal);
-        static private daoArticle _daoArticle = new daoArticle(_dbal);
-        static private daoVille _daoVille = new daoVille(_dbal);
-        static private daoTheme _daoTheme = new daoTheme(_dbal);
-        static private daoSalle _daoSalle = new daoSalle(_dbal, _daoVille, _daoTheme);
-        static private daoClient _daoClient = new daoClient(_dbal, _daoVille);
-        static private daoReservation _daoReservation = new daoReservation(_dbal, _daoClient, _daoSalle);
-        static private daoTransaction _daoTransaction = new daoTransaction(_dbal, _daoClient, _daoReservation);
-        static private daoObstacle _daoObstacle = new daoObstacle(_dbal, _daoReservation, _daoArticle);
-        static private daoArticleSalle _daoArticleSalle = new daoArticleSalle(_dbal, _daoArticle, _daoSalle);
-        static private List<dtoUtilisateur> lesUsers = (List<dtoUtilisateur>)_daoUtilisateur.select("*","");
+        //static private dbal _dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
+        static private dbal _dbal;
+        //static private dbal _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
+        static private daoUtilisateur _daoUtilisateur;
+        static private daoArticle _daoArticle;
+        static private daoVille _daoVille;
+        static private daoTheme _daoTheme;
+        static private daoSalle _daoSalle;
+        static private daoClient _daoClient;
+        static private daoReservation _daoReservation;
+        static private daoTransaction _daoTransaction;
+        static private daoObstacle _daoObstacle;
+        static private daoArticleSalle _daoArticleSalle;
+        static private List<dtoUtilisateur> lesUsers;
 
         public ConnexionWindow()
         {
+            if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["bdd"]))
+            {
+                string[] configBdd = ConfigurationSettings.AppSettings["bdd"].Split(',');
+                _dbal = new dbal(configBdd[0], configBdd[1], configBdd[2], configBdd[3]);
+                _daoUtilisateur = new daoUtilisateur(_dbal);
+                _daoArticle = new daoArticle(_dbal);
+                _daoVille = new daoVille(_dbal);
+                _daoTheme = new daoTheme(_dbal);
+                _daoSalle = new daoSalle(_dbal, _daoVille, _daoTheme);
+                _daoClient = new daoClient(_dbal, _daoVille);
+                _daoReservation = new daoReservation(_dbal, _daoClient, _daoSalle);
+                _daoTransaction = new daoTransaction(_dbal, _daoClient, _daoReservation);
+                _daoObstacle = new daoObstacle(_dbal, _daoReservation, _daoArticle);
+                lesUsers = (List<dtoUtilisateur>)_daoUtilisateur.select("*", "");
+            }
             InitializeComponent();
             cmb_ville.SelectedIndex = 0;
             txt_login.Focus();
