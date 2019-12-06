@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using CoucheModele.modele;
 using CoucheModele.metier;
 using WpfComptabilite.viewModel;
+using System.Configuration;
 
 namespace WpfComptabilite
 {
@@ -25,16 +26,28 @@ namespace WpfComptabilite
     {
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
-        static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
-        static private daoVille theDaoVille = new daoVille(bdd);
-        static private daoTheme theDaoTheme = new daoTheme(bdd);
-        static private daoSalle theDaoSalle = new daoSalle(bdd, theDaoVille, theDaoTheme);
-        static private daoClient theDaoClient = new daoClient(bdd, theDaoVille);
-        static private daoReservation theDaoReserv = new daoReservation(bdd, theDaoClient, theDaoSalle);
-        static private daoTransaction theDaoTransac = new daoTransaction(bdd, theDaoClient, theDaoReserv);
+        static private dbal bdd;
+        static private daoVille theDaoVille;
+        static private daoTheme theDaoTheme;
+        static private daoSalle theDaoSalle;
+        static private daoClient theDaoClient;
+        static private daoReservation theDaoReserv;
+        static private daoTransaction theDaoTransac;
         private viewClient vc;
         public MainWindow()
         {
+            if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["BddVm"]))
+            {
+                string[] recup = ConfigurationSettings.AppSettings["BddVm"].Split(',');
+                bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
+            }
+            theDaoVille = new daoVille(bdd);
+            theDaoTheme = new daoTheme(bdd);
+            theDaoSalle = new daoSalle(bdd, theDaoVille, theDaoTheme);
+            theDaoClient = new daoClient(bdd, theDaoVille);
+            theDaoReserv = new daoReservation(bdd, theDaoClient, theDaoSalle);
+            theDaoTransac = new daoTransaction(bdd, theDaoClient, theDaoReserv);
+
             InitializeComponent();
             vc = new viewClient(theDaoTransac, theDaoVille, theDaoClient, bdd, theDaoTheme, theDaoSalle, theDaoReserv);
             principale.DataContext = vc;

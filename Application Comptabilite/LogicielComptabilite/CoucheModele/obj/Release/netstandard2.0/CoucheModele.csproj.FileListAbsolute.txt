@@ -1,0 +1,9 @@
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Release\netstandard2.0\CoucheModele.deps.json
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Release\netstandard2.0\CoucheModele.dll
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\bin\Release\netstandard2.0\CoucheModele.pdb
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.csprojAssemblyReference.cache
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.csproj.CoreCompileInputs.cache
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.AssemblyInfoInputs.cache
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.AssemblyInfo.cs
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.dll
+D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.pdb
