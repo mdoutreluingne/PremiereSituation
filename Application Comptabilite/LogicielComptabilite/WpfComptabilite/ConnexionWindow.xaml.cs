@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,13 +23,28 @@ namespace WpfComptabilite
     public partial class ConnexionWindow : Window
     {
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
-        static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
+        //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
         //static private dbal bdd = new dbal("root", "", 3306, "127.0.0.1", "bdd_escape_game");
-        static private daoUtilisateur unDaoUtilisateur = new daoUtilisateur(bdd);
-        static private List<Utilisateur> lesUsers = new List<Utilisateur>(unDaoUtilisateur.selectAllClient());
+        static private dbal bdd;
+        static private daoUtilisateur unDaoUtilisateur;
+        static private List<Utilisateur> lesUsers;
 
         public ConnexionWindow()
         {
+            if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["BddVm"]))
+            {
+                string[] recup = ConfigurationSettings.AppSettings["BddVm"].Split(',');
+                bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
+            }
+            if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["Localhost"]))
+            {
+                string[] recup = ConfigurationSettings.AppSettings["Localhost"].Split(',');
+                bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
+            }
+
+            unDaoUtilisateur = new daoUtilisateur(bdd);
+            lesUsers = new List<Utilisateur>(unDaoUtilisateur.selectAllClient());
+
             InitializeComponent();
             cmb_ville.SelectedIndex = 0;
             txt_login.Focus();

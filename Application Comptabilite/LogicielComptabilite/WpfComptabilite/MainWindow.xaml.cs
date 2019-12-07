@@ -26,6 +26,7 @@ namespace WpfComptabilite
     {
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.1", "bdd_escape_game");
         //static private dbal bdd = new dbal("admin", "admin", 3306, "172.31.135.2", "bdd_escape_game");
+        //static private dbal bdd = new dbal("admin", "admin", 3306, "127.0.0.1", "bdd_escape_game");
         static private dbal bdd;
         static private daoVille theDaoVille;
         static private daoTheme theDaoTheme;
@@ -41,6 +42,12 @@ namespace WpfComptabilite
                 string[] recup = ConfigurationSettings.AppSettings["BddVm"].Split(',');
                 bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
             }
+            if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["Localhost"]))
+            {
+                string[] recup = ConfigurationSettings.AppSettings["Localhost"].Split(',');
+                bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
+            }
+
             theDaoVille = new daoVille(bdd);
             theDaoTheme = new daoTheme(bdd);
             theDaoSalle = new daoSalle(bdd, theDaoVille, theDaoTheme);
