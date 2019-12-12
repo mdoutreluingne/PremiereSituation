@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< 206edd17f777d8180d5d5ef7612e0ca668f9c26e
 <<<<<<< Updated upstream
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe.config
@@ -122,6 +123,8 @@ D:\EE4\PremiereSituation\Application Direction\Application Direction\Application
 D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Numerics.Vectors.xml
 D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
 =======
+=======
+>>>>>>> directeur
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe.config
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.pdb
@@ -181,4 +184,7 @@ C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Appli
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.CopyComplete
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.exe
 C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.pdb
+<<<<<<< HEAD
 >>>>>>> Debut d'ajout pour nouvelle salle
+=======
+>>>>>>> directeur

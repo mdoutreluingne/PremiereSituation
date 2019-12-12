@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 <<<<<<< 206edd17f777d8180d5d5ef7612e0ca668f9c26e
 <<<<<<< Updated upstream
 =======
 >>>>>>> Debut d'ajout pour nouvelle salle
+=======
+>>>>>>> directeur
 ﻿"DeployProject"
 {
 "VSVersion" = "3:800"
@@ -693,6 +696,7 @@
         }
     }
 }
+<<<<<<< HEAD
 <<<<<<< 206edd17f777d8180d5d5ef7612e0ca668f9c26e
 =======
 ﻿"DeployProject"
@@ -2395,3 +2399,5 @@
 >>>>>>> Stashed changes
 =======
 >>>>>>> Debut d'ajout pour nouvelle salle
+=======
+>>>>>>> directeur

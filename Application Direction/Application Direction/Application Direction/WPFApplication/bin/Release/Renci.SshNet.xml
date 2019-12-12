@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< 206edd17f777d8180d5d5ef7612e0ca668f9c26e
 <?xml version="1.0"?>
 <doc>
@@ -19415,6 +19416,8 @@
     </members>
 </doc>
 =======
+=======
+>>>>>>> directeur
 <?xml version="1.0"?>
 <doc>
     <assembly>
@@ -38830,4 +38833,7 @@
         </member>
     </members>
 </doc>
+<<<<<<< HEAD
 >>>>>>> Debut d'ajout pour nouvelle salle
+=======
+>>>>>>> directeur
