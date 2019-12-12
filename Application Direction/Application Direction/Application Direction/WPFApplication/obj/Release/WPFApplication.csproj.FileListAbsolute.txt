@@ -1,0 +1,122 @@
+<<<<<<< Updated upstream
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe.config
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.pdb
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\BouncyCastle.Crypto.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Base.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.BO.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Console.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.DB.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.Base.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.VWG.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.Win.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\modeleMetier.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\MySql.Data.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Renci.SshNet.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Buffers.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Memory.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Numerics.Vectors.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ZedGraph.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.pdb
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\modeleMetier.pdb
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\MySql.Data.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Renci.SshNet.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Buffers.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Memory.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Numerics.Vectors.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ZedGraph.xml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\de\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\es\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\fr\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\hu\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\it\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ja\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\pt\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ru\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\sk\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\sv\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\tr\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\zh-cn\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\zh-tw\ZedGraph.resources.dll
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csprojAssemblyReference.cache
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\Connexion\ConnexionWindow.g.cs
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\graphique.g.cs
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\MainWindow.g.cs
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\App.g.cs
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication_MarkupCompile.cache
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication_MarkupCompile.lref
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\Connexion\ConnexionWindow.baml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\graphique.baml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\MainWindow.baml
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.g.resources
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.Properties.Resources.resources
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.GenerateResource.cache
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.CopyComplete
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.exe
+C:\Users\barra\OneDrive\Documents\Visual Studio 2019\PPE\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.pdb
+=======
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe.config
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.exe
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\WPFApplication.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\BouncyCastle.Crypto.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Base.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.BO.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Console.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.DB.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.Base.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.VWG.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Habanero.Faces.Win.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\modeleMetier.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\MySql.Data.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Renci.SshNet.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ZedGraph.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Google.Protobuf.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\modeleMetier.pdb
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\MySql.Data.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\Renci.SshNet.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ZedGraph.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\de\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\es\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\fr\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\hu\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\it\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ja\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\pt\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\ru\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\sk\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\sv\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\tr\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\zh-cn\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\zh-tw\ZedGraph.resources.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csprojAssemblyReference.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\Connexion\ConnexionWindow.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\graphique.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\MainWindow.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\App.g.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication_MarkupCompile.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication_MarkupCompile.lref
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\Connexion\ConnexionWindow.baml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\graphique.baml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\MainWindow.baml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.g.resources
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.Properties.Resources.resources
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.GenerateResource.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.CoreCompileInputs.cache
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.csproj.CopyComplete
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.exe
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\WPFApplication.pdb
+>>>>>>> Stashed changes
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Buffers.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Memory.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Numerics.Vectors.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Buffers.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Memory.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Numerics.Vectors.xml
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\bin\Release\System.Runtime.CompilerServices.Unsafe.xml

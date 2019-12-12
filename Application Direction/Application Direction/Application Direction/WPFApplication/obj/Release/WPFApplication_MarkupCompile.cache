@@ -1,3 +1,4 @@
+<<<<<<< 206edd17f777d8180d5d5ef7612e0ca668f9c26e
 ﻿WPFApplication
 
 
@@ -18,3 +19,25 @@ Connexion\ConnexionWindow.xaml;graphique.xaml;MainWindow.xaml;
 
 True
 
+=======
+﻿WPFApplication
+
+
+winexe
+C#
+.cs
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\obj\Release\
+WPFApplication
+none
+false
+TRACE
+D:\EE4\PremiereSituation\Application Direction\Application Direction\Application Direction\WPFApplication\App.xaml
+3-289582557
+
+10-1029244596
+14365107086
+Connexion\ConnexionWindow.xaml;graphique.xaml;MainWindow.xaml;
+
+False
+
+>>>>>>> Auto stash before merge of "directeur" and "origin/directeur"

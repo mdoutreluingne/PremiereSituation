@@ -23,9 +23,9 @@ namespace ApplicationWPF.Connexion
     /// </summary>
     public partial class ConnexionWindow : Window
     {
-        //_dbal = new dbal("172.31.135.1","admin","bdd_escape_game","admin");
+        static private dbal _dbal = new dbal("172.31.135.2","admin","bdd_escape_game","admin");
         //_dbal = new dbal("172.31.135.2","admin","bdd_escape_game","admin");
-        static private dbal _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
+        //static private dbal _dbal = new dbal("127.0.0.1", "root", "bdd_escape_game", "");
         static private daoUtilisateur _daoUtilisateur = new daoUtilisateur(_dbal);
         static private daoVille _daoVille = new daoVille(_dbal);
         static private daoTheme _daoTheme = new daoTheme(_dbal);

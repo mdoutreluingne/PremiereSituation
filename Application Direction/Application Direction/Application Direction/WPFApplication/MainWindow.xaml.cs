@@ -34,7 +34,7 @@ namespace WPFApplication
         {
             InitializeComponent();
 
-            //dans le code alexis --> xaml.cs -> l.209 -> exemple de ce qu'il y à faire. 
+       
 
             _daoSalle = daoSalle;
             _daoAvis = daoAvis;
