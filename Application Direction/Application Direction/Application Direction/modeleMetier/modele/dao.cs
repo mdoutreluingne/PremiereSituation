@@ -12,7 +12,7 @@ namespace ModeleMetier.modele
         {
             _dbal = dbal;
         }
-        public abstract void insert(object o);
+      
         /// <summary>
         /// Select d'un element
         /// </summary>

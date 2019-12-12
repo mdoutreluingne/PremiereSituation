@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +23,7 @@ namespace WPFApplication
         private static viewModele _instance = null;
         private static readonly object _padlock = new object();
 
-        public List<viewModele> _lesViews; 
+        public List<viewModele> _lesViews;
         private daoAvis _daoavis;
         private daoPartie _daopartie;
         private daoTheme _daoTheme;
@@ -46,7 +47,9 @@ namespace WPFApplication
 
         private ICommand _commandArchiver;
         private ICommand _commandStatitique;
-        private ICommand _desarchiver; 
+        private ICommand _desarchiver;
+
+        private ICommand _ajout;
 
 
         private int _Id;
@@ -58,7 +61,7 @@ namespace WPFApplication
         private string _horaireFermeture;
 
 
-        public viewModele(daoAvis daoAvis,daoSalle daoSalle, dtoSalle laSalle, daoVille daoVille, daoPartie daopartie, daoTheme daoTheme, MainWindow mainWindow, List<dtoSalle> les_salles, List<dtoAvis> les_avis)
+        public viewModele(daoAvis daoAvis, daoSalle daoSalle, dtoSalle laSalle, daoVille daoVille, daoPartie daopartie, daoTheme daoTheme, MainWindow mainWindow, List<dtoSalle> les_salles, List<dtoAvis> les_avis)
         {
             _main = mainWindow;
             _daoavis = daoAvis;
@@ -69,7 +72,7 @@ namespace WPFApplication
             _salle = laSalle;
             _lesSalles = les_salles;
             _lesAvis = les_avis;
-            if(laSalle != null)
+            if (laSalle != null)
             {
                 _Id = laSalle.Id;
                 _NomVille = laSalle.DtoVille.Nom;
@@ -79,15 +82,15 @@ namespace WPFApplication
                 _horaireOuverture = laSalle.Heure_ouverture.ToShortTimeString();
                 _horaireFermeture = laSalle.Heure_fermeture.ToShortTimeString();
             }
-        IsVisible = Visibility.Hidden;
+            IsVisible = Visibility.Hidden;
         }
 
-     
+
         public string NomVille //gère les villes des salles 
         {
-            get 
+            get
             {
-                return _NomVille; 
+                return _NomVille;
             }
             set
             {
@@ -161,6 +164,9 @@ namespace WPFApplication
             }
         }
 
+    
+        
+
         public void OnPropertyChanged([CallerMemberName]string caller = null)
         {
             if (PropertyChanged != null)
@@ -217,6 +223,17 @@ namespace WPFApplication
             }
         }
 
+        public ICommand Ajout
+        {
+            get
+            {
+                if (this._ajout == null)
+                    this._ajout = new RelayCommand(() => this.ajout(), () => true);
+
+
+                return this._ajout;
+            }
+        }
         public ICommand Valider //permet de valider les modifications en faisant appel à la méthode valider 
         {
             get
@@ -368,6 +385,48 @@ namespace WPFApplication
             EnableModification = false;
         }
 
+        public void ajout()
+        {
+            string message = "Voulez-vous ajouter une salle ?";
+            string title = "Validation";
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult result = MessageBox.Show(message, title, buttons);
+            if(result == DialogResult.Yes)
+            {
+                Window addSalle = new Window();
+
+                Label lbl_Ville = new Label();
+                Label lbl_numero = new Label();
+                Label lbl_prix = new Label();               
+                Label lbl_heure_ouverture = new Label();
+                Label lbl_fermeture = new Label();
+                Label lbl_archive = new Label();
+                Label lbl_theme = new Label();
+
+                TextBox txt_ville_id = new TextBox();
+                TextBox txt_numero = new TextBox();
+                TextBox txt_prix = new TextBox();
+                TextBox txt_heure_ouverture = new TextBox();
+                TextBox txt_heure_fermeture = new TextBox();
+                TextBox txt_archive = new TextBox();
+                TextBox txt_theme = new TextBox();
+
+
+
+                addSalle.Content = lbl_Ville.Text = "Dans quelle ville ?: ";
+                addSalle.Content = addSalle.Content.ToString() + txt_ville_id.Enabled;
+
+
+
+                addSalle.Show(); 
+
+            }
+
+
+
+        }
+
+
 
         public void compteLesView(List<viewModele> uneListe)
         {
@@ -415,6 +474,8 @@ namespace WPFApplication
                 EnableModification = false;
             }
         }
+
+ 
 
         #endregion
 

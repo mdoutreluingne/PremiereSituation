@@ -17,9 +17,11 @@ namespace ModeleMetier.modele
             _daoTheme = daoTheme;
         }
 
-        public override void insert(object o)
+        public  void insert(dtoSalle Salle)
         {
-            throw new NotImplementedException();
+            string query = "INSERT INTO salle VALUES("+ Salle.Id+ ","+Salle.DtoVille.Id + "," +Salle.Numero + ","
+                +Salle.Prix + "," +Salle.Heure_ouverture + "," +Salle.Heure_fermeture + "," +Salle.Archive + ","+Salle.DtoTheme.Id+";";
+            _dbal.insert(query); 
         }
 
         public override object select(string elements, string join_where)

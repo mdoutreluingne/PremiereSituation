@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "modeleMetier", "modeleMetie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPFApplication\WPFApplication.csproj", "{DA77B668-AD30-4EB8-9945-CC62823EED6F}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ApplicationDirection", "ApplicationDirection\ApplicationDirection.vdproj", "{439E8CC4-51CF-4BF6-9079-4B39C63E2886}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{DA77B668-AD30-4EB8-9945-CC62823EED6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA77B668-AD30-4EB8-9945-CC62823EED6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA77B668-AD30-4EB8-9945-CC62823EED6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{439E8CC4-51CF-4BF6-9079-4B39C63E2886}.Debug|Any CPU.ActiveCfg = Debug
+		{439E8CC4-51CF-4BF6-9079-4B39C63E2886}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
