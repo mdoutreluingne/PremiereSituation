@@ -205,6 +205,7 @@ namespace ApplicationWPF.MVVM
                     Nouveau = true;
                     _id = -1;
                     Salle = value.DtoSalle;
+                    //A CORRIGER SALLE -1 = 7-1 = 6 
                     this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
                     Date = value.Date;
                     Heure = value.Date.TimeOfDay.ToString();
