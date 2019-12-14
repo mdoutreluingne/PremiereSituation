@@ -14,3 +14,4 @@ C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\Logi
 C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.AssemblyInfo.cs
 C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.dll
 C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.pdb
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\CoucheModele\obj\Release\netstandard2.0\CoucheModele.csprojAssemblyReference.cache

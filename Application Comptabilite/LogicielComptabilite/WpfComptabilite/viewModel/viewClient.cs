@@ -139,7 +139,11 @@ namespace WpfComptabilite.viewModel
         }
         public Client ClientActif
         {
-            get => _clientActif;
+            get 
+            {
+                IsEnableGridUser = true; //Réactive la grid après avoir archiver puis sélectionner un client
+                return _clientActif; 
+            }
             set
             {
                 if (value != null)
@@ -164,7 +168,7 @@ namespace WpfComptabilite.viewModel
                     OnPropertyChanged("Lesclients");
                     OnPropertyChanged("SelectVille");
                     OnPropertyChanged("LesVillesVisible");
-                    
+
                 }
             }
         }
@@ -301,6 +305,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("Commentaire");
             } 
         }
+        #region IsEnable
         public bool IsEnableLesClients
         {
             get => _isEnableLesClients;
@@ -375,7 +380,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("IsEnableGridUser");
             }
         }
-
+        #endregion
 
         public ObservableCollection<Transaction> LesHistoriques 
         {
@@ -571,9 +576,7 @@ namespace WpfComptabilite.viewModel
 
                 return this.filterClient;
             }
-        }
-
-        
+        }      
 
         #region Méthodes
         public void ajouterClient()
@@ -741,7 +744,6 @@ namespace WpfComptabilite.viewModel
             if (this.collectionViewClient.CurrentItem != null)
             {
                 ClientActif = this.collectionViewClient.CurrentItem as Client;
-                IsEnableGridUser = true;
             }
             if (this.collectionViewHistoriques.CurrentItem != null)
             {
