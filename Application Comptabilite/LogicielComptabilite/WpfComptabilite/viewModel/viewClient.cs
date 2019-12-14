@@ -43,6 +43,7 @@ namespace WpfComptabilite.viewModel
         private bool _autreBoutonVisible = true;
         private bool _lesVillesVisible = false;
         private bool _lesClientsVisible = true;
+        private bool _isEnableGridUser = true;
         private object _soldes = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
@@ -263,7 +264,15 @@ namespace WpfComptabilite.viewModel
                 _soldes = unDaoTransac.soldes_client(_clientActif.Id);
                 return _soldes; 
             }
-            
+            set
+            {
+                if (_soldes != value)
+                {
+                    _soldes = value;
+                    OnPropertyChanged("Soldes");
+                }
+            }
+
         }
         public string NumCheque 
         { 
@@ -354,6 +363,16 @@ namespace WpfComptabilite.viewModel
             {
                 _isEnabledNumCheque = value;
                 OnPropertyChanged("IsEnabledNumCheque");
+            }
+        }
+
+        public bool IsEnableGridUser 
+        { 
+            get => _isEnableGridUser;
+            set
+            {
+                _isEnableGridUser = value;
+                OnPropertyChanged("IsEnableGridUser");
             }
         }
 
@@ -554,6 +573,8 @@ namespace WpfComptabilite.viewModel
             }
         }
 
+        
+
         #region Méthodes
         public void ajouterClient()
         {
@@ -616,6 +637,7 @@ namespace WpfComptabilite.viewModel
                         IsEnableLesClients = true;
                         LesVillesVisible = false;
                         LesClientsVisible = true;
+                        IsEnableGridUser = true;
                     }
                     
                 }
@@ -626,8 +648,11 @@ namespace WpfComptabilite.viewModel
         {
             _clientActif.Ville_id.Id = unDaoVille.selectByNom(ClientActif.Ville_id.Nom); //Récupère l'id du pays saisie
             unDaoClient.update(ClientActif);
+            this.collectionViewClient.MoveCurrentTo(ClientActif);
+            
+            _lesclients = new ObservableCollection<Client>(unDaoClient.selectAllClient());
             this.collectionViewClient.Refresh();
-            this.collectionViewClient.MoveCurrentTo(null);
+
             IsEnableNom = false;
             IsEnablePrenom = false;
             IsEnableVille = false;
@@ -640,14 +665,6 @@ namespace WpfComptabilite.viewModel
             LesClientsVisible = true;
             SelectClient = string.Empty;
 
-            //Met les champs vide
-            ClientActif = new Client();
-            TransactionActive = new Transaction();
-            this.collectionViewClient.MoveCurrentTo(null);
-            this.collectionViewClient.Refresh();
-            this.collectionViewHistoriques.MoveCurrentTo(null);
-            this.collectionViewHistoriques.Refresh();
-
         }
         public void archiverClient()
         {
@@ -655,6 +672,7 @@ namespace WpfComptabilite.viewModel
             this.collectionViewClient.Refresh();
             this.collectionViewClient.MoveCurrentTo(null);
             SelectClient = string.Empty;
+            IsEnableGridUser = false;
 
             //Met les champs vide
             ClientActif = new Client();
@@ -699,12 +717,7 @@ namespace WpfComptabilite.viewModel
                 _transactionActive = new Transaction(null, date, Montant, _modeAddCreditActif, NumCheque, Commentaire, null, c);
                 _lesHistoriques.Add(_transactionActive);
                 unDaoTransac.insert(_transactionActive);
-                this.collectionViewHistoriques.Refresh();
-                NumCheque = string.Empty;
-                ModeAddCreditActif = string.Empty;
-                Montant = 0;
-                Commentaire = string.Empty;
-                SelectClient = string.Empty;
+                OnPropertyChanged("Soldes");
             }
             else
             {
@@ -721,13 +734,14 @@ namespace WpfComptabilite.viewModel
         }
         public void autocomplete_client()
         {
-            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%' AND archive = 0;"));
+            Lesclients = new ObservableCollection<Client>(unDaoClient.selectFilter("*", "WHERE nom LIKE '" + _clientSaisie + "%' AND archive = 0 ORDER BY nom ASC;"));
         }
         private void OnCollectionViewCurrentChanged(object sender, EventArgs e)
         {
             if (this.collectionViewClient.CurrentItem != null)
             {
                 ClientActif = this.collectionViewClient.CurrentItem as Client;
+                IsEnableGridUser = true;
             }
             if (this.collectionViewHistoriques.CurrentItem != null)
             {
@@ -749,6 +763,7 @@ namespace WpfComptabilite.viewModel
             IsEnableLesClients = false;
             LesVillesVisible = true;
             LesClientsVisible = false;
+            IsEnableGridUser = false;
 
             ClientActif = new Client();
             TransactionActive = new Transaction();

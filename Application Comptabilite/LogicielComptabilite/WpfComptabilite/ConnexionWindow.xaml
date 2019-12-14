@@ -23,9 +23,9 @@
             <System:String>Bonneville-</System:String>
             <System:String>Chamonix-</System:String>
         </ComboBox>
-        <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="180" Margin="377,128,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
         <PasswordBox x:Name="pass_confirm" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="32" Width="180" Margin="377,252,0,0" FontFamily="Segoe UI Semibold" FontSize="14" Visibility="Hidden"/>
         <TextBox x:Name="txt_login" Height="30" TextWrapping="Wrap" Text="" Width="180" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="377,70,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
+        <PasswordBox x:Name="pass" PasswordChar="*" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Width="180" Margin="377,128,0,0" FontFamily="Segoe UI Semibold" FontSize="14"/>
         <Label Content="Connexion" HorizontalAlignment="Left" VerticalAlignment="Top" Width="792" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" FontFamily="Segoe UI Semibold" Foreground="White"/>
         <Label Content="Login :" HorizontalAlignment="Left" Margin="377,44,0,0" VerticalAlignment="Top" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
         <Label Content="Mot de passe :" HorizontalAlignment="Left" Margin="377,100,0,0" VerticalAlignment="Top" Width="180" FontStyle="Italic" FontWeight="Bold" Foreground="White"/>
