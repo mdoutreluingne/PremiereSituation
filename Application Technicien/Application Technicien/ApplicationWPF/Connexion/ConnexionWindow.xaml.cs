@@ -42,12 +42,12 @@ namespace ApplicationWPF.Connexion
             {
                 string[] configBdd = ConfigurationSettings.AppSettings["bdd"].Split(',');
                 _dbal = new dbal(configBdd[0], configBdd[1], configBdd[2], configBdd[3]);
-                _daoUtilisateur = new daoUtilisateur(_dbal);
                 _daoArticle = new daoArticle(_dbal);
                 _daoVille = new daoVille(_dbal);
                 _daoTheme = new daoTheme(_dbal);
                 _daoSalle = new daoSalle(_dbal, _daoVille, _daoTheme);
                 _daoClient = new daoClient(_dbal, _daoVille);
+                _daoUtilisateur = new daoUtilisateur(_dbal, _daoClient);
                 _daoReservation = new daoReservation(_dbal, _daoClient, _daoSalle);
                 _daoTransaction = new daoTransaction(_dbal, _daoClient, _daoReservation);
                 _daoObstacle = new daoObstacle(_dbal, _daoReservation, _daoArticle);

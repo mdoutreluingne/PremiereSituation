@@ -8,10 +8,11 @@ namespace ModeleMetier.modele
 {
     public class daoUtilisateur : dao
     {
-        public daoUtilisateur(dbal dbal)
+        private daoClient _daoClient;
+        public daoUtilisateur(dbal dbal, daoClient daoClient)
             : base(dbal)
         {
-
+            _daoClient = daoClient;
         }
 
         public override void insert(object o)
@@ -36,7 +37,12 @@ namespace ModeleMetier.modele
                 string login = (string)table[0].Rows[i]["login"];
                 string mdp = (string)table[0].Rows[i]["mdp"];
                 string role = (string)table[0].Rows[i]["role"];
-                listUtilisateur.Add(new dtoUtilisateur(login, mdp, role));
+                int client_id = (int)table[0].Rows[i]["client_id"];
+
+                List<dtoClient> lesClients = (List<dtoClient>)_daoClient.select("*", "WHERE id = " + client_id);
+                dtoClient client = lesClients[0];
+
+                listUtilisateur.Add(new dtoUtilisateur(login, mdp, role, client));
             }
             return listUtilisateur;
         }
