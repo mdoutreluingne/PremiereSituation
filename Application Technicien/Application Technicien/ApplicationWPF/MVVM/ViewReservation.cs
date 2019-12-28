@@ -31,6 +31,7 @@ namespace ApplicationWPF.MVVM
         private readonly ICollectionView collectionViewSalles;
         private readonly ICollectionView collectionViewHeures;
 
+        private List<string> _numSalles;
         private bool _enablePayement;
         private int _id;
         private dtoSalle _salle;
@@ -66,9 +67,17 @@ namespace ApplicationWPF.MVVM
             _daoClient = daoClient;
             _daoVille = daoVille;
             _daoTransaction = daoTransaction;
+
             _les_salles = new ObservableCollection<dtoSalle>(les_salles);
             _les_clients = new ObservableCollection<dtoClient>();
             _les_heures = new ObservableCollection<string>(les_heures);
+
+            _numSalles = new List<string>();
+            foreach (dtoSalle s in les_salles)
+            {
+                _numSalles.Add(s.Numero.ToString());
+            }
+
             this.collectionViewSalles = CollectionViewSource.GetDefaultView(this._les_salles);
             if (this.collectionViewSalles == null) throw new NullReferenceException("collectionView");
             this.collectionViewSalles.CurrentChanged += new EventHandler(this.OnCollectionViewCurrentChanged);
@@ -176,7 +185,7 @@ namespace ApplicationWPF.MVVM
                     Nouveau = false;
                     _id = value.Id;
                     Salle = value.DtoSalle;
-                    this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
+                    this.collectionViewSalles.MoveCurrentToPosition(_numSalles.IndexOf(value.DtoSalle.Numero.ToString()));
                     _client = value.Client;
                     Nom = value.Client.Nom;
                     Prenom = value.Client.Prenom;
@@ -206,7 +215,7 @@ namespace ApplicationWPF.MVVM
                     _id = -1;
                     Salle = value.DtoSalle;
                     //A CORRIGER SALLE -1 = 7-1 = 6 
-                    this.collectionViewSalles.MoveCurrentToPosition(value.DtoSalle.Numero - 1);
+                    this.collectionViewSalles.MoveCurrentToPosition(_numSalles.IndexOf(value.DtoSalle.Numero.ToString()));
                     Date = value.Date;
                     Heure = value.Date.TimeOfDay.ToString();
                     this.collectionViewHeures.MoveCurrentTo(value.Date.TimeOfDay.ToString());

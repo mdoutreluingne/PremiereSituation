@@ -37,10 +37,15 @@ namespace ModeleMetier.modele
                 string login = (string)table[0].Rows[i]["login"];
                 string mdp = (string)table[0].Rows[i]["mdp"];
                 string role = (string)table[0].Rows[i]["role"];
-                int client_id = (int)table[0].Rows[i]["client_id"];
+                object client_id = (object)table[0].Rows[i]["client_id"];
 
-                List<dtoClient> lesClients = (List<dtoClient>)_daoClient.select("*", "WHERE id = " + client_id);
-                dtoClient client = lesClients[0];
+                dtoClient client = null;
+                
+                if (client_id.GetType() != typeof(DBNull))
+                {
+                    List<dtoClient> lesClients = (List<dtoClient>)_daoClient.select("*", "WHERE id = " + client_id);
+                    client = lesClients[0];
+                }
 
                 listUtilisateur.Add(new dtoUtilisateur(login, mdp, role, client));
             }

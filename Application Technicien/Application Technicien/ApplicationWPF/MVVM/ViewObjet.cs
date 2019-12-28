@@ -601,7 +601,7 @@ namespace ApplicationWPF.MVVM
             get
             {
                 if (this._commandFinResa == null)
-                    this._commandFinResa = new RelayCommand(() => this.finResa(), () => true);
+                    this._commandFinResa = new RelayCommand(() => this.finResa(false), () => true);
 
                 return this._commandFinResa;
             }
@@ -755,33 +755,37 @@ namespace ApplicationWPF.MVVM
         /// <summary>
         /// Création de la réservation
         /// </summary>
-        public void finResa()
+        public void finResa(bool bypass)
         {
-            string obstaclesString = "";
-            foreach (var o in _les_obstacles)
+            MessageBoxResult mr = MessageBoxResult.Yes;
+            if (!bypass)
             {
-                obstaclesString += "    - " + o + "\n";
+                string obstaclesString = "";
+                foreach (var o in _les_obstacles)
+                {
+                    obstaclesString += "    - " + o + "\n";
+                }
+                string message = "===== Résumé de la réservation ====="
+                    + "\nClient : " + _reservation.Client
+                    + "\nSalle : " + _reservation.DtoSalle.Numero
+                    + "\nDate : " + _reservation.Date
+                    + "\nNombre de joueurs : " + _reservation.NbJoueur
+                    + "\nCommentaire : " + _reservation.Commentaire
+                    + "\nObstacles : \n" + obstaclesString
+                    + "\nPrix Total : " + _prix
+                    + "\nSolde Restant : " + (_solde - _prix);
+                if (_solde - _prix <= 0)
+                {
+                    message += "\n\n /!\\ Solde non suffisant, de l'argent doit être ajouté au préalable !"
+                            + "\nVoulez vous quand même sauvegarder la réservation ?";
+                }
+                else
+                {
+                    message += "\n\nVoulez vous valider la réservation ?";
+                }
+                mr = MessageBox.Show(message, "Valider la réservation", MessageBoxButton.YesNo);
             }
-            string message = "===== Résumé de la réservation ====="
-                + "\nClient : " + _reservation.Client
-                + "\nSalle : " + _reservation.DtoSalle.Numero
-                + "\nDate : " + _reservation.Date
-                + "\nNombre de joueurs : " + _reservation.NbJoueur
-                + "\nCommentaire : " + _reservation.Commentaire
-                + "\nObstacles : \n" + obstaclesString
-                + "\nPrix Total : " + _prix
-                + "\nSolde Restant : " + (_solde - _prix);
-            if (_solde - _prix <= 0)
-            {
-                message += "\n\n /!\\ Solde non suffisant, de l'argent doit être ajouté au préalable !"
-                        + "\nVoulez vous quand même sauvegarder la réservation ?";
-            }
-            else
-            {
-                message += "\n\nVoulez vous valider la réservation ?";
-            }
-            MessageBoxResult mr = MessageBox.Show(message, "Valider la réservation", MessageBoxButton.YesNo);
-            if (mr == MessageBoxResult.Yes)
+            if (mr == MessageBoxResult.Yes || bypass)
             {
                 if (!_nouveau)
                 {
@@ -796,12 +800,15 @@ namespace ApplicationWPF.MVVM
                 {
                     _daoObstacle.insert(o);
                 }
-                ViewDate.Instance(null, null, null, null).DateSelect = DateTime.Today;
-                _les_obstacles.Clear();
-                Visibilite = Visibility.Hidden;
-                _viewPlanning.Visibilite = Visibility.Visible;
-                ViewDate.Instance(null, null, null, null).Visibilite = Visibility.Visible;
-                ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
+                if (!bypass)
+                {
+                    ViewDate.Instance(null, null, null, null).DateSelect = DateTime.Today;
+                    _les_obstacles.Clear();
+                    Visibilite = Visibility.Hidden;
+                    _viewPlanning.Visibilite = Visibility.Visible;
+                    ViewDate.Instance(null, null, null, null).Visibilite = Visibility.Visible;
+                    ViewReservation.Instance(null, null, null, null, null, null, null, Visibility.Hidden).SelectClient = null;
+                }
             }
         }
 
@@ -829,6 +836,7 @@ namespace ApplicationWPF.MVVM
         /// </summary>
         public void payerReservation()
         {
+            finResa(true);
             MessageBoxResult mr = MessageBox.Show("Êtes vous sûr de vouloir payer la réservation ?", "Suppression", MessageBoxButton.YesNo);
             if (mr == MessageBoxResult.Yes)
             {

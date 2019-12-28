@@ -52,7 +52,7 @@ namespace ApplicationWPF.Connexion
                 _daoTransaction = new daoTransaction(_dbal, _daoClient, _daoReservation);
                 _daoObstacle = new daoObstacle(_dbal, _daoReservation, _daoArticle);
                 _daoArticleSalle = new daoArticleSalle(_dbal, _daoArticle, _daoSalle);
-                lesUsers = (List<dtoUtilisateur>)_daoUtilisateur.select("*", "");
+                lesUsers = (List<dtoUtilisateur>)_daoUtilisateur.select("*", "WHERE client_id IS NULL");
             }
             InitializeComponent();
             cmb_ville.SelectedIndex = 0;
