@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -41,7 +42,7 @@ namespace WpfComptabilite
             cmb_ville.SelectedIndex = 0;
             txt_login.Focus();
         }
-        //PERSONNE NE TOUCHE AU CODE
+        
         private void connecter_Click(object sender, RoutedEventArgs e)
         {  
             string login = cmb_ville.Text + txt_login.Text;
@@ -52,7 +53,24 @@ namespace WpfComptabilite
             {
                 if (login.Contains(user.Login) == true)
                 {
-                    if (pass.Password.Contains(user.Mdp) == true)
+                    string source = pass.Password; //Password saisie
+                    bool connect = false;
+
+                    using (MD5 md5Hash = MD5.Create())
+                    {
+                        string hash = user.Mdp;
+
+                        if (VerifyMd5Hash(md5Hash, source, hash)) //Test si les 2 passwords cryptés sont identiques
+                        {
+                            connect = true;
+                        }
+                        else
+                        {
+                            connect = false;
+                        }
+                    }
+
+                    if (connect == true) //Si les password sont identiques
                     {
                         MainWindow logicielCompta = new MainWindow();
                         logicielCompta.Show(); //Ouvre la fenetre
@@ -84,6 +102,45 @@ namespace WpfComptabilite
                 MessageBox.Show("Mot de passe incorrect", "Erreur de connexion", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+        }
+        static string GetMd5Hash(MD5 md5Hash, string input)
+        {
+
+            // Convert the input string to a byte array and compute the hash.
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes
+            // and create a string.
+            StringBuilder sBuilder = new StringBuilder();
+
+            // Loop through each byte of the hashed data 
+            // and format each one as a hexadecimal string.
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string.
+            return sBuilder.ToString();
+        }
+
+        // Verify a hash against a string.
+        static bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
+        {
+            // Hash the input.
+            string hashOfInput = GetMd5Hash(md5Hash, input);
+
+            // Create a StringComparer an compare the hashes.
+            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+
+            if (0 == comparer.Compare(hashOfInput, hash))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void btn_modif_pass_Click(object sender, RoutedEventArgs e)

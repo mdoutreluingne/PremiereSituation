@@ -23,7 +23,7 @@ namespace CoucheModele.modele
             DataRow datarow = this.dbal.SelectById("reservation", id);
             Client unClient = unDaoClient.selectById((int)datarow["client_id"]);
             Salle uneSalle = unDaoSalle.selectById((int)datarow["salle_id"]);
-            return new Reservation((int)(datarow["id"]), (DateTime)datarow["date"], (string)datarow["commentaire"], (int)datarow["nbJoueur"], unClient, uneSalle);
+            return new Reservation((int)(datarow["id"]), (DateTime)datarow["date"], (string)datarow["commentaire"], (int)datarow["nb_joueur"], unClient, uneSalle);
         }
 
     }

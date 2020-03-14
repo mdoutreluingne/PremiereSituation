@@ -204,3 +204,11 @@ C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\Logi
 C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\ConnexionWindow.baml
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\ConnexionWindow.g.cs
 D:\doutreluingne\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\obj\Debug\ConnexionWindow.baml
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Buffers.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Memory.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Buffers.xml
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Memory.xml
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Unknown\source\repos\e4\PremiereSituation\Application Comptabilite\LogicielComptabilite\WpfComptabilite\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

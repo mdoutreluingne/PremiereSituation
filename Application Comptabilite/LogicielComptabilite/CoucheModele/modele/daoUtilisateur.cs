@@ -26,7 +26,7 @@ namespace CoucheModele.modele
             {
                 string login = table.Rows[i]["login"].ToString();
                 string mdp = table.Rows[i]["mdp"].ToString();
-                string role = table.Rows[i]["role"].ToString();
+                string role = table.Rows[i]["roles"].ToString();
                 lesUsers.Add(new Utilisateur(login, mdp, role));
 
             }
