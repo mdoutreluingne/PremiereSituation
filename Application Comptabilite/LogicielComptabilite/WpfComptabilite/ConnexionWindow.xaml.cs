@@ -160,19 +160,22 @@ namespace WpfComptabilite
             bool erreur_login = false;
             bool erreur_pass = false;
             bool comfirm_pass = false;
+            MD5 md5Hash = MD5.Create();
+            string AncienPasswordCrypte = GetMd5Hash(md5Hash, pass.Password);
+            string NouveauPasswordCrypte = GetMd5Hash(md5Hash, pass_new.Password);
+            string NouveauPasswordComfirmCrypte = GetMd5Hash(md5Hash, pass_confirm.Password);
 
             if (txt_login.Text != "" || pass.Password != "")
             {
-                foreach (Utilisateur user in lesUsers)
+                foreach (Utilisateur user in lesUsers) //Parcourt les utilisateurs de la bdd
                 {
                     if (login.Contains(user.Login) == true)
                     {
-                        if (pass.Password.Contains(user.Mdp) == true)
-                        {
-                            
-                            if (pass_new.Password == pass_confirm.Password)
+                        if (AncienPasswordCrypte.Contains(user.Mdp) == true)
+                        {    
+                            if (NouveauPasswordCrypte == NouveauPasswordComfirmCrypte)
                             {
-                                unDaoUtilisateur.update("UPDATE utilisateur SET mdp = '" + pass_new.Password + "' WHERE login = '" + login + "'");
+                                unDaoUtilisateur.update("UPDATE utilisateur SET mdp = '" + NouveauPasswordCrypte + "' WHERE login = '" + login + "'");
                                 lbl_new_mdp.Visibility = Visibility.Hidden;
                                 pass_new.Visibility = Visibility.Hidden;
                                 lbl_comfirm_pass.Visibility = Visibility.Hidden;
