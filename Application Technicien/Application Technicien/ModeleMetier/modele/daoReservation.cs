@@ -67,7 +67,9 @@ namespace ModeleMetier.modele
         public override object select(string elements, string join_where)
         {
             List<dtoReservation> listReservation = new List<dtoReservation>();
+            Console.WriteLine(elements);
             string request = "SELECT " + elements + " FROM reservation " + join_where + ";";
+            Console.WriteLine(request);
             DataTableCollection table = _dbal.select(request);
 
             for (int i = 0; i < table[0].Rows.Count; i++)
@@ -75,7 +77,7 @@ namespace ModeleMetier.modele
                 int id = (int)table[0].Rows[i]["id"];
                 DateTime date = Convert.ToDateTime(table[0].Rows[i]["date"].ToString());
                 string commentaire = (string)table[0].Rows[i]["commentaire"];
-                int nbJoueur = (int)table[0].Rows[i]["nbJoueur"];
+                int nbJoueur = (int)table[0].Rows[i]["nb_joueur"];
                 int client_id = (int)table[0].Rows[i]["client_id"];
                 int salle_id = (int)table[0].Rows[i]["salle_id"];
 
