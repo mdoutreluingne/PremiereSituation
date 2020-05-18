@@ -36,7 +36,7 @@ namespace ModeleMetier.modele
             {
                 string login = (string)table[0].Rows[i]["login"];
                 string mdp = (string)table[0].Rows[i]["mdp"];
-                string role = (string)table[0].Rows[i]["role"];
+                string role = (string)table[0].Rows[i]["roles"];
                 object client_id = (object)table[0].Rows[i]["client_id"];
 
                 dtoClient client = null;

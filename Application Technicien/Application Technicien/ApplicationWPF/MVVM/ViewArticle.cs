@@ -570,11 +570,11 @@ namespace ApplicationWPF.MVVM
                     List<dtoArticle> article_id = (List<dtoArticle>)_daoArticle.select("*", "ORDER BY id DESC LIMIT 1");
                     id = article_id[0].Id + 1;
                     dtoArticle article = new dtoArticle(id, Libelle, Prix, false);
+                    _daoArticle.insert(article);
                     for (int i = 1; i < _les_salles_select.Count; i++)
                     {
                         _daoArticleSalle.insert(id, _les_salles_select[i].Id);
                     }
-                    _daoArticle.insert(article);
                     _les_articles.Add(article);
                     VisibiliteAjout = Visibility.Hidden;
                     LesArticles = null;

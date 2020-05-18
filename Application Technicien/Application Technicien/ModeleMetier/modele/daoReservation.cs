@@ -59,7 +59,7 @@ namespace ModeleMetier.modele
             string request = "update reservation SET "
                 + "date = '" + date
                 + "',commentaire = '" + commentaire
-                + "',nbJoueur = " + reservation.NbJoueur
+                + "',nb_joueur = " + reservation.NbJoueur
                 + ",client_id = " + reservation.Client.Id
                 + ",salle_id = " + reservation.DtoSalle.Id + " " + where;
             _dbal.command(request);
