@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeleMetier", "ModeleMetier\ModeleMetier.csproj", "{2ABF3636-4E12-4D52-9C68-A52E24A9BB1C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationWPF", "ApplicationWPF\ApplicationWPF.csproj", "{34233F97-AE1A-4440-90C2-9C8E8E8165CA}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupApplicationTechnicien", "SetupApplicationTechnicien\SetupApplicationTechnicien.vdproj", "{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupApplication", "SetupApplication\SetupApplication.vdproj", "{21B4F7F3-BD30-4CB3-95C9-A28A137A2477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34233F97-AE1A-4440-90C2-9C8E8E8165CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}.Debug|Any CPU.ActiveCfg = Debug
-		{3EB4BC56-B53E-4BEC-8CF4-FA02A8E4F50E}.Release|Any CPU.ActiveCfg = Release
+		{21B4F7F3-BD30-4CB3-95C9-A28A137A2477}.Debug|Any CPU.ActiveCfg = Debug
+		{21B4F7F3-BD30-4CB3-95C9-A28A137A2477}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
