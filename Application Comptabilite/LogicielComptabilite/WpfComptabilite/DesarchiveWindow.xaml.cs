@@ -31,6 +31,7 @@ namespace WpfComptabilite
         {
             if (!string.IsNullOrEmpty(ConfigurationSettings.AppSettings["BddVm"]))
             {
+                //Lit et récupère les données de connexions dans le fichier de config App.config
                 string[] recup = ConfigurationSettings.AppSettings["BddVm"].Split(',');
                 bdd = new dbal(recup[0], recup[1], Convert.ToInt32(recup[2]), recup[3], recup[4]);
             }
