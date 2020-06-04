@@ -31,6 +31,7 @@ namespace WpfComptabilite
         static private daoClient theDaoClient;
         static private daoReservation theDaoReserv;
         static private daoTransaction theDaoTransac;
+        static private daoConfiguration theDaoConfig;
         private viewClient vc;
         public MainWindow()
         {
@@ -48,9 +49,10 @@ namespace WpfComptabilite
             theDaoClient = new daoClient(bdd, theDaoVille);
             theDaoReserv = new daoReservation(bdd, theDaoClient, theDaoSalle);
             theDaoTransac = new daoTransaction(bdd, theDaoClient, theDaoReserv);
+            theDaoConfig = new daoConfiguration(bdd);
 
             InitializeComponent();
-            vc = new viewClient(theDaoTransac, theDaoVille, theDaoClient, bdd, theDaoTheme, theDaoSalle, theDaoReserv);
+            vc = new viewClient(theDaoTransac, theDaoVille, theDaoClient, bdd, theDaoTheme, theDaoSalle, theDaoReserv, theDaoConfig);
             principale.DataContext = vc;
             txt_autocomplete_client.Focus();
         }

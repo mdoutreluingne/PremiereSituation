@@ -34,6 +34,20 @@ namespace CoucheModele.modele
             soldes = table.Rows[0]["soldes"];
             return soldes;
         }
+        public object total_credit()
+        {
+            object total_credit = 0;
+            DataTable table = this.dbal.selectMontant("SELECT SUM(montant) as soldes FROM transaction;");
+            total_credit = table.Rows[0]["soldes"];
+            return total_credit;
+        }
+        public object total_achat()
+        {
+            object total_achat = 0;
+            DataTable table = this.dbal.selectMontant("SELECT SUM(montant) as soldes FROM transaction WHERE MONTH(date) IN(MONTH(CURRENT_DATE)) AND YEAR(date) IN(YEAR(CURRENT_DATE));");
+            total_achat = table.Rows[0]["soldes"];
+            return total_achat;
+        }
         public List<Transaction> selectAllHistorique(int idClient)
         {
             List<Transaction> lesHistoriques = new List<Transaction>();

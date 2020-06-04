@@ -25,6 +25,7 @@ namespace WpfComptabilite.viewModel
         private daoReservation unDaoReserv;
         private daoSalle unDaoSalle;
         private daoTheme unDaoTheme;
+        private daoConfiguration unDaoConfiguration;
         private Client _clientActif;
         private Transaction _transactionActive;
         private string _modeAddCreditActif;
@@ -39,12 +40,14 @@ namespace WpfComptabilite.viewModel
         private bool _isEnableTel = false;
         private bool _isEnableMail = false;
         private bool _isEnabledNumCheque = false;
-        private bool _boutonVisible = false;
-        private bool _autreBoutonVisible = true;
+        private bool _boutonVisible = false; //Bouton "MODIFIER"
+        private bool _autreBoutonVisible = true; //Bouton "AJOUTER UN CLIENT"
         private bool _lesVillesVisible = false;
         private bool _lesClientsVisible = true;
         private bool _isEnableGridUser = true;
         private object _soldes = 0;
+        private object _total_credit = 0;
+        private object _total_achat = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
         private ICommand desarchiveCommand;
@@ -59,6 +62,8 @@ namespace WpfComptabilite.viewModel
         private ICommand viderMail;
         private ICommand filterVille;
         private ICommand filterClient;
+        private Brush colorTotalCredit;
+        private Brush colorTotalAchat;
 
 
         private ObservableCollection<Client> _lesclients;
@@ -73,7 +78,7 @@ namespace WpfComptabilite.viewModel
 
 
         #region Constructeur
-        public viewClient(daoTransaction dt, daoVille dv, daoClient dc, dbal bdd, daoTheme dtheme, daoSalle ds, daoReservation dr)
+        public viewClient(daoTransaction dt, daoVille dv, daoClient dc, dbal bdd, daoTheme dtheme, daoSalle ds, daoReservation dr, daoConfiguration dconfig)
         {
             unDaoTransac = dt;
             unDaoClient = dc;
@@ -82,6 +87,7 @@ namespace WpfComptabilite.viewModel
             unDaoTheme = dtheme;
             unDaoSalle = ds;
             unDaoReserv = dr;
+            unDaoConfiguration = dconfig;
             _lesclients = new ObservableCollection<Client>(unDaoClient.selectAllClient());
             //_lesvilles = new ObservableCollection<Ville>(unDaoVille.selectAllVille());
             _lesHistoriques = new ObservableCollection<Transaction>();
@@ -119,7 +125,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("Lesvilles");
             }
         }
-        public string SelectVille //Ville sélectionner
+        public string SelectVille //Ville saisie
         {
             get { return null; }
             set
@@ -128,7 +134,7 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("SelectVille");
             }
         }
-        public string SelectClient //Client sélectionner
+        public string SelectClient //Client saisie
         {
             get { return _clientSaisie; }
             set
@@ -168,6 +174,7 @@ namespace WpfComptabilite.viewModel
                     OnPropertyChanged("Lesclients");
                     OnPropertyChanged("SelectVille");
                     OnPropertyChanged("LesVillesVisible");
+                    OnPropertyChanged("Total_credit");
 
                 }
             }
@@ -277,6 +284,99 @@ namespace WpfComptabilite.viewModel
                 }
             }
 
+        }
+
+        public Brush ColorTotalCredit
+        { 
+            get
+            {
+                Configuration c = unDaoConfiguration.seuil_total_credit();
+                if ( (Convert.ToDouble(_total_credit) >= c.Seuil_vert_total_credit) && (Convert.ToDouble(_total_credit) <= c.Seuil_orange_total_credit) )
+                {
+                    return Brushes.Green;
+                }
+                if ( (Convert.ToDouble(_total_credit) >= c.Seuil_orange_total_credit) && (Convert.ToDouble(_total_credit) <= c.Seuil_rouge_total_credit) )
+                {
+                    return Brushes.Orange;
+                }
+                if (Convert.ToDouble(_total_credit) >= c.Seuil_rouge_total_credit)
+                {
+                    return Brushes.Red;
+                }
+                return Brushes.Black;
+            }
+            set
+            {
+                if (colorTotalCredit != value)
+                {
+                    colorTotalCredit = value;
+                    OnPropertyChanged("ColorTotalCredit");
+                }
+            }
+        }
+
+        public object Total_credit 
+        { 
+            get
+            {
+                _total_credit = unDaoTransac.total_credit();    
+                return _total_credit;
+            }
+            set
+            {
+                if (_total_credit != value)
+                {
+                    _total_credit = value;
+                    OnPropertyChanged("Total_credit");
+                }
+            }
+        }
+
+        public Brush ColorTotalAchat 
+        { 
+            get
+            {
+                Configuration c = unDaoConfiguration.seuil_total_achat();
+                if ((Convert.ToDouble(_total_achat) >= c.Seuil_vert_total_achat) && (Convert.ToDouble(_total_achat) <= c.Seuil_orange_total_achat))
+                {
+                    return Brushes.Green;
+                }
+                if ((Convert.ToDouble(_total_achat) >= c.Seuil_orange_total_achat) && (Convert.ToDouble(_total_achat) <= c.Seuil_rouge_total_achat))
+                {
+                    return Brushes.Orange;
+                }
+                if (Convert.ToDouble(_total_achat) >= c.Seuil_rouge_total_achat)
+                {
+                    return Brushes.Red;
+                }
+                return Brushes.Black;
+            }
+            set
+            {
+                if (colorTotalAchat != value)
+                {
+                    colorTotalAchat = value;
+                    OnPropertyChanged("ColorTotalAchat");
+                }
+            }
+        }
+
+
+        public object Total_achat 
+        { 
+            get
+            {
+                _total_achat = unDaoTransac.total_achat();
+                return _total_achat;
+            }
+            set
+            {
+                if (_total_achat != value)
+                {
+                    _total_achat = value;
+                    OnPropertyChanged("Total_achat");
+                }
+            }
         }
         public string NumCheque 
         { 
@@ -576,7 +676,7 @@ namespace WpfComptabilite.viewModel
 
                 return this.filterClient;
             }
-        }      
+        }
 
         #region Méthodes
         public void ajouterClient()
@@ -720,7 +820,16 @@ namespace WpfComptabilite.viewModel
                 _transactionActive = new Transaction(null, date, Montant, _modeAddCreditActif, NumCheque, Commentaire, null, c);
                 _lesHistoriques.Add(_transactionActive);
                 unDaoTransac.insert(_transactionActive);
+                this.collectionViewHistoriques.Refresh();
+                NumCheque = string.Empty;
+                ModeAddCreditActif = string.Empty;
+                Montant = 0;
+                Commentaire = string.Empty;
                 OnPropertyChanged("Soldes");
+                OnPropertyChanged("Total_credit");
+                OnPropertyChanged("ColorTotalCredit");
+                OnPropertyChanged("Total_achat");
+                OnPropertyChanged("ColorTotalAchat");
             }
             else
             {
