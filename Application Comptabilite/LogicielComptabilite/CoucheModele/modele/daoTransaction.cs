@@ -48,6 +48,15 @@ namespace CoucheModele.modele
             total_achat = table.Rows[0]["soldes"];
             return total_achat;
         }
+        public object total_depense()
+        {
+            object total_depense = 0;
+            DataTable table = this.dbal.selectMontant("SELECT SUM(montant) as soldes FROM transaction WHERE montant LIKE '-%' AND MONTH(date) IN(MONTH(CURRENT_DATE)) AND YEAR(date) IN(YEAR(CURRENT_DATE));");
+            total_depense = table.Rows[0]["soldes"];
+            total_depense = Convert.ToString(total_depense).Substring(1);
+            total_depense = (object)total_depense;
+            return total_depense;
+        }
         public List<Transaction> selectAllHistorique(int idClient)
         {
             List<Transaction> lesHistoriques = new List<Transaction>();

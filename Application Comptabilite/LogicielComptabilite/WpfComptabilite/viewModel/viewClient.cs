@@ -48,6 +48,7 @@ namespace WpfComptabilite.viewModel
         private object _soldes = 0;
         private object _total_credit = 0;
         private object _total_achat = 0;
+        private object _total_depense = 0;
         private ICommand addCommandClient;
         private ICommand archiveCommand;
         private ICommand desarchiveCommand;
@@ -64,6 +65,7 @@ namespace WpfComptabilite.viewModel
         private ICommand filterClient;
         private Brush colorTotalCredit;
         private Brush colorTotalAchat;
+        private Brush colorTotalDepense;
 
 
         private ObservableCollection<Client> _lesclients;
@@ -337,7 +339,7 @@ namespace WpfComptabilite.viewModel
             get
             {
                 Configuration c = unDaoConfiguration.seuil_total_achat();
-                if ((Convert.ToDouble(_total_achat) >= c.Seuil_vert_total_achat) && (Convert.ToDouble(_total_achat) <= c.Seuil_orange_total_achat))
+                if (Convert.ToDouble(_total_achat) >= c.Seuil_vert_total_achat && Convert.ToDouble(_total_achat) <= c.Seuil_orange_total_achat)
                 {
                     return Brushes.Green;
                 }
@@ -378,6 +380,52 @@ namespace WpfComptabilite.viewModel
                 }
             }
         }
+
+        public Brush ColorTotalDepense 
+        { 
+            get
+            {
+                Configuration c = unDaoConfiguration.seuil_total_depense();
+                if ((Convert.ToDouble(_total_depense) >= c.Seuil_vert_total_depense) && (Convert.ToDouble(_total_depense) <= c.Seuil_orange_total_depense))
+                {
+                    return Brushes.Green;
+                }
+                if ((Convert.ToDouble(_total_depense) >= c.Seuil_orange_total_depense) && (Convert.ToDouble(_total_depense) <= c.Seuil_rouge_total_depense))
+                {
+                    return Brushes.Orange;
+                }
+                if (Convert.ToDouble(_total_depense) >= c.Seuil_rouge_total_depense)
+                {
+                    return Brushes.Red;
+                }
+                return Brushes.Black;
+            }
+            set
+            {
+                if (colorTotalDepense != value)
+                {
+                    colorTotalDepense = value;
+                    OnPropertyChanged("ColorTotalDepense");
+                }
+            }
+        }
+        public object Total_depense 
+        { 
+            get
+            {
+                _total_depense = unDaoTransac.total_depense();
+                return _total_depense;
+            }
+            set
+            {
+                if (_total_depense != value)
+                {
+                    _total_depense = value;
+                    OnPropertyChanged("Total_depense");
+                }
+            }
+        }
+        
         public string NumCheque 
         { 
             get => _numCheque;
@@ -677,6 +725,7 @@ namespace WpfComptabilite.viewModel
                 return this.filterClient;
             }
         }
+       
 
         #region Méthodes
         public void ajouterClient()
@@ -830,6 +879,8 @@ namespace WpfComptabilite.viewModel
                 OnPropertyChanged("ColorTotalCredit");
                 OnPropertyChanged("Total_achat");
                 OnPropertyChanged("ColorTotalAchat");
+                OnPropertyChanged("Total_depense");
+                OnPropertyChanged("ColorTotalDepense");
             }
             else
             {

@@ -116,8 +116,10 @@
         <Button Content="DESARCHIVER" Command="{Binding DesarchiveCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="33" Background="#FF6C6969" FontSize="16" Foreground="#FF74AC93"/>
         <Label x:Name="total_credit" Content="{Binding Total_credit}" Foreground="{Binding Path=ColorTotalCredit}" HorizontalAlignment="Left" Margin="240,0,0,0" VerticalAlignment="Top" Width="102" Height="31" FontSize="15" FontWeight="Bold"/>
         <Label Content="Total crédits :" HorizontalAlignment="Left" Margin="145,2,0,0" VerticalAlignment="Top" Height="31" FontSize="15"/>
-        <Label Content="Total des achats :" HorizontalAlignment="Left" Margin="383,0,0,0" VerticalAlignment="Top" FontSize="15" Height="33"/>
-        <Label Content="{Binding Total_achat}" Foreground="{Binding Path=ColorTotalAchat}" HorizontalAlignment="Left" Margin="510,0,0,0" VerticalAlignment="Top" Width="76" Height="33" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Total des achats :" HorizontalAlignment="Left" Margin="354,0,0,0" VerticalAlignment="Top" FontSize="15" Height="33"/>
+        <Label x:Name="total_achat" Content="{Binding Total_achat}" Foreground="{Binding Path=ColorTotalAchat}" HorizontalAlignment="Left" Margin="476,0,0,0" VerticalAlignment="Top" Width="76" Height="33" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Total des dépenses :" HorizontalAlignment="Left" Margin="557,0,0,0" VerticalAlignment="Top" Height="35" FontSize="15"/>
+        <Label x:Name="total_depense" Content="{Binding Total_depense}" Foreground="{Binding Path=ColorTotalDepense}" HorizontalAlignment="Left" Margin="700,0,0,0" VerticalAlignment="Top" Height="31" Width="82" FontWeight="Bold" FontSize="15"/>
 
     </Grid>
 </Window>
