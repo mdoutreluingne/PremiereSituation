@@ -869,7 +869,9 @@ namespace WpfComptabilite.viewModel
                 _transactionActive = new Transaction(null, date, Montant, _modeAddCreditActif, NumCheque, Commentaire, null, c);
                 _lesHistoriques.Add(_transactionActive);
                 unDaoTransac.insert(_transactionActive);
+                this.collectionViewClient.MoveCurrentTo(ClientActif);
                 this.collectionViewHistoriques.Refresh();
+                
                 NumCheque = string.Empty;
                 ModeAddCreditActif = string.Empty;
                 Montant = 0;
